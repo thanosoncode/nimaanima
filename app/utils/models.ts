@@ -1,12 +1,16 @@
 import { StaticImageData } from "next/image";
 
 export type Product = {
-  id: number;
+  id: string;
   name: string;
   price: number;
-  image: StaticImageData;
+  image: string;
   description: string;
 };
+
+export interface CartItem extends Product {
+  amount: number;
+}
 
 export type UploadedImageData = {
   asset_id: string;

@@ -1,19 +1,24 @@
 "use client";
 
 import { createContext, useContext, useReducer } from "react";
+import { CartItem } from "./utils/models";
 
 type AppState = {
-  cartItems: { name: string }[];
+  cartItems: CartItem[];
 };
 
 const initialState = {
-  cartItems: [{ name: "hello" }],
+  cartItems: [],
 };
 
 type Action =
   | {
       type: "ADD_CART_ITEM";
-      cartItem: { name: string };
+      cartItem: CartItem;
+    }
+  | {
+      type: "SET_CART_ITEMS_AMOUNT";
+      cartItems: CartItem[];
     }
   | { type: "EMPTY_CART" };
 
@@ -26,6 +31,8 @@ const reducer = (state: AppState, action: Action) => {
   switch (action.type) {
     case "ADD_CART_ITEM":
       return { ...state, cartItems: [...state.cartItems, action.cartItem] };
+    case "SET_CART_ITEMS_AMOUNT":
+      return { ...state, cartItems: action.cartItems };
 
     case "EMPTY_CART":
       return { ...state, cartItems: [] };
