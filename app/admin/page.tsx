@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Product, UploadedImageData } from "../utils/models";
+import MyProducts from "./myProducts";
 
 const Admin = () => {
   const [message, setMessage] = useState("");
@@ -235,6 +236,8 @@ const Admin = () => {
           </button>
         </form>
       </div>
+      {/* @ts-ignore*/}
+      <MyProducts />
     </>
   );
 };
