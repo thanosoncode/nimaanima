@@ -3,7 +3,10 @@ import { Product } from "../utils/models";
 import Link from "next/link";
 
 const Products = async () => {
-  const response = await fetch("http://localhost:3000/api/products");
+  const response = await fetch("http://localhost:3000/api/products", {
+    cache: "reload",
+    next: { revalidate: 60 },
+  });
   const products = (await response.json()) as Product[];
 
   return (

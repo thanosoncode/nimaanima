@@ -1,6 +1,6 @@
-import { getSigleProduct } from "@/lib/getSingleProuduct";
 import Image from "next/image";
 import ProductHandle from "./productHandle";
+import { getSigleProduct } from "@/lib/products";
 
 const SingleProduct = async ({
   params: { productId },

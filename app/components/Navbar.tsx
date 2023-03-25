@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAppState } from "../context";
 
 const Navbar = () => {
   const pathname = usePathname();
+
+  const { cartItems } = useAppState();
 
   return (
     <nav className="bg-gray-700">
@@ -33,7 +36,14 @@ const Navbar = () => {
           href="/cart"
           className={pathname === "/cart" ? "text-white" : "text-black"}
         >
-          cart
+          <div className="relative">
+            Cart
+            {cartItems.length > 0 ? (
+              <span className="absolute -right-2 -top-2">
+                {cartItems.length}
+              </span>
+            ) : null}
+          </div>
         </Link>
       </div>
     </nav>

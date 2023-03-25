@@ -1,4 +1,4 @@
-import { createProduct } from "@/lib/createProduct";
+import { createProduct } from "@/lib/products";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function POST(request: NextRequest, response: NextResponse) {

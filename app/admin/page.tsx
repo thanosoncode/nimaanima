@@ -5,12 +5,19 @@ import { Product, UploadedImageData } from "../utils/models";
 
 const Admin = () => {
   const [message, setMessage] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState({
+    isUploading: false,
+    isSaving: false,
+  });
   const [inputValue, setInputValue] = useState("");
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-  const [productInfo, setProductInfo] = useState({
+  const [productInfo, setProductInfo] = useState<{
+    name: string;
+    price: null | number;
+    description: string;
+  }>({
     name: "",
-    price: 0,
+    price: null,
     description: "",
   });
 
@@ -52,8 +59,14 @@ const Admin = () => {
 
     const { name, price, description } = productInfo;
 
-    if (!name || !description || !price || typeof price === "string") {
-      setMessage("name price description are all required");
+    if (
+      !name ||
+      !description ||
+      !price ||
+      typeof price === "string" ||
+      price < 0
+    ) {
+      setMessage("Some values are incorrect");
       return;
     }
 
@@ -63,7 +76,7 @@ const Admin = () => {
     }
     formData.append("upload_preset", "my_uploads");
 
-    setIsUploading(true);
+    setUploadStatus({ ...uploadStatus, isUploading: true });
     const cloudName = process.env.CLOUD_NAME ?? "";
     try {
       const uploadImageResponse = await fetch(
@@ -77,9 +90,11 @@ const Admin = () => {
 
       if (!uploadImageResponse.ok) {
         setMessage("Image file is required");
-        setIsUploading(false);
+        setUploadStatus({ ...uploadStatus, isUploading: false });
         return;
       }
+      setUploadStatus({ ...uploadStatus, isUploading: false, isSaving: true });
+
       const uploadProductResponse = await fetch(
         "http://localhost:3000/api/admin",
         {
@@ -98,14 +113,12 @@ const Admin = () => {
         setProductInfo({ name: "", description: "", price: 0 });
         handleProductSubmitSuccess();
       }
-
-      setIsUploading(false);
+      setUploadStatus({ ...uploadStatus, isSaving: false });
       setMessage("Success!");
       setInputValue("");
       setImageSrc(null);
     } catch (error) {
-      console.log(error);
-      setIsUploading(false);
+      setUploadStatus({ ...uploadStatus, isUploading: false, isSaving: false });
       setInputValue("");
       setImageSrc(null);
       throw new Error("error uploading image");
@@ -131,7 +144,11 @@ const Admin = () => {
       <h4 className="py-4 text-xl">Add Product</h4>
       <div>
         <p className="p-2">
-          {isUploading ? "Uploading... This might take a few seconds." : ""}
+          {uploadStatus.isUploading
+            ? "Uploading... This might take a few seconds."
+            : uploadStatus.isSaving
+            ? "Saving to database..."
+            : ""}
         </p>
         <p className="p-2">{message ? message : null}</p>
         <div>
@@ -204,13 +221,14 @@ const Admin = () => {
               type="number"
               id="price"
               name="price"
-              value={productInfo.price}
+              min={0}
+              value={productInfo.price ? productInfo.price : ""}
               onChange={handleProductInfoChange}
             />
           </fieldset>
           <button
             type="submit"
-            disabled={isUploading}
+            disabled={uploadStatus.isSaving || uploadStatus.isUploading}
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           >
             Create product

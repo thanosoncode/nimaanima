@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppDispatch } from "@/app/context";
+import { useAppDispatch, useAppState } from "@/app/context";
 import { Product } from "@/app/utils/models";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -13,6 +13,7 @@ interface ProductHandler {
 const ProductHandler: React.FC<ProductHandler> = ({ product }) => {
   const router = useRouter();
   const appDispatch = useAppDispatch();
+  const { cartItems } = useAppState();
   const [amount, setAmount] = useState(1);
 
   const handlePlusClick = () => {
@@ -23,9 +24,14 @@ const ProductHandler: React.FC<ProductHandler> = ({ product }) => {
     setAmount((prevValue) => (prevValue > 1 ? prevValue - 1 : 1));
   };
 
+  const itemAlreadyInCart = cartItems.find((item) => item.id === product.id);
+
   const handleAddToCart = () => {
-    appDispatch({ type: "ADD_CART_ITEM", cartItem: { ...product, amount } });
-    router.push("/cart");
+    if (!itemAlreadyInCart) {
+      appDispatch({ type: "ADD_CART_ITEM", cartItem: { ...product, amount } });
+      router.push("/cart");
+      return;
+    }
   };
 
   return (
@@ -48,8 +54,9 @@ const ProductHandler: React.FC<ProductHandler> = ({ product }) => {
       <button
         className="transition-all ease-in-out p-4 bg-gray-400 rounded hover:bg-gray-200"
         onClick={handleAddToCart}
+        disabled={itemAlreadyInCart ? true : false}
       >
-        Add to cart
+        {itemAlreadyInCart ? "Already in cart" : "Add to cart"}
       </button>
     </div>
   );
