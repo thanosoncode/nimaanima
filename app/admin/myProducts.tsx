@@ -5,7 +5,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Backdrop from "./Backdrop";
 
-const MyProducts = () => {
+interface MyProduct {
+  newProduct: Product;
+}
+
+const MyProducts: React.FC<MyProduct> = ({ newProduct }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,7 +24,7 @@ const MyProducts = () => {
       }
     };
     getProducts();
-  }, []);
+  }, [newProduct]);
 
   const handleProductDelete = async (id: string) => {
     setIsLoading(true);

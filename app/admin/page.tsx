@@ -21,6 +21,7 @@ const Admin = () => {
     price: null,
     description: "",
   });
+  const [newProduct, setNewProduct] = useState<Product>();
 
   const handleImageChange = (
     changeEvent: React.ChangeEvent<HTMLInputElement>
@@ -112,7 +113,10 @@ const Admin = () => {
       const productData = (await uploadProductResponse.json()) as Product;
       if (productData) {
         setProductInfo({ name: "", description: "", price: 0 });
-        handleProductSubmitSuccess();
+        setMessage("Success!");
+        setInputValue("");
+        setImageSrc(null);
+        setNewProduct(productData);
       }
       setUploadStatus({ ...uploadStatus, isSaving: false });
       setMessage("Success!");
@@ -124,12 +128,6 @@ const Admin = () => {
       setImageSrc(null);
       throw new Error("error uploading image");
     }
-  };
-
-  const handleProductSubmitSuccess = () => {
-    setMessage("Success!");
-    setInputValue("");
-    setImageSrc(null);
   };
 
   const handleProductInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -237,7 +235,7 @@ const Admin = () => {
         </form>
       </div>
       {/* @ts-ignore*/}
-      <MyProducts />
+      <MyProducts newProduct={newProduct} />
     </>
   );
 };

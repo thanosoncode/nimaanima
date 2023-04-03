@@ -17,3 +17,13 @@ export type UploadedImageData = {
   created_at: string;
   secure_url: string;
 };
+
+export interface MockProduct {
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  thumbNail: StaticImageData;
+  thumbNail2: StaticImageData;
+  images: StaticImageData[];
+}

@@ -1,19 +1,14 @@
 "use client";
 
-import { useAppDispatch, useAppState } from "@/app/context";
-import { Product } from "@/app/utils/models";
-import { useRouter } from "next/navigation";
+import { MockProduct } from "@/app/utils/models";
 import { useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 
 interface ProductHandler {
-  product: Product;
+  product: MockProduct;
 }
 
 const ProductHandler: React.FC<ProductHandler> = ({ product }) => {
-  const router = useRouter();
-  const appDispatch = useAppDispatch();
-  const { cartItems } = useAppState();
   const [amount, setAmount] = useState(1);
 
   const handlePlusClick = () => {
@@ -24,18 +19,12 @@ const ProductHandler: React.FC<ProductHandler> = ({ product }) => {
     setAmount((prevValue) => (prevValue > 1 ? prevValue - 1 : 1));
   };
 
-  const itemAlreadyInCart = cartItems.find((item) => item.id === product.id);
-
   const handleAddToCart = () => {
-    if (!itemAlreadyInCart) {
-      appDispatch({ type: "ADD_CART_ITEM", cartItem: { ...product, amount } });
-      router.push("/cart");
-      return;
-    }
+    console.log("add to cart");
   };
 
   return (
-    <div className="flex gap-8  mt-8 flex-col">
+    <div className="flex gap-8  mt-8 ">
       <div className="flex gap-1">
         <div
           className="flex justify-center items-center text-lg bg-gray-300 px-2 py-1 cursor-pointer transition-all ease-in-out p-4 hover:bg-gray-200"
@@ -43,7 +32,11 @@ const ProductHandler: React.FC<ProductHandler> = ({ product }) => {
         >
           <BiMinus />
         </div>
-        <p className="text-center text-lg bg-gray-300 px-6">{amount}</p>
+
+        <p className="text-center text-lg bg-gray-300 px-6 flex justify-center items-center">
+          {amount}
+        </p>
+
         <div
           className="flex justify-center items-center text-lg bg-gray-300 px-2 py-1 cursor-pointer transition-all ease-in-out p-4 hover:bg-gray-200"
           onClick={handlePlusClick}
@@ -52,11 +45,10 @@ const ProductHandler: React.FC<ProductHandler> = ({ product }) => {
         </div>
       </div>
       <button
-        className="transition-all ease-in-out p-4 bg-gray-400 rounded hover:bg-gray-200"
+        className="transition-all ease-in-out p-4 bg-gray-300 rounded hover:bg-gray-900 hover:text-white"
         onClick={handleAddToCart}
-        disabled={itemAlreadyInCart ? true : false}
       >
-        {itemAlreadyInCart ? "Added" : "Add to cart"}
+        Add to cart
       </button>
     </div>
   );

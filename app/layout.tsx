@@ -1,3 +1,4 @@
+import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { AppProvider } from "./context";
 import "./globals.css";
@@ -14,10 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-400">
+      <body className="bg-gray-400 min-h-screen">
         <AppProvider>
           <Navbar />
-          <div className="w-3/4 mx-auto px-2 mb-4">{children}</div>
+          <div className="w-3/4 mx-auto px-2">{children}</div>
+          <Footer />
         </AppProvider>
       </body>
     </html>

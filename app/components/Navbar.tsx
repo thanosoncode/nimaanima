@@ -26,10 +26,12 @@ const Navbar = () => {
             products
           </Link>
           <Link
-            href="/admin"
-            className={pathname === "/admin" ? "text-white" : "text-black"}
+            href="/mock-product"
+            className={
+              pathname === "/mock-product" ? "text-white" : "text-black"
+            }
           >
-            admin
+            Mock Product
           </Link>
         </div>
         <Link
