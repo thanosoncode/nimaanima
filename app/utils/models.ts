@@ -1,3 +1,4 @@
+import { ImageObj } from "@/mockProduct/mockProduct";
 import { StaticImageData } from "next/image";
 
 export type Product = {
@@ -23,7 +24,5 @@ export interface MockProduct {
   description: string;
   price: number;
   category: string;
-  thumbNail: StaticImageData;
-  thumbNail2: StaticImageData;
-  images: StaticImageData[];
+  images: ImageObj[];
 }

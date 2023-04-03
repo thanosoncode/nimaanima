@@ -1,15 +1,14 @@
 "use client";
 
-import { mockProduct } from "@/mockProduct/mockProduct";
-import Image from "next/image";
+import { ImageObj, mockProduct } from "@/mockProduct/mockProduct";
+import Image, { StaticImageData } from "next/image";
 import ProductHandler from "./handler";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 const MockProduct = () => {
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
   const [isMouseOver, setIsMouseOver] = useState(false);
-
-  const { x, y } = zoomPosition;
+  const [mainImage, setMainImage] = useState<ImageObj>(mockProduct.images[0]);
 
   const handleImageMouseOver = (event: React.MouseEvent<HTMLImageElement>) => {
     setIsMouseOver(true);
@@ -23,13 +22,24 @@ const MockProduct = () => {
     setZoomPosition({ x: 0, y: 0 });
   };
 
+  const handleImageChange = (id: number) => {
+    const selected = mockProduct.images.find((image) => image.id === id);
+    if (selected) setMainImage(selected);
+  };
+
   return (
     <div className="flex gap-8 justify-center pt-40">
       <aside className="flex flex-col gap-4 shrink-0">
-        <Image src={mockProduct.images[0]} alt="" width={60} height={60} />
-        <Image src={mockProduct.images[1]} alt="" width={60} height={60} />
-        <Image src={mockProduct.thumbNail} alt="" width={60} height={60} />
-        <Image src={mockProduct.thumbNail2} alt="" width={60} height={60} />
+        {mockProduct.images.map((image) => (
+          <Image
+            key={image.id}
+            src={image.image}
+            alt=""
+            width={60}
+            height={60}
+            onClick={() => handleImageChange(image.id)}
+          />
+        ))}
       </aside>
       <div
         style={{
@@ -43,7 +53,7 @@ const MockProduct = () => {
         onMouseLeave={handleMouseLeave}
       >
         <Image
-          src={mockProduct.thumbNail}
+          src={mainImage.image}
           alt=""
           style={{
             transformOrigin: `${zoomPosition.x}px ${zoomPosition.y}px`,
