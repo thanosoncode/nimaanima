@@ -9,6 +9,11 @@ module.exports = {
     colors: {
       lightGreen: "#DDEBE2",
     },
+    extend: {
+      gridTemplateColumns: {
+        gridAuto: "repeat(auto-fill, 200px)",
+      },
+    },
   },
   plugins: [],
 };

@@ -4,23 +4,9 @@ import category1 from "../assets/category1.jpg";
 import category2 from "../assets/category2.jpg";
 import category3 from "../assets/category3.jpg";
 import category4 from "../assets/category4.jpg";
-import product1 from "../assets/product1.jpg";
-import product2 from "../assets/product2.jpg";
-import product3 from "../assets/product3.jpg";
-import product4 from "../assets/product4.jpg";
-import product5 from "../assets/product5.jpg";
-import product6 from "../assets/product6.jpg";
 import about1 from "../assets/about1.jpg";
 import technique1 from "../assets/technique1.jpg";
-
-const products = [
-  { id: 1, name: "product 1", image: product1 },
-  { id: 2, name: "product 2", image: product2 },
-  { id: 3, name: "product 3", image: product3 },
-  { id: 4, name: "product 4", image: product4 },
-  { id: 5, name: "product 5", image: product5 },
-  { id: 6, name: "product 6", image: product6 },
-];
+import { products } from "./data/categories";
 
 const Home = () => {
   return (

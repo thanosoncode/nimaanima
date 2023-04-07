@@ -1,11 +1,12 @@
 import Image from "next/image";
-import { categories } from "../data/categories";
+import { categories, products } from "../data/categories";
+import Container from "../components/Container";
 
 const ProductsNew = () => {
   return (
     <>
       <header className="bg-lightGreen">
-        <div className="w-3/4 mx-auto relative">
+        <Container classes="relative">
           <h1 className="text-3xl text-center font-extralight tracking-wide pt-6 pb-28">
             Find things you'll love. Support independent sellers. Only on Etsy.
           </h1>
@@ -13,7 +14,7 @@ const ProductsNew = () => {
             className="flex gap-12 items-center justify-center"
             style={{
               position: "absolute",
-              top: "140px",
+              top: "100px",
               left: "50%",
               transform: "translateX(-50%)",
             }}
@@ -34,8 +35,28 @@ const ProductsNew = () => {
               </div>
             ))}
           </section>
-        </div>
+        </Container>
       </header>
+      <Container>
+        <main className="pt-32">
+          <h4 className="text-2xl  mb-4">Find something you love</h4>
+          <section
+            style={{
+              display: "grid",
+              gap: "20px",
+              gridTemplateColumns: "repeat(auto-fill, 256px)",
+            }}
+          >
+            {products.map((product) => (
+              <div className="shrink-0 w-64 h-64" key={product.id}>
+                <Image src={product.image} alt={product.name} />
+                <p className="">{product.name}</p>
+                <p>€{product.price}</p>
+              </div>
+            ))}
+          </section>
+        </main>
+      </Container>
     </>
   );
 };
