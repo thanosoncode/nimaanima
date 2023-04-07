@@ -6,11 +6,10 @@ import { useAppState } from "../context";
 
 const Navbar = () => {
   const pathname = usePathname();
-
   const { cartItems } = useAppState();
 
   return (
-    <nav className="bg-gray-700">
+    <nav className="border-b-2 border-neutral-300">
       <div className="w-3/4  mx-auto py-4 px-2 flex justify-between items-center">
         <div className="flex justify-between gap-4 items-center">
           <Link
@@ -24,6 +23,14 @@ const Navbar = () => {
             className={pathname === "/products" ? "text-white" : "text-black"}
           >
             products
+          </Link>
+          <Link
+            href="/products-new"
+            className={
+              pathname === "/products-new" ? "text-white" : "text-black"
+            }
+          >
+            products new
           </Link>
           <Link
             href="/mock-product"

@@ -15,10 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-gray-400 min-h-screen">
+      <body className="min-h-screen">
         <AppProvider>
           <Navbar />
-          <div className="w-3/4 mx-auto px-2">{children}</div>
+          <div>{children}</div>
           <Footer />
         </AppProvider>
       </body>
