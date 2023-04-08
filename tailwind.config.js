@@ -8,6 +8,8 @@ module.exports = {
   theme: {
     colors: {
       lightGreen: "#DDEBE2",
+      lightBlue: "#D7E6F5",
+      lightPink: "#F8EBE6",
     },
     extend: {
       gridTemplateColumns: {

@@ -17,10 +17,88 @@ export const categories = [
 ];
 
 export const products = [
-  { id: 1, name: "product 1", image: product1, price: 29 },
-  { id: 2, name: "product 2", image: product2, price: 99 },
-  { id: 3, name: "product 3", image: product3, price: 39 },
-  { id: 4, name: "product 4", image: product4, price: 19 },
-  { id: 5, name: "product 5", image: product5, price: 69 },
-  { id: 6, name: "product 6", image: product6, price: 79 },
+  {
+    id: 1,
+    name: "product 1",
+    image: product1,
+    description:
+      "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
+    price: 29,
+    images: [
+      { id: 1, image: product1 },
+      { id: 2, image: product1 },
+      { id: 3, image: product1 },
+      { id: 4, image: product1 },
+    ],
+  },
+  {
+    id: 2,
+    name: "product 2",
+    image: product2,
+    description:
+      "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
+    price: 99,
+    images: [
+      { id: 1, image: product2 },
+      { id: 2, image: product2 },
+      { id: 3, image: product2 },
+      { id: 4, image: product2 },
+    ],
+  },
+  {
+    id: 3,
+    name: "product 3",
+    image: product3,
+    price: 39,
+    description:
+      "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
+    images: [
+      { id: 1, image: product3 },
+      { id: 2, image: product3 },
+      { id: 3, image: product3 },
+      { id: 4, image: product3 },
+    ],
+  },
+  {
+    id: 4,
+    name: "product 4",
+    image: product4,
+    price: 19,
+    description:
+      "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
+    images: [
+      { id: 1, image: product4 },
+      { id: 2, image: product4 },
+      { id: 3, image: product4 },
+      { id: 4, image: product4 },
+    ],
+  },
+  {
+    id: 5,
+    name: "product 5",
+    image: product5,
+    description:
+      "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
+    price: 69,
+    images: [
+      { id: 1, image: product5 },
+      { id: 2, image: product5 },
+      { id: 3, image: product5 },
+      { id: 4, image: product5 },
+    ],
+  },
+  {
+    id: 6,
+    name: "product 6",
+    image: product6,
+    description:
+      "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
+    price: 79,
+    images: [
+      { id: 1, image: product6 },
+      { id: 2, image: product6 },
+      { id: 3, image: product6 },
+      { id: 4, image: product6 },
+    ],
+  },
 ];

@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Container from "./Container";
 
 const Footer = () => {
   const pathname = usePathname();
 
   return (
-    <footer className="fixed bottom-0 left-0 w-full bg-white">
-      <div className="w-3/4 flex gap-2 py-4 px-2 mx-auto justify-center">
+    <footer>
+      <Container classes="flex gap-2 py-4 px-2 justify-center">
         <p>&copy; Copyright 2023</p>{" "}
         <Link
           href="/admin"
@@ -16,7 +17,7 @@ const Footer = () => {
         >
           Admin
         </Link>
-      </div>
+      </Container>
     </footer>
   );
 };
