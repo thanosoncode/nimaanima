@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
+    "@hookform/resolvers": "^3.0.1",
     "@prisma/client": "^4.11.0",
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
@@ -19,8 +20,10 @@
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
-    "typescript": "5.0.2"
+    "typescript": "5.0.2",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

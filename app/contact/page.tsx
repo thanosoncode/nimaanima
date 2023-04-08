@@ -3,43 +3,50 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Container from "../components/Container";
+import z from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+type TypeFormData = {
+  email: string;
+  message: string;
+};
 
 const ContactUs = () => {
-  const [error, setError] = useState("");
   const form = useRef<HTMLFormElement>(null);
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (form.current) {
-      const formData = new FormData(e.currentTarget);
-      const { name, email, message } = Object.fromEntries(formData) as {
-        name: string;
-        email: string;
-        message: string;
-      };
-
-      if (!name || !email || !message) {
-        setError("we need all values");
-        return;
-      }
-
-      emailjs
-        .sendForm(
-          "service_wh4c1jj",
-          "template_4x5wobq",
-          e.currentTarget,
-          "user_bm37QJFLQoyKqlOoNcG0e"
-        )
-        .then(
-          (result) => {
-            console.log(result.text);
-          },
-          (error) => {
-            console.log(error.text);
-          }
-        );
-    }
+  const sendEmail = (data: TypeFormData) => {
+    console.log(data);
+    emailjs
+      .sendForm(
+        "service_wh4c1jj",
+        "template_4x5wobq",
+        form.current ?? "",
+        "user_bm37QJFLQoyKqlOoNcG0e"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   };
+
+  const schema = z.object({
+    email: z.string().email({ message: "Email is required" }),
+    message: z
+      .string()
+      .min(10, { message: "Message should be at least 10 characters." })
+      .max(1000),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<TypeFormData>({ resolver: zodResolver(schema) });
 
   return (
     <>
@@ -58,31 +65,25 @@ const ContactUs = () => {
         <div className="mt-12">
           <form
             ref={form}
-            onSubmit={sendEmail}
+            onSubmit={handleSubmit(sendEmail)}
             className="flex flex-col gap-4 w-96 mx-auto"
           >
-            <fieldset className="flex flex-col">
-              <label>Name</label>
-              <input
-                type="text"
-                name="name"
-                className="rounded py-2 border border-gray-300 pl-2"
-              />
-            </fieldset>
             <fieldset className="flex flex-col">
               <label>Email</label>
               <input
                 type="email"
-                name="email"
                 className="rounded py-2 border border-gray-300 pl-2"
+                {...register("email")}
               />
+              {errors.email && <p>{errors.email.message}</p>}
             </fieldset>
             <fieldset className="flex flex-col">
               <label>Message</label>
               <textarea
-                name="message"
                 className="resize-y h-40 border border-gray-300 pl-2"
+                {...register("message")}
               />
+              {errors.message && <p>{errors.message.message}</p>}
             </fieldset>
             <button
               type="submit"
