@@ -6,14 +6,17 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      lightGreen: "#DDEBE2",
-      lightBlue: "#D7E6F5",
-      lightPink: "#F8EBE6",
-    },
     extend: {
-      gridTemplateColumns: {
-        gridAuto: "repeat(auto-fill, 200px)",
+      colors: {
+        lightGreen: {
+          400: "#DDEBE2",
+        },
+        lightBlue: {
+          400: "#D7E6F5",
+        },
+        lightPink: {
+          400: "#F8EBE6",
+        },
       },
     },
   },
