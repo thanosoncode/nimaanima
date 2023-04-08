@@ -8,38 +8,29 @@ const Navbar = () => {
   const pathname = usePathname();
   const { cartItems } = useAppState();
 
+  const links = [
+    { name: "home", path: "/" },
+    { name: "products", path: "/products" },
+    { name: "products new", path: "/products-new" },
+    { name: "techniques", path: "/techniques" },
+    { name: "mock product", path: "/mock-product" },
+  ];
+
   return (
     <nav className="border-b-2 border-neutral-300">
       <div className="w-3/4  mx-auto py-4 px-2 flex justify-between items-center">
         <div className="flex justify-between gap-4 items-center">
-          <Link
-            href="/"
-            className={pathname === "/" ? "text-white" : "text-black"}
-          >
-            home
-          </Link>
-          <Link
-            href="/products"
-            className={pathname === "/products" ? "text-white" : "text-black"}
-          >
-            products
-          </Link>
-          <Link
-            href="/products-new"
-            className={
-              pathname === "/products-new" ? "text-white" : "text-black"
-            }
-          >
-            products new
-          </Link>
-          <Link
-            href="/mock-product"
-            className={
-              pathname === "/mock-product" ? "text-white" : "text-black"
-            }
-          >
-            Mock Product
-          </Link>
+          {links.map((link) => {
+            return (
+              <Link
+                key={link.name}
+                href={link.path}
+                className={pathname === link.path ? "border-b-2 p-1" : "p-1"}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </div>
         <Link
           href="/cart"
