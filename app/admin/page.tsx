@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Product, UploadedImageData } from "../utils/models";
-import MyProducts from "./myProducts";
+import Container from "../components/Container";
 
 const Admin = () => {
   const [message, setMessage] = useState("");
@@ -139,7 +139,7 @@ const Admin = () => {
   };
 
   return (
-    <>
+    <Container>
       <h4 className="py-4 text-xl">Add Product</h4>
       <div>
         <p className="p-2">
@@ -235,8 +235,8 @@ const Admin = () => {
         </form>
       </div>
       {/* @ts-ignore*/}
-      <MyProducts newProduct={newProduct} />
-    </>
+      {/* <MyProducts newProduct={newProduct} /> */}
+    </Container>
   );
 };
 export default Admin;

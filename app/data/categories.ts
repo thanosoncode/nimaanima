@@ -8,15 +8,16 @@ import product3 from "../../assets/product3.jpg";
 import product4 from "../../assets/product4.jpg";
 import product5 from "../../assets/product5.jpg";
 import product6 from "../../assets/product6.jpg";
+import { Product } from "../utils/models";
 
 export const categories = [
-  { id: 1, name: "category 1", image: category1 },
-  { id: 2, name: "category 2", image: category2 },
-  { id: 3, name: "category 3", image: category3 },
-  { id: 4, name: "category 4", image: category4 },
+  { id: 1, name: "category-1", image: category1 },
+  { id: 2, name: "category-2", image: category2 },
+  { id: 3, name: "category-3", image: category3 },
+  { id: 4, name: "category-4", image: category4 },
 ];
 
-export const products = [
+export const products: Product[] = [
   {
     id: 1,
     name: "product 1",
@@ -24,6 +25,7 @@ export const products = [
     description:
       "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
     price: 29,
+    category: "category-1",
     images: [
       { id: 1, image: product1 },
       { id: 2, image: product1 },
@@ -38,6 +40,7 @@ export const products = [
     description:
       "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
     price: 99,
+    category: "category-1",
     images: [
       { id: 1, image: product2 },
       { id: 2, image: product2 },
@@ -50,6 +53,7 @@ export const products = [
     name: "product 3",
     image: product3,
     price: 39,
+    category: "category-2",
     description:
       "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
     images: [
@@ -64,6 +68,7 @@ export const products = [
     name: "product 4",
     image: product4,
     price: 19,
+    category: "category-2",
     description:
       "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
     images: [
@@ -80,6 +85,7 @@ export const products = [
     description:
       "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
     price: 69,
+    category: "category-2",
     images: [
       { id: 1, image: product5 },
       { id: 2, image: product5 },
@@ -94,6 +100,7 @@ export const products = [
     description:
       "Crochet roses, hand-crocheted red roses finished product, confession bouquet, home decoration, Wool imitation flowers,Valentine's Day gift",
     price: 79,
+    category: "category-1",
     images: [
       { id: 1, image: product6 },
       { id: 2, image: product6 },

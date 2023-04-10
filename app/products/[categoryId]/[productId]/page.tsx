@@ -5,8 +5,14 @@ import { ImageObj } from "@/mockProduct/mockProduct";
 import Image from "next/image";
 import { useState } from "react";
 
-const SingleProduct = ({ params: { id } }: { params: { id: string } }) => {
-  const product = products.find((product) => product.id === Number(id));
+const SingleProduct = ({
+  params: { productId },
+}: {
+  params: { productId: string };
+}) => {
+  console.log("id", productId);
+
+  const product = products.find((product) => product.id === Number(productId));
   if (!product) {
     return <Container>{<h4>Sorry, we couldn't find that one.</h4>}</Container>;
   }
