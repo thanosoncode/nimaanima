@@ -24,6 +24,8 @@ export async function PUT(request: Request) {
     name: string;
     description: string;
     price: number;
+    category: string;
+    images: string[];
   };
 
   if (!name || !description || !price || typeof price === "string") {
@@ -31,7 +33,10 @@ export async function PUT(request: Request) {
       message: "name, description, price, image url are required",
     });
   }
-  const product = await updateProduct({ name, description, price }, id);
+  const product = await updateProduct(
+    { name, description, price, category, images },
+    id
+  );
 
   if (!product) {
     return NextResponse.json({

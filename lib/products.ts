@@ -15,7 +15,8 @@ const createProduct = async (product: {
   name: string;
   description: string;
   price: number;
-  image: string;
+  category: string;
+  images: string[];
 }) => {
   const newProduct = await prisma.product.create({
     data: product,
@@ -28,6 +29,8 @@ const updateProduct = async (
     name: string;
     description: string;
     price: number;
+    category: string;
+    images: string[];
   },
   id: string
 ) => {

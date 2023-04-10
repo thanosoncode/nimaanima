@@ -3,6 +3,14 @@
 import { useState } from "react";
 import { Product, UploadedImageData } from "../utils/models";
 import Container from "../components/Container";
+import Fieldset from "./components/Fieldset";
+
+export type ProductInfo = {
+  name: string;
+  price: null | number;
+  description: string;
+  category: string;
+};
 
 const Admin = () => {
   const [message, setMessage] = useState("");
@@ -11,15 +19,12 @@ const Admin = () => {
     isSaving: false,
   });
   const [inputValue, setInputValue] = useState("");
-  const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
-  const [productInfo, setProductInfo] = useState<{
-    name: string;
-    price: null | number;
-    description: string;
-  }>({
+  const [imageSrc, setImageSrc] = useState<string[]>([]);
+  const [productInfo, setProductInfo] = useState<ProductInfo>({
     name: "",
     price: null,
     description: "",
+    category: "",
   });
   const [newProduct, setNewProduct] = useState<Product>();
 
@@ -28,19 +33,44 @@ const Admin = () => {
   ) => {
     setInputValue(changeEvent.currentTarget.value);
     const input = changeEvent.currentTarget;
-    if (input.files && input.files.length > 1) {
-      setMessage("upload only 1 image at a time");
-      return;
-    }
 
-    const reader = new FileReader();
-    reader.onload = (onLoadEvent) => {
-      if (onLoadEvent.target) {
-        setImageSrc(onLoadEvent.target.result);
-      }
-    };
-    if (changeEvent.target.files && changeEvent.target.files[0]) {
-      reader.readAsDataURL(changeEvent.target.files[0]);
+    if (input.files && input.files.length > 0) {
+      const loadImage = (file: File) => {
+        return new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          if (!file.type.startsWith("image/")) {
+            reject("Invalid file type");
+          }
+          reader.readAsDataURL(file);
+          reader.onload = (onLoadEvent) => {
+            if (onLoadEvent.target) {
+              resolve(onLoadEvent.target.result as string);
+            } else {
+              reject("Failed to load file");
+            }
+          };
+          reader.onerror = (onErrorEvent) => {
+            reject(onErrorEvent);
+          };
+        });
+      };
+
+      const loadImages = () => {
+        const promises: Promise<string>[] = [];
+        if (input.files)
+          for (let i = 0; i < input.files.length; i++) {
+            promises.push(loadImage(input.files[i]));
+          }
+        return Promise.all(promises);
+      };
+
+      loadImages()
+        .then((imageUrls) => {
+          setImageSrc(imageUrls);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
@@ -54,56 +84,58 @@ const Admin = () => {
 
     const formData = new FormData();
 
-    if (input.files && input.files.length > 1) {
-      setMessage("upload only 1 image at a time");
-      return;
-    }
+    // if (input.files && input.files.length > 1) {
+    //   setMessage("upload only 1 image at a time");
+    //   return;
+    // }
 
-    const { name, price, description } = productInfo;
+    // const { name, price, description } = productInfo;
 
-    if (
-      !name ||
-      !description ||
-      !price ||
-      typeof price === "string" ||
-      price < 0
-    ) {
-      setMessage("Some values are incorrect");
-      return;
-    }
+    // if (
+    //   !name ||
+    //   !description ||
+    //   !price ||
+    //   typeof price === "string" ||
+    //   price < 0
+    // ) {
+    //   setMessage("Some values are incorrect");
+    //   return;
+    // }
 
-    const file = input.files && input.files[0];
-    if (file) {
-      formData.append("file", file);
-    }
-    formData.append("upload_preset", "my_uploads");
+    if (input.files && input.files.length > 0) {
+      const imageUrls: string[] = [];
+      for (const file of input.files) {
+        formData.append("file", file);
+        formData.append("upload_preset", "my_uploads");
+        const cloudName = process.env.CLOUD_NAME ?? "";
+        try {
+          const uploadImageResponse = await fetch(
+            `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+            {
+              method: "post",
+              body: formData,
+            }
+          );
+          const imageData =
+            (await uploadImageResponse.json()) as UploadedImageData;
 
-    setUploadStatus({ ...uploadStatus, isUploading: true });
-    const cloudName = process.env.CLOUD_NAME ?? "";
-    try {
-      const uploadImageResponse = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-        {
-          method: "post",
-          body: formData,
+          if (!uploadImageResponse.ok) {
+            return;
+          }
+          imageUrls.push(imageData.secure_url);
+          console.log("imageUrls", imageUrls);
+        } catch (error) {
+          throw new Error("error uploading image");
         }
-      );
-      const imageData = (await uploadImageResponse.json()) as UploadedImageData;
-
-      if (!uploadImageResponse.ok) {
-        setMessage("Image file is required");
-        setUploadStatus({ ...uploadStatus, isUploading: false });
-        return;
       }
-      setUploadStatus({ ...uploadStatus, isUploading: false, isSaving: true });
-
+      console.log("imageUrls", imageUrls);
       const uploadProductResponse = await fetch(
         "http://localhost:3000/api/admin",
         {
           method: "POST",
           body: JSON.stringify({
             ...productInfo,
-            image: imageData.secure_url,
+            images: imageUrls,
           }),
           headers: {
             "Content-type": "application/json",
@@ -112,25 +144,13 @@ const Admin = () => {
       );
       const productData = (await uploadProductResponse.json()) as Product;
       if (productData) {
-        setProductInfo({ name: "", description: "", price: 0 });
-        setMessage("Success!");
-        setInputValue("");
-        setImageSrc(null);
-        setNewProduct(productData);
+        console.log(productData);
       }
-      setUploadStatus({ ...uploadStatus, isSaving: false });
-      setMessage("Success!");
-      setInputValue("");
-      setImageSrc(null);
-    } catch (error) {
-      setUploadStatus({ ...uploadStatus, isUploading: false, isSaving: false });
-      setInputValue("");
-      setImageSrc(null);
-      throw new Error("error uploading image");
     }
   };
 
   const handleProductInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(productInfo);
     setProductInfo({
       ...productInfo,
       [e.target.name]:
@@ -151,80 +171,52 @@ const Admin = () => {
         </p>
         <p className="p-2">{message ? message : null}</p>
         <div>
-          {imageSrc && typeof imageSrc === "string" && (
-            <img src={imageSrc} className="w-24 h-18" />
-          )}
+          {imageSrc.map((src) => (
+            <img src={src} style={{ width: "100px", height: "100px" }} />
+          ))}
         </div>
         <form
           method="post"
           onSubmit={handleSubmit}
           className="flex flex-col gap-4 w-96 border border-gray-200 rounded-lg shadow p-2.5"
         >
-          <fieldset className="flex flex-col gap-2">
-            <label
-              htmlFor="file-input"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Upload your image
-            </label>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              type="file"
-              name="file-input"
-              id="file-input"
-              value={inputValue}
-              onChange={handleImageChange}
-            />
-          </fieldset>
-          <fieldset className="flex flex-col gap-2">
-            <label
-              htmlFor="name"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Name
-            </label>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              type="text"
-              id="name"
-              name="name"
-              value={productInfo.name}
-              onChange={handleProductInfoChange}
-            />
-          </fieldset>
-          <fieldset className="flex flex-col gap-2">
-            <label
-              htmlFor="description"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Description
-            </label>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              type="text"
-              id="description"
-              name="description"
-              value={productInfo.description}
-              onChange={handleProductInfoChange}
-            />
-          </fieldset>
-          <fieldset className="flex flex-col gap-2">
-            <label
-              htmlFor="price"
-              className="block mb-2 text-sm font-medium text-gray-900"
-            >
-              Price
-            </label>
-            <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              type="number"
-              id="price"
-              name="price"
-              min={0}
-              value={productInfo.price ? productInfo.price : ""}
-              onChange={handleProductInfoChange}
-            />
-          </fieldset>
+          <Fieldset
+            htmlFor="file-input"
+            label="Upload your image"
+            type="file"
+            handleProductInfoChange={handleImageChange}
+            value={inputValue}
+            inputProps={{ multiple: true }}
+          />
+
+          <Fieldset
+            htmlFor="name"
+            label="Name"
+            type="text"
+            handleProductInfoChange={handleProductInfoChange}
+            value={productInfo.name}
+          />
+          <Fieldset
+            htmlFor="description"
+            label="Descripton"
+            type="text"
+            handleProductInfoChange={handleProductInfoChange}
+            value={productInfo.description}
+          />
+          <Fieldset
+            htmlFor="category"
+            label="Category"
+            type="text"
+            handleProductInfoChange={handleProductInfoChange}
+            value={productInfo.category}
+          />
+          <Fieldset
+            htmlFor="price"
+            label="Price"
+            type="number"
+            handleProductInfoChange={handleProductInfoChange}
+            value={productInfo.price ? productInfo.price : ""}
+          />
           <button
             type="submit"
             disabled={uploadStatus.isSaving || uploadStatus.isUploading}
