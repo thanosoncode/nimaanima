@@ -1,6 +1,7 @@
 interface FieldsetProps {
   htmlFor: string;
   label: string;
+  info?: string;
   value: string | number;
   type: "text" | "number" | "file";
   inputProps?: { multiple: boolean };
@@ -14,6 +15,7 @@ const Fieldset: React.FC<FieldsetProps> = ({
   value,
   type,
   inputProps,
+  info,
 }) => {
   return (
     <fieldset className="flex flex-col gap-2">
@@ -22,6 +24,7 @@ const Fieldset: React.FC<FieldsetProps> = ({
         className="block mb-2 text-sm font-medium text-gray-900"
       >
         {label}
+        {info && <p className="text-sm">{info}</p>}
       </label>
       <input
         min={0}

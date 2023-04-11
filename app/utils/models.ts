@@ -2,16 +2,11 @@ import { ImageObj } from "@/mockProduct/mockProduct";
 import { StaticImageData } from "next/image";
 
 export type Product = {
-  id: number;
   name: string;
-  image: StaticImageData;
   description: string;
   price: number;
   category: string;
-  images: {
-    id: number;
-    image: StaticImageData;
-  }[];
+  images: string[];
 };
 
 export interface CartItem extends Product {
