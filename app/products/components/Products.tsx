@@ -18,15 +18,15 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
         }}
       >
         {products.map((product) => (
-          <div className="shrink-0 w-64 h-64" key={product.id}>
+          <div className="shrink-0 w-64 h-64" key={product.name}>
             <Image
-              src={product.image}
+              src={product.images[0]}
               alt={product.name}
               width={100}
               height={100}
             />
 
-            <Link href={`/products/${product.category}/${product.id}`}>
+            <Link href={`/products/${product.category}/${product.name}`}>
               <p className="">{product.name}</p>
             </Link>
             <p>€{product.price}</p>

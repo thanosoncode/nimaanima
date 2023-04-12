@@ -5,7 +5,6 @@ import category2 from "../assets/category2.jpg";
 import category3 from "../assets/category3.jpg";
 import category4 from "../assets/category4.jpg";
 import about1 from "../assets/about1.jpg";
-import { products } from "./data/categories";
 import Container from "./components/Container";
 import { techniques } from "./data/techniques";
 import Contact from "./components/Contact";
@@ -62,12 +61,13 @@ const Home = () => {
             <section>
               <h4 className="text-2xl py-4">Products</h4>
               <div className="flex gap-4 overflow-hidden">
-                {products.map((product) => (
+                need a carousel with products here
+                {/* {products.map((product) => (
                   <div className="shrink-0 w-64 h-64" key={product.id}>
                     <Image src={product.image} alt={product.name} />
                     <p className="">{product.name}</p>
                   </div>
-                ))}
+                ))} */}
               </div>
             </section>
             <section>

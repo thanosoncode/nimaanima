@@ -1,18 +1,18 @@
 "use client";
 import Container from "@/app/components/Container";
-import { products } from "@/app/data/categories";
+import { Product } from "@/app/utils/models";
 import { ImageObj } from "@/mockProduct/mockProduct";
 import Image from "next/image";
 import { useState } from "react";
 
 const SingleProduct = ({
-  params: { productId },
+  params: { name },
+  products,
 }: {
-  params: { productId: string };
+  params: { name: string };
+  products: Product[];
 }) => {
-  console.log("id", productId);
-
-  const product = products.find((product) => product.id === Number(productId));
+  const product = products.find((product) => product.name === name);
   if (!product) {
     return <Container>{<h4>Sorry, we couldn't find that one.</h4>}</Container>;
   }

@@ -1,17 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Product, UploadedImageData } from "../utils/models";
+import { Product } from "../utils/models";
 import Container from "../components/Container";
 import Fieldset from "./components/Fieldset";
 import { uploadImage, uploadProduct } from "../api/client/helpers";
+import MyProducts from "./myProducts";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export type ProductInfo = {
   name: string;
   price: number;
   description: string;
   category: string;
+  images: string[];
 };
+
+const ZProductIfo = z.object({
+  name: z.string().min(3, { message: "name must be over 3 characters" }),
+  price: z.number(),
+  description: z
+    .string()
+    .min(3, { message: "description must be over 3 characters" }),
+  category: z
+    .string()
+    .min(3, { message: "category must be over 3 characters" }),
+  images: z.array(z.string()),
+});
 
 const Admin = () => {
   const [message, setMessage] = useState("");
@@ -26,46 +43,18 @@ const Admin = () => {
     price: 0,
     description: "",
     category: "",
+    images: [],
   });
-  const [newProduct, setNewProduct] = useState<Product>();
+  const [newProduct, setNewProduct] = useState<Product | null>(null);
 
   const handleImageChange = (
     changeEvent: React.ChangeEvent<HTMLInputElement>
   ) => {
     const input = changeEvent.currentTarget;
-
     setFileInputValue(input.value);
     if (input.files && input.files.length > 0) {
-      const loadImage = (file: File) => {
-        return new Promise<string>((resolve, reject) => {
-          const reader = new FileReader();
-          if (!file.type.startsWith("image/")) {
-            reject("Invalid file type");
-          }
-          reader.readAsDataURL(file);
-          reader.onload = (onLoadEvent) => {
-            if (onLoadEvent.target) {
-              resolve(onLoadEvent.target.result as string);
-            } else {
-              reject("Failed to load file");
-            }
-          };
-          reader.onerror = (onErrorEvent) => {
-            reject(onErrorEvent);
-          };
-        });
-      };
-
-      const loadImages = () => {
-        const promises: Promise<string>[] = [];
-        if (input.files)
-          for (let i = 0; i < input.files.length; i++) {
-            promises.push(loadImage(input.files[i]));
-          }
-        return Promise.all(promises);
-      };
-
-      loadImages()
+      const promises = loadImages(input.files);
+      promises
         .then((imageUrls) => {
           setChosenImages(imageUrls);
         })
@@ -75,17 +64,42 @@ const Admin = () => {
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const loadImage = (file: File) => {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      if (!file.type.startsWith("image/")) {
+        reject("Invalid file type");
+      }
+      reader.readAsDataURL(file);
+      reader.onload = (onLoadEvent) => {
+        if (onLoadEvent.target) {
+          resolve(onLoadEvent.target.result as string);
+        } else {
+          reject("Failed to load file");
+        }
+      };
+      reader.onerror = (onErrorEvent) => {
+        reject(onErrorEvent);
+      };
+    });
+  };
+
+  const loadImages = (files: FileList) => {
+    const promises: Promise<string>[] = [];
+    for (let i = 0; i < files.length; i++) {
+      promises.push(loadImage(files[i]));
+    }
+    return Promise.all(promises);
+  };
+
+  const submitProduct = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const elements = Array.from(event.currentTarget.elements);
-
-    const input = elements.find(
-      (el) => el.id === "file-input-multiple"
-    ) as HTMLInputElement;
+    const input = elements.find((el) => el.id === "images") as HTMLInputElement;
 
     const formData = new FormData();
-
     if (input.files && input.files.length > 0) {
+      setUploadStatus({ ...uploadStatus, isUploading: true });
       const imageUrls: string[] = [];
       for (const file of input.files) {
         formData.append("file", file);
@@ -98,13 +112,29 @@ const Admin = () => {
         }
       }
       setChosenImages([]);
-      const uploadedProduct = await uploadProduct({
-        ...productInfo,
-        images: imageUrls,
-      });
+      setFileInputValue("");
+      setUploadStatus({ ...uploadStatus, isUploading: false });
+      setUploadStatus({ ...uploadStatus, isSaving: true });
 
-      if (uploadedProduct) {
+      try {
+        const uploadedProduct = await uploadProduct({
+          ...productInfo,
+          images: imageUrls,
+        });
         setNewProduct(uploadedProduct);
+        setUploadStatus({ ...uploadStatus, isSaving: false });
+        setProductInfo({
+          name: "",
+          price: 0,
+          description: "",
+          category: "",
+          images: [],
+        });
+      } catch (error) {
+        setUploadStatus({ ...uploadStatus, isSaving: false });
+        setNewProduct(null);
+        console.log(error);
+        throw new Error("Error uploading product");
       }
     }
   };
@@ -116,6 +146,16 @@ const Admin = () => {
         e.target.name === "price" ? Number(e.target.value) : e.target.value,
     });
   };
+
+  const mockSubmit = (data: ProductInfo) => console.log(data);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ProductInfo>({
+    resolver: zodResolver(ZProductIfo),
+  });
 
   return (
     <Container>
@@ -129,7 +169,7 @@ const Admin = () => {
             : ""}
         </p>
         <p className="p-2">{message ? message : null}</p>
-        {chosenImages ? (
+        {chosenImages.length > 0 ? (
           <div>
             <h4>Images</h4>
             <div style={{ display: "flex", gap: "16px" }}>
@@ -149,47 +189,55 @@ const Admin = () => {
 
         <form
           method="post"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(mockSubmit)}
           className="flex flex-col gap-4 w-96 border border-gray-200 rounded-lg shadow p-2.5"
         >
           <Fieldset
-            htmlFor="file-input-multiple"
+            id="images"
             label="Upload your images"
             info="Note that the first image will be the main of your product"
             type="file"
-            handleProductInfoChange={handleImageChange}
+            handleInputChange={handleImageChange}
             value={fileInputValue}
             inputProps={{ multiple: true }}
           />
-
+          {errors.images && <span>{errors.images.message}</span>}
           <Fieldset
-            htmlFor="name"
+            id="name"
             label="Name"
             type="text"
-            handleProductInfoChange={handleProductInfoChange}
+            register={register}
+            handleInputChange={handleProductInfoChange}
             value={productInfo.name}
           />
+          {errors.name && <span>{errors.name.message}</span>}
           <Fieldset
-            htmlFor="description"
+            id="description"
             label="Descripton"
             type="text"
-            handleProductInfoChange={handleProductInfoChange}
+            register={register}
+            handleInputChange={handleProductInfoChange}
             value={productInfo.description}
           />
+          {errors.description && <span>{errors.description.message}</span>}
           <Fieldset
-            htmlFor="category"
+            id="category"
             label="Category"
             type="text"
-            handleProductInfoChange={handleProductInfoChange}
+            register={register}
+            handleInputChange={handleProductInfoChange}
             value={productInfo.category}
           />
+          {errors.category && <span>{errors.category.message}</span>}
           <Fieldset
-            htmlFor="price"
+            id="price"
             label="Price"
             type="number"
-            handleProductInfoChange={handleProductInfoChange}
+            register={register}
+            handleInputChange={handleProductInfoChange}
             value={productInfo.price ? productInfo.price : ""}
           />
+          {errors.price && <span>{errors.price.message}</span>}
           <button
             type="submit"
             disabled={uploadStatus.isSaving || uploadStatus.isUploading}
@@ -200,7 +248,7 @@ const Admin = () => {
         </form>
       </div>
       {/* @ts-ignore*/}
-      {/* <MyProducts newProduct={newProduct} /> */}
+      <MyProducts newProduct={newProduct} />
     </Container>
   );
 };
