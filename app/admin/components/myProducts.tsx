@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface MyProduct {
-  newProduct: Product;
+  newProduct: Product | null;
   isDeleting: boolean;
   setIsDeleting: Dispatch<SetStateAction<boolean>>;
 }

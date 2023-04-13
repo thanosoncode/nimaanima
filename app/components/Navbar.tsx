@@ -17,8 +17,8 @@ const Navbar = () => {
 
   return (
     <nav className="border-b-2 border-neutral-300">
-      <div className="w-3/4  mx-auto py-4 px-2 flex justify-between items-center">
-        <div className="flex justify-between gap-4 items-center">
+      <div className="mx-auto  flex w-3/4 items-center justify-between py-4 px-2">
+        <div className="flex items-center justify-between gap-4">
           {links.map((link) => {
             return (
               <Link

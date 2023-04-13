@@ -1,13 +1,12 @@
-import { UploadStatus } from "@/app/utils/models";
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/adminStore";
 
-interface StatusMessageProp {
-  uploadStatus: UploadStatus;
-}
+const StatusMessage: React.FC = () => {
+  const { isSaving, isUploading } = useSelector(
+    (state: RootState) => state.admin
+  );
 
-const StatusMessage: React.FC<StatusMessageProp> = ({
-  uploadStatus: { isUploading, isSaving },
-}) => {
   return (
     <p className="p-2">
       {isUploading

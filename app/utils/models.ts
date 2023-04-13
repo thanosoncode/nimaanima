@@ -1,7 +1,7 @@
 import { ImageObj } from "@/mockProduct/mockProduct";
-import { StaticImageData } from "next/image";
 
 export type Product = {
+  id: string;
   name: string;
   description: string;
   price: number;
