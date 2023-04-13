@@ -26,3 +26,8 @@ export interface MockProduct {
   category: string;
   images: ImageObj[];
 }
+
+export interface UploadStatus {
+  isUploading: boolean;
+  isSaving: boolean;
+}

@@ -1,7 +1,7 @@
 const Backdrop = ({ open, message }: { open: boolean; message: string }) => {
   return (
     <div
-      className={`absolute inset-0 w-full h-full flex justify-center items-center backdrop-brightness-75 ${
+      className={`absolute inset-0 flex h-full w-full items-center justify-center backdrop-brightness-75 ${
         open ? "flex" : "hidden"
       }`}
     >

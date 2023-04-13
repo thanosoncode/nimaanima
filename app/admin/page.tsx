@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Product } from "../utils/models";
+import { useRef, useState } from "react";
+import { Product, UploadStatus } from "../utils/models";
 import Container from "../components/Container";
 import Fieldset from "./components/Fieldset";
 import { uploadImage, uploadProduct } from "../api/client/helpers";
@@ -9,16 +9,13 @@ import MyProducts from "./myProducts";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Backdrop from "./Backdrop";
+import StatusMessage from "./components/StatusMessage";
+import PreviewImages from "./components/PreviewImages";
 
-export type ProductInfo = {
-  name: string;
-  price: number;
-  description: string;
-  category: string;
-  images: string[];
-};
+export type ProductData = z.infer<typeof ProductDataSchema>;
 
-const ZProductIfo = z.object({
+const ProductDataSchema = z.object({
   name: z.string().min(3, { message: "name must be over 3 characters" }),
   price: z.number(),
   description: z
@@ -27,18 +24,21 @@ const ZProductIfo = z.object({
   category: z
     .string()
     .min(3, { message: "category must be over 3 characters" }),
-  images: z.array(z.string()),
+  images: z
+    .custom((value) => value instanceof FileList)
+    .refine((images: any) => images.length >= 2, {
+      message: "Please select at least 1 images",
+    }),
 });
 
 const Admin = () => {
-  const [message, setMessage] = useState("");
-  const [uploadStatus, setUploadStatus] = useState({
+  const [uploadStatus, setUploadStatus] = useState<UploadStatus>({
     isUploading: false,
     isSaving: false,
   });
   const [fileInputValue, setFileInputValue] = useState("");
   const [chosenImages, setChosenImages] = useState<string[]>([]);
-  const [productInfo, setProductInfo] = useState<ProductInfo>({
+  const [productInfo, setProductInfo] = useState<ProductData>({
     name: "",
     price: 0,
     description: "",
@@ -46,21 +46,28 @@ const Admin = () => {
     images: [],
   });
   const [newProduct, setNewProduct] = useState<Product | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
-  const handleImageChange = (
+  const handleProductInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProductInfo({
+      ...productInfo,
+      [e.target.name]:
+        e.target.name === "price" ? Number(e.target.value) : e.target.value,
+    });
+  };
+
+  const handleImageChange = async (
     changeEvent: React.ChangeEvent<HTMLInputElement>
   ) => {
     const input = changeEvent.currentTarget;
     setFileInputValue(input.value);
     if (input.files && input.files.length > 0) {
-      const promises = loadImages(input.files);
-      promises
-        .then((imageUrls) => {
-          setChosenImages(imageUrls);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const imageUrls = await loadImages(input.files);
+        setChosenImages(imageUrls);
+      } catch (error) {
+        throw new Error("Error when loading images.");
+      }
     }
   };
 
@@ -86,117 +93,77 @@ const Admin = () => {
 
   const loadImages = (files: FileList) => {
     const promises: Promise<string>[] = [];
-    for (let i = 0; i < files.length; i++) {
-      promises.push(loadImage(files[i]));
-    }
+    Array.from(files).forEach((promise) => promises.push(loadImage(promise)));
     return Promise.all(promises);
   };
 
-  const submitProduct = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const elements = Array.from(event.currentTarget.elements);
-    const input = elements.find((el) => el.id === "images") as HTMLInputElement;
-
+  const submitProduct = async (data: ProductData) => {
+    const files = data.images as FileList;
     const formData = new FormData();
-    if (input.files && input.files.length > 0) {
-      setUploadStatus({ ...uploadStatus, isUploading: true });
-      const imageUrls: string[] = [];
-      for (const file of input.files) {
-        formData.append("file", file);
-        formData.append("upload_preset", "my_uploads");
-        try {
-          const uploadedImage = await uploadImage(formData);
-          imageUrls.push(uploadedImage.secure_url);
-        } catch (error) {
-          throw new Error("error uploading image");
-        }
-      }
-      setChosenImages([]);
-      setFileInputValue("");
-      setUploadStatus({ ...uploadStatus, isUploading: false });
-      setUploadStatus({ ...uploadStatus, isSaving: true });
-
+    setUploadStatus({ ...uploadStatus, isUploading: true });
+    const imageUrls: string[] = [];
+    for (const file of files) {
+      formData.append("file", file);
+      formData.append("upload_preset", "my_uploads");
       try {
-        const uploadedProduct = await uploadProduct({
-          ...productInfo,
-          images: imageUrls,
-        });
-        setNewProduct(uploadedProduct);
-        setUploadStatus({ ...uploadStatus, isSaving: false });
-        setProductInfo({
-          name: "",
-          price: 0,
-          description: "",
-          category: "",
-          images: [],
-        });
+        const uploadedImage = await uploadImage(formData);
+        imageUrls.push(uploadedImage.secure_url);
       } catch (error) {
-        setUploadStatus({ ...uploadStatus, isSaving: false });
-        setNewProduct(null);
-        console.log(error);
-        throw new Error("Error uploading product");
+        throw new Error("error uploading image");
       }
     }
-  };
+    setChosenImages([]);
+    setFileInputValue("");
+    setUploadStatus({ ...uploadStatus, isUploading: false, isSaving: true });
 
-  const handleProductInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProductInfo({
-      ...productInfo,
-      [e.target.name]:
-        e.target.name === "price" ? Number(e.target.value) : e.target.value,
-    });
+    try {
+      const uploadedProduct = await uploadProduct({
+        ...productInfo,
+        images: imageUrls,
+      });
+      setNewProduct(uploadedProduct);
+      setUploadStatus({ ...uploadStatus, isSaving: false });
+      setProductInfo({
+        name: "",
+        price: 0,
+        description: "",
+        category: "",
+        images: [],
+      });
+    } catch (error) {
+      setUploadStatus({ ...uploadStatus, isSaving: false });
+      setNewProduct(null);
+      throw new Error("Error uploading product");
+    }
   };
-
-  const mockSubmit = (data: ProductInfo) => console.log(data);
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
-  } = useForm<ProductInfo>({
-    resolver: zodResolver(ZProductIfo),
+  } = useForm<ProductData>({
+    resolver: zodResolver(ProductDataSchema),
   });
 
   return (
     <Container>
       <h4 className="py-4 text-xl">Add Product</h4>
       <div>
-        <p className="p-2">
-          {uploadStatus.isUploading
-            ? "Uploading... This might take a few seconds."
-            : uploadStatus.isSaving
-            ? "Saving to database..."
-            : ""}
-        </p>
-        <p className="p-2">{message ? message : null}</p>
-        {chosenImages.length > 0 ? (
-          <div>
-            <h4>Images</h4>
-            <div style={{ display: "flex", gap: "16px" }}>
-              {chosenImages.map((image) => (
-                <img
-                  src={image}
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                  }}
-                  key={image}
-                />
-              ))}
-            </div>
-          </div>
-        ) : null}
+        <StatusMessage uploadStatus={uploadStatus} />
+        <PreviewImages images={chosenImages} />
 
         <form
           method="post"
-          onSubmit={handleSubmit(mockSubmit)}
-          className="flex flex-col gap-4 w-96 border border-gray-200 rounded-lg shadow p-2.5"
+          onSubmit={handleSubmit(submitProduct)}
+          className="flex w-96 flex-col gap-4 rounded-lg border border-gray-200 p-2.5 shadow"
         >
           <Fieldset
             id="images"
             label="Upload your images"
             info="Note that the first image will be the main of your product"
             type="file"
+            register={register}
             handleInputChange={handleImageChange}
             value={fileInputValue}
             inputProps={{ multiple: true }}
@@ -241,14 +208,15 @@ const Admin = () => {
           <button
             type="submit"
             disabled={uploadStatus.isSaving || uploadStatus.isUploading}
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            className="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto"
           >
             Create product
           </button>
         </form>
       </div>
       {/* @ts-ignore*/}
-      <MyProducts newProduct={newProduct} />
+      <MyProducts newProduct={newProduct} setIsDeleting={setIsDeleting} />
+      <Backdrop open={isDeleting} message="deleting..." />
     </Container>
   );
 };

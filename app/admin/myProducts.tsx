@@ -2,16 +2,20 @@
 
 import { Product } from "@prisma/client";
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import Backdrop from "./Backdrop";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface MyProduct {
   newProduct: Product;
+  isDeleting: boolean;
+  setIsDeleting: Dispatch<SetStateAction<boolean>>;
 }
 
-const MyProducts: React.FC<MyProduct> = ({ newProduct }) => {
+const MyProducts: React.FC<MyProduct> = ({
+  newProduct,
+  isDeleting,
+  setIsDeleting,
+}) => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const getProducts = async () => {
     try {
@@ -27,7 +31,7 @@ const MyProducts: React.FC<MyProduct> = ({ newProduct }) => {
   }, [newProduct]);
 
   const handleProductDelete = async (id: string) => {
-    setIsLoading(true);
+    setIsDeleting(true);
     try {
       const response = await fetch(`http://localhost:3000/api/admin/${id}`, {
         method: "DELETE",
@@ -38,14 +42,14 @@ const MyProducts: React.FC<MyProduct> = ({ newProduct }) => {
           products.filter((product) => product.id !== data.product.id)
         );
       }
-      setIsLoading(false);
+      setIsDeleting(false);
     } catch (error) {
-      setIsLoading(false);
+      setIsDeleting(false);
       throw new Error("error deleting product");
     }
   };
   return (
-    <div className="relative">
+    <div>
       <h4>MyProducts</h4>
       <div className="flex flex-wrap gap-4">
         {products.length > 0
@@ -60,7 +64,7 @@ const MyProducts: React.FC<MyProduct> = ({ newProduct }) => {
                 />
                 <button
                   onClick={() => handleProductDelete(product.id)}
-                  disabled={isLoading}
+                  disabled={isDeleting}
                 >
                   delete product
                 </button>
@@ -68,7 +72,6 @@ const MyProducts: React.FC<MyProduct> = ({ newProduct }) => {
             ))
           : null}
       </div>
-      <Backdrop open={isLoading} message="deleting..." />
     </div>
   );
 };
