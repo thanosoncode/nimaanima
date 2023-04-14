@@ -2,19 +2,16 @@
 
 import { Product } from "@prisma/client";
 import Image from "next/image";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AdminState } from "../store/adminStore";
+import { setIsDeleting } from "../store/adminSlice";
 
-interface MyProduct {
-  newProduct: Product | null;
-  isDeleting: boolean;
-  setIsDeleting: Dispatch<SetStateAction<boolean>>;
-}
-
-const MyProducts: React.FC<MyProduct> = ({
-  newProduct,
-  isDeleting,
-  setIsDeleting,
-}) => {
+const MyProducts: React.FC = () => {
+  const dispatch = useDispatch();
+  const { isDeleting, newProduct } = useSelector(
+    (state: AdminState) => state.admin
+  );
   const [products, setProducts] = useState<Product[]>([]);
 
   const getProducts = async () => {
@@ -31,7 +28,7 @@ const MyProducts: React.FC<MyProduct> = ({
   }, [newProduct]);
 
   const handleProductDelete = async (id: string) => {
-    setIsDeleting(true);
+    dispatch(setIsDeleting(true));
     try {
       const response = await fetch(`http://localhost:3000/api/admin/${id}`, {
         method: "DELETE",
@@ -42,9 +39,9 @@ const MyProducts: React.FC<MyProduct> = ({
           products.filter((product) => product.id !== data.product.id)
         );
       }
-      setIsDeleting(false);
+      dispatch(setIsDeleting(false));
     } catch (error) {
-      setIsDeleting(false);
+      dispatch(setIsDeleting(false));
       throw new Error("error deleting product");
     }
   };

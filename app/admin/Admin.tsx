@@ -12,11 +12,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Backdrop from "./components/Backdrop";
 import StatusMessage from "./components/StatusMessage";
 import PreviewImages from "./components/PreviewImages";
-import { RootState, store } from "./store/adminStore";
+import { AdminState } from "./store/adminStore";
 import {
   setIsSaving,
   setIsUploading,
   setFileInputValue,
+  setChosenImages,
+  setProduct,
+  setNewProduct,
 } from "./store/adminSlice";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -40,26 +43,23 @@ const ProductDataSchema = z.object({
 
 const Admin = () => {
   const dispatch = useDispatch();
-  const { isSaving, isUploading, fileInputValue } = useSelector(
-    (state: RootState) => state.admin
-  );
-  const [chosenImages, setChosenImages] = useState<string[]>([]);
-  const [product, setProductInfo] = useState<ProductData>({
-    name: "",
-    price: 0,
-    description: "",
-    category: "",
-    images: [],
-  });
-  const [newProduct, setNewProduct] = useState<Product | null>(null);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const {
+    isSaving,
+    isUploading,
+    isDeleting,
+    fileInputValue,
+    chosenImages,
+    product,
+  } = useSelector((state: AdminState) => state.admin);
 
   const handleProductInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProductInfo({
-      ...product,
-      [e.target.name]:
-        e.target.name === "price" ? Number(e.target.value) : e.target.value,
-    });
+    dispatch(
+      setProduct({
+        ...product,
+        [e.target.name]:
+          e.target.name === "price" ? Number(e.target.value) : e.target.value,
+      })
+    );
   };
 
   const handleImageChange = async (
@@ -70,7 +70,7 @@ const Admin = () => {
     if (input.files && input.files.length > 0) {
       try {
         const imageUrls = await loadImages(input.files);
-        setChosenImages(imageUrls);
+        dispatch(setChosenImages(imageUrls));
       } catch (error) {
         throw new Error("Error when loading images.");
       }
@@ -118,7 +118,7 @@ const Admin = () => {
         throw new Error("error uploading image");
       }
     }
-    setChosenImages([]);
+    dispatch(setChosenImages([]));
     dispatch(setFileInputValue(""));
     dispatch(setIsUploading(false));
     dispatch(setIsSaving(true));
@@ -130,18 +130,20 @@ const Admin = () => {
 
     try {
       const uploadedProduct = await uploadProduct(productToUpload);
-      setNewProduct(uploadedProduct);
+      dispatch(setNewProduct(uploadedProduct));
       dispatch(setIsSaving(false));
-      setProductInfo({
-        name: "",
-        price: 0,
-        description: "",
-        category: "",
-        images: [],
-      });
+      dispatch(
+        setProduct({
+          name: "",
+          price: 0,
+          description: "",
+          category: "",
+          images: [],
+        })
+      );
     } catch (error) {
       dispatch(setIsSaving(false));
-      setNewProduct(null);
+      dispatch(setNewProduct(null));
       throw new Error("Error uploading product");
     }
   };
@@ -222,11 +224,7 @@ const Admin = () => {
           </button>
         </form>
       </div>
-      <MyProducts
-        newProduct={newProduct}
-        isDeleting={isDeleting}
-        setIsDeleting={setIsDeleting}
-      />
+      <MyProducts />
       <Backdrop open={isDeleting} message="deleting..." />
     </Container>
   );
