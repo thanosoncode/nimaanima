@@ -25,7 +25,6 @@ const ProductsPage = async () => {
       <Container>
         <Products products={products} />
       </Container>
-      <Some />
       <Contact />
     </>
   );

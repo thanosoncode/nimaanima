@@ -29,10 +29,7 @@ const Fieldset: React.FC<FieldsetProps> = ({
 
   return (
     <fieldset className="flex flex-col gap-2">
-      <label
-        htmlFor={id}
-        className="mb-2 block text-sm font-medium text-gray-900"
-      >
+      <label htmlFor={id} className="block text-sm font-medium text-gray-900">
         {label}
         {info && <p className="text-sm">{info}</p>}
       </label>

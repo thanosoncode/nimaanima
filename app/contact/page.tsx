@@ -6,6 +6,7 @@ import Container from "../components/Container";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { store } from "../store";
 
 const TypeFormData = z.object({
   email: z.string().email({ message: "Email is required" }),
@@ -57,11 +58,14 @@ const ContactUs = () => {
     formState: { errors },
   } = useForm<TypeFormData>({ resolver: zodResolver(TypeFormData) });
 
+  const data = store.getState().products.products;
+  console.log("data", data);
+
   return (
     <>
       <header className="bg-lightBlue-400 py-12">
         <Container>
-          <h1 className="text-4xl font-thin text-center pb-4 tracking-wide">
+          <h1 className="pb-4 text-center text-4xl font-thin tracking-wide">
             Do you have a question or want to share your ideas?
           </h1>
           <p className="text-center font-light tracking-wide">
@@ -70,17 +74,17 @@ const ContactUs = () => {
         </Container>
       </header>
       <Container>
-        <h4 className="text-center pt-4">{progressMessage}</h4>
+        <h4 className="pt-4 text-center">{progressMessage}</h4>
         <div className="mt-12">
           <form
             ref={form}
             onSubmit={handleSubmit(sendEmail)}
-            className="flex flex-col gap-4 w-96 mx-auto"
+            className="mx-auto flex w-96 flex-col gap-4"
           >
             <fieldset className="flex flex-col">
               <label>Message</label>
               <textarea
-                className="resize-y h-40 border border-gray-300 pl-2"
+                className="h-40 resize-y border border-gray-300 pl-2"
                 {...register("message")}
               />
               {errors.message && <p>{errors.message.message}</p>}
@@ -90,14 +94,14 @@ const ContactUs = () => {
               <label>Email</label>
               <input
                 type="email"
-                className="rounded py-2 border border-gray-300 pl-2"
+                className="rounded border border-gray-300 py-2 pl-2"
                 {...register("email")}
               />
               {errors.email && <p>{errors.email.message}</p>}
             </fieldset>
             <button
               type="submit"
-              className="bg-black text-white rounded w-full py-2"
+              className="w-full rounded bg-black py-2 text-white"
               disabled={loading}
             >
               Send message
