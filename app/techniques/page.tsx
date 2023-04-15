@@ -9,26 +9,30 @@ const Techniques = () => {
     <>
       <Container>
         <header className=" pt-8 pb-16">
-          <h1 className="text-3xl pb-4">Techniques</h1>
+          <h1 className="pb-4 text-3xl">Techniques</h1>
           <p>Learna all about the techniques we use for our products</p>
         </header>
         <main
+          className="align grid justify-between gap-x-5 gap-y-10"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, 500px)",
-            gap: "20px",
-            justifyContent: "center",
+            gridTemplateColumns: "repeat(auto-fit, 384px)",
           }}
         >
           {techniques.map((technique) => (
             <article
               key={technique.id}
-              className="rounded-xl border border-neutral-100 overflow-hidden"
+              className="overflow-hidden rounded-xl border hover:shadow-md"
             >
-              <Image src={technique.mainImage} alt={technique.name} />
-              <section className="p-4">
+              <div className="h-80 w-96">
+                <Image
+                  src={technique.mainImage}
+                  alt={technique.name}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <section className="p-6">
                 <Link href={`/techniques/${technique.id}`}>
-                  <h4 className="text-xl font-bold">{technique.title}</h4>
+                  <h4 className="mb-4 text-xl font-bold">{technique.title}</h4>
                   <p className="text-base font-light">{technique.title}</p>
                 </Link>
               </section>

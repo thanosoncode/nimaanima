@@ -59,7 +59,6 @@ const ContactUs = () => {
   } = useForm<TypeFormData>({ resolver: zodResolver(TypeFormData) });
 
   const data = store.getState().products.products;
-  console.log("data", data);
 
   return (
     <>

@@ -1,23 +1,14 @@
 import { prisma } from "./prisma";
 
-const getSigleProduct = async (id: string) => {
-  try {
-    const product = await prisma.product.findUnique({
-      where: { id },
-    });
-    return product;
-  } catch (error) {
-    throw new Error("could not get product");
-  }
+const getSingleProduct = async (id: string) => {
+  console.log("id", id);
+  const product = await prisma.product.findUnique({ where: { id } });
+  return product;
 };
 
 export const getAllProducts = async () => {
-  try {
-    const products = await prisma.product.findMany({});
-    return products;
-  } catch (error) {
-    throw new Error("could not get product");
-  }
+  const products = await prisma.product.findMany({});
+  return products;
 };
 
 const createProduct = async (product: {
@@ -59,4 +50,4 @@ const deleteProduct = async (id: string) => {
   return product;
 };
 
-export { createProduct, updateProduct, getSigleProduct, deleteProduct };
+export { createProduct, updateProduct, getSingleProduct, deleteProduct };

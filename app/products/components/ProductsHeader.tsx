@@ -13,13 +13,13 @@ interface ProductsHeaderProps {
 
 const ProductsHeader: React.FC<ProductsHeaderProps> = ({ categories }) => {
   return (
-    <header className="bg-lightPink-400">
+    <header className=" bg-lightPink-400 pb-4">
       <Container classes="relative">
-        <h1 className="text-3xl text-center font-extralight tracking-wide pt-6 pb-28">
+        <h1 className="pt-6 pb-28 text-center text-3xl font-extralight tracking-wide">
           Find things you'll love. Support independent sellers. Only on Etsy.
         </h1>
         <section
-          className="flex gap-12 items-center justify-center"
+          className="flex items-center justify-center gap-16"
           style={{
             position: "absolute",
             top: "100px",

@@ -16,23 +16,23 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ category }) => {
 
   return (
     <div
-      className="flex flex-col gap-2 justify-center items-center"
+      className="flex flex-col items-center justify-center gap-2"
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div
-        className={`w-24 h-24 overflow-hidden rounded-full ease-in-out duration-300 border border-gray-300 ${
+        className={`h-28 w-28 overflow-hidden rounded-full border border-gray-300 duration-300 ease-in-out ${
           isHovered ? "scale-110" : ""
         }`}
       >
         <Image
           src={category.image}
           alt={category.name}
-          className="object-fill w-24 h-24"
+          className="h-28 w-28 object-fill"
         />
       </div>
       <p
-        className={`px-2 pb-1 ease-in-out duration-300 ${
+        className={`px-2 pb-1 duration-300 ease-in-out ${
           isHovered ? "border-b border-black" : "border-b border-white"
         }`}
       >

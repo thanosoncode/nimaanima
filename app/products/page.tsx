@@ -2,7 +2,7 @@ import { categories } from "../data/categories";
 import Container from "../components/Container";
 import Contact from "../components/Contact";
 import ProductsHeader from "./components/ProductsHeader";
-import Products from "./components/Products";
+import ProductList from "./components/ProductList";
 import { store } from "../store";
 import { setProducts } from "../store/productsSlice";
 
@@ -16,13 +16,12 @@ const getProducts = async () => {
 
 const ProductsPage = async () => {
   const products = await getProducts();
-  store.dispatch(setProducts(products));
 
   return (
     <>
       <ProductsHeader categories={categories} />
       <Container>
-        <Products products={products} />
+        <ProductList products={products} />
       </Container>
       <Contact />
     </>
