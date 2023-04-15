@@ -47,7 +47,7 @@ const MyProducts: React.FC = () => {
   };
   return (
     <div>
-      <h4 className="mb-4 text-center text-xl">MyProducts</h4>
+      <h4 className="mb-4 text-center text-xl">My products</h4>
       <table className="w-full border">
         <thead className="uppercase">
           <tr className="border-b p-1">

@@ -1,5 +1,5 @@
 import { UseFormRegister } from "react-hook-form";
-import { ProductData } from "../Admin";
+import { ProductData } from "./AddNewProduct";
 
 interface FieldsetProps {
   id: "name" | "price" | "description" | "category" | "images";

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ProductData } from "../Admin";
+import { ProductData } from "../components/AddNewProduct";
 import { Product } from "@/app/utils/models";
 
 type InitialState = {

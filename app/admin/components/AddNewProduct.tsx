@@ -1,18 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { Product, UploadStatus } from "../utils/models";
-import Container from "../components/Container";
-import Fieldset from "./components/Fieldset";
-import { uploadImage, uploadProduct } from "../api/client/helpers";
-import MyProducts from "./components/myProducts";
+import Container from "../../components/Container";
+import Fieldset from "./Fieldset";
+import { uploadImage, uploadProduct } from "../../api/client/helpers";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Backdrop from "./components/Backdrop";
-import StatusMessage from "./components/StatusMessage";
-import PreviewImages from "./components/PreviewImages";
-import { AdminState } from "./store/adminStore";
+import Backdrop from "./Backdrop";
+import PreviewImages from "./PreviewImages";
+import { AdminState } from "../store/adminStore";
 import {
   setIsSaving,
   setIsUploading,
@@ -20,7 +16,7 @@ import {
   setChosenImages,
   setProduct,
   setNewProduct,
-} from "./store/adminSlice";
+} from "../store/adminSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 export type ProductData = z.infer<typeof ProductDataSchema>;
@@ -158,103 +154,98 @@ const Admin = () => {
 
   return (
     <Container>
-      <div className="my-8 flex flex-col gap-12">
-        <MyProducts />
+      <div>
+        <h4 className="mb-4 text-center text-xl">Add new product</h4>
         <div>
-          <h4 className="mb-4 text-center text-xl">Add Product</h4>
-          <div>
-            <PreviewImages images={chosenImages} />
-            <form
-              method="post"
-              onSubmit={handleSubmit(submitProduct)}
-              className="mx-auto flex w-96 flex-col rounded-lg border border-gray-200 p-2.5 shadow"
+          <PreviewImages images={chosenImages} />
+          <form
+            method="post"
+            onSubmit={handleSubmit(submitProduct)}
+            className="mx-auto flex w-96 flex-col rounded-lg border border-gray-200 p-2.5 shadow"
+          >
+            <Fieldset
+              id="images"
+              label="Upload your images"
+              info="Note that the first image will be the main of your product"
+              type="file"
+              register={register}
+              handleInputChange={handleImageChange}
+              value={fileInputValue}
+              inputProps={{ multiple: true }}
+            />
+            {errors.images ? (
+              <span className="tex-sm text-red-400">
+                {errors.images.message}
+              </span>
+            ) : (
+              <span className="p-3"></span>
+            )}
+            <Fieldset
+              id="name"
+              label="Name"
+              type="text"
+              register={register}
+              handleInputChange={handleProductInfoChange}
+              value={product.name}
+            />
+            {errors.name ? (
+              <span className="tex-sm text-red-400">{errors.name.message}</span>
+            ) : (
+              <span className="p-3"></span>
+            )}
+            <Fieldset
+              id="description"
+              label="Descripton"
+              type="text"
+              register={register}
+              handleInputChange={handleProductInfoChange}
+              value={product.description}
+            />
+            {errors.description ? (
+              <span className="tex-sm text-red-400">
+                {errors.description.message}
+              </span>
+            ) : (
+              <span className="p-3"></span>
+            )}
+            <Fieldset
+              id="category"
+              label="Category"
+              type="text"
+              register={register}
+              handleInputChange={handleProductInfoChange}
+              value={product.category}
+            />
+            {errors.category ? (
+              <span className="tex-sm text-red-400">
+                {errors.category.message}
+              </span>
+            ) : (
+              <span className="p-3"></span>
+            )}
+            <Fieldset
+              id="price"
+              label="Price"
+              type="number"
+              register={register}
+              handleInputChange={handleProductInfoChange}
+              value={product.price ? product.price : ""}
+            />
+            {errors.price ? (
+              <span className="tex-sm text-red-400">
+                {errors.price.message}
+              </span>
+            ) : (
+              <span className="p-3"></span>
+            )}
+            <button
+              type="submit"
+              disabled={isSaving || isUploading}
+              className="w-full rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-neutral-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto"
             >
-              <Fieldset
-                id="images"
-                label="Upload your images"
-                info="Note that the first image will be the main of your product"
-                type="file"
-                register={register}
-                handleInputChange={handleImageChange}
-                value={fileInputValue}
-                inputProps={{ multiple: true }}
-              />
-              {errors.images ? (
-                <span className="tex-sm text-red-400">
-                  {errors.images.message}
-                </span>
-              ) : (
-                <span className="p-3"></span>
-              )}
-              <Fieldset
-                id="name"
-                label="Name"
-                type="text"
-                register={register}
-                handleInputChange={handleProductInfoChange}
-                value={product.name}
-              />
-              {errors.name ? (
-                <span className="tex-sm text-red-400">
-                  {errors.name.message}
-                </span>
-              ) : (
-                <span className="p-3"></span>
-              )}
-              <Fieldset
-                id="description"
-                label="Descripton"
-                type="text"
-                register={register}
-                handleInputChange={handleProductInfoChange}
-                value={product.description}
-              />
-              {errors.description ? (
-                <span className="tex-sm text-red-400">
-                  {errors.description.message}
-                </span>
-              ) : (
-                <span className="p-3"></span>
-              )}
-              <Fieldset
-                id="category"
-                label="Category"
-                type="text"
-                register={register}
-                handleInputChange={handleProductInfoChange}
-                value={product.category}
-              />
-              {errors.category ? (
-                <span className="tex-sm text-red-400">
-                  {errors.category.message}
-                </span>
-              ) : (
-                <span className="p-3"></span>
-              )}
-              <Fieldset
-                id="price"
-                label="Price"
-                type="number"
-                register={register}
-                handleInputChange={handleProductInfoChange}
-                value={product.price ? product.price : ""}
-              />
-              {errors.price ? (
-                <span className="tex-sm text-red-400">
-                  {errors.price.message}
-                </span>
-              ) : (
-                <span className="p-3"></span>
-              )}
-              <button
-                type="submit"
-                disabled={isSaving || isUploading}
-                className="w-full rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-neutral-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto"
-              >
-                Create product
-              </button>
-            </form>
-          </div>
+              Create product
+            </button>
+          </form>
         </div>
       </div>
       <Backdrop />
