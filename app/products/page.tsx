@@ -5,7 +5,6 @@ import ProductsHeader from "./components/ProductsHeader";
 import Products from "./components/Products";
 import { store } from "../store";
 import { setProducts } from "../store/productsSlice";
-import Some from "./Some";
 
 const getProducts = async () => {
   const response = await fetch("http://localhost:3000/api/products");

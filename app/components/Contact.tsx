@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Container from "./Container";
 
 const Contact = () => {
@@ -8,6 +9,7 @@ const Contact = () => {
           Feel free to contact us to discuss your ideas or to order more
           personalized products.
         </h4>
+
         <button
           style={{
             background: "white",
@@ -17,7 +19,7 @@ const Contact = () => {
             fontWeight: "bolder",
           }}
         >
-          Get in touch!
+          <Link href="/contact">Get in touch!</Link>
         </button>
       </Container>
     </section>

@@ -5,7 +5,7 @@ import { store } from "./store/adminStore";
 import Admin from "./components/AddNewProduct";
 import { useState } from "react";
 import Container from "../components/Container";
-import MyProducts from "./components/myProducts";
+import MyProducts from "./components/MyProducts";
 
 enum Tab {
   myProducts = "My products",
@@ -15,11 +15,12 @@ enum Tab {
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.myProducts);
 
+  const myProductsView = activeTab === Tab.myProducts;
+  const newProductView = activeTab === Tab.newProduct;
+
   const handleTabChange = (tab: Tab) => {
     setActiveTab(tab);
   };
-  const myProductsView = activeTab === Tab.myProducts;
-  const newProductView = activeTab === Tab.newProduct;
 
   const tabsContent = (tab: Tab) => {
     switch (tab) {
