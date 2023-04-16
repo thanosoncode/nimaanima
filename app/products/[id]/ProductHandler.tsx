@@ -2,8 +2,14 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import { Product } from "@/app/utils/models";
+import arrowBlock from "../../../public/assets/left-black-arrow.png";
 
-const ProductHandler = () => {
+interface ProductHandlerProps {
+  product: Product;
+}
+
+const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
   const [isMouseOver, setIsMouseOver] = useState(false);
 
@@ -20,42 +26,64 @@ const ProductHandler = () => {
   };
   return (
     <>
-      <aside className="flex shrink-0 flex-col gap-4">
-        {product.images.map((image, index) => (
-          <div>
+      <section className="mr-16 flex gap-4">
+        <aside className="flex shrink-0 flex-col gap-4">
+          {product.images.map((image, index) => (
+            <div key={index}>
+              <Image
+                key={index}
+                src={image}
+                alt=""
+                width={60}
+                height={60}
+                // onClick={() => handleImageChange(image.id)}
+              />
+            </div>
+          ))}
+        </aside>
+        <div
+          style={{
+            position: "relative",
+            width: "640px",
+            height: "480px",
+            flexShrink: 0,
+            overflow: "hidden",
+          }}
+          onMouseMove={handleImageMouseOver}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white duration-200 ease-in-out hover:bg-neutral-100">
             <Image
-              key={index}
-              src={image}
-              alt=""
-              width={60}
-              height={60}
-              // onClick={() => handleImageChange(image.id)}
+              src={arrowBlock}
+              alt="left-arrow"
+              width={20}
+              height={20}
+              className=""
             />
           </div>
-        ))}
-      </aside>
-      <div
-        style={{
-          position: "relative",
-          width: "400px",
-          height: "400px",
-          flexShrink: 0,
-          overflow: "hidden",
-        }}
-        onMouseMove={handleImageMouseOver}
-        onMouseLeave={handleMouseLeave}
-      >
-        <Image
-          src={product.images[0]}
-          alt=""
-          style={{
-            transformOrigin: `${zoomPosition.x}px ${zoomPosition.y}px`,
-            transform: isMouseOver ? "scale(2)" : "scale(1)",
-            width: "400px",
-            height: "400px",
-          }}
-        />
-      </div>
+          <div className="absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 rotate-180 cursor-pointer items-center justify-center rounded-full bg-white duration-200 ease-in-out hover:bg-neutral-100">
+            <Image
+              src={arrowBlock}
+              alt="right-arrow"
+              width={20}
+              height={20}
+              className=""
+            />
+          </div>
+          <Image
+            src={product.images[0]}
+            alt=""
+            width={480}
+            height={640}
+            style={{
+              transformOrigin: `${zoomPosition.x}px ${zoomPosition.y}px`,
+              transform: isMouseOver ? "scale(2)" : "scale(1)",
+              width: "640px",
+              height: "480px",
+            }}
+          />
+        </div>
+      </section>
     </>
   );
 };

@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Container from "@/app/components/Container";
-import { Product } from "@/app/utils/models";
+import ProductHandler from "./ProductHandler";
+import AddToCart from "./AddToCart";
 
 const getProduct = async (id: string) => {
   const response = await fetch(`http://localhost:3000/api/products/${id}`);
@@ -17,11 +17,13 @@ const SingleProduct = async ({
 
   return (
     <Container>
-      <div className="flex justify-center gap-8 pt-40">
-        <article className="flex flex-col gap-5">
-          <h1 className="text-3xl">{product.name}</h1>
+      <div className="flex gap-8 pt-40">
+        <ProductHandler product={product} />
+        <article className="flex w-full flex-col gap-6">
+          <p className="text-2xl">€{product.price} </p>
+          <p className="">{product.name}</p>
           <p>{product.description}</p>
-          <p className="my-4 text-3xl">{product.price} € </p>
+          <AddToCart product={product} />
         </article>
       </div>
     </Container>

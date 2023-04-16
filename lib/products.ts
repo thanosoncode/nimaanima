@@ -1,7 +1,6 @@
 import { prisma } from "./prisma";
 
 const getSingleProduct = async (id: string) => {
-  console.log("id", id);
   const product = await prisma.product.findUnique({ where: { id } });
   return product;
 };
