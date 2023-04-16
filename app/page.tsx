@@ -3,9 +3,9 @@ import hero from "../assets/hero.jpg";
 import Container from "./components/Container";
 import FooterCTA from "./components/FooterCTA";
 import { Product } from "./utils/models";
-import Carousel from "./components/Carousel";
 import Categories from "./components/Categories";
 import HomeArticle from "./components/HomeArticle";
+import Slider from "./components/Slider";
 
 const getProducts = async () => {
   const response = await fetch("http://localhost:3000/api/products");
@@ -26,7 +26,7 @@ const Home = async () => {
             {/* <Image src={hero} alt="hero" /> */}
             <Categories />
             <HomeArticle />
-            <Carousel products={products} />
+            <Slider products={products} />
           </div>
         </div>
       </Container>

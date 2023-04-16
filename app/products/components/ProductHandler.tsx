@@ -1,46 +1,41 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Product } from "@/app/utils/models";
-import arrowBlock from "../../../public/assets/left-black-arrow.png";
+import Modal from "./Modal";
+import Carousel from "./Carousel";
 
 interface ProductHandlerProps {
   product: Product;
 }
 
 const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
-  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
-  const [isMouseOver, setIsMouseOver] = useState(false);
   const [selectedImageINdex, setSelectedImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMainImageDimensions, setModalMainImageDimensions] = useState({
+    width: Math.floor(window.innerWidth * 0.8),
+    height: Math.floor(window.innerHeight * 0.8),
+  });
 
-  const handleImageMouseOver = (event: React.MouseEvent<HTMLImageElement>) => {
-    setIsMouseOver(true);
-    const x = event.clientX - event.currentTarget.offsetLeft;
-    const y = event.clientY - event.currentTarget.offsetTop;
-    setZoomPosition({ x, y });
+  const handleImageSelect = (index: number) => {
+    setSelectedImageIndex(index);
   };
 
-  const handleMouseLeave = (event: React.MouseEvent<HTMLImageElement>) => {
-    setIsMouseOver(false);
-    setZoomPosition({ x: 0, y: 0 });
-  };
+  const openModalView = () => setIsModalOpen(true);
+  const closeModalView = () => setIsModalOpen(false);
 
-  const handleNextImageClick = () => {
-    if (selectedImageINdex < product.images.length - 1) {
-      setSelectedImageIndex((prev) => prev + 1);
-    } else {
-      setSelectedImageIndex(0);
-    }
-  };
+  useEffect(() => {
+    const handleSize = () => {
+      setModalMainImageDimensions({
+        width: Math.floor(window.innerWidth * 0.8),
+        height: Math.floor(window.innerHeight * 0.8),
+      });
+    };
 
-  const handlePreviousImageClick = () => {
-    if (selectedImageINdex > 0) {
-      setSelectedImageIndex((prev) => prev - 1);
-    } else {
-      setSelectedImageIndex(product.images.length - 1);
-    }
-  };
+    window.addEventListener("resize", handleSize);
+    return () => window.removeEventListener("resize", handleSize);
+  }, []);
 
   return (
     <>
@@ -54,60 +49,30 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
                 alt=""
                 width={60}
                 height={60}
-                // onClick={() => handleImageChange(image.id)}
+                onClick={() => handleImageSelect(index)}
               />
             </div>
           ))}
         </aside>
-        <div
-          style={{
-            position: "relative",
-            width: "640px",
-            height: "480px",
-            flexShrink: 0,
-            overflow: "hidden",
-          }}
-          onMouseMove={handleImageMouseOver}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div
-            onClick={handlePreviousImageClick}
-            className="absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white duration-200 ease-in-out hover:bg-neutral-100"
-          >
-            <Image
-              src={arrowBlock}
-              alt="left-arrow"
-              width={20}
-              height={20}
-              className=""
-            />
-          </div>
-          <div
-            onClick={handleNextImageClick}
-            className="absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 rotate-180 cursor-pointer items-center justify-center rounded-full bg-white duration-200 ease-in-out hover:bg-neutral-100"
-          >
-            <Image
-              src={arrowBlock}
-              alt="right-arrow"
-              width={20}
-              height={20}
-              className=""
-            />
-          </div>
-          <Image
-            src={product.images[selectedImageINdex]}
-            alt=""
-            width={480}
-            height={640}
-            style={{
-              transformOrigin: `${zoomPosition.x}px ${zoomPosition.y}px`,
-              transform: isMouseOver ? "scale(2)" : "scale(1)",
-              width: "640px",
-              height: "480px",
-            }}
-          />
-        </div>
+        <Carousel
+          product={product}
+          selectedImageINdex={selectedImageINdex}
+          setSelectedImageIndex={setSelectedImageIndex}
+          width={640}
+          height={480}
+          onClick={openModalView}
+        />
       </section>
+      <Modal open={isModalOpen}>
+        <Carousel
+          product={product}
+          selectedImageINdex={selectedImageINdex}
+          setSelectedImageIndex={setSelectedImageIndex}
+          width={modalMainImageDimensions.width}
+          height={modalMainImageDimensions.height}
+          onClose={closeModalView}
+        />
+      </Modal>
     </>
   );
 };

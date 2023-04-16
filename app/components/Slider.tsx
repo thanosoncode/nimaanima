@@ -5,11 +5,11 @@ import Image from "next/image";
 import arrow from "../../public/assets/arrow.png";
 import { useEffect, useRef, useState } from "react";
 
-interface CarouselProps {
+interface SliderProps {
   products: Product[];
 }
 
-const Carousel: React.FC<CarouselProps> = ({ products }) => {
+const Slider: React.FC<SliderProps> = ({ products }) => {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
   const [widthDifference, setWidthDifference] = useState<number>(0);
@@ -95,4 +95,4 @@ const Carousel: React.FC<CarouselProps> = ({ products }) => {
     </section>
   );
 };
-export default Carousel;
+export default Slider;
