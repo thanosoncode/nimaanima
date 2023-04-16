@@ -2,7 +2,7 @@ import Link from "next/link";
 import Container from "../components/Container";
 import { techniques } from "../data/techniques";
 import Image from "next/image";
-import Contact from "../components/Contact";
+import FooterCTA from "../components/FooterCTA";
 
 const Techniques = () => {
   return (
@@ -40,7 +40,7 @@ const Techniques = () => {
           ))}
         </main>
       </Container>
-      <Contact />
+      <FooterCTA />
     </>
   );
 };

@@ -1,10 +1,8 @@
 import { categories } from "../data/categories";
 import Container from "../components/Container";
-import Contact from "../components/Contact";
+import FooterCTA from "../components/FooterCTA";
 import ProductsHeader from "./components/ProductsHeader";
 import ProductList from "./components/ProductList";
-import { store } from "../store";
-import { setProducts } from "../store/productsSlice";
 
 const getProducts = async () => {
   const response = await fetch("http://localhost:3000/api/products");
@@ -23,7 +21,7 @@ const ProductsPage = async () => {
       <Container>
         <ProductList products={products} />
       </Container>
-      <Contact />
+      <FooterCTA />
     </>
   );
 };

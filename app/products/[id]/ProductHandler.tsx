@@ -12,6 +12,7 @@ interface ProductHandlerProps {
 const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
   const [isMouseOver, setIsMouseOver] = useState(false);
+  const [selectedImageINdex, setSelectedImageIndex] = useState(0);
 
   const handleImageMouseOver = (event: React.MouseEvent<HTMLImageElement>) => {
     setIsMouseOver(true);
@@ -24,6 +25,23 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
     setIsMouseOver(false);
     setZoomPosition({ x: 0, y: 0 });
   };
+
+  const handleNextImageClick = () => {
+    if (selectedImageINdex < product.images.length - 1) {
+      setSelectedImageIndex((prev) => prev + 1);
+    } else {
+      setSelectedImageIndex(0);
+    }
+  };
+
+  const handlePreviousImageClick = () => {
+    if (selectedImageINdex > 0) {
+      setSelectedImageIndex((prev) => prev - 1);
+    } else {
+      setSelectedImageIndex(product.images.length - 1);
+    }
+  };
+
   return (
     <>
       <section className="mr-16 flex gap-4">
@@ -52,7 +70,10 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
           onMouseMove={handleImageMouseOver}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white duration-200 ease-in-out hover:bg-neutral-100">
+          <div
+            onClick={handlePreviousImageClick}
+            className="absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white duration-200 ease-in-out hover:bg-neutral-100"
+          >
             <Image
               src={arrowBlock}
               alt="left-arrow"
@@ -61,7 +82,10 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
               className=""
             />
           </div>
-          <div className="absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 rotate-180 cursor-pointer items-center justify-center rounded-full bg-white duration-200 ease-in-out hover:bg-neutral-100">
+          <div
+            onClick={handleNextImageClick}
+            className="absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 rotate-180 cursor-pointer items-center justify-center rounded-full bg-white duration-200 ease-in-out hover:bg-neutral-100"
+          >
             <Image
               src={arrowBlock}
               alt="right-arrow"
@@ -71,7 +95,7 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
             />
           </div>
           <Image
-            src={product.images[0]}
+            src={product.images[selectedImageINdex]}
             alt=""
             width={480}
             height={640}

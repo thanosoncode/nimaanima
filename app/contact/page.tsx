@@ -6,7 +6,6 @@ import Container from "../components/Container";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { store } from "../store";
 
 const TypeFormData = z.object({
   email: z.string().email({ message: "Email is required" }),
@@ -58,10 +57,8 @@ const ContactUs = () => {
     formState: { errors },
   } = useForm<TypeFormData>({ resolver: zodResolver(TypeFormData) });
 
-  const data = store.getState().products.products;
-
   return (
-    <>
+    <div>
       <header className="bg-lightBlue-400 py-12">
         <Container>
           <h1 className="pb-4 text-center text-4xl font-thin tracking-wide">
@@ -108,7 +105,7 @@ const ContactUs = () => {
           </form>
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

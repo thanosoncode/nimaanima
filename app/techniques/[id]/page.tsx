@@ -1,4 +1,4 @@
-import Contact from "@/app/components/Contact";
+import FooterCTA from "@/app/components/FooterCTA";
 import Container from "@/app/components/Container";
 import { techniques } from "@/app/data/techniques";
 import Image from "next/image";
@@ -34,7 +34,7 @@ const SingleTechnique = ({ params: { id } }: { params: { id: string } }) => {
           </article>
         </main>
       </Container>
-      <Contact />
+      <FooterCTA />
     </>
   );
 };

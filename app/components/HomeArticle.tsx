@@ -18,7 +18,7 @@ const HomeArticle = () => {
             href="/techniques/1"
             className="flex flex-col items-center gap-6 p-14"
           >
-            <h4 className="">Learn more about the techniques we use</h4>
+            <h4 className="text-xl">Learn more about the techniques we use</h4>
             <h2 className="border-b-4 border-transparent px-2 text-center text-4xl hover:border-black">
               {techniques[0].name}
             </h2>

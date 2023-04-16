@@ -1,7 +1,7 @@
 import Image from "next/image";
 import hero from "../assets/hero.jpg";
 import Container from "./components/Container";
-import Contact from "./components/Contact";
+import FooterCTA from "./components/FooterCTA";
 import { Product } from "./utils/models";
 import Carousel from "./components/Carousel";
 import Categories from "./components/Categories";
@@ -23,14 +23,14 @@ const Home = async () => {
       <Container>
         <div className="my-20">
           <div className="flex flex-col gap-20">
-            <Image src={hero} alt="hero" />
+            {/* <Image src={hero} alt="hero" /> */}
             <Categories />
             <HomeArticle />
             <Carousel products={products} />
           </div>
         </div>
       </Container>
-      <Contact />
+      <FooterCTA />
     </>
   );
 };

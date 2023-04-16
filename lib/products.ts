@@ -1,10 +1,5 @@
 import { prisma } from "./prisma";
 
-const getSingleProduct = async (id: string) => {
-  const product = await prisma.product.findUnique({ where: { id } });
-  return product;
-};
-
 export const getAllProducts = async () => {
   const products = await prisma.product.findMany({});
   return products;
@@ -49,4 +44,4 @@ const deleteProduct = async (id: string) => {
   return product;
 };
 
-export { createProduct, updateProduct, getSingleProduct, deleteProduct };
+export { createProduct, updateProduct, deleteProduct };

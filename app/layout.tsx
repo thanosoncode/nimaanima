@@ -2,6 +2,7 @@ import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import { AppProvider } from "./context";
 import "./globals.css";
+import { NAVBAR_HEIGHT } from "./utils/constants";
 
 export const metadata = {
   title: "Create Next App",
@@ -15,11 +16,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen">
+      <body>
         <AppProvider>
           <Navbar />
-          <div>{children}</div>
-          <Footer />
+          <div
+            className="flex flex-col justify-between"
+            style={{ minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)` }}
+          >
+            {children}
+            <Footer />
+          </div>
         </AppProvider>
       </body>
     </html>

@@ -1,5 +1,7 @@
 "use client";
 
+import { useAppDispatch, useAppState } from "@/app/context";
+
 import { Product } from "@/app/utils/models";
 
 interface AddToCartProps {
@@ -7,15 +9,24 @@ interface AddToCartProps {
 }
 
 const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
+  const dispatch = useAppDispatch();
+
   const handleAddToCart = () => {
-    console.log(product);
+    dispatch({ type: "ADD_CART_ITEM", cartItem: product });
   };
+
+  const { cartItems } = useAppState();
+  const isNotInCart = !cartItems.find((item) => item.id === product.id);
+
   return (
     <button
       onClick={handleAddToCart}
-      className="mt-6 w-full rounded-full bg-black py-3 text-center text-white duration-100 ease-in-out hover:scale-105"
+      className={`mt-6 w-full rounded-full bg-black py-3 text-center text-white duration-100 ease-in-out ${
+        isNotInCart ? "hover:scale-105" : ""
+      } `}
+      disabled={!isNotInCart}
     >
-      Add to cart
+      {isNotInCart ? "Add to cart" : "Added!"}
     </button>
   );
 };

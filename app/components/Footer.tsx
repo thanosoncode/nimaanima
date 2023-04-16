@@ -8,8 +8,8 @@ const Footer = () => {
   const pathname = usePathname();
 
   return (
-    <footer>
-      <Container classes="flex gap-2 py-4 px-2 justify-center">
+    <footer className="bg-someBlue-600">
+      <Container classes="flex gap-2 py-4 px-2 justify-between">
         <p>&copy; Copyright 2023</p>{" "}
         <Link
           href="/admin"
