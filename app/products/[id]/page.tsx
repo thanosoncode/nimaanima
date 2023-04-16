@@ -1,7 +1,6 @@
 import Container from "@/app/components/Container";
-import ProductHandler from "./ProductHandler";
-import AddToCart from "./AddToCart";
-import FooterCTA from "@/app/components/FooterCTA";
+import ProductHandler from "../components/ProductHandler";
+import AddToCart from "../components/AddToCart";
 
 const getProduct = async (id: string) => {
   const response = await fetch(`http://localhost:3000/api/products/${id}`);

@@ -24,9 +24,7 @@ const ProductList: React.FC<ProductsProps> = ({ products }) => {
                 height={160}
                 className="h-full w-full object-cover duration-300 ease-in-out hover:scale-105"
               />
-
               <p className="">{product.name}</p>
-
               <p>€{product.price}</p>
             </Link>
           </div>
