@@ -12,21 +12,21 @@ const SingleTechnique = ({ params: { id } }: { params: { id: string } }) => {
 
   return (
     <>
-      <Container>
-        <header>
-          <h1 className="text-4xl">{technique.name}</h1>
-          <h4>{technique.title}</h4>
+      <Container classes="pb-20">
+        <header className="mb-10 px-40">
+          <h1 className="mt-10 mb-4 text-center text-4xl">{technique.name}</h1>
+          <h4 className="text-center">{technique.title}</h4>
         </header>
-        <main>
+        <main className="flex flex-col items-center gap-4 px-40">
           <Image src={technique.mainImage} alt="main-image" />
           <article>
-            <p>{technique.intro}</p>
-            {technique.parts.map((part) => (
-              <div>
+            <p className="my-10">{technique.intro}</p>
+            {technique.parts.map((part, index) => (
+              <div key={index} className="mb-10 flex flex-col items-center">
                 <Image src={part.image} alt={`image-${technique.id}`} />
-                <section>
-                  {part.texts.map((text) => (
-                    <p>{text?.text}</p>
+                <section className="mt-10">
+                  {part.texts.map((text, index) => (
+                    <p key={index}>{text?.text}</p>
                   ))}
                 </section>
               </div>

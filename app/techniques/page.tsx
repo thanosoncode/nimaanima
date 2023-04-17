@@ -7,30 +7,21 @@ import FooterCTA from "../components/FooterCTA";
 const Techniques = () => {
   return (
     <>
-      <Container>
+      <Container classes="pb-40">
         <header className=" pt-8 pb-16">
           <h1 className="pb-4 text-3xl">Techniques</h1>
           <p>Learna all about the techniques we use for our products</p>
         </header>
-        <main
-          className="align grid justify-between gap-x-5 gap-y-10"
-          style={{
-            gridTemplateColumns: "repeat(auto-fit, 384px)",
-          }}
-        >
+        <main className="flex flex-wrap gap-12">
           {techniques.map((technique) => (
             <article
               key={technique.id}
-              className="overflow-hidden rounded-xl border hover:shadow-md"
+              className="h-[620px] w-96 overflow-hidden rounded-xl border hover:shadow-md"
             >
-              <div className="h-80 w-96">
-                <Image
-                  src={technique.mainImage}
-                  alt={technique.name}
-                  className="h-full w-full object-cover"
-                />
+              <div className="relative h-3/5">
+                <Image src={technique.mainImage} alt={technique.name} fill />
               </div>
-              <section className="p-6">
+              <section className="p-3">
                 <Link href={`/techniques/${technique.id}`}>
                   <h4 className="mb-4 text-xl font-bold">{technique.title}</h4>
                   <p className="text-base font-light">{technique.title}</p>
