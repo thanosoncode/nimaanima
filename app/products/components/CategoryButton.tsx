@@ -28,7 +28,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ category }) => {
         <Image
           src={category.image}
           alt={category.name}
-          className="h-28 w-28 object-fill"
+          className="h-28 w-28 object-cover"
         />
       </div>
       <p

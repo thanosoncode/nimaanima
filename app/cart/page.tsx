@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { useAppDispatch, useAppState } from "../context";
-import { BiMinus, BiPlus } from "react-icons/bi";
 import Container from "../components/Container";
+import Link from "next/link";
 
 const Cart = () => {
   const { cartItems } = useAppState();
@@ -69,6 +69,7 @@ const Cart = () => {
           </tbody>
         </table>
       )}
+      <Link href="/order">continue</Link>
     </Container>
   );
 };

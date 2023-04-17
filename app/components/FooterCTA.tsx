@@ -16,7 +16,7 @@ const FooterCTA = () => {
         </Container>
       </section>
       <div className="bg-someBlue-500">
-        <Container classes="py-3 text-center">
+        <Container classes="py-3 text-center text-white">
           Every product is 100% handmade.
         </Container>
       </div>
