@@ -5,10 +5,12 @@ import { Product } from "./utils/models";
 
 type AppState = {
   cartItems: Product[];
+  selectedCategory: string | null;
 };
 
 const initialState = {
   cartItems: [],
+  selectedCategory: null,
 };
 
 type Action =
@@ -24,7 +26,8 @@ type Action =
       type: "REMOVE_ITEM";
       id: string;
     }
-  | { type: "EMPTY_CART" };
+  | { type: "EMPTY_CART" }
+  | { type: "SET_SELECTED_CATEGORY"; category: string };
 
 type Dispatch = (action: Action) => void;
 
@@ -42,10 +45,10 @@ const reducer = (state: AppState, action: Action) => {
         ...state,
         cartItems: state.cartItems.filter((item) => item.id !== action.id),
       };
-
     case "EMPTY_CART":
       return { ...state, cartItems: [] };
-
+    case "SET_SELECTED_CATEGORY":
+      return { ...state, selectedCategory: action.category };
     default: {
       throw new Error(`Unhandled action type: ${action}`);
     }

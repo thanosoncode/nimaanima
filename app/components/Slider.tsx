@@ -4,6 +4,7 @@ import { Product } from "../utils/models";
 import Image from "next/image";
 import arrow from "../../public/assets/arrow.png";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 interface SliderProps {
   products: Product[];
@@ -76,18 +77,20 @@ const Slider: React.FC<SliderProps> = ({ products }) => {
         >
           {products.map((product) => (
             <div className="h-64 w-64 shrink-0" key={product.id}>
-              <Image
-                src={product.images[0]}
-                alt={product.name}
-                width={256}
-                height={256}
-                style={{
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-              <p className="">{product.name}</p>
+              <Link href={`/products/${product.id}`}>
+                <Image
+                  src={product.images[0]}
+                  alt={product.name}
+                  width={256}
+                  height={256}
+                  style={{
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+                <p className="">{product.name}</p>
+              </Link>
             </div>
           ))}
         </div>

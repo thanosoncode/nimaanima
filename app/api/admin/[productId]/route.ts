@@ -33,16 +33,16 @@ export async function PUT(request: Request) {
       message: "name, description, price, image url are required",
     });
   }
-  const product = await updateProduct(
-    { name, description, price, category, images },
-    id
-  );
+  // const product = await updateProduct(
+  //   { name, description, price, category, images },
+  //   id
+  // );
 
-  if (!product) {
-    return NextResponse.json({
-      message: "could not find product with that id",
-    });
-  }
+  // if (!product) {
+  //   return NextResponse.json({
+  //     message: "could not find product with that id",
+  //   });
+  // }
 
-  return NextResponse.json({ product });
+  return NextResponse.json({});
 }

@@ -7,7 +7,9 @@ const SingleTechnique = ({ params: { id } }: { params: { id: string } }) => {
   const technique = techniques.find((technique) => technique.id === Number(id));
 
   if (!technique) {
-    return <Container>{<h4>Sorry, we couldn't find that one.</h4>}</Container>;
+    return (
+      <Container>{<h4>Sorry, we couldn&apos;t find that one.</h4>}</Container>
+    );
   }
 
   return (

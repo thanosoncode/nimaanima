@@ -97,7 +97,7 @@ const ContactUs = () => {
             </fieldset>
             <button
               type="submit"
-              className="mt-8 w-full rounded rounded-full bg-black py-4 text-white"
+              className="mt-8 w-full rounded-full bg-black py-4 text-white"
               disabled={loading}
             >
               Send message

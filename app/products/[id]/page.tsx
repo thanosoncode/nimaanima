@@ -19,7 +19,7 @@ const SingleProduct = async ({
     <Container>
       <div className="flex gap-8 pt-40">
         <ProductHandler product={product} />
-        <article className="flex w-full flex-col gap-6">
+        <article className="flex w-80 flex-col gap-6 ">
           <p className="text-2xl">€{product.price} </p>
           <p className="">{product.name}</p>
           <p>{product.description}</p>

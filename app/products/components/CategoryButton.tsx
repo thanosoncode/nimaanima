@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppDispatch } from "@/app/context";
 import Image, { StaticImageData } from "next/image";
 import { useState } from "react";
 
@@ -14,11 +15,17 @@ interface CategoryButtonProps {
 const CategoryButton: React.FC<CategoryButtonProps> = ({ category }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const dispatch = useAppDispatch();
+  const handleCategoryClick = (category: string) => {
+    dispatch({ type: "SET_SELECTED_CATEGORY", category });
+  };
+
   return (
     <div
       className="flex flex-col items-center justify-center gap-2"
       onMouseOver={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => handleCategoryClick(category.name)}
     >
       <div
         className={`h-28 w-28 overflow-hidden rounded-full border border-gray-300 duration-300 ease-in-out ${

@@ -16,7 +16,8 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = ({ categories }) => {
     <header className=" bg-lightGreen-400 pb-4">
       <Container classes="relative">
         <h1 className="pt-6 pb-28 text-center text-3xl font-extralight tracking-wide">
-          Find things you'll love. Support independent sellers. Only on Etsy.
+          Find things you&apos;ll love. Support independent sellers. Only on
+          Etsy.
         </h1>
         <section
           className="flex items-center justify-center gap-16"
@@ -28,9 +29,7 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = ({ categories }) => {
           }}
         >
           {categories.map((category) => (
-            <Link href={`/products/${category.name}`} key={category.name}>
-              <CategoryButton category={category} />
-            </Link>
+            <CategoryButton category={category} key={category.name} />
           ))}
         </section>
       </Container>

@@ -1,3 +1,5 @@
+"use client";
+import { useAppState } from "@/app/context";
 import { Product } from "../../utils/models";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,11 +9,17 @@ interface ProductsProps {
 }
 
 const ProductList: React.FC<ProductsProps> = ({ products }) => {
+  const { selectedCategory } = useAppState();
+
+  const filteredProducts = products.filter(
+    (product) => product.category !== selectedCategory
+  );
+
   return (
     <main className="py-32">
       <h4 className="mb-4  text-2xl">Find something you love</h4>
       <section className="flex flex-wrap gap-x-10 gap-y-16">
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <div
             className="h-40 w-60 shrink-0 hover:shadow-lg"
             key={product.name}
