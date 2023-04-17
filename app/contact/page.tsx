@@ -59,7 +59,7 @@ const ContactUs = () => {
 
   return (
     <div>
-      <header className="bg-lightBlue-400 py-12">
+      <header className="bg-someBlue-400 py-12">
         <Container>
           <h1 className="pb-4 text-center text-4xl font-thin tracking-wide">
             Do you have a question or want to share your ideas?
@@ -75,12 +75,12 @@ const ContactUs = () => {
           <form
             ref={form}
             onSubmit={handleSubmit(sendEmail)}
-            className="mx-auto flex w-96 flex-col gap-4"
+            className="mx-auto flex w-[500px] flex-col gap-4"
           >
             <fieldset className="flex flex-col">
               <label>Message</label>
               <textarea
-                className="h-40 resize-y border border-gray-300 pl-2"
+                className="h-60 resize-y border border-gray-300 pl-2"
                 {...register("message")}
               />
               {errors.message && <p>{errors.message.message}</p>}
@@ -90,14 +90,14 @@ const ContactUs = () => {
               <label>Email</label>
               <input
                 type="email"
-                className="rounded border border-gray-300 py-2 pl-2"
+                className="rounded border border-gray-300 py-4 pl-2"
                 {...register("email")}
               />
               {errors.email && <p>{errors.email.message}</p>}
             </fieldset>
             <button
               type="submit"
-              className="w-full rounded bg-black py-2 text-white"
+              className="mt-8 w-full rounded rounded-full bg-black py-4 text-white"
               disabled={loading}
             >
               Send message

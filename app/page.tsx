@@ -1,5 +1,3 @@
-import Image from "next/image";
-import hero from "../assets/hero.jpg";
 import Container from "./components/Container";
 import FooterCTA from "./components/FooterCTA";
 import { Product } from "./utils/models";
@@ -21,12 +19,11 @@ const Home = async () => {
   return (
     <>
       <Container>
-        <div className="my-20">
-          <div className="flex flex-col gap-20">
-            {/* <Image src={hero} alt="hero" /> */}
+        <div className="mt-10 mb-40">
+          <div className="flex flex-col gap-40">
             <Categories />
-            <HomeArticle />
             <Slider products={products} />
+            <HomeArticle />
           </div>
         </div>
       </Container>

@@ -87,10 +87,10 @@ const Carousel: React.FC<CarouselProps> = ({
       />
       {onClose ? (
         <div
-          className="absolute top-2  right-2 z-10 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-white"
+          className="absolute top-2  right-2 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white"
           onClick={onClose}
         >
-          <Image src={closeIcon} alt="close-window" width={30} height={30} />
+          <Image src={closeIcon} alt="close-window" width={20} height={20} />
         </div>
       ) : null}
     </div>
