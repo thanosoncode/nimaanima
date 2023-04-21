@@ -7,6 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AdminState } from "../store/adminStore";
 import { setIsDeleting } from "../store/adminSlice";
 
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://shop-next.netlify.app"
+    : "http://localhost:3000";
+
 const MyProducts: React.FC = () => {
   const dispatch = useDispatch();
   const { isDeleting, newProduct } = useSelector(
@@ -16,7 +21,7 @@ const MyProducts: React.FC = () => {
 
   const getProducts = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/products");
+      const response = await fetch(`${url}/api/products`);
       const data = (await response.json()) as Product[];
       setProducts(data);
     } catch (error) {
@@ -30,7 +35,7 @@ const MyProducts: React.FC = () => {
   const handleProductDelete = async (id: string) => {
     dispatch(setIsDeleting(true));
     try {
-      const response = await fetch(`http://localhost:3000/api/admin/${id}`, {
+      const response = await fetch(`${url}/api/admin/${id}`, {
         method: "DELETE",
       });
       const data = (await response.json()) as { product: Product };

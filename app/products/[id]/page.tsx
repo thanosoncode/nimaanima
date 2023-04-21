@@ -2,8 +2,13 @@ import Container from "@/app/components/Container";
 import ProductHandler from "../components/ProductHandler";
 import AddToCart from "../components/AddToCart";
 
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://shop-next.netlify.app"
+    : "http://localhost:3000";
+
 const getProduct = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/products/${id}`);
+  const response = await fetch(`${url}/api/products/${id}`);
 
   return response.json();
 };

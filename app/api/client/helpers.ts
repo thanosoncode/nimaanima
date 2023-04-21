@@ -17,18 +17,20 @@ export const uploadImage = async (formData: FormData) => {
   }
 };
 
+const url =
+  process.env.NODE_ENV === "production"
+    ? "https://shop-next.netlify.app"
+    : "http://localhost:3000";
+
 export const uploadProduct = async (product: Product) => {
   try {
-    const uploadProductResponse = await fetch(
-      "http://localhost:3000/api/admin",
-      {
-        method: "POST",
-        body: JSON.stringify(product),
-        headers: {
-          "Content-type": "application/json",
-        },
-      }
-    );
+    const uploadProductResponse = await fetch(`${url}/api/admin`, {
+      method: "POST",
+      body: JSON.stringify(product),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
     const productData = (await uploadProductResponse.json()) as Product;
     return productData;
   } catch (error) {
@@ -38,7 +40,7 @@ export const uploadProduct = async (product: Product) => {
 
 export const deleteProduct = async (id: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/admin/${id}`, {
+    const response = await fetch(`${url}/api/admin/${id}`, {
       method: "DELETE",
     });
     const data = (await response.json()) as { product: Product };
