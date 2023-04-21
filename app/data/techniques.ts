@@ -1,15 +1,15 @@
-import t1main from "../../assets/technique1/t1main.jpg";
-import t1one from "../../assets/technique1/t1-1.jpeg";
-import t1two from "../../assets/technique1/t1-2.jpg";
-import t1three from "../../assets/technique1/t1-3.jpg";
-import t2main from "../../assets/technique2/t2main.jpg";
-import t2one from "../../assets/technique2/t2-1.jpg";
-import t2two from "../../assets/technique2/t2-2.jpg";
-import t2three from "../../assets/technique2/t2-3.jpg";
-import t3main from "../../assets/technique3/t3main.jpeg";
-import t3one from "../../assets/technique3/t3-1.jpg";
-import t3two from "../../assets/technique3/t3-2.jpg";
-import t3three from "../../assets/technique3/t3-3.jpg";
+import t1main from "../../public/assets/technique1/t1main.jpg";
+import t1one from "../../public/assets/technique1/t1-1.jpeg";
+import t1two from "../../public/assets/technique1/t1-2.jpg";
+import t1three from "../../public/assets/technique1/t1-3.jpg";
+import t2main from "../../public/assets/technique2/t2main.jpg";
+import t2one from "../../public/assets/technique2/t2-1.jpg";
+import t2two from "../../public/assets/technique2/t2-2.jpg";
+import t2three from "../../public/assets/technique2/t2-3.jpg";
+import t3main from "../../public/assets/technique3/t3main.jpeg";
+import t3one from "../../public/assets/technique3/t3-1.jpg";
+import t3two from "../../public/assets/technique3/t3-2.jpg";
+import t3three from "../../public/assets/technique3/t3-3.jpg";
 
 export const techniques = [
   {

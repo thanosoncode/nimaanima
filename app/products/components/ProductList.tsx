@@ -18,20 +18,36 @@ const ProductList: React.FC<ProductsProps> = ({ products }) => {
   return (
     <main className="py-32">
       <h4 className="mb-4  text-2xl">Find something you love</h4>
-      <section className="flex flex-wrap gap-x-10 gap-y-16">
+      <section
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gridAutoRows: "minmax(300px, auto)",
+          gap: "80px 20px",
+        }}
+      >
         {filteredProducts.map((product) => (
-          <div
-            className="h-40 w-60 shrink-0 hover:shadow-lg"
-            key={product.name}
-          >
-            <Link href={`/products/${product.id}`}>
+          <div key={product.name}>
+            <Link
+              href={`/products/${product.id}`}
+              style={{
+                maxWidth: "100%",
+                position: "relative",
+                height: "100%",
+                display: "block",
+              }}
+            >
               <Image
                 src={product.images[0]}
                 alt={product.name}
-                width={240}
-                height={160}
-                className="h-full w-full object-cover duration-300 ease-in-out hover:scale-105"
+                fill
+                className=" rounded-2xl object-cover"
               />
+            </Link>
+            <Link
+              href={`/products/${product.id}`}
+              style={{ display: "block", padding: "10px" }}
+            >
               <p className="">{product.name}</p>
               <p>€{product.price}</p>
             </Link>

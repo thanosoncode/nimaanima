@@ -1,7 +1,7 @@
-import category1 from "../../assets/category1.jpg";
-import category2 from "../../assets/category2.jpg";
-import category3 from "../../assets/category3.jpg";
-import category4 from "../../assets/category4.jpg";
+import category1 from "../../public/assets/category1.jpg";
+import category2 from "../../public/assets/category2.jpg";
+import category3 from "../../public/assets/category3.jpg";
+import category4 from "../../public/assets/category4.jpg";
 
 export const categories = [
   { id: 1, name: "category-1", image: category1 },

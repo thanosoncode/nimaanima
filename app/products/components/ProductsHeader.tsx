@@ -1,17 +1,10 @@
-import Link from "next/link";
 import Container from "../../components/Container";
-import { StaticImageData } from "next/image";
 import CategoryButton from "./CategoryButton";
+import { categories } from "@/app/data/categories";
 
-interface ProductsHeaderProps {
-  categories: {
-    id: number;
-    name: string;
-    image: StaticImageData;
-  }[];
-}
+interface ProductsHeaderProps {}
 
-const ProductsHeader: React.FC<ProductsHeaderProps> = ({ categories }) => {
+const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
   return (
     <header className=" bg-lightGreen-400 pb-4">
       <Container classes="relative">

@@ -18,7 +18,7 @@ const ProductsPage = async () => {
   return (
     <>
       <ProductsHeader categories={categories} />
-      <Container>
+      <Container classes="h-full">
         <ProductList products={products} />
       </Container>
       <FooterCTA />
