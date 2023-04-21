@@ -1,4 +1,3 @@
-import { categories } from "../data/categories";
 import Container from "../components/Container";
 import FooterCTA from "../components/FooterCTA";
 import ProductsHeader from "./components/ProductsHeader";
@@ -17,7 +16,7 @@ const ProductsPage = async () => {
 
   return (
     <>
-      <ProductsHeader categories={categories} />
+      <ProductsHeader />
       <Container classes="h-full">
         <ProductList products={products} />
       </Container>
