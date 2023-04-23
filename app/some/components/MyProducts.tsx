@@ -8,9 +8,7 @@ import { AdminState } from "../store/adminStore";
 import { setIsDeleting } from "../store/adminSlice";
 
 const url =
-  process.env.NODE_ENV === "production"
-    ? "https://shop-next.netlify.app"
-    : "http://localhost:3000";
+  process.env.NODE_ENV === "production" ? "/" : "http://localhost:3000";
 
 const MyProducts: React.FC = () => {
   const dispatch = useDispatch();
