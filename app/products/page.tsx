@@ -4,7 +4,7 @@ import ProductsHeader from "./components/ProductsHeader";
 import ProductList from "./components/ProductList";
 
 const url =
-  process.env.NODE_ENV === "production" ? "/" : "http://localhost:3000";
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:3000";
 
 const getProducts = async () => {
   const response = await fetch(`${url}/api/products`);
