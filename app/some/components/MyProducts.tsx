@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AdminState } from "../store/adminStore";
 import { setIsDeleting } from "../store/adminSlice";
+import { baseUrl } from "@/app/page";
 
 const MyProducts: React.FC = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const MyProducts: React.FC = () => {
 
   const getProducts = async () => {
     try {
-      const response = await fetch("http:localhost:3000/api/products");
+      const response = await fetch(`${baseUrl}/api/products`);
       const data = (await response.json()) as Product[];
       setProducts(data);
     } catch (error) {
@@ -30,7 +31,7 @@ const MyProducts: React.FC = () => {
   const handleProductDelete = async (id: string) => {
     dispatch(setIsDeleting(true));
     try {
-      const response = await fetch(`http://localhost:3000/api/admin/${id}`, {
+      const response = await fetch(`${baseUrl}/api/admin/${id}`, {
         method: "DELETE",
       });
       const data = (await response.json()) as { product: Product };

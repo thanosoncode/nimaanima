@@ -1,9 +1,10 @@
 import Container from "@/app/components/Container";
 import ProductHandler from "../components/ProductHandler";
 import AddToCart from "../components/AddToCart";
+import { baseUrl } from "@/app/page";
 
 const getProduct = async (id: string) => {
-  const response = await fetch(`http://localhost:3000/api/products/${id}`);
+  const response = await fetch(`${baseUrl}/api/products/${id}`);
 
   return response.json();
 };
