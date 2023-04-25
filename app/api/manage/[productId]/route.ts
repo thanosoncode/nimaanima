@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { deleteProduct, updateProduct } from "@/lib/products";
 
 export async function DELETE(request: Request) {
-  const id = request.url.split("admin/")[1];
+  const id = request.url.split("manage/")[1];
   if (!id) {
     return NextResponse.json({ message: "id required" });
   }
@@ -15,7 +15,7 @@ export async function DELETE(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  const id = request.url.split("admin/")[1];
+  const id = request.url.split("manage/")[1];
   if (!id) {
     return NextResponse.json({ message: "id required" });
   }

@@ -12,10 +12,10 @@ const Footer = () => {
       <Container classes="flex gap-2 py-4 px-2 justify-between">
         <p>&copy; Copyright 2023</p>{" "}
         <Link
-          href="/some"
-          className={pathname === "/some" ? "text-white" : "text-black"}
+          href="/manage"
+          className={pathname === "/manage" ? "text-white" : "text-black"}
         >
-          some
+          manage
         </Link>
       </Container>
     </footer>

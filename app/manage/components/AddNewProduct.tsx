@@ -35,7 +35,7 @@ const ProductDataSchema = z.object({
     }),
 });
 
-const Admin = () => {
+const AddNewProduct = () => {
   const dispatch = useDispatch();
   const {
     isSaving,
@@ -250,4 +250,4 @@ const Admin = () => {
     </Container>
   );
 };
-export default Admin;
+export default AddNewProduct;

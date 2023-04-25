@@ -30,7 +30,7 @@ const MyProducts: React.FC = () => {
   const handleProductDelete = async (id: string) => {
     dispatch(setIsDeleting(true));
     try {
-      const response = await fetch(`/api/admin/${id}`, {
+      const response = await fetch(`/api/manage/${id}`, {
         method: "DELETE",
       });
       const data = (await response.json()) as { product: Product };

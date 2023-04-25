@@ -2,7 +2,7 @@
 
 import { Provider } from "react-redux";
 import { store } from "./store/adminStore";
-import Admin from "./components/AddNewProduct";
+import AddNewProduct from "./components/AddNewProduct";
 import { useState } from "react";
 import Container from "../components/Container";
 import MyProducts from "./components/MyProducts";
@@ -12,7 +12,7 @@ enum Tab {
   newProduct = "New Product",
 }
 
-const AdminPage = () => {
+const Manage = () => {
   const [activeTab, setActiveTab] = useState<Tab>(Tab.myProducts);
 
   const myProductsView = activeTab === Tab.myProducts;
@@ -27,7 +27,7 @@ const AdminPage = () => {
       case Tab.myProducts:
         return <MyProducts />;
       case Tab.newProduct:
-        return <Admin />;
+        return <AddNewProduct />;
     }
   };
 
@@ -57,4 +57,4 @@ const AdminPage = () => {
     </Provider>
   );
 };
-export default AdminPage;
+export default Manage;
