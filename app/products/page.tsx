@@ -2,18 +2,10 @@ import Container from "../components/Container";
 import FooterCTA from "../components/FooterCTA";
 import ProductsHeader from "./components/ProductsHeader";
 import ProductList from "./components/ProductList";
-import { baseUrl } from "../page";
-
-const getProducts = async () => {
-  const response = await fetch(`${baseUrl}/api/products`);
-  if (!response.ok) {
-    throw new Error("error fetching products");
-  }
-  return response.json();
-};
+import { getAllProducts } from "@/lib/products";
 
 const ProductsPage = async () => {
-  const products = await getProducts();
+  const products = await getAllProducts();
 
   return (
     <>

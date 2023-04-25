@@ -1,5 +1,3 @@
-"use client";
-
 import Container from "../../components/Container";
 import Fieldset from "./Fieldset";
 import { uploadImage, uploadProduct } from "../../api/client/helpers";

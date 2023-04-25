@@ -1,20 +1,15 @@
 import Container from "@/app/components/Container";
 import ProductHandler from "../components/ProductHandler";
 import AddToCart from "../components/AddToCart";
-import { baseUrl } from "@/app/page";
-
-const getProduct = async (id: string) => {
-  const response = await fetch(`${baseUrl}/api/products/${id}`);
-
-  return response.json();
-};
+import { getSingleProduct } from "@/lib/products";
+import { Product } from "@/app/utils/models";
 
 const SingleProduct = async ({
   params: { id },
 }: {
   params: { id: string };
 }) => {
-  const product = await getProduct(id);
+  const product = (await getSingleProduct(id)) as Product;
 
   return (
     <Container>

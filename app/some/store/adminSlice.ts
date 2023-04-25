@@ -2,6 +2,8 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ProductData } from "../components/AddNewProduct";
 import { Product } from "@/app/utils/models";
 
+process.env.n;
+
 type InitialState = {
   isSaving: boolean;
   isUploading: boolean;

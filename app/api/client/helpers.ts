@@ -1,4 +1,3 @@
-import { baseUrl } from "@/app/page";
 import { Product, UploadedImageData } from "@/app/utils/models";
 
 export const uploadImage = async (formData: FormData) => {
@@ -20,7 +19,7 @@ export const uploadImage = async (formData: FormData) => {
 
 export const uploadProduct = async (product: Product) => {
   try {
-    const uploadProductResponse = await fetch(`${baseUrl}/api/admin`, {
+    const uploadProductResponse = await fetch("/api/admin", {
       method: "POST",
       body: JSON.stringify(product),
       headers: {
@@ -36,7 +35,7 @@ export const uploadProduct = async (product: Product) => {
 
 export const deleteProduct = async (id: string) => {
   try {
-    const response = await fetch(`${baseUrl}/api/admin/${id}`, {
+    const response = await fetch(`/api/admin/${id}`, {
       method: "DELETE",
     });
     const data = (await response.json()) as { product: Product };

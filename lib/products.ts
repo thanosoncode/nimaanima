@@ -5,6 +5,11 @@ export const getAllProducts = async () => {
   return products;
 };
 
+export const getSingleProduct = async (id: string) => {
+  const product = await prisma.product.findUnique({ where: { id } });
+  return product;
+};
+
 const createProduct = async (product: {
   name: string;
   description: string;

@@ -4,20 +4,10 @@ import { Product } from "./utils/models";
 import Categories from "./components/Categories";
 import HomeArticle from "./components/HomeArticle";
 import Slider from "./components/Slider";
-
-const baseUrl =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:3000";
-
-const getProducts = async () => {
-  const response = await fetch(`${baseUrl}/api/products`);
-  if (!response.ok) {
-    throw new Error("error fetching products");
-  }
-  return response.json();
-};
+import { getAllProducts } from "@/lib/products";
 
 const Home = async () => {
-  const products = (await getProducts()) as Product[];
+  const products = (await getAllProducts()) as Product[];
 
   return (
     <>
@@ -35,5 +25,3 @@ const Home = async () => {
   );
 };
 export default Home;
-
-export { baseUrl };
