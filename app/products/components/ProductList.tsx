@@ -6,27 +6,35 @@ import Link from "next/link";
 
 interface ProductsProps {
   products: Product[];
+  filterByCategory: boolean;
+  title: string;
 }
 
-const ProductList: React.FC<ProductsProps> = ({ products }) => {
+const ProductList: React.FC<ProductsProps> = ({
+  products,
+  filterByCategory,
+  title,
+}) => {
   const { selectedCategory } = useAppState();
 
   const filteredProducts = products.filter(
     (product) => product.category !== selectedCategory
   );
 
+  const productsToShow = filterByCategory ? filteredProducts : products;
+
   return (
-    <main className="py-32">
-      <h4 className="mb-4  text-2xl">Find something you love</h4>
+    <main>
+      <h4 className="mb-4  text-2xl">{title}</h4>
       <section
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 0.4fr))",
           gridAutoRows: "minmax(300px, auto)",
           gap: "80px 20px",
         }}
       >
-        {filteredProducts.map((product) => (
+        {productsToShow.map((product) => (
           <div key={product.name}>
             <Link
               href={`/products/${product.id}`}
@@ -41,7 +49,7 @@ const ProductList: React.FC<ProductsProps> = ({ products }) => {
                 src={product.images[0]}
                 alt={product.name}
                 fill
-                className=" rounded-2xl object-cover"
+                className="rounded-2xl object-cover"
               />
             </Link>
             <Link

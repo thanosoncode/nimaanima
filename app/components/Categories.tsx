@@ -13,26 +13,33 @@ const Categories = () => {
   return (
     <section>
       <h4 className="py-4 text-3xl">Shop our awesome gift categories</h4>
-      <div className="flex gap-4">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 0.8fr))",
+          gridAutoRows: "minmax(180px, auto)",
+          gap: "20px",
+        }}
+      >
         {categories.map((category) => (
-          <div
-            className="border-gray w-80 overflow-hidden rounded-xl border hover:shadow-md"
+          <Link
             key={category.name}
+            href={`/products`}
             onClick={() => handleCategoryClick(category.name)}
+            style={{
+              maxWidth: "100%",
+              position: "relative",
+              height: "100%",
+              display: "block",
+            }}
           >
-            <Link href={`/products`}>
-              <div className="h-60 w-80">
-                <Image
-                  src={category.image}
-                  alt={category.name}
-                  width={320}
-                  height={240}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <p className="p-4 text-center">{category.name}</p>
-            </Link>
-          </div>
+            <Image
+              src={category.image}
+              alt={category.name}
+              fill
+              className=" rounded-2xl object-cover"
+            />
+          </Link>
         ))}
       </div>
     </section>

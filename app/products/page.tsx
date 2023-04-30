@@ -11,7 +11,13 @@ const ProductsPage = async () => {
     <>
       <ProductsHeader />
       <Container classes="h-full">
-        <ProductList products={products} />
+        <div className="my-32">
+          <ProductList
+            title={"Find something you love"}
+            products={products}
+            filterByCategory={true}
+          />
+        </div>
       </Container>
       <FooterCTA />
     </>
