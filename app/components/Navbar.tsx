@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAppState } from "../context";
+import { BsBag } from "react-icons/bs";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -10,8 +11,7 @@ const Navbar = () => {
 
   const links = [
     { name: "Products", path: "/products" },
-    { name: "Techniques", path: "/techniques" },
-    { name: "Contact", path: "/contact" },
+    { name: "How they're made", path: "/techniques" },
   ];
 
   return (
@@ -37,19 +37,29 @@ const Navbar = () => {
             );
           })}
         </div>
-        <Link
-          href="/cart"
-          className={pathname === "/cart" ? "text-white" : "text-black"}
-        >
-          <div className="relative">
-            Cart
-            {cartItems.length > 0 ? (
-              <span className="absolute -right-2 -top-2">
-                {cartItems.length}
-              </span>
-            ) : null}
-          </div>
-        </Link>
+        <div className="flex items-center justify-center gap-4">
+          <Link
+            href={"/contact"}
+            className={
+              "rounded-full border border-main-400 px-3 py-1.5 text-main-400 duration-300 ease-in-out hover:bg-main-400 hover:text-white"
+            }
+          >
+            Get in touch
+          </Link>
+          <Link
+            href="/cart"
+            className={pathname === "/cart" ? "text-white" : "text-black"}
+          >
+            <div className="relative">
+              <BsBag />
+              {cartItems.length > 0 ? (
+                <span className="absolute -right-2 -top-2">
+                  {cartItems.length}
+                </span>
+              ) : null}
+            </div>
+          </Link>
+        </div>
       </div>
     </nav>
   );
