@@ -24,6 +24,7 @@ const Navbar = () => {
           {links.map((link) => {
             return (
               <Link
+                prefetch={false}
                 key={link.name}
                 href={link.path}
                 className={
@@ -41,7 +42,7 @@ const Navbar = () => {
           <Link
             href={"/contact"}
             className={
-              "rounded-full border border-main-400 px-3 py-1.5 text-main-400 duration-300 ease-in-out hover:bg-main-400 hover:text-white"
+              "rounded-full border border-main-400 px-4 py-1 text-main-400 duration-300 ease-in-out hover:bg-main-400 hover:text-white"
             }
           >
             Get in touch

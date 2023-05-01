@@ -6,11 +6,13 @@ import { Product } from "./utils/models";
 type AppState = {
   cartItems: Product[];
   selectedCategory: string | null;
+  selectedFilter: string | null;
 };
 
 const initialState = {
   cartItems: [],
   selectedCategory: null,
+  selectedFilter: null,
 };
 
 type Action =
@@ -27,7 +29,8 @@ type Action =
       id: string;
     }
   | { type: "EMPTY_CART" }
-  | { type: "SET_SELECTED_CATEGORY"; category: string };
+  | { type: "SET_SELECTED_CATEGORY"; category: string | null }
+  | { type: "SET_SELECTED_FILTER"; filter: string | null };
 
 type Dispatch = (action: Action) => void;
 
@@ -35,6 +38,7 @@ const AppStateContext = createContext<AppState | undefined>(undefined);
 const AppDispatchContext = createContext<Dispatch | undefined>(undefined);
 
 const reducer = (state: AppState, action: Action) => {
+  console.log("action", action);
   switch (action.type) {
     case "ADD_CART_ITEM":
       return { ...state, cartItems: [...state.cartItems, action.cartItem] };
@@ -49,6 +53,8 @@ const reducer = (state: AppState, action: Action) => {
       return { ...state, cartItems: [] };
     case "SET_SELECTED_CATEGORY":
       return { ...state, selectedCategory: action.category };
+    case "SET_SELECTED_FILTER":
+      return { ...state, selectedFilter: action.filter };
     default: {
       throw new Error(`Unhandled action type: ${action}`);
     }

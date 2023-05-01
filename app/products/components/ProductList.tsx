@@ -17,15 +17,15 @@ const ProductList: React.FC<ProductsProps> = ({
 }) => {
   const { selectedCategory } = useAppState();
 
-  const filteredProducts = products.filter(
-    (product) => product.category !== selectedCategory
+  const filteredProducts = products.filter((product) =>
+    selectedCategory ? product.category === selectedCategory : product
   );
 
   const productsToShow = filterByCategory ? filteredProducts : products;
 
   return (
     <main>
-      <h4 className="mb-4  text-2xl">{title}</h4>
+      <h4 className="mb-4 text-2xl">{title}</h4>
       <section
         style={{
           display: "grid",

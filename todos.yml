@@ -1,0 +1,7 @@
+Manage
+-spinner when deleting
+-backdrop should cover whole screen when creating
+-createdAt to Produc
+
+Revalidate after adding products
+-Links prefetch maybe or router.refresh()

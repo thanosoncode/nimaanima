@@ -1,11 +1,11 @@
-import category1 from "../../public/assets/category1.jpg";
-import category2 from "../../public/assets/category2.jpg";
-import category3 from "../../public/assets/category3.jpg";
-import category4 from "../../public/assets/category4.jpg";
+import dolls from "../../public/assets/category-dolls.webp";
+import straps from "../../public/assets/category-straps.webp";
+import tablet from "../../public/assets/category-tablet.webp";
+import tapestry from "../../public/assets/category-tapestry.webp";
 
 export const categories = [
-  { id: 1, name: "category-1", image: category1 },
-  { id: 2, name: "category-2", image: category2 },
-  { id: 3, name: "category-3", image: category3 },
-  { id: 4, name: "category-4", image: category4 },
+  { id: 1, name: "Dolls", image: dolls },
+  { id: 2, name: "Straps", image: straps },
+  { id: 3, name: "Tablet", image: tablet },
+  { id: 4, name: "Tapestry", image: tapestry },
 ];
