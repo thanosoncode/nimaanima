@@ -16,13 +16,18 @@ const Cart = () => {
 
   return (
     <Container>
-      <h4 className="py-4">Cart</h4>
-      {cartItems.length === 0 ? (
-        <p>No items in cart yet.</p>
+      {cartItems.length > 0 ? (
+        <h4 className="pt-8 pb-16 text-3xl font-thin">
+          {cartItems.length} {cartItems.length === 1 ? "item" : "items"} in your
+          cart.
+        </h4>
       ) : (
+        <h4 className="py-8 text-3xl font-thin">No items in your cart yet.</h4>
+      )}
+      {cartItems.length > 0 ? (
         <table className="w-full text-left text-sm text-gray-500 ">
           <thead className="text-xs uppercase">
-            <tr>
+            {/* <tr>
               <th scope="col" className="px-6 py-3 text-center">
                 Item
               </th>
@@ -35,7 +40,7 @@ const Cart = () => {
               <th scope="col" className="px-6 py-3 text-center">
                 total
               </th>
-            </tr>
+            </tr> */}
           </thead>
           <tbody>
             {cartItems.map((item) => (
@@ -44,18 +49,21 @@ const Cart = () => {
                   <Image
                     src={item.images[0]}
                     alt={item.name}
-                    width={50}
+                    width={40}
                     height={40}
+                    className="h-10 w-10"
                   />
                 </td>
-                <td className="px-6 py-4 text-center">{item.name}</td>
+                <td className="px-6 py-4 text-center font-semibold">
+                  {item.name}
+                </td>
                 <td
-                  className="px-6 py-4 text-center"
+                  className="cursor-pointer px-6 py-4 text-center"
                   onClick={() => handleRemoveItem(item.id)}
                 >
                   remove
                 </td>
-                <td className="px-6 py-4 text-center">{item.price} EUROS</td>
+                <td className="px-6 py-4 text-center">{item.price} €</td>
               </tr>
             ))}
             <tr>
@@ -63,13 +71,25 @@ const Cart = () => {
               <td></td>
               <td></td>
               <td className="border-b bg-white px-6 py-4 text-center">
-                {total} EUROS
+                {total} €
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td className="flex items-center justify-center">
+                <Link
+                  href="/order"
+                  className="mt-8 block w-min whitespace-nowrap rounded-full bg-neutral-800 px-5 py-2.5 text-center tracking-wider text-white"
+                >
+                  Proceed to checkout
+                </Link>
               </td>
             </tr>
           </tbody>
         </table>
-      )}
-      <Link href="/order">continue</Link>
+      ) : null}
     </Container>
   );
 };

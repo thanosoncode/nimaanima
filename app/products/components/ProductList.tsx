@@ -53,15 +53,15 @@ const ProductList: React.FC<ProductsProps> = ({
                 src={product.images[0]}
                 alt={product.name}
                 fill
-                className="rounded-2xl object-cover"
+                className="rounded-xl object-cover"
               />
             </Link>
             <Link
               href={`/products/${product.id}`}
-              style={{ display: "block", padding: "10px" }}
+              style={{ display: "block", padding: "4px" }}
             >
-              <p className="">{product.name}</p>
-              <p>€{product.price}</p>
+              <p className="text-sm font-semibold">{product.name}</p>
+              <p className="text-sm">€ {product.price}</p>
             </Link>
           </div>
         ))}

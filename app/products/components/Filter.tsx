@@ -56,8 +56,8 @@ const Filter = () => {
       <div
         onMouseOver={() => setIsMouseOver(true)}
         onMouseLeave={() => setIsMouseOver(false)}
-        className={`absolute top-12 right-0 z-10  flex flex-col whitespace-nowrap rounded-lg border bg-white shadow-md ${
-          menuOpen ? "block" : "hidden"
+        className={`absolute top-8 right-0 z-10  flex flex-col whitespace-nowrap rounded-lg border bg-white shadow-md duration-300 ease-in-out ${
+          menuOpen ? "visible opacity-100" : "invisible opacity-0"
         } `}
       >
         {selection.map((selection) => (

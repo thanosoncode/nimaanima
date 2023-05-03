@@ -47,10 +47,7 @@ const Navbar = () => {
           >
             Get in touch
           </Link>
-          <Link
-            href="/cart"
-            className={pathname === "/cart" ? "text-white" : "text-black"}
-          >
+          <Link href="/cart" className="">
             <div className="relative">
               <BsBag />
               {cartItems.length > 0 ? (
