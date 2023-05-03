@@ -3,6 +3,7 @@ import { useAppState } from "@/app/context";
 import { Product } from "../../utils/models";
 import Image from "next/image";
 import Link from "next/link";
+import Filter from "./Filter";
 
 interface ProductsProps {
   products: Product[];
@@ -25,12 +26,15 @@ const ProductList: React.FC<ProductsProps> = ({
 
   return (
     <main>
-      <h4 className="mb-4 text-2xl">{title}</h4>
+      <div className="flex justify-between">
+        <h4 className="mb-4 text-2xl">{title}</h4>
+        <Filter />
+      </div>
       <section
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(320px, 0.4fr))",
-          gridAutoRows: "minmax(300px, auto)",
+          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 0.4fr))",
+          gridAutoRows: "minmax(200px, auto)",
           gap: "80px 20px",
         }}
       >

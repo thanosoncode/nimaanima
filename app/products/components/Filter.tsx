@@ -2,6 +2,7 @@
 
 import { useAppDispatch, useAppState } from "@/app/context";
 import { useEffect, useState } from "react";
+import { BsFilter } from "react-icons/bs";
 
 const Filter = () => {
   const dispatch = useAppDispatch();
@@ -40,18 +41,22 @@ const Filter = () => {
 
   return (
     <div className="relative">
-      <p
+      <div
         onClick={handleMenuOpen}
-        className="w-min cursor-pointer whitespace-nowrap rounded-full border-2 border-black px-3 py-1.5 text-center"
+        className="w-min cursor-pointer whitespace-nowrap rounded-full border border-black px-4 py-1.5 text-center"
       >
-        {selectedFilter
-          ? selection.find((s) => s.value === selectedFilter)?.name
-          : "Filters"}
-      </p>
+        {selectedFilter ? (
+          <p className="text-sm">
+            {selection.find((s) => s.value === selectedFilter)?.name}
+          </p>
+        ) : (
+          <BsFilter />
+        )}
+      </div>
       <div
         onMouseOver={() => setIsMouseOver(true)}
         onMouseLeave={() => setIsMouseOver(false)}
-        className={`absolute top-12 left-0 flex  flex-col rounded-lg border bg-white shadow-md ${
+        className={`absolute top-12 right-0 z-10  flex flex-col whitespace-nowrap rounded-lg border bg-white shadow-md ${
           menuOpen ? "block" : "hidden"
         } `}
       >

@@ -11,10 +11,10 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
         <h1 className="pt-6 pb-2  text-center text-3xl font-extralight tracking-wide">
           All things are handmade and one of a kind creations.
         </h1>
-        <p className="pb-12 text-center">
+        <p className="pb-8 text-center">
           Find your favorite item in our unique selection
         </p>
-        <section className="flex items-center justify-center gap-16">
+        <section className="flex items-center justify-center gap-12">
           {categories.map((category) => (
             <CategoryButton category={category} key={category.name} />
           ))}
