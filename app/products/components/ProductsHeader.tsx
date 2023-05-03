@@ -1,7 +1,6 @@
 import Container from "../../components/Container";
 import CategoryButton from "./CategoryButton";
 import { categories } from "@/app/data/categories";
-import ShowAllCategoriesButton from "./ShowAllCategoriesButton";
 
 interface ProductsHeaderProps {}
 
@@ -20,7 +19,6 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
             <CategoryButton category={category} key={category.name} />
           ))}
         </section>
-        <ShowAllCategoriesButton />
       </Container>
     </header>
   );

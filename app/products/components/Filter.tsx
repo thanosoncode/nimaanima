@@ -1,15 +1,16 @@
 "use client";
 
 import { useAppDispatch, useAppState } from "@/app/context";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Filter = () => {
   const dispatch = useAppDispatch();
   const { selectedFilter } = useAppState();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   const handleMenuOpen = () => {
-    setMenuOpen(true);
+    setMenuOpen(!menuOpen);
   };
 
   const handleSelectionClick = (value: string) => {
@@ -17,23 +18,40 @@ const Filter = () => {
     setMenuOpen(false);
   };
 
+  const handleShowAllItems = () => {
+    dispatch({ type: "SET_SELECTED_FILTER", filter: null });
+    dispatch({ type: "SET_SELECTED_CATEGORY", category: null });
+    setMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const closeModal = () => setMenuOpen(false);
+    if (menuOpen && !isMouseOver) {
+      document.addEventListener("click", closeModal);
+    }
+    return () => document.removeEventListener("click", closeModal);
+  }, [menuOpen, isMouseOver]);
+
   const selection = [
     { name: "Price: Low to High", value: "low" },
     { name: "Price: High to Low", value: "high" },
     { name: "Newest", value: "newest" },
-    { name: "Clear filters", value: "clear" },
   ];
 
   return (
     <div className="relative">
       <p
         onClick={handleMenuOpen}
-        className="w-20 cursor-pointer rounded-full border-2 border-black py-1 text-center"
+        className="w-min cursor-pointer whitespace-nowrap rounded-full border-2 border-black px-3 py-1.5 text-center"
       >
-        {selectedFilter ? selectedFilter : "Filters"}
+        {selectedFilter
+          ? selection.find((s) => s.value === selectedFilter)?.name
+          : "Filters"}
       </p>
       <div
-        className={`absolute top-10 left-0 flex flex-col ${
+        onMouseOver={() => setIsMouseOver(true)}
+        onMouseLeave={() => setIsMouseOver(false)}
+        className={`absolute top-12 left-0 flex  flex-col rounded-lg border bg-white shadow-md ${
           menuOpen ? "block" : "hidden"
         } `}
       >
@@ -41,11 +59,17 @@ const Filter = () => {
           <div
             key={selection.value}
             onClick={() => handleSelectionClick(selection.value)}
-            className="cursor-pointer py-1 px-4 hover:bg-neutral-100"
+            className="cursor-pointer py-1.5 px-5 hover:bg-neutral-100"
           >
             {selection.name}
           </div>
         ))}
+        <div
+          onClick={() => handleShowAllItems()}
+          className="cursor-pointer border-t border-neutral-300 py-1.5 px-5 hover:bg-neutral-100"
+        >
+          Show all items
+        </div>
       </div>
     </div>
   );
