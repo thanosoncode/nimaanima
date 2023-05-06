@@ -12,19 +12,29 @@ const Techniques = () => {
           <h1 className="pb-4 text-3xl">Techniques</h1>
           <p>Learna all about the techniques we use for our products</p>
         </header>
-        <main className="flex flex-wrap gap-12">
+        <main
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 0.2fr))",
+            gap: "20px",
+          }}
+        >
           {techniques.map((technique) => (
             <article
               key={technique.id}
-              className="h-[620px] w-96 overflow-hidden rounded-xl border hover:shadow-md"
+              className="h-full w-full overflow-hidden rounded-xl border hover:shadow-md"
             >
-              <div className="relative h-3/5">
-                <Image src={technique.mainImage} alt={technique.name} fill />
+              <div className="relative  w-full">
+                <Image
+                  src={technique.mainImage}
+                  alt={technique.name}
+                  style={{ maxHeight: "200px" }}
+                />
               </div>
               <section className="p-3">
-                <Link href={`/techniques/${technique.id}`}>
-                  <h4 className="mb-4 text-xl font-bold">{technique.title}</h4>
-                  <p className="text-base font-light">{technique.title}</p>
+                <Link href={`/techniques/${technique.id}`} className="block">
+                  <h4 className="mb-2 font-bold">{technique.name}</h4>
+                  <p className="font-light">{technique.title}</p>
                 </Link>
               </section>
             </article>
