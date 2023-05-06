@@ -26,22 +26,7 @@ const Cart = () => {
       )}
       {cartItems.length > 0 ? (
         <table className="w-full text-left text-sm text-gray-500 ">
-          <thead className="text-xs uppercase">
-            {/* <tr>
-              <th scope="col" className="px-6 py-3 text-center">
-                Item
-              </th>
-              <th scope="col" className="px-6 py-3 text-center">
-                name
-              </th>
-              <th scope="col" className="px-6 py-3 text-center">
-                remove
-              </th>
-              <th scope="col" className="px-6 py-3 text-center">
-                total
-              </th>
-            </tr> */}
-          </thead>
+          <thead className="text-xs uppercase"></thead>
           <tbody>
             {cartItems.map((item) => (
               <tr key={item.id} className="border-b bg-white">
@@ -83,7 +68,7 @@ const Cart = () => {
                   href="/order"
                   className="mt-8 block w-min whitespace-nowrap rounded-full bg-neutral-800 px-5 py-2.5 text-center tracking-wider text-white"
                 >
-                  Proceed to checkout
+                  Continue to details
                 </Link>
               </td>
             </tr>

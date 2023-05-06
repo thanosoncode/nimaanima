@@ -16,6 +16,7 @@ const ProductsPage = async () => {
             title={"Find something you love"}
             products={products}
             filterByCategory={true}
+            showFilter={true}
           />
         </div>
       </Container>

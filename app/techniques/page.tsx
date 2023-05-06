@@ -7,15 +7,18 @@ import FooterCTA from "../components/FooterCTA";
 const Techniques = () => {
   return (
     <>
-      <Container classes="pb-40">
-        <header className=" pt-8 pb-16">
-          <h1 className="pb-4 text-3xl">Techniques</h1>
-          <p>Learna all about the techniques we use for our products</p>
-        </header>
+      <header className="bg-lightPink-400 pt-14 pb-10">
+        <Container>
+          <h1 className="pb-2 text-4xl font-extralight">How they are made</h1>
+          <p>Explore the techniques behind our handcrafted pieces</p>
+        </Container>
+      </header>
+      <Container classes="py-24">
         <main
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 0.2fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 0.2fr))",
+            justifyContent: "center",
             gap: "20px",
           }}
         >

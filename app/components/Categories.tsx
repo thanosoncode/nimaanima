@@ -12,7 +12,9 @@ const Categories = () => {
   };
   return (
     <section>
-      <h4 className="py-4 text-3xl">Shop our awesome gift categories</h4>
+      <h4 className="mb-6 py-4 text-2xl font-light">
+        Shop our awesome gift categories
+      </h4>
       <div
         style={{
           display: "grid",

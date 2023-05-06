@@ -21,3 +21,10 @@ export interface UploadStatus {
   isUploading: boolean;
   isSaving: boolean;
 }
+
+export interface OrderDetails {
+  fullName: string;
+  email: string;
+  street: string;
+  postalCode: string;
+}

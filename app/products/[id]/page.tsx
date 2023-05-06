@@ -13,7 +13,7 @@ const SingleProduct = async ({
 
   return (
     <Container>
-      <div className="flex gap-8 pt-40">
+      <div className="flex gap-8 pt-32">
         <ProductHandler product={product} />
         <article className="flex w-80 flex-col gap-6 ">
           <p className="">{product.name}</p>

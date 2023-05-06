@@ -42,7 +42,14 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
       <section className="mr-16 flex gap-4">
         <aside className="flex shrink-0 flex-col gap-4">
           {product.images.map((image, index) => (
-            <div key={index}>
+            <div
+              key={index}
+              className={`cursor-pointer overflow-hidden rounded ${
+                selectedImageINdex === index
+                  ? "border-2 border-black opacity-100"
+                  : "border-2 border-transparent opacity-70"
+              } `}
+            >
               <Image
                 key={index}
                 src={image}
@@ -58,8 +65,8 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
           product={product}
           selectedImageINdex={selectedImageINdex}
           setSelectedImageIndex={setSelectedImageIndex}
-          width={640}
-          height={480}
+          width={720}
+          height={540}
           onClick={openModalView}
         />
       </section>

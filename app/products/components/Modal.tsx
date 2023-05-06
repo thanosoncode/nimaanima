@@ -10,7 +10,7 @@ const Modal: React.FC<ModalProps> = ({ open, children }) => {
   return (
     <>
       <div
-        className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-neutral-500 opacity-50"
+        className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-neutral-900 opacity-80"
         style={{ display }}
       ></div>
       <div

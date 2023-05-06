@@ -14,14 +14,17 @@ const Home = async () => {
     <>
       <Container>
         <div className="mt-10 mb-40">
-          <div className="flex flex-col gap-20">
+          <div className="mx-auto flex w-3/4 flex-col gap-20">
             <Categories />
             {/* <Slider products={products} /> */}
-            <HomeArticle />
+            <div className="mt-8">
+              <HomeArticle />
+            </div>
             <ProductList
               title={"Latest items"}
               products={products.slice(0, 3)}
               filterByCategory={false}
+              showFilter={false}
             />
           </div>
         </div>

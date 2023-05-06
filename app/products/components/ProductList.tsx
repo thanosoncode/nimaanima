@@ -9,12 +9,14 @@ interface ProductsProps {
   products: Product[];
   filterByCategory: boolean;
   title: string;
+  showFilter: boolean;
 }
 
 const ProductList: React.FC<ProductsProps> = ({
   products,
   filterByCategory,
   title,
+  showFilter,
 }) => {
   const { selectedCategory } = useAppState();
 
@@ -27,14 +29,15 @@ const ProductList: React.FC<ProductsProps> = ({
   return (
     <main>
       <div className="flex justify-between">
-        <h4 className="mb-4 text-2xl">{title}</h4>
-        <Filter />
+        <h4 className="mb-4 text-2xl font-light">{title}</h4>
+        {showFilter ? <Filter /> : null}
       </div>
       <section
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(240px, 0.4fr))",
           gridAutoRows: "minmax(200px, auto)",
+          justifyContent: "center",
           gap: "80px 20px",
         }}
       >

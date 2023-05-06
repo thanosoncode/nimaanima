@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Product } from "@/app/utils/models";
-import arrowBlock from "../../../public/assets/left-black-arrow.png";
+import arrowLeft from "../../../public/assets/left-black-arrow.png";
+import arrowRight from "../../../public/assets/right-black-arrow.png";
 import closeIcon from "../../../public/assets/window-close.png";
 
 interface CarouselProps {
@@ -40,6 +41,7 @@ const Carousel: React.FC<CarouselProps> = ({
       setSelectedImageIndex(product.images.length - 1);
     }
   };
+
   return (
     <div
       style={{
@@ -52,10 +54,10 @@ const Carousel: React.FC<CarouselProps> = ({
     >
       <div
         onClick={handlePreviousImageClick}
-        className="absolute top-1/2 left-4 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white duration-200 ease-in-out hover:bg-neutral-100"
+        className="absolute top-1/2 left-8 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white shadow-lg duration-200 ease-in-out hover:bg-neutral-100"
       >
         <Image
-          src={arrowBlock}
+          src={arrowLeft}
           alt="left-arrow"
           width={20}
           height={20}
@@ -64,10 +66,10 @@ const Carousel: React.FC<CarouselProps> = ({
       </div>
       <div
         onClick={handleNextImageClick}
-        className="absolute top-1/2 right-4 z-10 flex h-12 w-12 -translate-y-1/2 rotate-180 cursor-pointer items-center justify-center rounded-full bg-white duration-200 ease-in-out hover:bg-neutral-100"
+        className="absolute top-1/2 right-8 z-10 flex h-12 w-12 -translate-y-1/2  cursor-pointer items-center justify-center rounded-full bg-white shadow-lg duration-200 ease-in-out hover:bg-neutral-100"
       >
         <Image
-          src={arrowBlock}
+          src={arrowRight}
           alt="right-arrow"
           width={20}
           height={20}
@@ -76,12 +78,13 @@ const Carousel: React.FC<CarouselProps> = ({
       </div>
       <Image
         src={product.images[selectedImageINdex]}
-        alt=""
+        alt={product.name}
         width={width}
         height={height}
         style={{
           width: "100%",
           height: "100%",
+          objectFit: "contain",
         }}
         onClick={onClick}
       />

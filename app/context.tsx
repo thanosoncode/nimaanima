@@ -1,18 +1,20 @@
 "use client";
 
 import { createContext, useContext, useReducer } from "react";
-import { Product } from "./utils/models";
+import { OrderDetails, Product } from "./utils/models";
 
 type AppState = {
   cartItems: Product[];
   selectedCategory: string | null;
   selectedFilter: string | null;
+  orderDetails: OrderDetails | null;
 };
 
 const initialState = {
   cartItems: [],
   selectedCategory: null,
   selectedFilter: null,
+  orderDetails: null,
 };
 
 type Action =
@@ -30,7 +32,8 @@ type Action =
     }
   | { type: "EMPTY_CART" }
   | { type: "SET_SELECTED_CATEGORY"; category: string | null }
-  | { type: "SET_SELECTED_FILTER"; filter: string | null };
+  | { type: "SET_SELECTED_FILTER"; filter: string | null }
+  | { type: "SET_ORDER_DETAILS"; orderDetails: OrderDetails };
 
 type Dispatch = (action: Action) => void;
 
@@ -55,6 +58,8 @@ const reducer = (state: AppState, action: Action) => {
       return { ...state, selectedCategory: action.category };
     case "SET_SELECTED_FILTER":
       return { ...state, selectedFilter: action.filter };
+    case "SET_ORDER_DETAILS":
+      return { ...state, orderDetails: action.orderDetails };
     default: {
       throw new Error(`Unhandled action type: ${action}`);
     }
