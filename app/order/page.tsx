@@ -65,9 +65,11 @@ const Order = () => {
   };
 
   return (
-    <Container classes="pt-20 mx-auto">
+    <Container classes="py-12 mx-auto">
       <div className="mx-auto w-1/2">
-        <h4 className="pb-8 text-3xl">Choose your shipping address</h4>
+        <h4 className="pb-8 text-3xl font-light">
+          Choose your shipping address
+        </h4>
         <form>
           <Fieldset
             id="email"

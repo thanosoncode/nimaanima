@@ -9,10 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const TypeFormData = z.object({
   email: z.string().email({ message: "Email is required" }),
-  message: z
-    .string()
-    .min(10, { message: "Message should be at least 10 characters." })
-    .max(1000),
+  message: z.string().min(1, { message: "Please add your message." }).max(1000),
 });
 
 type TypeFormData = z.infer<typeof TypeFormData>;
@@ -62,14 +59,14 @@ const ContactUs = () => {
       <header className="bg-someBlue-400 py-12">
         <Container>
           <h1 className="pb-4 text-center text-4xl font-thin tracking-wide">
-            Do you have a question or want to share your ideas?
+            Make a special offer or ask us anything like.
           </h1>
           <p className="text-center font-light tracking-wide">
-            Send use a message we will contact you as soon as possible.
+            Send us your message we will contact you as soon as possible.
           </p>
         </Container>
       </header>
-      <Container>
+      <Container classes="pb-24">
         <h4 className="pt-4 text-center">{progressMessage}</h4>
         <div className="mt-12">
           <form
@@ -83,7 +80,9 @@ const ContactUs = () => {
                 className="h-60 resize-y border border-gray-300 pl-2"
                 {...register("message")}
               />
-              {errors.message && <p>{errors.message.message}</p>}
+              {errors.message && (
+                <p className="text-sm text-red-400">{errors.message.message}</p>
+              )}
             </fieldset>
 
             <fieldset className="flex flex-col">
@@ -93,7 +92,9 @@ const ContactUs = () => {
                 className="rounded border border-gray-300 py-4 pl-2"
                 {...register("email")}
               />
-              {errors.email && <p>{errors.email.message}</p>}
+              {errors.email && (
+                <p className="text-sm text-red-400">{errors.email.message}</p>
+              )}
             </fieldset>
             <button
               type="submit"

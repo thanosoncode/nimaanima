@@ -14,10 +14,12 @@ const Cart = () => {
   const handleRemoveItem = (id: string) =>
     appDispatch({ type: "REMOVE_ITEM", id });
 
+  const handleSaveForLater = () => {};
+
   return (
     <Container>
       {cartItems.length > 0 ? (
-        <h4 className="pt-8 pb-16 text-3xl font-thin">
+        <h4 className="pt-8 pb-10 text-3xl font-thin">
           {cartItems.length} {cartItems.length === 1 ? "item" : "items"} in your
           cart.
         </h4>
@@ -25,55 +27,67 @@ const Cart = () => {
         <h4 className="py-8 text-3xl font-thin">No items in your cart yet.</h4>
       )}
       {cartItems.length > 0 ? (
-        <table className="w-full text-left text-sm text-gray-500 ">
-          <thead className="text-xs uppercase"></thead>
-          <tbody>
+        <div className="flex justify-between">
+          <div className="flex flex-col gap-6">
             {cartItems.map((item) => (
-              <tr key={item.id} className="border-b bg-white">
-                <td className="flex items-center justify-center px-6 py-4 text-center">
+              <div
+                key={item.id}
+                className="flex gap-2 rounded-xl border border-neutral-300 p-3 shadow-xl"
+              >
+                <div className="relative h-32 w-40 overflow-hidden rounded-xl">
                   <Image
                     src={item.images[0]}
                     alt={item.name}
-                    width={40}
-                    height={40}
-                    className="h-10 w-10"
+                    fill
+                    style={{ objectFit: "cover" }}
                   />
-                </td>
-                <td className="px-6 py-4 text-center font-semibold">
-                  {item.name}
-                </td>
-                <td
-                  className="cursor-pointer px-6 py-4 text-center"
-                  onClick={() => handleRemoveItem(item.id)}
-                >
-                  remove
-                </td>
-                <td className="px-6 py-4 text-center">{item.price} €</td>
-              </tr>
+                </div>
+                <div>
+                  <div className="mb-4 pl-2.5 font-medium">
+                    <Link href={`/products/${item.id}`}>{item.name}</Link>
+                  </div>
+                  <div className="mb-4 pl-2.5">€ {item.price}.00</div>
+                  <div className="flex gap-4">
+                    <button
+                      onClick={handleSaveForLater}
+                      className="block rounded-full bg-white px-2.5 py-1 text-sm  duration-200 ease-in-out hover:bg-neutral-100"
+                    >
+                      Save it for later
+                    </button>
+                    <button
+                      onClick={() => handleRemoveItem(item.id)}
+                      className="block rounded-full bg-white px-2.5 py-1 text-sm  duration-200 ease-in-out hover:bg-neutral-100"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
             ))}
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td className="border-b bg-white px-6 py-4 text-center">
-                {total} €
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td className="flex items-center justify-center">
-                <Link
-                  href="/order"
-                  className="mt-8 block w-min whitespace-nowrap rounded-full bg-neutral-800 px-5 py-2.5 text-center tracking-wider text-white"
-                >
-                  Continue to details
-                </Link>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+          </div>
+          <div>
+            <div className="flex flex-col gap-2 px-2">
+              <div className="flex justify-between">
+                <div className="font-medium">Item total</div>
+                <div className="">€{total}</div>
+              </div>
+              <div className="flex justify-between border-b border-neutral-200 pb-2">
+                <div className="font-medium">Shipping</div>
+                <div className="">€3.00</div>
+              </div>
+              <div className="flex justify-between">
+                <div className="font-medium">Total</div>
+                <div className="">€{total + 3}</div>
+              </div>
+            </div>
+            <Link
+              href="/order"
+              className="mt-14 block w-min whitespace-nowrap rounded-full bg-neutral-800 px-5 py-2 text-center text-sm tracking-wider text-white duration-200 ease-out hover:scale-105"
+            >
+              Proceed to checkout
+            </Link>
+          </div>
+        </div>
       ) : null}
     </Container>
   );
