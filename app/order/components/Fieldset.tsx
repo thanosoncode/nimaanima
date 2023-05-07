@@ -1,12 +1,12 @@
 import { UseFormRegister } from "react-hook-form";
-import { Details } from "../page";
+import { OrderDetails } from "../page";
 
 interface FieldsetProps {
   id: "email" | "fullName" | "street" | "postalCode" | "city";
   label: string;
   info?: string;
   value: string | number;
-  register: UseFormRegister<Details>;
+  register: UseFormRegister<OrderDetails>;
   inputProps?: { multiple: boolean };
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
