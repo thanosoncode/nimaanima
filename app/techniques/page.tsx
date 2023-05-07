@@ -3,14 +3,32 @@ import Container from "../components/Container";
 import { techniques } from "../data/techniques";
 import Image from "next/image";
 import FooterCTA from "../components/FooterCTA";
+import bg from "../../public/assets/howmade-bg-no-b.png";
 
 const Techniques = () => {
   return (
     <>
-      <header className="bg-lightPink-400 pt-14 pb-10">
-        <Container>
-          <h1 className="pb-2 text-4xl font-extralight">How they are made</h1>
-          <p>Explore the techniques behind our handcrafted pieces</p>
+      <header className="bg-lightPink-400 py-2">
+        <Container classes="flex gap-18 items-center justify-center">
+          <div>
+            <h1 className="-mt-8 text-4xl font-extralight">
+              How they are made
+            </h1>
+            <p className="mt-4">
+              Explore the techniques behind our handcrafted pieces
+            </p>
+          </div>
+          <div
+            style={{ width: "380px", height: "220px", position: "relative" }}
+          >
+            <Image
+              src={bg}
+              fill
+              alt="background"
+              className="opacity-60"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </Container>
       </header>
       <Container classes="py-24">

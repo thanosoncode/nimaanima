@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 const DetailsSchema = z.object({
   email: z.string().email(),
@@ -17,38 +18,50 @@ const DetailsSchema = z.object({
   postalCode: z.string().min(1, { message: "Postal code is required" }),
 });
 
-export type Details = z.infer<typeof DetailsSchema>;
+export type OrderDetails = z.infer<typeof DetailsSchema>;
 
 const Order = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
 
-  const [details, setDetails] = useState({
+  const emptyDetails = {
     email: "",
     fullName: "",
     street: "",
     postalCode: "",
     city: "",
-  });
+  };
+
+  const [details, setDetails] = useState<OrderDetails>(emptyDetails);
 
   const { cartItems } = useAppState();
   if (cartItems.length === 0) {
     redirect("/products");
   }
 
+  type FieldName = "email" | "fullName" | "street" | "postalCode" | "city";
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fieldName = e.target.name as FieldName;
     setDetails({ ...details, [e.target.name]: e.target.value });
+    setValue(fieldName, e.target.value);
   };
 
   const {
     handleSubmit,
     register,
+    setValue,
+    reset,
     formState: { errors },
-  } = useForm<Details>({
+  } = useForm<OrderDetails>({
     resolver: zodResolver(DetailsSchema),
   });
 
-  const submit = (data: Details) => {
+  const submit = (data: OrderDetails) => {
     dispatch({ type: "SET_ORDER_DETAILS", orderDetails: data });
+    reset();
+    setDetails(emptyDetails);
+    router.push("/payment");
   };
 
   return (

@@ -27,4 +27,5 @@ export interface OrderDetails {
   email: string;
   street: string;
   postalCode: string;
+  city: string;
 }
