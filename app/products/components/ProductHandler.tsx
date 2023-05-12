@@ -17,6 +17,10 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
     width: Math.floor(window.innerWidth * 0.8),
     height: Math.floor(window.innerHeight * 0.8),
   });
+  const [mainImageDimensions, setmainImageDimensions] = useState({
+    width: Math.floor(window.innerWidth * 0.5),
+    height: Math.floor(window.innerHeight * 0.6),
+  });
 
   const handleImageSelect = (index: number) => {
     setSelectedImageIndex(index);
@@ -31,6 +35,10 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
         width: Math.floor(window.innerWidth * 0.8),
         height: Math.floor(window.innerHeight * 0.8),
       });
+      setmainImageDimensions({
+        width: Math.floor(window.innerWidth * 0.5),
+        height: Math.floor(window.innerHeight * 0.6),
+      });
     };
 
     window.addEventListener("resize", handleSize);
@@ -39,7 +47,7 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
 
   return (
     <>
-      <section className="mr-16 flex gap-4">
+      <section className="mr-10 flex gap-4">
         <aside className="flex shrink-0 flex-col gap-4">
           {product.images.map((image, index) => (
             <div
@@ -65,8 +73,8 @@ const ProductHandler: React.FC<ProductHandlerProps> = ({ product }) => {
           product={product}
           selectedImageINdex={selectedImageINdex}
           setSelectedImageIndex={setSelectedImageIndex}
-          width={720}
-          height={540}
+          width={mainImageDimensions.width}
+          height={mainImageDimensions.height}
           onClick={openModalView}
         />
       </section>

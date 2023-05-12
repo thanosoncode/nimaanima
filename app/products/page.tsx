@@ -10,7 +10,7 @@ const ProductsPage = async () => {
   return (
     <>
       <ProductsHeader />
-      <Container classes="h-full">
+      <Container classes="h-full lg:px-8 lg:w-full xl:max-w-[1400px] md:w-full md:px-8 w-full px-2">
         <div className="mt-10 mb-40">
           <ProductList
             title={"Find something you love"}
