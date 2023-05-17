@@ -31,7 +31,7 @@ const Techniques = () => {
           </div>
         </Container>
       </header>
-      <Container classes="py-24">
+      <Container classes="py-24 lg:px-8 lg:w-full xl:max-w-[1400px] md:w-full md:px-8 w-full px-2">
         <main
           style={{
             display: "grid",

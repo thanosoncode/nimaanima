@@ -14,6 +14,7 @@ const Navbar = () => {
   const links = [
     { name: "Products", path: "/products" },
     { name: "How they're made", path: "/techniques" },
+    { name: "test", path: "/test" },
   ];
 
   const { width } = useWidth();
