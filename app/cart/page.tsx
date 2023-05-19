@@ -14,8 +14,6 @@ const Cart = () => {
   const handleRemoveItem = (id: string) =>
     appDispatch({ type: "REMOVE_ITEM", id });
 
-  const handleSaveForLater = () => {};
-
   return (
     <Container classes="lg:px-8 lg:w-full xl:max-w-[1400px] md:w-full md:px-8 w-full px-2">
       <div className="sm:2/5 mx-auto lg:w-3/4">
@@ -30,8 +28,8 @@ const Cart = () => {
           </h4>
         )}
         {cartItems.length > 0 ? (
-          <div className="flex flex-col items-center justify-between sm:flex-row sm:items-start">
-            <div className="flex flex-col gap-6">
+          <div className="flex flex-col items-center justify-center gap-40 sm:flex-row sm:items-start">
+            <div className="flex flex-col gap-16">
               {cartItems.map((item) => (
                 <div
                   key={item.id}
@@ -46,17 +44,11 @@ const Cart = () => {
                     />
                   </div>
                   <div>
-                    <div className="mb-4 pl-2.5 font-medium">
+                    <div className="mb-4 pl-2.5 font-medium tracking-wide">
                       <Link href={`/products/${item.id}`}>{item.name}</Link>
                     </div>
                     <div className="mb-4 pl-2.5">€ {item.price}.00</div>
                     <div className="flex gap-4">
-                      <button
-                        onClick={handleSaveForLater}
-                        className="block rounded-full bg-white px-2.5 py-1 text-sm  duration-200 ease-in-out hover:bg-neutral-100"
-                      >
-                        Save it for later
-                      </button>
                       <button
                         onClick={() => handleRemoveItem(item.id)}
                         className="block rounded-full bg-white px-2.5 py-1 text-sm  duration-200 ease-in-out hover:bg-neutral-100"
@@ -69,18 +61,18 @@ const Cart = () => {
               ))}
             </div>
             <div className="mt-16 flex w-1/2 flex-col items-center sm:mt-0 sm:w-fit">
-              <div className="flex w-full flex-col gap-2 px-2">
+              <div className="flex w-full flex-col gap-4 px-2">
                 <div className="flex justify-between">
-                  <div className="font-medium">Item total</div>
-                  <div className="">€{total}</div>
+                  <div className="font-medium tracking-wide">Item total</div>
+                  <div className="">€ {total}</div>
                 </div>
                 <div className="flex justify-between border-b border-neutral-200 pb-2">
-                  <div className="font-medium">Shipping</div>
-                  <div className="">€3.00</div>
+                  <div className="font-medium tracking-wide">Shipping</div>
+                  <div className="">€ 3.00</div>
                 </div>
                 <div className="flex justify-between">
-                  <div className="font-medium">Total</div>
-                  <div className="">€{total + 3}</div>
+                  <div className="font-medium tracking-wide">Total</div>
+                  <div className="">€ {total + 3}</div>
                 </div>
               </div>
               <Link

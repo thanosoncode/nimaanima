@@ -14,7 +14,7 @@ const SingleTechnique = ({ params: { id } }: { params: { id: string } }) => {
 
   return (
     <>
-      <Container classes="pb-20">
+      <Container classes="pb-20 w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1400px]">
         <header className="mb-10 px-40">
           <h1 className="mt-10 mb-4 text-center text-4xl">{technique.name}</h1>
           <h4 className="text-center">{technique.title}</h4>

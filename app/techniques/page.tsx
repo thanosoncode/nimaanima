@@ -4,6 +4,7 @@ import { techniques } from "../data/techniques";
 import Image from "next/image";
 import FooterCTA from "../components/FooterCTA";
 import bg from "../../public/assets/howmade-bg-no-b.png";
+import HomeArticle from "../components/HomeArticle";
 
 const Techniques = () => {
   return (
@@ -31,15 +32,11 @@ const Techniques = () => {
           </div>
         </Container>
       </header>
-      <Container classes="py-24 lg:px-8 lg:w-full xl:max-w-[1400px] md:w-full md:px-8 w-full px-2">
-        <main
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 0.2fr))",
-            justifyContent: "center",
-            gap: "20px",
-          }}
-        >
+      <Container classes="py-24 lg:px-8 lg:w-full xl:max-w-[1400px] md:w-full md:px-8 w-full px-2 ">
+        <div className="mb-16">
+          <HomeArticle />
+        </div>
+        <main>
           {techniques.map((technique) => (
             <article
               key={technique.id}
@@ -49,7 +46,7 @@ const Techniques = () => {
                 <Image
                   src={technique.mainImage}
                   alt={technique.name}
-                  style={{ maxHeight: "200px" }}
+                  style={{ maxHeight: "300px" }}
                 />
               </div>
               <section className="p-3">

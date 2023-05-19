@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useAppState } from "../context";
 import { BsBag } from "react-icons/bs";
 import { MdOutlineEmail } from "react-icons/md";
-import { useWidth } from "../utils/useWidth";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -15,9 +14,9 @@ const Navbar = () => {
     { name: "Products", path: "/products" },
     { name: "How they're made", path: "/techniques" },
     { name: "test", path: "/test" },
+    { name: "test-modal", path: "/test-modal" },
   ];
 
-  const { width } = useWidth();
   return (
     <nav className="border-b-2 border-neutral-300">
       <div className="mx-auto flex w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1400px]">
@@ -44,17 +43,14 @@ const Navbar = () => {
         </div>
         <div className="flex items-center justify-center gap-4">
           <Link href={"/contact"}>
-            {width > 641 ? (
-              <p
-                className={
-                  "rounded-full border border-main-400  px-4 py-1 text-main-400 duration-300 ease-in-out hover:bg-main-400 hover:text-white"
-                }
-              >
-                Get in touch
-              </p>
-            ) : (
-              <MdOutlineEmail className="mt-1 text-xl text-main-400" />
-            )}
+            <p
+              className={
+                "hidden rounded-full border border-main-400  px-4 py-1 text-main-400 duration-300 ease-in-out hover:bg-main-400 hover:text-white sm:block"
+              }
+            >
+              Get in touch
+            </p>
+            <MdOutlineEmail className="mt-1 text-xl text-main-400 sm:hidden" />
           </Link>
           <Link href="/cart" className="">
             <div className="relative mt-0.5">

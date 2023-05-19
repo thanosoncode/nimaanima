@@ -21,7 +21,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
   return (
     <button
       onClick={handleAddToCart}
-      className={`mt-6 w-full rounded-full bg-black py-3 text-center text-white duration-100 ease-in-out ${
+      className={`mx-auto mt-2 w-1/3  rounded-full bg-black py-2 text-center text-white duration-100 ease-in-out sm:mt-6 sm:w-full sm:py-3 ${
         isNotInCart ? "hover:scale-105" : ""
       } `}
       disabled={!isNotInCart}
