@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface PreviewImagesProps {
@@ -11,14 +12,7 @@ const PreviewImages: React.FC<PreviewImagesProps> = ({ images }) => {
         <h4>Images</h4>
         <div style={{ display: "flex", gap: "16px" }}>
           {images.map((image) => (
-            <img
-              src={image}
-              style={{
-                width: "100px",
-                height: "100px",
-              }}
-              key={image}
-            />
+            <Image src={image} width={100} height={100} alt="" key={image} />
           ))}
         </div>
       </div>

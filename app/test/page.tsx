@@ -2,9 +2,6 @@
 
 import Image from "next/image";
 import Container from "../components/Container";
-import straps from "../../public/assets/category-straps.webp";
-import { getSingleProduct } from "@/lib/products";
-import { Product } from "@/app/utils/models";
 import AddToCart from "../products/components/AddToCart";
 import arrowLeft from "../../public/assets/left-black-arrow.png";
 import arrowRight from "../../public/assets/right-black-arrow.png";
@@ -49,7 +46,7 @@ const SingleTest = () => {
 
   return (
     <>
-      <Container classes="w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1400px] my-12">
+      <Container classes="w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1400px] mt-12 mb-40">
         <div className="flex gap-2 sm:gap-4">
           <div
             style={{ display: "flex", gap: "16px" }}

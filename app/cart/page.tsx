@@ -15,7 +15,7 @@ const Cart = () => {
     appDispatch({ type: "REMOVE_ITEM", id });
 
   return (
-    <Container classes="lg:px-8 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2">
+    <Container classes="lg:px-8 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 mb-40">
       <div className="sm:2/5 mx-auto lg:w-3/4">
         {cartItems.length > 0 ? (
           <h4 className="pt-8 pb-10 text-3xl font-thin">

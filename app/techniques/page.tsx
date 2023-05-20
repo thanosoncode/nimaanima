@@ -5,12 +5,19 @@ import Image from "next/image";
 import FooterCTA from "../components/FooterCTA";
 import bg from "../../public/assets/howmade-bg-no-b.png";
 import HomeArticle from "../components/HomeArticle";
+import Svg from "../components/Svg";
 
 const Techniques = () => {
   return (
     <>
-      <header className="bg-lightPink-400 py-2 px-2">
-        <Container classes="flex items-center justify-center gap-4 ">
+      <header>
+        <div className="relative bg-lightPink-400 pt-12">
+          <Svg />
+        </div>
+        <div
+          className="absolute flex items-center justify-center gap-4"
+          style={{ top: 0, left: "50%", transform: "translate(-50%, 50%)" }}
+        >
           <div>
             <h1 className="-mt-8 text-2xl font-extralight tracking-wide sm:text-4xl">
               How they are made
@@ -30,10 +37,10 @@ const Techniques = () => {
               style={{ objectFit: "contain" }}
             />
           </div>
-        </Container>
+        </div>
       </header>
-      <Container classes="py-24 lg:px-8 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 ">
-        <div className="mb-24">
+      <Container classes="pb-24 pt-24 lg:px-8 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 mb-40">
+        <div className="mb-40">
           <HomeArticle />
         </div>
         <section

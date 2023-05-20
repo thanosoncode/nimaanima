@@ -27,17 +27,6 @@ const ProductList: React.FC<ProductsProps> = ({
 
   const productsToShow = filterByCategory ? filteredProducts : products;
 
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleSize = () => {
-      setWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleSize);
-    return () => window.removeEventListener("resize", handleSize);
-  }, []);
-
   return (
     <main>
       <div className="flex justify-between">
@@ -47,15 +36,12 @@ const ProductList: React.FC<ProductsProps> = ({
       <section
         style={{
           display: "grid",
-          gridTemplateColumns:
-            width < 640
-              ? "repeat(2, minmax(160px, 1fr))"
-              : "repeat(auto-fill, minmax(240px, 0.4fr))",
-          gridAutoRows:
-            width < 640 ? "minmax(160px, auto)" : "minmax(200px, auto)",
+          // gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
+          gridAutoRows: "minmax(240px, auto)",
           justifyContent: "center",
           gap: "80px 20px",
         }}
+        className="auto-rows-tight grid-cols-tight sm:auto-rows-wide sm:grid-cols-wide"
       >
         {productsToShow.map((product) => (
           <div key={product.name}>

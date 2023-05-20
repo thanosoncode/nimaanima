@@ -1,13 +1,16 @@
-import Container from "../../components/Container";
 import CategoryButton from "./CategoryButton";
 import { categories } from "@/app/data/categories";
+import Green from "@/app/components/Green";
 
 interface ProductsHeaderProps {}
 
 const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
   return (
-    <header className=" bg-lightGreen-400 pb-4">
-      <Container classes="flex flex-col items-center">
+    <header className="relative mb-20 bg-lightGreen-400 pb-40">
+      <div
+        className="absolute top-0 left-1/2 z-10 flex flex-col items-center justify-center"
+        style={{ transform: "translateX(-50%" }}
+      >
         <h1 className="pt-6 pb-2  text-center text-3xl font-extralight tracking-wide">
           All things are handmade and one of a kind creations.
         </h1>
@@ -19,7 +22,10 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
             <CategoryButton category={category} key={category.name} />
           ))}
         </section>
-      </Container>
+      </div>
+      <div className="absolute top-28 left-0 w-full">
+        <Green />
+      </div>
     </header>
   );
 };

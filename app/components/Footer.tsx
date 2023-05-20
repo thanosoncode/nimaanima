@@ -9,7 +9,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-someBlue-600">
-      <Container classes="flex gap-2 py-4 px-2 justify-between">
+      <Container classes="flex gap-2 py-4 px-2 justify-between max-w-[1200px]">
         <p>&copy; Copyright 2023</p>{" "}
         <Link
           href="/manage"

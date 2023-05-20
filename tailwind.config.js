@@ -7,6 +7,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        tight: "repeat(auto-fill, minmax(180px, 1fr))",
+        wide: "repeat(auto-fill, minmax(300px, 0.4fr))",
+      },
+      gridAutoRows: {
+        tight: "minmax(180px, auto)",
+        wide: "minmax(220px, auto)",
+      },
       screens: {
         xs: { min: "480px", max: "640px" },
       },
