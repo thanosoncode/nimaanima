@@ -4,14 +4,14 @@ import { techniques } from ".././data/techniques";
 
 const HomeArticle = () => {
   return (
-    <div className="flex">
-      <article className="w-1/2">
+    <div className="flex flex-col-reverse gap-4 sm:flex-row">
+      <article className="w-full sm:w-1/2">
         <Link
           href="/techniques/3"
-          className="flex flex-col items-center gap-6 p-8"
+          className="flex h-full flex-col items-center justify-center gap-6"
         >
           <h4 className="text-xl">Learn more about the techniques we use</h4>
-          <h2 className="border-b-4 border-transparent px-2 text-center text-4xl hover:border-black">
+          <h2 className="border-b-4 border-transparent px-2 text-center text-3xl  hover:border-black">
             {techniques[2].name}
           </h2>
           <p className="text-center">{techniques[2].title}</p>
@@ -21,11 +21,11 @@ const HomeArticle = () => {
           </button>
         </Link>
       </article>
-      <div className="relative  max-h-[300px] w-1/2 flex-shrink-0 overflow-hidden rounded-xl">
+      <div className="relative  max-h-[400px] w-full flex-shrink-0 overflow-hidden rounded-xl sm:w-1/2">
         <Image
           src={techniques[2].mainImage}
           alt="about-1"
-          style={{ width: "100%" }}
+          style={{ width: "100%", objectFit: "cover" }}
         />
       </div>
     </div>

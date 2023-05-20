@@ -66,7 +66,7 @@ const Order = () => {
 
   return (
     <Container classes="py-12 mx-auto lg:px-8 lg:w-full xl:max-w-[1400px] md:w-full md:px-8 w-full px-2">
-      <div className="mx-auto w-1/2">
+      <div className="mx-auto max-w-[700px] px-4">
         <h4 className="pb-8 text-3xl font-light">
           Choose your shipping address
         </h4>

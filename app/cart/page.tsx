@@ -15,7 +15,7 @@ const Cart = () => {
     appDispatch({ type: "REMOVE_ITEM", id });
 
   return (
-    <Container classes="lg:px-8 lg:w-full xl:max-w-[1400px] md:w-full md:px-8 w-full px-2">
+    <Container classes="lg:px-8 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2">
       <div className="sm:2/5 mx-auto lg:w-3/4">
         {cartItems.length > 0 ? (
           <h4 className="pt-8 pb-10 text-3xl font-thin">
@@ -28,14 +28,14 @@ const Cart = () => {
           </h4>
         )}
         {cartItems.length > 0 ? (
-          <div className="flex flex-col items-center justify-center gap-40 sm:flex-row sm:items-start">
+          <div className="flex flex-col items-center justify-between gap-20 sm:flex-row sm:items-start sm:gap-10">
             <div className="flex flex-col gap-16">
               {cartItems.map((item) => (
                 <div
                   key={item.id}
                   className="flex gap-2 rounded-xl border border-neutral-300 p-3 shadow-xl"
                 >
-                  <div className="relative h-32 w-40 overflow-hidden rounded-xl">
+                  <div className="relative h-52 w-64 overflow-hidden rounded-xl">
                     <Image
                       src={item.images[0]}
                       alt={item.name}
@@ -43,19 +43,19 @@ const Cart = () => {
                       style={{ objectFit: "cover" }}
                     />
                   </div>
-                  <div>
-                    <div className="mb-4 pl-2.5 font-medium tracking-wide">
-                      <Link href={`/products/${item.id}`}>{item.name}</Link>
+                  <div className="flex flex-col justify-between px-2 pb-4">
+                    <div>
+                      <div className="mb-4 pl-2.5 font-medium tracking-wide">
+                        <Link href={`/products/${item.id}`}>{item.name}</Link>
+                      </div>
+                      <div className="mb-4 pl-2.5">€ {item.price}.00</div>
                     </div>
-                    <div className="mb-4 pl-2.5">€ {item.price}.00</div>
-                    <div className="flex gap-4">
-                      <button
-                        onClick={() => handleRemoveItem(item.id)}
-                        className="block rounded-full bg-white px-2.5 py-1 text-sm  duration-200 ease-in-out hover:bg-neutral-100"
-                      >
-                        Remove
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => handleRemoveItem(item.id)}
+                      className="block w-min rounded-full bg-white px-2.5 py-1 text-sm duration-200 ease-in-out hover:bg-neutral-100"
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
               ))}
