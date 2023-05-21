@@ -62,8 +62,8 @@ const ProductList: React.FC<ProductsProps> = ({
               href={`/products/${product.id}`}
               style={{ display: "block", padding: "4px" }}
             >
-              <p className="text-sm font-semibold">{product.name}</p>
-              <p className="text-sm">€ {product.price}</p>
+              <p className="">{product.name}</p>
+              <p className="">€ {product.price}</p>
             </Link>
           </div>
         ))}

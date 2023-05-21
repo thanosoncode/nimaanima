@@ -7,7 +7,7 @@ interface ProductsHeaderProps {}
 
 const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
   return (
-    <header className="relative mb-28 bg-lightGreen-400 pb-40">
+    <header className="relative mb-28 bg-lightGreen-400 pb-48">
       <div
         className="absolute top-0 left-1/2 z-10 flex flex-col items-center justify-center"
         style={{ transform: "translateX(-50%" }}
@@ -27,7 +27,7 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
       <div className="absolute top-20 left-0 hidden w-full sm:block">
         <Green />
       </div>
-      <div className="top-30 absolute left-0 block w-full sm:hidden">
+      <div className="absolute top-44 left-0 block w-full sm:hidden">
         <GreenMobile />
       </div>
     </header>
