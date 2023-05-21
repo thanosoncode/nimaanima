@@ -12,13 +12,13 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
         className="absolute top-0 left-1/2 z-10 flex flex-col items-center justify-center"
         style={{ transform: "translateX(-50%" }}
       >
-        <h1 className="whitespace-normal  pt-6 pb-2  text-center text-xl font-extralight tracking-wide sm:whitespace-nowrap sm:text-3xl">
-          All things are handmade and one of a kind creations.
+        <h1 className="whitespace-normal  pt-6 pb-6  text-center text-2xl font-normal tracking-wide sm:whitespace-nowrap sm:text-3xl">
+          Handmade and one of a kind creations.
         </h1>
         <p className="pb-0 text-center text-sm sm:pb-8  sm:text-base">
-          Find your favorite item in our unique selection
+          Browse the categories of our unique selection
         </p>
-        <section className="mt-10 flex items-center justify-center gap-6 sm:mt-0 sm:gap-12">
+        <section className="mt-6 flex items-center justify-center gap-6 sm:mt-0 sm:gap-12">
           {categories.map((category) => (
             <CategoryButton category={category} key={category.name} />
           ))}

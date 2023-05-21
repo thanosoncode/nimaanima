@@ -19,7 +19,7 @@ const Techniques = () => {
           style={{ left: "50%", transform: "translateX(-50%)" }}
         >
           <div className="pl-4 sm:pl-0">
-            <h1 className="-mt-8 text-xl font-extralight tracking-wide sm:text-4xl">
+            <h1 className="-mt-8 hidden text-xl font-extralight tracking-wide sm:text-4xl">
               How they are made
             </h1>
             <p className=" mt-4 text-sm  font-light sm:text-base sm:font-normal">
@@ -41,17 +41,11 @@ const Techniques = () => {
         <div className="mb-40">
           <HomeArticle />
         </div>
-        <section
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-            gap: "16px",
-          }}
-        >
+        <section className="grid grid-cols-normal gap-y-8 sm:gap-4">
           {techniques.map((technique) => (
             <article
               key={technique.id}
-              className=" overflow-hidden rounded-xl border duration-300 ease-in-out hover:shadow-lg"
+              className="hover:shadow-2lg overflow-hidden rounded-xl border border-neutral-300 shadow-lg duration-300 ease-in-out"
             >
               <div className="relative p-0 sm:p-0 xs:p-8">
                 <Image

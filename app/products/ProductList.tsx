@@ -35,8 +35,6 @@ const ProductList: React.FC<ProductsProps> = ({
       <section
         style={{
           display: "grid",
-          // gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-          gridAutoRows: "minmax(240px, auto)",
           justifyContent: "center",
           gap: "80px 20px",
         }}

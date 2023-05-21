@@ -30,8 +30,8 @@ const Navbar = () => {
                 href={link.path}
                 className={
                   pathname === link.path
-                    ? "mt-1 block border-b-2 border-main-400 p-1 text-xs sm:text-base"
-                    : "mt-1 block border-b-2 border-transparent p-1 text-xs sm:text-base"
+                    ? "mt-1 block border-b-2 border-main-400 p-1 text-sm sm:text-base"
+                    : "mt-1 block border-b-2 border-transparent p-1 text-sm sm:text-base"
                 }
               >
                 {link.name}
@@ -51,7 +51,7 @@ const Navbar = () => {
             <MdOutlineEmail className="mt-1 text-xl text-main-400 sm:hidden" />
           </Link>
           <Link href="/cart" className="">
-            <div className="relative mt-0.5">
+            <div className="relative mt-0.5 mr-2 sm:mr-0">
               <BsBag />
               {cartItems.length > 0 ? (
                 <span className="absolute -right-2 -top-2">

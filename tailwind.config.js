@@ -8,11 +8,12 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        tight: "repeat(auto-fill, minmax(180px, 1fr))",
+        tight: "repeat(auto-fill, minmax(190px, 1fr))",
         wide: "repeat(auto-fill, minmax(300px, 0.4fr))",
+        normal: "repeat(auto-fill, minmax(280px, 1fr))",
       },
       gridAutoRows: {
-        tight: "minmax(180px, auto)",
+        tight: "minmax(280px, auto)",
         wide: "minmax(220px, auto)",
       },
       screens: {
