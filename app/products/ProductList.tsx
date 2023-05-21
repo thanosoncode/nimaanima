@@ -1,10 +1,9 @@
 "use client";
 import { useAppState } from "@/app/context";
-import { Product } from "../../utils/models";
+import { Product } from "../utils/models";
 import Image from "next/image";
 import Link from "next/link";
 import Filter from "./Filter";
-import { useEffect, useState } from "react";
 
 interface ProductsProps {
   products: Product[];

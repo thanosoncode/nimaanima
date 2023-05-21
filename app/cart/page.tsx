@@ -35,7 +35,7 @@ const Cart = () => {
                   key={item.id}
                   className="flex gap-2 rounded-xl border border-neutral-300 p-3 shadow-xl"
                 >
-                  <div className="relative h-52 w-64 overflow-hidden rounded-xl">
+                  <div className="relative  h-48 w-56 overflow-hidden rounded-xl sm:h-52 sm:w-64">
                     <Image
                       src={item.images[0]}
                       alt={item.name}

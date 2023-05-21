@@ -3,9 +3,8 @@ import FooterCTA from "./components/FooterCTA";
 import { Product } from "./utils/models";
 import Categories from "./components/Categories";
 import HomeArticle from "./components/HomeArticle";
-import Slider from "./components/Slider";
 import { getAllProducts } from "@/lib/products";
-import ProductList from "./products/components/ProductList";
+import ProductList from "./products/ProductList";
 
 const Home = async () => {
   const products = (await getAllProducts()) as Product[];

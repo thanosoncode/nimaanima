@@ -11,24 +11,22 @@ const Techniques = () => {
   return (
     <>
       <header>
-        <div className="relative bg-lightPink-400 pt-12">
+        <div className="md-12 relative bg-lightPink-400 pt-20 sm:pt-20 lg:pt-0 ">
           <Svg />
         </div>
         <div
-          className="absolute flex items-center justify-center gap-4"
-          style={{ top: 0, left: "50%", transform: "translate(-50%, 50%)" }}
+          className="absolute top-12 flex items-center justify-center gap-0 sm:top-16 sm:gap-4"
+          style={{ left: "50%", transform: "translateX(-50%)" }}
         >
-          <div>
-            <h1 className="-mt-8 text-2xl font-extralight tracking-wide sm:text-4xl">
+          <div className="pl-4 sm:pl-0">
+            <h1 className="-mt-8 text-xl font-extralight tracking-wide sm:text-4xl">
               How they are made
             </h1>
-            <p className="mt-4 font-light  sm:font-normal">
+            <p className=" mt-4 text-sm  font-light sm:text-base sm:font-normal">
               Explore the techniques behind our handcrafted pieces
             </p>
           </div>
-          <div
-            style={{ width: "380px", height: "220px", position: "relative" }}
-          >
+          <div className="relative h-48 w-72 sm:h-56 sm:w-80">
             <Image
               src={bg}
               fill

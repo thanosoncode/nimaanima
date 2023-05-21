@@ -1,6 +1,6 @@
 "use client";
 
-import Modal from "../products/components/Modal";
+import Modal from "../products/Modal";
 import TestCarousel from "../test/TestCarousel";
 import { product } from "../test/mockProduct";
 

@@ -1,7 +1,7 @@
 import Container from "../components/Container";
 import FooterCTA from "../components/FooterCTA";
-import ProductsHeader from "./components/ProductsHeader";
-import ProductList from "./components/ProductList";
+import ProductsHeader from "./ProductsHeader";
+import ProductList from "./ProductList";
 import { getAllProducts } from "@/lib/products";
 
 const ProductsPage = async () => {
