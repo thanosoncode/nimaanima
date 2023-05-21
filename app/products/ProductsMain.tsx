@@ -4,7 +4,7 @@ import ProductsHeader from "./ProductsHeader";
 import ProductList from "./ProductList";
 import { getAllProducts } from "@/lib/products";
 
-const ProductsPage = async () => {
+const ProductsMain = async () => {
   const products = await getAllProducts();
 
   return (
@@ -24,4 +24,4 @@ const ProductsPage = async () => {
     </>
   );
 };
-export default ProductsPage;
+export default ProductsMain;

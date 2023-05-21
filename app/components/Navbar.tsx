@@ -11,7 +11,7 @@ const Navbar = () => {
   const { cartItems } = useAppState();
 
   const links = [
-    { name: "Products", path: "/products" },
+    { name: "Products", path: "/" },
     { name: "How they're made", path: "/techniques" },
   ];
 
