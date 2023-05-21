@@ -30,14 +30,14 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ category }) => {
       onClick={() => handleCategoryClick(category.name)}
     >
       <div
-        className={`h-14 w-14 overflow-hidden rounded-full duration-300 ease-in-out  sm:h-20 sm:w-20 ${
+        className={`h-16 w-16 overflow-hidden rounded-full duration-300 ease-in-out  sm:h-20 sm:w-20 ${
           isHovered || isActive ? "scale-110" : ""
         }`}
       >
         <Image
           src={category.image}
           alt={category.name}
-          className="h-14 w-14  object-cover sm:h-20 sm:w-20"
+          className="h-16 w-16  object-cover sm:h-20 sm:w-20"
         />
       </div>
       <p

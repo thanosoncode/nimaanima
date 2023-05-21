@@ -15,7 +15,7 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
         <h1 className="whitespace-normal  pt-6 pb-6  text-center text-2xl font-normal tracking-wide sm:whitespace-nowrap sm:text-3xl">
           Handmade and one of a kind creations.
         </h1>
-        <p className="pb-0 text-center text-sm sm:pb-8  sm:text-base">
+        <p className="pb-0 text-center sm:pb-8">
           Browse the categories of our unique selection
         </p>
         <section className="mt-6 flex items-center justify-center gap-6 sm:mt-0 sm:gap-12">
@@ -27,7 +27,7 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
       <div className="absolute top-20 left-0 hidden w-full sm:block">
         <Green />
       </div>
-      <div className="absolute top-32 left-0 block w-full sm:hidden">
+      <div className="top-30 absolute left-0 block w-full sm:hidden">
         <GreenMobile />
       </div>
     </header>

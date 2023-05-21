@@ -21,7 +21,7 @@ const HomeArticle = () => {
           </button>
         </Link>
       </article>
-      <div className="relative  max-h-[320px] w-full flex-shrink-0 overflow-hidden rounded-xl sm:w-1/2">
+      <div className="relative  max-h-[320px] w-full flex-shrink-0 overflow-hidden sm:w-1/2 sm:rounded-xl">
         <Image
           src={techniques[2].mainImage}
           alt="about-1"

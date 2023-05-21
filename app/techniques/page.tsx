@@ -37,11 +37,11 @@ const Techniques = () => {
           </div>
         </div>
       </header>
-      <Container classes="pb-24 pt-24 lg:px-8 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 mb-40">
-        <div className="mb-40">
-          <HomeArticle />
-        </div>
-        <section className="grid grid-cols-normal gap-y-8 sm:gap-4">
+      <div className="mt-24 mb-12 max-w-[1400px] px-0 sm:px-8">
+        <HomeArticle />
+      </div>
+      <Container classes="pb-24 pt-24 lg:px-8 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-8 mb-40">
+        <section className="grid grid-cols-normal gap-y-24 sm:gap-4">
           {techniques.map((technique) => (
             <article
               key={technique.id}
