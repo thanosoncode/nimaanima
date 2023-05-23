@@ -1,17 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { techniques } from ".././data/techniques";
+import { techniques } from "../data/techniques";
 
-const HomeArticle = () => {
+const Article = () => {
   return (
     <div className="flex flex-col-reverse gap-4 sm:flex-row">
       <article className="w-full sm:w-1/2">
         <Link
           href="/techniques/3"
-          className="flex h-full flex-col items-center justify-center gap-6"
+          className="flex h-full flex-col items-center justify-center gap-3 sm:gap-6"
         >
-          <h4 className="text-xl">Learn more about the techniques we use</h4>
-          <h2 className="border-b-4 border-transparent px-2 text-center text-3xl  hover:border-black">
+          <h2 className="border-b-4 border-transparent px-2 text-center text-2xl hover:border-black  sm:text-3xl">
             {techniques[2].name}
           </h2>
           <p className="text-center">{techniques[2].title}</p>
@@ -31,4 +30,4 @@ const HomeArticle = () => {
     </div>
   );
 };
-export default HomeArticle;
+export default Article;

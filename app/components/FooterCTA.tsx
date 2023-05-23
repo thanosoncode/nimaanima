@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Container from "./Container";
 import Image from "next/image";
-import LightBlue from "./LightBlue";
-import DarkBlue from "./DarkBlue";
+import LightBlue from "./LightBlueWave";
+import DarkBlue from "./DarkBlueWave";
 
 const FooterCTA = () => {
   return (
