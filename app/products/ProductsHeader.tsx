@@ -21,7 +21,7 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = () => {
           ))}
         </section>
       </div>
-      <div className="block bg-lightGreen-400 pt-32 sm:hidden">
+      <div className="block bg-lightGreen-400 pt-36 sm:hidden">
         <GreenMobileWaveTest />
       </div>
       <div className="hidden bg-lightGreen-400 pt-24 sm:block">
