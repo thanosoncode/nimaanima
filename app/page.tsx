@@ -1,9 +1,9 @@
-import ProductsMain from "./products/ProductsMain";
+import Products from './(routes)/products/Products';
 
 const Home = async () => {
   return (
     // @ts-ignore
-    <ProductsMain />
+    <Products />
   );
 };
 export default Home;
