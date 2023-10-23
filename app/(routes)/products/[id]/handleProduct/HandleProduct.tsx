@@ -2,8 +2,8 @@
 import { Product } from '@/app/utils/models';
 import { useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import arrowLeft from '../../../../public/assets/left-black-arrow.png';
-import arrowRight from '../../../../public/assets/right-black-arrow.png';
+import arrowLeft from '../../../../../public/assets/left-black-arrow.png';
+import arrowRight from '../../../../../public/assets/right-black-arrow.png';
 
 interface HandleProductProps {
   product: Product;
