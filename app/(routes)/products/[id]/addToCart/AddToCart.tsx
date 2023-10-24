@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppState } from '@/app/context';
 
-import { Product } from '@/app/utils/models';
+import { Product } from '@/app/utils/types';
 
 interface AddToCartProps {
   product: Product;

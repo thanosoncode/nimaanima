@@ -5,7 +5,7 @@ import Link from 'next/link';
 import FooterCTA from '../../../components/footer/CTA';
 import HandleProduct from './handleProduct/HandleProduct';
 import { getSingleProduct } from '@/lib/products';
-import { Product } from '@/app/utils/models';
+import { Product } from '@/app/utils/types';
 
 const SingleTest = async ({ params: { id } }: { params: { id: string } }) => {
   const product = (await getSingleProduct(id)) as Product;

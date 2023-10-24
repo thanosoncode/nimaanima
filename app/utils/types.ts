@@ -1,9 +1,11 @@
+export type Category = 'Dolls' | 'Tapestry' | 'Bracelets' | 'Straps';
+
 export type Product = {
   id: string;
   name: string;
   description: string;
   price: number;
-  category: string;
+  category: Category;
   images: string[];
 };
 
@@ -29,3 +31,7 @@ export interface OrderDetails {
   postalCode: string;
   city: string;
 }
+
+export type SearchParams = {
+  searchParams: { [key: string]: string | string[] | undefined };
+};

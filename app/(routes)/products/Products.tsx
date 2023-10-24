@@ -1,20 +1,24 @@
+import { Category, Product } from '@/app/utils/types';
 import Container from '../../components/container/Container';
 import FooterCTA from '../../components/footer/CTA';
-import ProductsHeader from './productsheader/ProductsHeader';
-import ProductList from './productList/ProductList';
-import { getAllProducts } from '@/lib/products';
+import ProductsHeader from './header/ProductsHeader';
+import ProductList from './list/ProductList';
 
-const ProductsMain = async () => {
-  const products = await getAllProducts();
+interface ProductsProps {
+  selectedCategory: Category;
+  products: Product[];
+}
 
+const Products: React.FC<ProductsProps> = ({ selectedCategory, products }) => {
   return (
     <>
-      <ProductsHeader />
+      <ProductsHeader selectedCategory={selectedCategory} />
       <Container classes='h-full lg:px-8 lg:w-full xl:max-w-[1400px] md:w-full md:px-8 w-full px-2'>
         <div className='mt-10 mb-56'>
           <ProductList
             title={'Find something you love'}
             products={products}
+            selectedCategory={selectedCategory}
             filterByCategory={true}
             showFilter={true}
           />
@@ -24,4 +28,4 @@ const ProductsMain = async () => {
     </>
   );
 };
-export default ProductsMain;
+export default Products;

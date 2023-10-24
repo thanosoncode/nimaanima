@@ -1,6 +1,6 @@
 'use client';
 
-import { Product } from '../../utils/models';
+import { Product } from '../../utils/types';
 import Image from 'next/image';
 import arrow from '../../public/assets/arrow.png';
 import { useEffect, useRef, useState } from 'react';

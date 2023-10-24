@@ -1,5 +1,5 @@
 'use client';
-import { Product } from '@/app/utils/models';
+import { Product } from '@/app/utils/types';
 import { useLayoutEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import arrowLeft from '../../../../../public/assets/left-black-arrow.png';

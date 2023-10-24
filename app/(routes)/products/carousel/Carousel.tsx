@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { Product } from "@/app/utils/models";
-import arrowLeft from "../../../public/assets/left-black-arrow.png";
-import arrowRight from "../../../public/assets/right-black-arrow.png";
-import closeIcon from "../../../public/assets/window-close.png";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { Product } from '@/app/utils/types';
+import arrowLeft from '../../../public/assets/left-black-arrow.png';
+import arrowRight from '../../../public/assets/right-black-arrow.png';
+import closeIcon from '../../../public/assets/window-close.png';
 
 interface CarouselProps {
   width: number;
@@ -55,44 +55,44 @@ const Carousel: React.FC<CarouselProps> = ({
   return (
     <div
       style={{
-        position: "relative",
+        position: 'relative',
         flexShrink: 0,
-        overflow: "hidden",
+        overflow: 'hidden',
       }}
-      className="h-80 w-80 sm:h-[400px] sm:w-[400px] md:h-[400px] md:w-[600px] lg:h-[300px] lg:w-[500px] xl:h-[400px] xl:w-[700px]"
+      className='h-80 w-80 sm:h-[400px] sm:w-[400px] md:h-[400px] md:w-[600px] lg:h-[300px] lg:w-[500px] xl:h-[400px] xl:w-[700px]'
     >
       <div
         onClick={handlePreviousImageClick}
-        className="absolute top-1/2 left-8 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white shadow-lg duration-200 ease-in-out hover:bg-neutral-100"
+        className='absolute top-1/2 left-8 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white shadow-lg duration-200 ease-in-out hover:bg-neutral-100'
       >
         <Image
           src={arrowLeft}
-          alt="left-arrow"
+          alt='left-arrow'
           width={20}
           height={20}
-          className=""
+          className=''
         />
       </div>
       <div
         onClick={handleNextImageClick}
-        className="absolute top-1/2 right-8 z-10 flex h-12 w-12 -translate-y-1/2  cursor-pointer items-center justify-center rounded-full bg-white shadow-lg duration-200 ease-in-out hover:bg-neutral-100"
+        className='absolute top-1/2 right-8 z-10 flex h-12 w-12 -translate-y-1/2  cursor-pointer items-center justify-center rounded-full bg-white shadow-lg duration-200 ease-in-out hover:bg-neutral-100'
       >
         <Image
           src={arrowRight}
-          alt="right-arrow"
+          alt='right-arrow'
           width={20}
           height={20}
-          className=""
+          className=''
         />
       </div>
-      <div className="relative h-full w-full">
+      <div className='relative h-full w-full'>
         <Image
           src={product.images[selectedImageINdex]}
           alt={product.name}
           style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
           }}
           fill
           onClick={onClick}
@@ -101,10 +101,10 @@ const Carousel: React.FC<CarouselProps> = ({
       </div>
       {onClose ? (
         <div
-          className="absolute top-2  right-2 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white"
+          className='absolute top-2  right-2 z-10 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white'
           onClick={onClose}
         >
-          <Image src={closeIcon} alt="close-window" width={20} height={20} />
+          <Image src={closeIcon} alt='close-window' width={20} height={20} />
         </div>
       ) : null}
     </div>

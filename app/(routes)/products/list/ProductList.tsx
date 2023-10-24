@@ -1,6 +1,4 @@
-'use client';
-import { useAppState } from '@/app/context';
-import { Product } from '../../../utils/models';
+import { Category, Product } from '../../../utils/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import Filter from './filter/Filter';
@@ -10,6 +8,7 @@ interface ProductsProps {
   filterByCategory: boolean;
   title: string;
   showFilter: boolean;
+  selectedCategory: Category;
 }
 
 const ProductList: React.FC<ProductsProps> = ({
@@ -17,9 +16,8 @@ const ProductList: React.FC<ProductsProps> = ({
   filterByCategory,
   title,
   showFilter,
+  selectedCategory,
 }) => {
-  const { selectedCategory } = useAppState();
-
   const filteredProducts = products.filter((product) =>
     selectedCategory ? product.category === selectedCategory : product
   );
