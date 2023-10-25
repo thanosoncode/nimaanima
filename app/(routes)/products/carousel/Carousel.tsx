@@ -53,14 +53,7 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [selectedImageINdex]);
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        flexShrink: 0,
-        overflow: 'hidden',
-      }}
-      className='h-80 w-80 sm:h-[400px] sm:w-[400px] md:h-[400px] md:w-[600px] lg:h-[300px] lg:w-[500px] xl:h-[400px] xl:w-[700px]'
-    >
+    <div className='h-80 w-80 sm:h-[400px] sm:w-[400px] md:h-[400px] md:w-[600px] lg:h-[300px] lg:w-[500px] xl:h-[400px] xl:w-[700px] relative overflow-hidden shrink-0'>
       <div
         onClick={handlePreviousImageClick}
         className='absolute top-1/2 left-8 z-10 flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full  bg-white shadow-lg duration-200 ease-in-out hover:bg-neutral-100'
@@ -89,11 +82,7 @@ const Carousel: React.FC<CarouselProps> = ({
         <Image
           src={product.images[selectedImageINdex]}
           alt={product.name}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          }}
+          className='w-full h-full object-cover'
           fill
           onClick={onClick}
           onLoad={() => setImageLoaded(true)}

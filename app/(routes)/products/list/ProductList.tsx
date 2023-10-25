@@ -31,25 +31,27 @@ const ProductList: React.FC<ProductsProps> = ({
         <h4 className='mb-4 text-2xl font-light'>{title}</h4>
         {showFilter ? <Filter /> : null}
       </div>
-      <section className='grid gap-y-20 gap-x-5 justify-center  auto-rows-tight grid-cols-tight sm:auto-rows-wide sm:grid-cols-wide'>
+      <section className='grid gap-y-8 md:gap-y-16 gap-x-5 justify-center grid-cols-1  xs:grid-cols-2 sm:grid-cols-2  md:grid-cols-3 '>
         {productsToShow.map((product) => (
           <div key={product.name}>
             <Link
               href={`/products/${product.id}`}
-              className='w-full h-full relative block'
+              className='w-full  h-56 sm:h-64 relative block'
             >
               <Image
                 src={product.images[0]}
                 alt={product.name}
                 fill
-                className='object-cover rounded-xl'
+                className='object-cover rounded-xl '
               />
             </Link>
             <div>
               <div className='px-1 mb-1'>
-                <div className='flex items-center justify-between '>
-                  <p className=''>{product.name}</p>
-                  <p className=''>€ {product.price}</p>
+                <div className='flex items-center justify-between gap-2'>
+                  <p className='overflow-hidden whitespace-nowrap text-ellipsis'>
+                    {product.name}
+                  </p>
+                  <p className='whitespace-nowrap'>€ {product.price}</p>
                 </div>
               </div>
               <AddToCartButton product={product} />

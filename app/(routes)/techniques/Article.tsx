@@ -24,7 +24,7 @@ const Article = () => {
         <Image
           src={techniques[2].mainImage}
           alt='about-1'
-          style={{ width: '100%', objectFit: 'cover' }}
+          className='w-full object-cover'
         />
       </div>
     </div>

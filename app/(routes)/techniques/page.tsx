@@ -20,12 +20,11 @@ const Techniques = () => {
               key={technique.id}
               className='hover:shadow-2lg overflow-hidden rounded-xl border border-neutral-300 shadow-lg duration-300 ease-in-out'
             >
-              <div className='relative p-0 sm:p-0 xs:p-8'>
+              <div className='relative p-0 sm:p-0 sm:p-8'>
                 <Image
                   src={technique.mainImage}
                   alt={technique.name}
-                  className='w-full'
-                  style={{ maxHeight: '300px' }}
+                  className='w-full max-h-[300px]'
                 />
               </div>
               <section className='p-5'>

@@ -1,14 +1,11 @@
 import Link from 'next/link';
 import Container from '../../container/Container';
-import LightBlueWave from '../../waves/LightBlueWave';
-import DarkBlueWave from '../../waves/DarkBlueWave';
 
 const FooterCTA = () => {
   return (
     <div>
       <div className='bg-someBlue-400'>
-        <LightBlueWave />
-        <div className='-mt-1 flex flex-col items-center justify-center gap-4 pb-6'>
+        <div className='-mt-1 flex flex-col items-center justify-center gap-4 py-6 bg-LightBlueWave'>
           <h4 className='text-bold px-8 text-center text-base sm:text-xl '>
             Connect with us to explore your concepts or request tailored items
           </h4>
@@ -18,7 +15,6 @@ const FooterCTA = () => {
         </div>
       </div>
       <div className='bg-someBlue-500'>
-        <DarkBlueWave />
         <Container classes='py-2.5 text-center text-white'>
           Every product is 100% handmade.
         </Container>

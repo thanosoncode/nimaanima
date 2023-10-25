@@ -40,7 +40,7 @@ const Cart = () => {
                       src={item.images[0]}
                       alt={item.name}
                       fill
-                      style={{ objectFit: 'cover' }}
+                      className='object-cover'
                     />
                   </div>
                   <div className='flex flex-col justify-between px-2 pb-4'>

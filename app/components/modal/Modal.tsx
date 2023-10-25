@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 interface ModalProps {
   open: boolean;
@@ -6,17 +6,14 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ open, children }) => {
-  const display = open ? "flex" : "none";
   return (
     <>
       <div
-        className="absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-neutral-700 "
-        style={{ display }}
+        className={`absolute top-0 left-0 z-20 flex h-full w-full items-center justify-center bg-neutral-700 ${
+          open ? 'flex' : 'hidden'
+        }`}
       ></div>
-      <div
-        className="absolute top-0 left-0 z-30 flex h-full w-full items-center justify-center"
-        style={{ display }}
-      >
+      <div className='absolute top-0 left-0 z-30 flex h-full w-full items-center justify-center'>
         {children}
       </div>
     </>

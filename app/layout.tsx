@@ -19,10 +19,7 @@ export default function RootLayout({
       <body>
         <AppProvider>
           <Navbar />
-          <div
-            className='flex flex-col justify-between'
-            style={{ minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)` }}
-          >
+          <div className='flex flex-col justify-between min-h-[calc(100vh-66px)]'>
             {children}
 
             <Footer />

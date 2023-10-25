@@ -10,7 +10,7 @@ const PreviewImages: React.FC<PreviewImagesProps> = ({ images }) => {
     images.length > 0 ? (
       <div>
         <h4>Images</h4>
-        <div style={{ display: 'flex', gap: '16px' }}>
+        <div className='flex gap-4'>
           {images.map((image) => (
             <Image src={image} width={100} height={100} alt='' key={image} />
           ))}
