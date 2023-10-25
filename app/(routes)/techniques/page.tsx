@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Container from '../../components/container/Container';
 import { techniques } from '../../data/techniques';
 import Image from 'next/image';
-import FooterCTA from '../../components/footer/CTA';
+import FooterCTA from '../../components/footer/cta/CTA';
 import Article from './Article';
 import Header from './Header';
 
@@ -41,7 +41,6 @@ const Techniques = () => {
           ))}
         </section>
       </Container>
-      <FooterCTA />
     </>
   );
 };

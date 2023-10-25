@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import Container from '../container/Container';
-import LightBlueWave from './LightBlueWave';
-import DarkBlueWave from './DarkBlueWave';
+import Container from '../../container/Container';
+import LightBlueWave from '../../waves/LightBlueWave';
+import DarkBlueWave from '../../waves/DarkBlueWave';
 
 const FooterCTA = () => {
   return (
-    <>
+    <div>
       <div className='bg-someBlue-400'>
         <LightBlueWave />
         <div className='-mt-1 flex flex-col items-center justify-center gap-4 pb-6'>
@@ -23,7 +23,7 @@ const FooterCTA = () => {
           Every product is 100% handmade.
         </Container>
       </div>
-    </>
+    </div>
   );
 };
 export default FooterCTA;

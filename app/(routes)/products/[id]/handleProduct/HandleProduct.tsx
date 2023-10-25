@@ -58,22 +58,14 @@ const HandleProduct: React.FC<HandleProductProps> = ({ product }) => {
             <Image
               key={index}
               src={image}
-              alt=''
+              alt={`image-${index + 1}`}
               fill
               onClick={() => handleImageSelect(index)}
             />
           </div>
         ))}
       </aside>
-      <div
-        style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-        }}
-        ref={ref}
-      >
+      <div className='relative w-full h-full flex' ref={ref}>
         <div
           onClick={handlePreviousImageClick}
           className='absolute top-1/2 left-2 z-10 flex h-8 w-8 -translate-y-1/2 cursor-pointer items-center   justify-center rounded-full bg-white shadow-lg duration-200  ease-in-out hover:bg-neutral-100 sm:left-8 sm:h-12 sm:w-12'
@@ -91,13 +83,7 @@ const HandleProduct: React.FC<HandleProductProps> = ({ product }) => {
           alt=''
           width={mainImageSize.width}
           height={mainImageSize.height}
-          style={{
-            objectFit: 'contain',
-            maxHeight: '600px',
-            background: '#f1f1f1',
-            borderRadius: '10px',
-            width: '100%',
-          }}
+          className='object-contain max-h-[600px] bg-neutral-100 rounded-lg w-full'
         />
       </div>
     </div>

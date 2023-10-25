@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <nav className='border-b-2 border-neutral-300'>
-      <div className='mx-auto flex w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1400px]'>
+      <div className='mx-auto flex w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1140px]'>
         <Link href='/' className='bold text-xl text-main-400 sm:text-3xl'>
           nimaAnima
         </Link>

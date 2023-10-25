@@ -1,4 +1,4 @@
-import FooterCTA from '@/app/components/footer/CTA';
+import FooterCTA from '@/app/components/footer/cta/CTA';
 import Container from '@/app/components/container/Container';
 import { techniques } from '@/app/data/techniques';
 import Image from 'next/image';
@@ -14,7 +14,7 @@ const SingleTechnique = ({ params: { id } }: { params: { id: string } }) => {
 
   return (
     <>
-      <Container classes='pb-20 w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1400px]'>
+      <Container classes='pb-20 w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1140px]'>
         <div className='max-w-[1200px] lg:px-20 xl:px-40'>
           <header className='mb-10 '>
             <h1 className='mt-10 mb-4 text-center text-4xl'>
@@ -40,7 +40,6 @@ const SingleTechnique = ({ params: { id } }: { params: { id: string } }) => {
           </main>
         </div>
       </Container>
-      <FooterCTA />
     </>
   );
 };

@@ -24,6 +24,7 @@ export default function RootLayout({
             style={{ minHeight: `calc(100vh - ${NAVBAR_HEIGHT}px)` }}
           >
             {children}
+
             <Footer />
           </div>
         </AppProvider>
