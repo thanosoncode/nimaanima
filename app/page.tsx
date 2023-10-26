@@ -11,9 +11,6 @@ const Home = async ({
 
   const selectedCategory = searchParams.category as Category;
 
-  return (
-    // @ts-ignore
-    <Products selectedCategory={selectedCategory} products={products} />
-  );
+  return <Products selectedCategory={selectedCategory} products={products} />;
 };
 export default Home;

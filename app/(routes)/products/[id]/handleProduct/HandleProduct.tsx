@@ -83,7 +83,7 @@ const HandleProduct: React.FC<HandleProductProps> = ({ product }) => {
           alt=''
           width={mainImageSize.width}
           height={mainImageSize.height}
-          className='object-contain max-h-[600px] bg-neutral-100 rounded-lg w-full'
+          className='object-contain max-h-[500px] bg-neutral-100 rounded-lg w-full'
         />
       </div>
     </div>

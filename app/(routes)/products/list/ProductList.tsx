@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Filter from './filter/Filter';
 import AddToCartButton from './addToCartButton/AddToCartButton';
+import ProductItem from './productItem/ProductItem';
 
 interface ProductsProps {
   products: Product[];
@@ -33,30 +34,7 @@ const ProductList: React.FC<ProductsProps> = ({
       </div>
       <section className='grid gap-y-8 md:gap-y-16 gap-x-5 justify-center grid-cols-1  xs:grid-cols-2 sm:grid-cols-2  md:grid-cols-3 '>
         {productsToShow.map((product) => (
-          <div key={product.name}>
-            <Link
-              href={`/products/${product.id}`}
-              className='w-full  h-56 sm:h-64 relative block'
-            >
-              <Image
-                src={product.images[0]}
-                alt={product.name}
-                fill
-                className='object-cover rounded-xl '
-              />
-            </Link>
-            <div>
-              <div className='px-1 mb-1'>
-                <div className='flex items-center justify-between gap-2'>
-                  <p className='overflow-hidden whitespace-nowrap text-ellipsis'>
-                    {product.name}
-                  </p>
-                  <p className='whitespace-nowrap'>€ {product.price}</p>
-                </div>
-              </div>
-              <AddToCartButton product={product} />
-            </div>
-          </div>
+          <ProductItem product={product} key={product.id} />
         ))}
       </section>
     </main>

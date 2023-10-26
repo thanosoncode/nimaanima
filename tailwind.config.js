@@ -7,6 +7,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        soft: '0 0px 10px rgba(0, 0, 0, 0.1)',
+        hover: '0 0px 10px rgba(0, 0, 0, 0.3)',
+      },
       gridTemplateColumns: {
         tight: 'repeat(auto-fill, minmax(190px, 1fr))',
         wide: 'repeat(auto-fill, minmax(300px, 0.4fr))',

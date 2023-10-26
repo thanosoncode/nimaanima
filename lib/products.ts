@@ -1,7 +1,17 @@
-import { prisma } from "./prisma";
+import { Category } from '@/app/utils/types';
+import { prisma } from './prisma';
 
 export const getAllProducts = async () => {
   const products = await prisma.product.findMany({});
+  return products;
+};
+
+export const getCategoryProducts = async (category: Category) => {
+  const products = await prisma.product.findMany({
+    where: {
+      category,
+    },
+  });
   return products;
 };
 

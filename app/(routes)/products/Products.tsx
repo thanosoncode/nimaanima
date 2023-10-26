@@ -1,6 +1,5 @@
 import { Category, Product } from '@/app/utils/types';
 import Container from '../../components/container/Container';
-import FooterCTA from '../../components/footer/cta/CTA';
 import ProductsHeader from './header/ProductsHeader';
 import ProductList from './list/ProductList';
 
