@@ -3,9 +3,9 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppState } from '../../context/context';
-import { BsBag } from 'react-icons/bs';
+import { BsCart4 } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
-import { AiOutlineHeart } from 'react-icons/ai';
+import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -51,16 +51,12 @@ const Navbar = () => {
             <MdOutlineEmail className='mt-1 text-xl text-main-400 sm:hidden' />
           </Link>
           <Link href='/favorites'>
-            {favorites.length > 0 ? (
-              <AiOutlineHeart size={20} fill='darkred' />
-            ) : (
-              <AiOutlineHeart size={20} />
-            )}
+            <AiOutlineHeart size={20} />
           </Link>
 
           <Link href='/cart' className=''>
             <div className='relative mt-0.5 mr-2 sm:mr-0'>
-              <BsBag />
+              <BsCart4 size={20} />
               {cartItems.length > 0 ? (
                 <span className='absolute -right-2 -top-2'>
                   {cartItems.length}

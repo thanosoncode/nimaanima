@@ -10,7 +10,7 @@ interface ProductItemProps {
 
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <div className='rounded-lg shadow-soft p-2 hover:shadow-hover relative'>
+    <div className='rounded-lg shadow-soft p-2 hover:shadow-hover relative group'>
       <Link
         href={`/products/${product.id}`}
         className='w-full  h-32 md:h-44 sm:h-40 relative block'
