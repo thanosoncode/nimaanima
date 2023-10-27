@@ -2,13 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useAppState } from '../../context';
+import { useAppState } from '../../context/context';
 import { BsBag } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
+import { AiOutlineHeart } from 'react-icons/ai';
 
 const Navbar = () => {
   const pathname = usePathname();
-  const { cartItems } = useAppState();
+  const { cartItems, favorites } = useAppState();
 
   const links = [
     { name: 'Products', path: '/' },
@@ -40,16 +41,23 @@ const Navbar = () => {
           })}
         </div>
         <div className='flex items-center justify-center gap-4'>
-          <Link href={'/contact'}>
-            <p
-              className={
-                'hidden rounded-full border border-main-400  px-4 py-1 text-main-400 duration-300 ease-in-out hover:bg-main-400 hover:text-white sm:block'
-              }
-            >
-              Get in touch
-            </p>
+          <Link
+            href={'/contact'}
+            className={
+              'hidden rounded-full border border-main-400  px-4 py-1 text-main-400 duration-300 ease-in-out hover:bg-main-400 hover:text-white sm:block'
+            }
+          >
+            Get in touch
             <MdOutlineEmail className='mt-1 text-xl text-main-400 sm:hidden' />
           </Link>
+          <Link href='/favorites'>
+            {favorites.length > 0 ? (
+              <AiOutlineHeart size={20} fill='darkred' />
+            ) : (
+              <AiOutlineHeart size={20} />
+            )}
+          </Link>
+
           <Link href='/cart' className=''>
             <div className='relative mt-0.5 mr-2 sm:mr-0'>
               <BsBag />

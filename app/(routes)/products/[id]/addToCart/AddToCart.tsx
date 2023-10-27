@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppDispatch, useAppState } from '@/app/context';
+import { useAppDispatch, useAppState } from '@/app/context/context';
 
 import { Product } from '@/app/utils/types';
 import { useRouter } from 'next/navigation';

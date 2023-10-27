@@ -1,6 +1,6 @@
 'use client';
 
-import { useAppDispatch, useAppState } from '@/app/context';
+import { useAppDispatch, useAppState } from '@/app/context/context';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BsFilter } from 'react-icons/bs';

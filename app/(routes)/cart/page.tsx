@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useAppDispatch, useAppState } from '../../context';
+import { useAppDispatch, useAppState } from '../../context/context';
 import Container from '../../components/container/Container';
 import Link from 'next/link';
 
@@ -15,21 +15,21 @@ const Cart = () => {
     appDispatch({ type: 'REMOVE_ITEM', id });
 
   return (
-    <Container classes='lg:px-8 xl:px-16 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 mb-40'>
+    <Container classes='lg:px-8 xl:px-16 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 mb-20'>
       <div className=''>
         {cartItems.length > 0 ? (
-          <h4 className='pt-8 pb-10 text-3xl font-thin'>
+          <h4 className='py-4 sm:py-8 text-3xl font-thin'>
             {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in
             your cart.
           </h4>
         ) : (
-          <h4 className='py-8 text-3xl font-thin'>
+          <h4 className='py-4 sm:py-8 text-3xl font-thin'>
             No items in your cart yet.
           </h4>
         )}
         {cartItems.length > 0 ? (
           <div className='flex flex-col  justify-between gap-10 lg:flex-row '>
-            <div>
+            <div className='flex flex-col gap-8'>
               {cartItems.map((item) => (
                 <div
                   key={item.id}
@@ -46,8 +46,13 @@ const Cart = () => {
                     </div>
                     <div className='flex flex-col justify-between'>
                       <div>
-                        <div className='font-medium tracking-wide'>
-                          <Link href={`/products/${item.id}`}>{item.name}</Link>
+                        <div className='text-neutral-700'>
+                          <Link
+                            href={`/products/${item.id}`}
+                            className='text-neutral-600'
+                          >
+                            {item.name}
+                          </Link>
                         </div>
                         <div className=''>€ {item.price}.00</div>
                       </div>
@@ -90,17 +95,21 @@ const Cart = () => {
               ))}
             </div>
             <div className='md:px-0 p-4 flex w-full  max-w-[400px] flex-col items-center sm:mt-0 '>
-              <div className='flex w-full flex-col gap-4 px-2'>
+              <div className='flex w-full flex-col gap-6 px-2'>
                 <div className='flex justify-between'>
-                  <div className='font-medium tracking-wide'>Item total</div>
+                  <div className='font-medium tracking-wide'>
+                    Item&#40;s&#41; total
+                  </div>
                   <div className=''>€ {total}</div>
                 </div>
                 <div className='flex justify-between border-b border-neutral-200 pb-2'>
-                  <div className='font-medium tracking-wide'>Shipping</div>
+                  <div className='tracking-wide'>Shipping</div>
                   <div className=''>€ 3.00</div>
                 </div>
                 <div className='flex justify-between'>
-                  <div className='font-medium tracking-wide'>Total</div>
+                  <div className='font-medium tracking-wide'>
+                    Total &#40;{cartItems.length}item&#41;
+                  </div>
                   <div className=''>€ {total + 3}</div>
                 </div>
               </div>

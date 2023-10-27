@@ -2,7 +2,7 @@ import { Category, Product } from '../../../utils/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import Filter from './filter/Filter';
-import AddToCartButton from './addToCartButton/AddToCartButton';
+import AddToCartButton from '../../../components/addToCartButton/AddToCartButton';
 import ProductItem from './productItem/ProductItem';
 
 interface ProductsProps {

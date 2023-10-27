@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import { Product } from '@/app/utils/types';
+import AddToFavorites from '../../../list/productItem/addToFavorites/AddToFavorites';
 
 interface ProductItemProps {
   product: Product;
@@ -9,7 +10,7 @@ interface ProductItemProps {
 
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <div className='rounded-lg shadow-soft p-2 hover:shadow-hover'>
+    <div className='rounded-lg shadow-soft p-2 hover:shadow-hover relative'>
       <Link
         href={`/products/${product.id}`}
         className='w-full  h-32 md:h-44 sm:h-40 relative block'
@@ -31,6 +32,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           </div>
         </div>
       </div>
+      <AddToFavorites product={product} size={16} />
     </div>
   );
 };

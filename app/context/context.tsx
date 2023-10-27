@@ -1,10 +1,11 @@
 'use client';
 
 import { createContext, useContext, useReducer } from 'react';
-import { OrderDetails, Product } from './utils/types';
+import { OrderDetails, Product } from '../utils/types';
 
 type AppState = {
   cartItems: Product[];
+  favorites: Product[];
   selectedCategory: string | null;
   selectedFilter: string | null;
   orderDetails: OrderDetails | null;
@@ -12,6 +13,7 @@ type AppState = {
 
 const initialState = {
   cartItems: [],
+  favorites: [],
   selectedCategory: null,
   selectedFilter: null,
   orderDetails: null,
@@ -21,6 +23,14 @@ type Action =
   | {
       type: 'ADD_CART_ITEM';
       cartItem: Product;
+    }
+  | {
+      type: 'ADD_FAVORITE';
+      favorite: Product;
+    }
+  | {
+      type: 'REMOVE_FAVORITE';
+      id: string;
     }
   | {
       type: 'SET_CART_ITEMS_AMOUNT';
@@ -45,6 +55,13 @@ const reducer = (state: AppState, action: Action) => {
   switch (action.type) {
     case 'ADD_CART_ITEM':
       return { ...state, cartItems: [...state.cartItems, action.cartItem] };
+    case 'ADD_FAVORITE':
+      return { ...state, favorites: [...state.favorites, action.favorite] };
+    case 'REMOVE_FAVORITE':
+      return {
+        ...state,
+        favorites: state.favorites.filter((f) => f.id !== action.id),
+      };
     case 'SET_CART_ITEMS_AMOUNT':
       return { ...state, cartItems: action.cartItems };
     case 'REMOVE_ITEM':
