@@ -33,15 +33,10 @@ type Action =
       id: string;
     }
   | {
-      type: 'SET_CART_ITEMS_AMOUNT';
-      cartItems: Product[];
-    }
-  | {
       type: 'REMOVE_ITEM';
       id: string;
     }
   | { type: 'EMPTY_CART' }
-  | { type: 'SET_SELECTED_CATEGORY'; category: string | null }
   | { type: 'SET_SELECTED_FILTER'; filter: string | null }
   | { type: 'SET_ORDER_DETAILS'; orderDetails: OrderDetails };
 
@@ -62,8 +57,6 @@ const reducer = (state: AppState, action: Action) => {
         ...state,
         favorites: state.favorites.filter((f) => f.id !== action.id),
       };
-    case 'SET_CART_ITEMS_AMOUNT':
-      return { ...state, cartItems: action.cartItems };
     case 'REMOVE_ITEM':
       return {
         ...state,
@@ -71,8 +64,6 @@ const reducer = (state: AppState, action: Action) => {
       };
     case 'EMPTY_CART':
       return { ...state, cartItems: [] };
-    case 'SET_SELECTED_CATEGORY':
-      return { ...state, selectedCategory: action.category };
     case 'SET_SELECTED_FILTER':
       return { ...state, selectedFilter: action.filter };
     case 'SET_ORDER_DETAILS':
