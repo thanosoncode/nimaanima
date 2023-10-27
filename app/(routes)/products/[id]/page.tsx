@@ -15,20 +15,30 @@ const SingleProduct = async ({
 
   return (
     <>
-      <Container classes='w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1140px] mt-12 mb-20'>
+      <Container classes='w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1140px] mt-8  md:mt-12 mb-12 md:mb-20'>
         <div className='flex gap-2 sm:gap-4'>
-          <div className='flex flex-col gap-4 sm:flex-row'>
+          <div className='flex flex-col gap-4 md:flex-row'>
             <HandleProduct product={product} />
-            <article className='flex w-full flex-col gap-6 sm:w-[25%]'>
-              <p className=' text-xl sm:text-3xl'>{product.name}</p>
+            <article className='flex w-full flex-col gap-2 md:gap-6 md:w-[25%]'>
+              <p className='text-xl md:text-2xl font-semibold'>
+                € {product.price}{' '}
+              </p>
+              <p className=' text-xl sm:text-xl text-neutral-700 '>
+                {product.name}
+              </p>
               <p>{product.description}</p>
-              <p className='text-xl sm:text-2xl'>€ {product.price} </p>
-              <Link href='/techniques/3'>Weaving technique</Link>
+
+              <Link
+                href='/techniques/3'
+                className=' w-min px-1 whitespace-nowrap border-b   block text-neutral-600  border-b-neutral-600'
+              >
+                Weaving technique
+              </Link>
               <AddToCart product={product} />
             </article>
           </div>
         </div>
-        <div className='mt-20'>
+        <div className='mt-12 '>
           <Recommendations category={product.category} currentId={id} />
         </div>
       </Container>

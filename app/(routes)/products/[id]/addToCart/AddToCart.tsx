@@ -3,6 +3,7 @@
 import { useAppDispatch, useAppState } from '@/app/context';
 
 import { Product } from '@/app/utils/types';
+import { useRouter } from 'next/navigation';
 
 interface AddToCartProps {
   product: Product;
@@ -10,9 +11,11 @@ interface AddToCartProps {
 
 const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleAddToCart = () => {
     dispatch({ type: 'ADD_CART_ITEM', cartItem: product });
+    router.push('/cart');
   };
 
   const { cartItems } = useAppState();
@@ -21,8 +24,8 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
   return (
     <button
       onClick={handleAddToCart}
-      className={`mx-auto mt-2 w-1/3  rounded-full bg-black py-2 text-center text-white duration-100 ease-in-out sm:mt-6 sm:w-full sm:py-3 ${
-        isNotInCart ? 'hover:scale-105' : ''
+      className={`mx-auto mt-2 w-1/3  rounded-full bg-neutral-900 py-2 text-center text-white duration-100 ease-in-out sm:mt-6 sm:w-full sm:py-3 ${
+        isNotInCart ? 'hover:scale-[1.04] hover:opacity-80' : ''
       } `}
       disabled={!isNotInCart}
     >

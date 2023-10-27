@@ -15,8 +15,8 @@ const Cart = () => {
     appDispatch({ type: 'REMOVE_ITEM', id });
 
   return (
-    <Container classes='lg:px-8 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 mb-40'>
-      <div className='sm:2/5 mx-auto lg:w-3/4'>
+    <Container classes='lg:px-8 xl:px-16 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 mb-40'>
+      <div className=''>
         {cartItems.length > 0 ? (
           <h4 className='pt-8 pb-10 text-3xl font-thin'>
             {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in
@@ -28,39 +28,68 @@ const Cart = () => {
           </h4>
         )}
         {cartItems.length > 0 ? (
-          <div className='flex flex-col items-center justify-between gap-20 sm:flex-row sm:items-start sm:gap-10'>
-            <div className='flex flex-col gap-16'>
+          <div className='flex flex-col  justify-between gap-10 lg:flex-row '>
+            <div>
               {cartItems.map((item) => (
                 <div
                   key={item.id}
-                  className='flex gap-2 rounded-xl border border-neutral-300 p-3 shadow-xl'
+                  className=' rounded-xl max-w-[600px] border border-neutral-300 p-2 sm:p-3 shadow-cart'
                 >
-                  <div className='relative  h-48 w-56 overflow-hidden rounded-xl sm:h-52 sm:w-64'>
-                    <Image
-                      src={item.images[0]}
-                      alt={item.name}
-                      fill
-                      className='object-cover'
-                    />
-                  </div>
-                  <div className='flex flex-col justify-between px-2 pb-4'>
-                    <div>
-                      <div className='mb-4 pl-2.5 font-medium tracking-wide'>
-                        <Link href={`/products/${item.id}`}>{item.name}</Link>
-                      </div>
-                      <div className='mb-4 pl-2.5'>€ {item.price}.00</div>
+                  <div className='flex gap-2 sm:gap-6  w-full'>
+                    <div className='relative h-32 w-36 sm:shrink shrink-0 sm:h-52 sm:w-60  overflow-hidden rounded-xl '>
+                      <Image
+                        src={item.images[0]}
+                        alt={item.name}
+                        fill
+                        className='object-cover'
+                      />
                     </div>
-                    <button
-                      onClick={() => handleRemoveItem(item.id)}
-                      className='block w-min rounded-full bg-white px-2.5 py-1 text-sm duration-200 ease-in-out hover:bg-neutral-100'
-                    >
-                      Remove
-                    </button>
+                    <div className='flex flex-col justify-between'>
+                      <div>
+                        <div className='font-medium tracking-wide'>
+                          <Link href={`/products/${item.id}`}>{item.name}</Link>
+                        </div>
+                        <div className=''>€ {item.price}.00</div>
+                      </div>
+                      <div className='flex gap-4 md:mb-0 mb-4'>
+                        <button
+                          onClick={() => handleRemoveItem(item.id)}
+                          className='block w-min rounded-full bg-white  font-medium text-sm duration-200 ease-in-out hover:bg-neutral-100'
+                        >
+                          Remove
+                        </button>
+                        <button className='block w-min whitespace-nowrap rounded-full font-medium bg-white  text-sm duration-200 ease-in-out hover:bg-neutral-100'>
+                          Save for later
+                        </button>
+                      </div>
+                      <div className='hidden sm:flex gap-2 items-start'>
+                        <input
+                          type='checkbox'
+                          id='gift'
+                          className='block mt-1.5'
+                        />
+                        <label htmlFor='gift' className='flex flex-col'>
+                          <span>This package is a gift</span>
+                          <span className='text-sm'>
+                            Prices will not be show in the package slip
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='flex sm:hidden gap-2 items-start mt-2'>
+                    <input type='checkbox' id='gift' className='block mt-1.5' />
+                    <label htmlFor='gift' className='flex flex-col'>
+                      <span>This package is a gift</span>
+                      <span className='text-sm'>
+                        Prices will not be show in the package slip
+                      </span>
+                    </label>
                   </div>
                 </div>
               ))}
             </div>
-            <div className='mt-16 flex w-1/2 flex-col items-center sm:mt-0 sm:w-fit'>
+            <div className='md:px-0 p-4 flex w-full  max-w-[400px] flex-col items-center sm:mt-0 '>
               <div className='flex w-full flex-col gap-4 px-2'>
                 <div className='flex justify-between'>
                   <div className='font-medium tracking-wide'>Item total</div>

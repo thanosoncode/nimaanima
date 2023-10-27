@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       boxShadow: {
         soft: '0 0px 10px rgba(0, 0, 0, 0.1)',
+        cart: '0px 1px 3px 0px rgba(0,0,0,.3019607843), 0px 4px 8px 3px rgba(0,0,0,.1490196078)',
         hover: '0 0px 10px rgba(0, 0, 0, 0.3)',
       },
       gridTemplateColumns: {

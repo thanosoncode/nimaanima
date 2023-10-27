@@ -44,8 +44,8 @@ const HandleProduct: React.FC<HandleProductProps> = ({ product }) => {
   }, []);
 
   return (
-    <div className='relative flex w-full flex-col-reverse gap-4 sm:w-[75%] sm:flex-row'>
-      <aside className='flex shrink-0 flex-row gap-2 sm:flex-col sm:gap-4'>
+    <div className='relative flex w-full flex-col-reverse gap-4 md:w-[75%] md:flex-row'>
+      <aside className='flex shrink-0 flex-row gap-2 md:flex-col md:gap-4'>
         {product.images.map((image, index) => (
           <div
             key={index}
