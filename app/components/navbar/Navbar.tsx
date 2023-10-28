@@ -2,14 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useAppState } from '../../context/context';
-import { BsCart4 } from 'react-icons/bs';
 import { MdOutlineEmail } from 'react-icons/md';
 import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
+import CartLink from './cartLink/CartLink';
+import { Session } from 'next-auth';
+import UserLink from './userLink/UserLink';
 
-const Navbar = () => {
+const Navbar = ({ session }: { session: Session }) => {
   const pathname = usePathname();
-  const { cartItems, favorites } = useAppState();
 
   const links = [
     { name: 'Products', path: '/' },
@@ -29,18 +29,18 @@ const Navbar = () => {
                 prefetch={false}
                 key={link.name}
                 href={link.path}
-                className={
+                className={`mt-1 block text-sm sm:text-base border-b-2  p-1 ${
                   pathname === link.path
-                    ? 'mt-1 block border-b-2 border-main-400 p-1 text-sm sm:text-base'
-                    : 'mt-1 block border-b-2 border-transparent p-1 text-sm sm:text-base'
-                }
+                    ? ' border-main-400'
+                    : 'border-transparent'
+                }`}
               >
                 {link.name}
               </Link>
             );
           })}
         </div>
-        <div className='flex items-center justify-center gap-4'>
+        <div className='flex items-center justify-center gap-1'>
           <Link
             href={'/contact'}
             className={
@@ -50,20 +50,15 @@ const Navbar = () => {
             Get in touch
             <MdOutlineEmail className='mt-1 text-xl text-main-400 sm:hidden' />
           </Link>
-          <Link href='/favorites'>
+          <UserLink session={session} />
+
+          <Link
+            href='/favorites'
+            className='hover:bg-neutral-200 rounded-full p-2 duration-200'
+          >
             <AiOutlineHeart size={20} />
           </Link>
-
-          <Link href='/cart' className=''>
-            <div className='relative mt-0.5 mr-2 sm:mr-0'>
-              <BsCart4 size={20} />
-              {cartItems.length > 0 ? (
-                <span className='absolute -right-2 -top-2 w-6 h-6 text-sm rounded-full bg-main-400 text-white flex justify-center items-center'>
-                  {cartItems.length}
-                </span>
-              ) : null}
-            </div>
-          </Link>
+          <CartLink />
         </div>
       </div>
     </nav>

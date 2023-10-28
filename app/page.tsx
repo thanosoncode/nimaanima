@@ -8,7 +8,6 @@ const Home = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const products = (await getAllProducts()) as Product[];
-
   const selectedCategory = searchParams.category as Category;
 
   return <Products selectedCategory={selectedCategory} products={products} />;

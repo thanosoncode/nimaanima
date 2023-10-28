@@ -1,7 +1,9 @@
+'use client';
 import google from '../../../public/assets/google.svg';
 import facebook from '../../../public/assets/facebook.svg';
 import instagram from '../../../public/assets/instagram.png';
 import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 const SignIn = () => {
   return (
@@ -9,7 +11,10 @@ const SignIn = () => {
       <div>
         <h1 className='text-xl font-medium mb-8'>Sign in</h1>
         <div className='flex flex-col gap-6'>
-          <button className='rounded-full justify-center py-3 whitespace-nowrap w-[320px] border-black border-2 font-semibold flex gap-4 items-center hover:scale-[1.04] hover:shadow-md duration-300'>
+          <button
+            onClick={() => signIn('google')}
+            className='rounded-full justify-center py-3 whitespace-nowrap w-[320px] border-black border-2 font-semibold flex gap-4 items-center hover:scale-[1.04] hover:shadow-md duration-300'
+          >
             <div className='w-4 h-4 relative'>
               <Image src={google} fill alt='google' />
             </div>

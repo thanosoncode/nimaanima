@@ -5,7 +5,7 @@ import { SessionStrategy } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 
 export const authOptions = {
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   callbacks: {
     //@ts-ignore
     async session({ session }) {
@@ -19,7 +19,7 @@ export const authOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID!,
+      clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
     }),
   ],
