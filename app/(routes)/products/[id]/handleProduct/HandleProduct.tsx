@@ -35,7 +35,6 @@ const HandleProduct: React.FC<HandleProductProps> = ({ product }) => {
 
   useLayoutEffect(() => {
     if (ref.current) {
-      console.log(ref.current?.getBoundingClientRect().width);
       setMainImageSize({
         width: ref.current.getBoundingClientRect().width,
         height: ref.current.getBoundingClientRect().height,

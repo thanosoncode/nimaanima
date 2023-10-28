@@ -6,8 +6,6 @@ import Container from '../../components/container/Container';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Image from 'next/image';
-import blob from '../../../public/assets/blob-scene-haikei.png';
 
 const TypeFormData = z.object({
   email: z.string().email({ message: 'Email is required' }),

@@ -1,4 +1,4 @@
-import { Category, Product } from '../../../utils/types';
+import { Category, Product, SortBy } from '../../../utils/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import Filter from './filter/Filter';
@@ -7,24 +7,28 @@ import ProductItem from './productItem/ProductItem';
 
 interface ProductsProps {
   products: Product[];
-  filterByCategory: boolean;
   title: string;
   showFilter: boolean;
   selectedCategory: Category;
+  sort: SortBy | undefined;
 }
 
 const ProductList: React.FC<ProductsProps> = ({
   products,
-  filterByCategory,
   title,
   showFilter,
   selectedCategory,
+  sort,
 }) => {
   const filteredProducts = products.filter((product) =>
     selectedCategory ? product.category === selectedCategory : product
   );
 
-  const productsToShow = filterByCategory ? filteredProducts : products;
+  const productsToShow = !sort
+    ? filteredProducts
+    : sort === 'asc'
+    ? filteredProducts.sort((a, b) => a.price - b.price)
+    : filteredProducts.sort((a, b) => b.price - a.price);
 
   return (
     <main>

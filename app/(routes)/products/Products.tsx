@@ -1,4 +1,4 @@
-import { Category, Product } from '@/app/utils/types';
+import { Category, Product, SortBy } from '@/app/utils/types';
 import Container from '../../components/container/Container';
 import ProductsHeader from './header/ProductsHeader';
 import ProductList from './list/ProductList';
@@ -6,9 +6,14 @@ import ProductList from './list/ProductList';
 interface ProductsProps {
   selectedCategory: Category;
   products: Product[];
+  sort: SortBy | undefined;
 }
 
-const Products: React.FC<ProductsProps> = ({ selectedCategory, products }) => {
+const Products: React.FC<ProductsProps> = ({
+  selectedCategory,
+  products,
+  sort,
+}) => {
   return (
     <>
       <ProductsHeader selectedCategory={selectedCategory} />
@@ -18,8 +23,8 @@ const Products: React.FC<ProductsProps> = ({ selectedCategory, products }) => {
             title={'Find something you love'}
             products={products}
             selectedCategory={selectedCategory}
-            filterByCategory={true}
             showFilter={true}
+            sort={sort}
           />
         </div>
       </Container>

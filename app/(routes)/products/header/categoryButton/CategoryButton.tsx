@@ -16,10 +16,9 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
   selectedCategory,
 }) => {
   const isSelected = selectedCategory === category.name;
-
   return (
     <Link
-      href={`?category=${category.name}`}
+      href={{ pathname: '', query: { category: category.name } }}
       className='flex flex-col items-center justify-center gap-2 cursor-pointer group'
     >
       <div className='w-16 h-16 overflow-hidden duration-200 ease-in-out rounded-full sm:h-20 sm:w-20 group-hover:scale-105'>

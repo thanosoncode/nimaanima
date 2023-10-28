@@ -1,5 +1,7 @@
 export type Category = 'Dolls' | 'Tapestry' | 'Bracelets' | 'Straps';
 
+export type SortBy = 'asc' | 'desc';
+
 export type Product = {
   id: string;
   name: string;

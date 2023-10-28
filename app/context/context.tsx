@@ -7,7 +7,6 @@ type AppState = {
   cartItems: Product[];
   favorites: Product[];
   selectedCategory: string | null;
-  selectedFilter: string | null;
   orderDetails: OrderDetails | null;
 };
 
@@ -15,7 +14,6 @@ const initialState = {
   cartItems: [],
   favorites: [],
   selectedCategory: null,
-  selectedFilter: null,
   orderDetails: null,
 };
 
@@ -37,7 +35,6 @@ type Action =
       id: string;
     }
   | { type: 'EMPTY_CART' }
-  | { type: 'SET_SELECTED_FILTER'; filter: string | null }
   | { type: 'SET_ORDER_DETAILS'; orderDetails: OrderDetails };
 
 type Dispatch = (action: Action) => void;
@@ -46,7 +43,6 @@ const AppStateContext = createContext<AppState | undefined>(undefined);
 const AppDispatchContext = createContext<Dispatch | undefined>(undefined);
 
 const reducer = (state: AppState, action: Action) => {
-  console.log('action', action);
   switch (action.type) {
     case 'ADD_CART_ITEM':
       return { ...state, cartItems: [...state.cartItems, action.cartItem] };
@@ -64,8 +60,6 @@ const reducer = (state: AppState, action: Action) => {
       };
     case 'EMPTY_CART':
       return { ...state, cartItems: [] };
-    case 'SET_SELECTED_FILTER':
-      return { ...state, selectedFilter: action.filter };
     case 'SET_ORDER_DETAILS':
       return { ...state, orderDetails: action.orderDetails };
     default: {
