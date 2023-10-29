@@ -46,7 +46,7 @@ const MyProducts: React.FC = () => {
     }
   };
   return (
-    <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2 mt-8 mb-20'>
+    <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2'>
       <table className='w-full border'>
         <thead className='uppercase'>
           <tr className='border-b'>

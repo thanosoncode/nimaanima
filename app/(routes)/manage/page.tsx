@@ -33,8 +33,8 @@ const Manage = () => {
 
   return (
     <Provider store={store}>
-      <Container>
-        <div className='mt-8 mb-12 flex justify-center gap-10'>
+      <Container classes='mt-8 mb-12 '>
+        <div className='flex mb-8 justify-center gap-10'>
           <button
             onClick={() => handleTabChange(Tab.myProducts)}
             className={`px-2 text-xl ${

@@ -53,14 +53,8 @@ const ProductDataSchema = z.object({
 
 const AddNewProduct = () => {
   const dispatch = useDispatch();
-  const {
-    isSaving,
-    isUploading,
-    isDeleting,
-    fileInputValue,
-    chosenImages,
-    product,
-  } = useSelector((state: AdminState) => state.admin);
+  const { isSaving, isUploading, fileInputValue, chosenImages, product } =
+    useSelector((state: AdminState) => state.admin);
 
   const handleProductInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
@@ -84,6 +78,8 @@ const AddNewProduct = () => {
       } catch (error) {
         throw new Error('Error when loading images.');
       }
+    } else {
+      dispatch(setChosenImages([]));
     }
   };
 
@@ -167,8 +163,9 @@ const AddNewProduct = () => {
   });
 
   return (
-    <Container classes='mb-20'>
+    <Container>
       <div>
+        <h4 className='mb-4 text-center text-xl'>Add new product</h4>
         <div>
           <PreviewImages images={chosenImages} />
           <form
@@ -229,7 +226,7 @@ const AddNewProduct = () => {
                 Category
               </label>
               <select id='category' {...register('category')}>
-                <option value=''>Please select</option>
+                <option value=''>Choose category</option>
                 <option value='Bracelets'>Bracelets</option>
                 <option value='Tapestry'>Tapestry</option>
                 <option value='Dolls'>Dolls</option>

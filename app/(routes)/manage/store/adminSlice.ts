@@ -12,6 +12,7 @@ type InitialState = {
   chosenImages: string[];
   product: ProductData;
   newProduct: Product | null;
+  imageData: string[];
 };
 
 const initialState: InitialState = {
@@ -20,6 +21,7 @@ const initialState: InitialState = {
   isDeleting: false,
   fileInputValue: '',
   chosenImages: [],
+  imageData: [],
   product: {
     name: '',
     price: 0,
@@ -42,6 +44,9 @@ const adminSlice = createSlice({
     },
     setFileInputValue: (state, action: PayloadAction<string>) => {
       state.fileInputValue = action.payload;
+    },
+    setImageData: (state, action: PayloadAction<string[]>) => {
+      state.chosenImages = action.payload;
     },
     setChosenImages: (state, action: PayloadAction<string[]>) => {
       state.chosenImages = action.payload;
@@ -66,6 +71,7 @@ export const {
   setIsDeleting,
   setProduct,
   setNewProduct,
+  setImageData,
 } = adminSlice.actions;
 
 export default adminSlice.reducer;
