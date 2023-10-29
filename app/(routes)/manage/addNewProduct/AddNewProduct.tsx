@@ -19,19 +19,35 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export type ProductData = z.infer<typeof ProductDataSchema>;
 
+const CategoryEnum = {
+  Bracelets: 'Bracelets',
+  Tapestry: 'Tapestry',
+  Dolls: 'Dolls',
+  Straps: 'Straps',
+};
+
 const ProductDataSchema = z.object({
   name: z.string().min(3, { message: 'Name must be over 3 characters' }),
   price: z.number(),
   description: z
     .string()
     .min(3, { message: 'Description must be over 3 characters' }),
-  category: z
-    .string()
-    .min(3, { message: 'Category must be over 3 characters' }),
+  category: z.nativeEnum(CategoryEnum, {
+    errorMap: (issue, _ctx) => {
+      switch (issue.code) {
+        case 'invalid_type':
+          return { message: 'Please choose one' };
+        case 'invalid_enum_value':
+          return { message: 'Please choose one' };
+        default:
+          return { message: 'Category is required' };
+      }
+    },
+  }),
   images: z
     .custom((value) => value instanceof FileList)
     .refine((images: any) => images.length >= 1, {
-      message: 'Please select at least 1 images',
+      message: 'Please select at least 1 image',
     }),
 });
 
@@ -151,9 +167,8 @@ const AddNewProduct = () => {
   });
 
   return (
-    <Container>
+    <Container classes='mb-20'>
       <div>
-        <h4 className='mb-4 text-center text-xl'>Add new product</h4>
         <div>
           <PreviewImages images={chosenImages} />
           <form
@@ -169,7 +184,10 @@ const AddNewProduct = () => {
               register={register}
               handleInputChange={handleImageChange}
               value={fileInputValue}
-              inputProps={{ multiple: true }}
+              inputProps={{
+                multiple: true,
+                accept: 'image/png, image/gif, image/jpeg',
+              }}
             />
             {errors.images ? (
               <span className='tex-sm text-red-400'>
@@ -206,14 +224,19 @@ const AddNewProduct = () => {
             ) : (
               <span className='p-3'></span>
             )}
-            <Fieldset
-              id='category'
-              label='Category'
-              type='text'
-              register={register}
-              handleInputChange={handleProductInfoChange}
-              value={product.category}
-            />
+            <div>
+              <label htmlFor='category' className='mr-2'>
+                Category
+              </label>
+              <select id='category' {...register('category')}>
+                <option value=''>Please select</option>
+                <option value='Bracelets'>Bracelets</option>
+                <option value='Tapestry'>Tapestry</option>
+                <option value='Dolls'>Dolls</option>
+                <option value='Straps'>Straps</option>
+              </select>
+            </div>
+
             {errors.category ? (
               <span className='tex-sm text-red-400'>
                 {errors.category.message}

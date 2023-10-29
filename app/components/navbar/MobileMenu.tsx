@@ -41,8 +41,9 @@ const MobileMenu = () => {
           menuOpen ? 'visible opacity-100' : 'invisible opacity-0'
         } `}
       >
-        {links.map((link) => (
+        {links.map((link, index) => (
           <Link
+            key={index}
             href={link.path}
             className='whitespace-nowrap text-neutral-900 hover:bg-gray-300 bg-white px-6 duration-300 py-1.5 hover:underline'
           >

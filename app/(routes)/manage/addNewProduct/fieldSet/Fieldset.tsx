@@ -7,7 +7,7 @@ interface FieldsetProps {
   info?: string;
   value: string | number;
   type: 'text' | 'number' | 'file';
-  inputProps?: { multiple: boolean };
+  inputProps?: { multiple: boolean; accept?: string };
   register?: UseFormRegister<ProductData>;
   handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

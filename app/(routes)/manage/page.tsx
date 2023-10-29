@@ -34,23 +34,23 @@ const Manage = () => {
   return (
     <Provider store={store}>
       <Container>
-        <div className='my-8 flex justify-center gap-10'>
-          <h4
+        <div className='mt-8 mb-12 flex justify-center gap-10'>
+          <button
             onClick={() => handleTabChange(Tab.myProducts)}
             className={`px-2 text-xl ${
               myProductsView ? 'border-b-2 border-red-400' : ''
             }`}
           >
             My Products
-          </h4>
-          <h4
+          </button>
+          <button
             onClick={() => handleTabChange(Tab.newProduct)}
             className={`px-2 text-xl ${
               newProductView ? 'border-b-2 border-red-400' : ''
             }`}
           >
             New Product
-          </h4>
+          </button>
         </div>
         {tabsContent(activeTab)}
       </Container>
