@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import Fieldset from './filedSet/Fieldset';
-import Container from '../../components/container/Container';
-import { useAppDispatch, useAppState } from '../../context/context';
+import Container from '../../../components/container/Container';
+import { useAppDispatch, useAppState } from '../../../context/context';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -20,37 +20,26 @@ const DetailsSchema = z.object({
 
 export type OrderDetails = z.infer<typeof DetailsSchema>;
 
-const Order = () => {
+const Details = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-
-  const emptyDetails = {
-    email: '',
-    fullName: '',
-    street: '',
-    postalCode: '',
-    city: '',
-  };
-
-  const [details, setDetails] = useState<OrderDetails>(emptyDetails);
+  const { orderDetails } = useAppState();
 
   const { cartItems } = useAppState();
   if (cartItems.length === 0) {
     redirect('/products');
   }
 
-  type FieldName = 'email' | 'fullName' | 'street' | 'postalCode' | 'city';
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldName = e.target.name as FieldName;
-    setDetails({ ...details, [e.target.name]: e.target.value });
-    setValue(fieldName, e.target.value);
+    dispatch({
+      type: 'SET_ORDER_DETAILS',
+      orderDetails: { ...orderDetails, [e.target.name]: e.target.value },
+    });
   };
 
   const {
     handleSubmit,
     register,
-    setValue,
     reset,
     formState: { errors },
   } = useForm<OrderDetails>({
@@ -60,8 +49,7 @@ const Order = () => {
   const submit = (data: OrderDetails) => {
     dispatch({ type: 'SET_ORDER_DETAILS', orderDetails: data });
     reset();
-    setDetails(emptyDetails);
-    router.push('/payment');
+    router.push('/cart/payment');
   };
 
   return (
@@ -74,7 +62,7 @@ const Order = () => {
           <Fieldset
             id='email'
             label='Email*'
-            value={details.email}
+            value={orderDetails.email}
             handleInputChange={handleInputChange}
             register={register}
           />
@@ -86,7 +74,7 @@ const Order = () => {
           <Fieldset
             id='fullName'
             label='Full name*'
-            value={details.fullName}
+            value={orderDetails.fullName}
             handleInputChange={handleInputChange}
             register={register}
           />
@@ -100,7 +88,7 @@ const Order = () => {
           <Fieldset
             id='street'
             label='Street address*'
-            value={details.street}
+            value={orderDetails.street}
             handleInputChange={handleInputChange}
             register={register}
           />
@@ -114,7 +102,7 @@ const Order = () => {
           <Fieldset
             id='postalCode'
             label='Postal code*'
-            value={details.postalCode}
+            value={orderDetails.postalCode}
             handleInputChange={handleInputChange}
             register={register}
           />
@@ -128,7 +116,7 @@ const Order = () => {
           <Fieldset
             id='city'
             label='City*'
-            value={details.city}
+            value={orderDetails.city}
             handleInputChange={handleInputChange}
             register={register}
           />
@@ -149,4 +137,4 @@ const Order = () => {
     </Container>
   );
 };
-export default Order;
+export default Details;

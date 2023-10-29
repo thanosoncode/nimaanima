@@ -72,6 +72,12 @@ const Cart = () => {
                           type='checkbox'
                           id='gift'
                           className='block mt-1.5 bg-red-500'
+                          onChange={(e) =>
+                            appDispatch({
+                              type: 'SET_IS_GIFT',
+                              isGift: e.target.checked,
+                            })
+                          }
                         />
                         <label htmlFor='gift' className='flex flex-col'>
                           <span>This package is a gift</span>
@@ -114,7 +120,7 @@ const Cart = () => {
                 </div>
               </div>
               <Link
-                href='/order'
+                href='/cart/details'
                 className='mt-14 block w-min whitespace-nowrap rounded-full bg-neutral-800 px-5 py-2 text-center text-sm tracking-wider text-white duration-200 ease-out hover:scale-105'
               >
                 Proceed to checkout

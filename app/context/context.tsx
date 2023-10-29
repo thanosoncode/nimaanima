@@ -7,14 +7,22 @@ type AppState = {
   cartItems: Product[];
   favorites: Product[];
   selectedCategory: string | null;
-  orderDetails: OrderDetails | null;
+  orderDetails: OrderDetails;
+  isGift: boolean;
 };
 
 const initialState = {
   cartItems: [],
   favorites: [],
   selectedCategory: null,
-  orderDetails: null,
+  orderDetails: {
+    email: '',
+    fullName: '',
+    street: '',
+    postalCode: '',
+    city: '',
+  },
+  isGift: false,
 };
 
 type Action =
@@ -35,7 +43,8 @@ type Action =
       id: string;
     }
   | { type: 'EMPTY_CART' }
-  | { type: 'SET_ORDER_DETAILS'; orderDetails: OrderDetails };
+  | { type: 'SET_ORDER_DETAILS'; orderDetails: OrderDetails }
+  | { type: 'SET_IS_GIFT'; isGift: boolean };
 
 type Dispatch = (action: Action) => void;
 
@@ -60,6 +69,8 @@ const reducer = (state: AppState, action: Action) => {
       };
     case 'EMPTY_CART':
       return { ...state, cartItems: [] };
+    case 'SET_IS_GIFT':
+      return { ...state, isGift: action.isGift };
     case 'SET_ORDER_DETAILS':
       return { ...state, orderDetails: action.orderDetails };
     default: {

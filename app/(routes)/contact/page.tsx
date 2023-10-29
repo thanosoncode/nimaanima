@@ -6,6 +6,7 @@ import Container from '../../components/container/Container';
 import z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Modal from '@/app/components/modal/Modal';
 
 const TypeFormData = z.object({
   email: z.string().email({ message: 'Email is required' }),
@@ -17,11 +18,10 @@ type TypeFormData = z.infer<typeof TypeFormData>;
 const ContactUs = () => {
   const form = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
-  const [progressMessage, setProgressMessage] = useState('');
 
   const sendEmail = async (data: TypeFormData) => {
     setLoading(true);
-    setProgressMessage('Sending..');
+
     try {
       const response = await emailjs.sendForm(
         'service_wh4c1jj',
@@ -32,18 +32,15 @@ const ContactUs = () => {
 
       if (response.text !== 'OK') {
         setLoading(false);
-        setProgressMessage(response.text);
         form.current && form.current.reset();
         throw new Error(response.text);
       }
       setLoading(false);
       form.current && form.current.reset();
-      setProgressMessage('Message sent successfully!');
       return;
     } catch (error) {
       setLoading(false);
       form.current && form.current.reset();
-      setProgressMessage('Something went wrong. Please try again later');
       throw new Error('Something went wrong.');
     }
   };
@@ -68,7 +65,6 @@ const ContactUs = () => {
           </Container>
         </header>
         <Container classes='pb-24'>
-          <h4 className='pt-4 text-center'>{progressMessage}</h4>
           <div className='mt-12'>
             <form
               ref={form}
@@ -110,6 +106,9 @@ const ContactUs = () => {
           </div>
         </Container>
       </div>
+      <Modal open={loading}>
+        <div className='bg-white px-12 py-6'>Sending...</div>
+      </Modal>
     </div>
   );
 };
