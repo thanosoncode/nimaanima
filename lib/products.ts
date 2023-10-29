@@ -6,7 +6,7 @@ export const getAllProducts = async () => {
   return products;
 };
 
-export const getCategoryProducts = async (category: Category) => {
+export const getCategoryProducts = async (category: string) => {
   const products = await prisma.product.findMany({
     where: {
       category,

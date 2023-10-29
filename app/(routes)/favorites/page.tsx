@@ -26,7 +26,7 @@ const Favorites = () => {
         <div className='flex gap-1 items-center mb-3'>
           <AiOutlineClockCircle size={22} />
           <p className='font-medium'>
-            Don't lose your faves! Sign in or create an account.
+            Don&apos;t lose your faves! Sign in or create an account.
           </p>
         </div>
         <p className='max-w-[420px] text-neutral-600 leading-relaxed'>

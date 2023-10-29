@@ -4,7 +4,7 @@ import React from 'react';
 import ProductItem from './productItem/ProductItem';
 
 interface RecommendationsProps {
-  category: Category;
+  category: string;
   currentId: string;
 }
 

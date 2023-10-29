@@ -12,7 +12,10 @@ const List = ({ favorites }: ListProps) => {
     <div className='py-4'>
       <section className='grid lg:grid-cols-4    md:grid-cols-3 sm:grid-cols-3 xs:grid-cols-3 grid-cols-2 gap-4'>
         {favorites.map((favorite) => (
-          <div className='rounded-lg shadow-soft p-2 hover:shadow-hover relative'>
+          <div
+            key={favorite.id}
+            className='rounded-lg shadow-soft p-2 hover:shadow-hover relative'
+          >
             <Link
               href={`/products/${favorite.id}`}
               className='w-full  h-32 md:h-44 sm:h-40 relative block'
