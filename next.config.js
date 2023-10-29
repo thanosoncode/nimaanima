@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    CLOUD_NAME: 'dffbrnlq2',
+    CLOUD_NAME: process.env.CLOUD_NAME,
     GOOGLE_SECRET: process.env.GOOGLE_SECRET,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     NEXTAUTH_URL:
