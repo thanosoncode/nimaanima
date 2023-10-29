@@ -23,7 +23,6 @@ const Products: React.FC<ProductsProps> = ({
             title={'Find something you love'}
             products={products}
             selectedCategory={selectedCategory}
-            showFilter={true}
             sort={sort}
           />
         </div>

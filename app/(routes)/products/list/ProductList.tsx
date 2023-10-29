@@ -1,14 +1,10 @@
 import { Category, Product, SortBy } from '../../../utils/types';
-import Image from 'next/image';
-import Link from 'next/link';
-import Filter from './filter/Filter';
-import AddToCartButton from '../../../components/addToCartButton/AddToCartButton';
+import SortByButton from './sortByButton/SortByButton';
 import ProductItem from './productItem/ProductItem';
 
 interface ProductsProps {
   products: Product[];
   title: string;
-  showFilter: boolean;
   selectedCategory: Category;
   sort: SortBy | undefined;
 }
@@ -16,7 +12,6 @@ interface ProductsProps {
 const ProductList: React.FC<ProductsProps> = ({
   products,
   title,
-  showFilter,
   selectedCategory,
   sort,
 }) => {
@@ -32,11 +27,11 @@ const ProductList: React.FC<ProductsProps> = ({
 
   return (
     <main>
-      <div className='flex justify-between'>
+      <div className='flex justify-between items-start'>
         <h4 className='mb-4 text-2xl font-light'>{title}</h4>
-        {showFilter ? <Filter /> : null}
+        <SortByButton />
       </div>
-      <section className='grid gap-y-8 md:gap-y-16 gap-x-5 justify-center grid-cols-1  xs:grid-cols-2 sm:grid-cols-2  md:grid-cols-3 '>
+      <section className='grid gap-y-8 md:gap-y-16 gap-x-2 xs:gap-x-5 justify-center grid-cols-2 sm:grid-cols-2  md:grid-cols-3 '>
         {productsToShow.map((product) => (
           <ProductItem product={product} key={product.id} />
         ))}

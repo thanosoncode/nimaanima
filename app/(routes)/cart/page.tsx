@@ -71,7 +71,7 @@ const Cart = () => {
                         <input
                           type='checkbox'
                           id='gift'
-                          className='block mt-1.5'
+                          className='block mt-1.5 bg-red-500'
                         />
                         <label htmlFor='gift' className='flex flex-col'>
                           <span>This package is a gift</span>

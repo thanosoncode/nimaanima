@@ -13,7 +13,7 @@ const UserLik = ({ session }: UserLikProps) => {
   const handleUserMenuOpen = () => setUserMenuOpen(!userMenuOpen);
 
   return session && session.user && session.user.email ? (
-    <div className='relative ml-4'>
+    <div className='relative mr-1 ml-3'>
       <div onClick={handleUserMenuOpen} className='cursor-pointer duration-300'>
         {session.user.image ? (
           <div className='relative w-6 h-6'>

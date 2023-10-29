@@ -13,7 +13,7 @@ type Selection = {
   sortBy: SortBy;
 };
 
-const Filter = () => {
+const SortByButton = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMouseOver, setIsMouseOver] = useState(false);
@@ -74,7 +74,17 @@ const Filter = () => {
   ];
 
   return (
-    <div className='relative'>
+    <div className='relative flex gap-2 items-center'>
+      {category ? (
+        <Link
+          href='/'
+          className='cursor-pointer text-sm p-1 hover:bg-neutral-100'
+          onClick={handleClearCategory}
+        >
+          Clear category
+        </Link>
+      ) : null}
+
       <div
         onClick={handleMenuOpen}
         className='w-min cursor-pointer whitespace-nowrap rounded-full border border-black px-4 py-1.5 text-center'
@@ -106,15 +116,8 @@ const Filter = () => {
             {currentSortBy === selection.sortBy && <BsCheckLg size={20} />}
           </div>
         ))}
-        <Link
-          href='/'
-          className='cursor-pointer border-t border-neutral-300 py-1.5 px-5 hover:bg-neutral-100'
-          onClick={handleClearCategory}
-        >
-          Clear category
-        </Link>
       </div>
     </div>
   );
 };
-export default Filter;
+export default SortByButton;

@@ -15,7 +15,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
       <AddToFavorites product={product} size={19} />
       <Link
         href={`/products/${product.id}`}
-        className=' w-full h-52 md:h-48 lg:h-56 sm:h-64 relative block'
+        className=' w-full h-40 xs:h-52 md:h-48 lg:h-56 sm:h-64 relative block'
       >
         <Image
           src={product.images[0]}
@@ -26,7 +26,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
       </Link>
       <div>
         <div className='px-1 mb-1'>
-          <div className='flex items-center justify-between gap-2'>
+          <div className='flex  sm:flex-row flex-col sm:gap-2  sm:items-center sm:justify-between items-start justify-start'>
             <p className='overflow-hidden whitespace-nowrap text-ellipsis'>
               {product.name}
             </p>
