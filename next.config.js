@@ -9,6 +9,7 @@ const nextConfig = {
         ? 'http://localhost:3000'
         : process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
   },
   images: {
     domains: ['res.cloudinary.com', 'lh3.googleusercontent.com'],

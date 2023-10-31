@@ -116,11 +116,15 @@ const AddNewProduct = () => {
     const imageUrls: string[] = [];
     for (const file of files) {
       formData.append('file', file);
-      formData.append('upload_preset', 'my_uploads');
+      formData.append('upload_preset', 'nimaanima');
       try {
         const uploadedImage = await uploadImage(formData);
         imageUrls.push(uploadedImage.secure_url);
       } catch (error) {
+        dispatch(setChosenImages([]));
+        dispatch(setFileInputValue(''));
+        dispatch(setIsUploading(false));
+        dispatch(setIsSaving(true));
         throw new Error('error uploading image');
       }
     }
@@ -165,7 +169,6 @@ const AddNewProduct = () => {
   return (
     <Container>
       <div>
-        <h4 className='mb-4 text-center text-xl'>Add new product</h4>
         <div>
           <PreviewImages images={chosenImages} />
           <form
