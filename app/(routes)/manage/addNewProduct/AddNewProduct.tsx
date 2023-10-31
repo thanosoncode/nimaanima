@@ -211,7 +211,7 @@ const AddNewProduct = () => {
             )}
             <Fieldset
               id='description'
-              label='Descripton'
+              label='Description'
               type='text'
               register={register}
               handleInputChange={handleProductInfoChange}

@@ -82,7 +82,7 @@ const MyProducts: React.FC = () => {
                       onClick={() => handleProductDelete(product.id)}
                       disabled={isDeleting}
                     >
-                      delete product
+                      remove product
                     </button>
                   </td>
                 </tr>

@@ -37,3 +37,11 @@ export interface OrderDetails {
 export type SearchParams = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
+export interface Session {
+  user: {
+    name: string;
+    email: string;
+    image: string;
+  };
+}

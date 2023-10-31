@@ -3,9 +3,11 @@ import Container from '../container/Container';
 import CTA from './cta/CTA';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { Session } from '@/app/utils/types';
 
 const Footer = async () => {
-  const session = await getServerSession(authOptions);
+  const session = (await getServerSession(authOptions)) as Session;
+  const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL_1;
 
   return (
     <footer>
@@ -23,7 +25,7 @@ const Footer = async () => {
             <Link href='/contact' className='underline text-white text-sm'>
               Contact
             </Link>
-            {session ? (
+            {isAdmin ? (
               <Link href='/manage' className='underline text-white text-sm'>
                 Manage
               </Link>
