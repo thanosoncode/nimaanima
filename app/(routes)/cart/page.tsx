@@ -14,6 +14,23 @@ const Cart = () => {
   const handleRemoveItem = (id: string) =>
     appDispatch({ type: 'REMOVE_ITEM', id });
 
+  const proceedToCheckout = async () => {
+    const stripePrices = cartItems.map((item) => item.stripePriceId);
+    const response = await fetch('api/checkout', {
+      method: 'POST',
+
+      body: JSON.stringify({ stripePrices }),
+      headers: {
+        'Content-type': 'application/json',
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Something went wrong. Try again later');
+    }
+    const checkoutUrl = await response.json();
+    window.location.assign(checkoutUrl);
+  };
+
   return (
     <Container classes='lg:px-8 xl:px-16 lg:w-full xl:max-w-[1200px] md:w-full md:px-8 w-full px-2 mb-20'>
       <div className=''>
@@ -119,12 +136,12 @@ const Cart = () => {
                   <div className=''>€ {total + 3}</div>
                 </div>
               </div>
-              <Link
-                href='/cart/details'
+              <button
+                onClick={proceedToCheckout}
                 className='mt-14 block w-min whitespace-nowrap rounded-full bg-neutral-800 px-5 py-2 text-center text-sm tracking-wider text-white duration-200 ease-out hover:scale-105'
               >
                 Proceed to checkout
-              </Link>
+              </button>
             </div>
           </div>
         ) : null}

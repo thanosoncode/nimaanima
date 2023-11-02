@@ -11,6 +11,19 @@ export type Product = {
   images: string[];
 };
 
+export type NewProduct = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  images: string[];
+  gift: boolean;
+  sold: boolean;
+  stripePriceId: string;
+  stripeProductId: string;
+};
+
 export interface CartItem extends Product {
   amount: number;
 }

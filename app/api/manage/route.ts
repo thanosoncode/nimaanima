@@ -1,3 +1,4 @@
+import { prisma } from '@/lib/prisma';
 import { createProduct } from '@/lib/products';
 import { NextResponse, type NextRequest } from 'next/server';
 import Stripe from 'stripe';
@@ -21,14 +22,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
   }
 
   try {
-    const product = await createProduct({
-      name,
-      category,
-      price,
-      description,
-      images,
-    });
-
     const stripeProduct = await stripe.products.create({
       name,
       description,
@@ -42,6 +35,21 @@ export async function POST(request: NextRequest, response: NextResponse) {
       currency: 'eur',
       product: stripeProduct.id,
     });
+
+    const product = await prisma.newProduct.create({
+      data: {
+        name,
+        category,
+        price,
+        description,
+        images,
+        gift: false,
+        sold: false,
+        stripePriceId: stripePrice.id,
+        stripeProductId: stripeProduct.id,
+      },
+    });
+
     if (product && stripeProduct && stripePrice) {
       return NextResponse.json(product);
     }

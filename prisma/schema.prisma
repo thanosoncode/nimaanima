@@ -15,3 +15,16 @@ model Product {
   category    String
   images      String[]
 }
+
+model NewProduct {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  price           Int
+  description     String
+  category        String
+  images          String[]
+  sold            Boolean
+  gift            Boolean
+  stripePriceId   String
+  stripeProductId String
+}
