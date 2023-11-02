@@ -1,8 +1,8 @@
 import { StaticImageData } from 'next/image';
-import dolls from '../../public/assets/category-dolls.webp';
-import straps from '../../public/assets/category-straps.webp';
-import tablet from '../../public/assets/category-tablet.webp';
-import tapestry from '../../public/assets/category-tapestry.webp';
+import dolls from '../../public/assets/categories/category-dolls.webp';
+import straps from '../../public/assets/categories/category-straps.webp';
+import tablet from '../../public/assets/categories/category-tablet.webp';
+import tapestry from '../../public/assets/categories/category-tapestry.webp';
 import { Category } from '../utils/types';
 
 type CategoryButton = {

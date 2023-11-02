@@ -1,7 +1,7 @@
 'use client';
-import google from '../../../public/assets/google.svg';
-import facebook from '../../../public/assets/facebook.svg';
-import instagram from '../../../public/assets/instagram.png';
+import google from '../../../public/assets/social/google.svg';
+import facebook from '../../../public/assets/social/facebook.svg';
+import instagram from '../../../public/assets/social/instagram.png';
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 

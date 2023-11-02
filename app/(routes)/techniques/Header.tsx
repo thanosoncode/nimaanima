@@ -1,8 +1,4 @@
 import Image from 'next/image';
-import t1 from '../../../public/sketches/t1.jpg';
-import t2 from '../../../public/sketches/t2.jpg';
-import t3 from '../../../public/sketches/t3.jpg';
-import t4 from '../../../public/sketches/t4.jpg';
 
 const Header = () => {
   return (
@@ -19,7 +15,7 @@ const Header = () => {
             handcrafted pieces
           </p>
         </div>
-        <div className='grid grid-cols-2 grid-rows-2 gap-2 sm:flex sm:gap-4 '>
+        {/* <div className='grid grid-cols-2 grid-rows-2 gap-2 sm:flex sm:gap-4 '>
           <div className='relative h-14 w-14 overflow-hidden rounded-full sm:h-14 sm:w-14 md:h-16 md:w-16'>
             <Image src={t1} alt='' fill />
           </div>
@@ -33,7 +29,7 @@ const Header = () => {
           <div className='relative h-14 w-14 overflow-hidden rounded-full sm:h-14 sm:w-14 md:h-16 md:w-16'>
             <Image src={t3} alt='' fill />
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   );
