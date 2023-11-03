@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {});
 const baseUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000'
-    : 'https://nimaanima.vercel.app/';
+    : 'https://nimaanima.vercel.app';
 
 export async function POST(request: Request) {
   const { stripePrices } = (await request.json()) as { stripePrices: string[] };
