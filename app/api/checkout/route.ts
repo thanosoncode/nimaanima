@@ -15,6 +15,8 @@ export async function POST(request: Request) {
     return NextResponse.json({}, { status: 400 });
   }
 
+  console.log('baseUrl', baseUrl);
+
   const lineItems = stripePrices.map((price) => ({ price, quantity: 1 }));
 
   const session = await stripe.checkout.sessions.create({
@@ -27,6 +29,8 @@ export async function POST(request: Request) {
     invoice_creation: { enabled: true },
     expand: ['invoice', 'customer', 'invoice.subscription', 'payment_intent'],
   });
+
+  console.log('session', session);
 
   return NextResponse.json(session.url);
 }
