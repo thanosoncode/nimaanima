@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import AddToFavorites from '../../products/list/productItem/addToFavorites/AddToFavorites';
-import { Product } from '@/app/utils/types';
+import { NewProduct } from '@/app/utils/types';
 
 interface ListProps {
-  favorites: Product[];
+  favorites: NewProduct[];
 }
 
 const List = ({ favorites }: ListProps) => {
