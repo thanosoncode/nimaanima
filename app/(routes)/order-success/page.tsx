@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import React from 'react';
 import partyFlags from '../../../public/assets/party-flags.jpg';
+import { revalidatePath } from 'next/cache';
 
 const OrderSuccess = () => {
+  revalidatePath('/');
   return (
     <div
       className='bg-[#F5F2EA] flex items-center justify-center '
