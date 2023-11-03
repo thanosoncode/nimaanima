@@ -33,6 +33,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
             <p className='whitespace-nowrap'>€ {product.price}</p>
           </div>
         </div>
+        {product.sold && 'sold'}
         <AddToCartButton product={product} />
       </div>
     </div>
