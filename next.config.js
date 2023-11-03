@@ -10,7 +10,8 @@ const nextConfig = {
         : process.env.NEXTAUTH_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-    ADMIN_EMAIL_1: process.env.ADMIN_EMAIL_1,
+    STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+    STRIPE_WEB_HOOK_SECRET: process.env.STRIPE_WEB_HOOK_SECRET,
   },
   images: {
     domains: ['res.cloudinary.com', 'lh3.googleusercontent.com'],
