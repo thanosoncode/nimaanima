@@ -3,6 +3,11 @@ import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {});
 
+const baseUrl =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000'
+    : 'nimaanima.vercel.app';
+
 export async function POST(request: Request) {
   const { stripePrices } = (await request.json()) as { stripePrices: string[] };
 
@@ -16,8 +21,8 @@ export async function POST(request: Request) {
     line_items: lineItems,
     shipping_address_collection: { allowed_countries: ['GR'] },
     mode: 'payment',
-    success_url: 'http://localhost:3000/order-success',
-    cancel_url: 'http://localhost:3000/cart',
+    success_url: `${baseUrl}/order-success`,
+    cancel_url: `${baseUrl}/cart`,
     automatic_tax: { enabled: true },
     invoice_creation: { enabled: true },
     expand: ['invoice', 'customer', 'invoice.subscription', 'payment_intent'],
