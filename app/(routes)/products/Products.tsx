@@ -1,11 +1,11 @@
-import { Category, Product, SortBy } from '@/app/utils/types';
+import { Category, NewProduct, SortBy } from '@/app/utils/types';
 import Container from '../../components/container/Container';
 import ProductsHeader from './header/ProductsHeader';
 import ProductList from './list/ProductList';
 
 interface ProductsProps {
   selectedCategory: Category;
-  products: Product[];
+  products: NewProduct[];
   sort: SortBy | undefined;
 }
 

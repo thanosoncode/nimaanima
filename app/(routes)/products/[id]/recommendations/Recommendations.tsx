@@ -1,4 +1,4 @@
-import { Category, Product } from '@/app/utils/types';
+import { NewProduct } from '@/app/utils/types';
 import { getCategoryProducts } from '@/lib/products';
 import React from 'react';
 import ProductItem from './productItem/ProductItem';
@@ -12,7 +12,7 @@ const Recommendations = async ({
   category,
   currentId,
 }: RecommendationsProps) => {
-  const products = (await getCategoryProducts(category)) as Product[];
+  const products = (await getCategoryProducts(category)) as NewProduct[];
 
   const filtered = products.filter((p) => p.id !== currentId);
 

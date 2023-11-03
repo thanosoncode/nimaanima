@@ -21,7 +21,7 @@ const OrderSuccess = () => {
           Thank you for your order!
         </h1>
         <p className='mb-6'>
-          We've sent a receipt to{' '}
+          We`&apos;ve sent a receipt to{' '}
           <span className='font-semibold'>thanosoncode@gmail.com</span>
         </p>
         <p>We will contact you soon with shipping details</p>

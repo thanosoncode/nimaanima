@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { Product } from '@/app/utils/types';
+import { NewProduct } from '@/app/utils/types';
 import AddToCartButton from '../../../../components/addToCartButton/AddToCartButton';
 import AddToFavorites from './addToFavorites/AddToFavorites';
 
 interface ProductItemProps {
-  product: Product;
+  product: NewProduct;
 }
 
 const ProductItem = ({ product }: ProductItemProps) => {

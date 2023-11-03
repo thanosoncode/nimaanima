@@ -1,9 +1,9 @@
-import { Category, Product, SortBy } from '../../../utils/types';
+import { Category, NewProduct, Product, SortBy } from '../../../utils/types';
 import SortByButton from './sortByButton/SortByButton';
 import ProductItem from './productItem/ProductItem';
 
 interface ProductsProps {
-  products: Product[];
+  products: NewProduct[];
   title: string;
   selectedCategory: Category;
   sort: SortBy | undefined;

@@ -2,11 +2,11 @@
 
 import { useAppDispatch, useAppState } from '@/app/context/context';
 
-import { Product } from '@/app/utils/types';
+import { NewProduct } from '@/app/utils/types';
 import { useRouter } from 'next/navigation';
 
 interface AddToCartProps {
-  product: Product;
+  product: NewProduct;
 }
 
 const AddToCart: React.FC<AddToCartProps> = ({ product }) => {

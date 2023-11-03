@@ -5,7 +5,7 @@ import { NewProduct, OrderDetails, Product } from '../utils/types';
 
 type AppState = {
   cartItems: NewProduct[];
-  favorites: Product[];
+  favorites: NewProduct[];
   selectedCategory: string | null;
   orderDetails: OrderDetails;
   isGift: boolean;
@@ -32,7 +32,7 @@ type Action =
     }
   | {
       type: 'ADD_FAVORITE';
-      favorite: Product;
+      favorite: NewProduct;
     }
   | {
       type: 'REMOVE_FAVORITE';
