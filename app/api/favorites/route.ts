@@ -1,15 +1,16 @@
+import { Favorite, Product } from '@/app/utils/types';
 import { prisma } from '@/lib/prisma';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest, response: NextResponse) {
-  const { userId, favoriteId } = (await request.json()) as {
+  const { userId, favorite } = (await request.json()) as {
     userId: string;
-    favoriteId: string;
+    favorite: Favorite;
   };
 
-  if (!userId || !favoriteId) {
+  if (!userId || !favorite) {
     return NextResponse.json(
-      { message: 'Missing user id and/or favorite id' },
+      { message: 'Invalid user id and/or favorite' },
       { status: 400 }
     );
   }
@@ -22,12 +23,13 @@ export async function POST(request: NextRequest, response: NextResponse) {
     if (user) {
       const updated = await prisma.user.update({
         where: {
-          id: userId,
+          id: user.id,
         },
         data: {
-          favorites: [...user.favorites, favoriteId],
+          favorites: [...user.favorites, favorite],
         },
       });
+
       return NextResponse.json(updated, { status: 200 });
     }
   } catch (error) {
@@ -41,14 +43,14 @@ export async function POST(request: NextRequest, response: NextResponse) {
 }
 
 export async function DELETE(request: NextRequest, response: NextResponse) {
-  const { userId, favoriteId } = (await request.json()) as {
+  const { userId, favorite } = (await request.json()) as {
     userId: string;
-    favoriteId: string;
+    favorite: Favorite;
   };
 
-  if (!userId || !favoriteId) {
+  if (!userId || !favorite) {
     return NextResponse.json(
-      { message: 'Missing user id and/or favorite id' },
+      { message: 'Invalid user id and/or favorite' },
       { status: 400 }
     );
   }
@@ -59,8 +61,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
     });
 
     if (user) {
-      const newFavorites = user.favorites.filter((f) => f !== favoriteId);
-
+      const newFavorites = user.favorites.filter((f) => f.id !== favorite.id);
       const updated = await prisma.user.update({
         where: {
           id: userId,

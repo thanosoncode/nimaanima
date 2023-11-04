@@ -3,10 +3,10 @@ import Navbar from './components/navbar/Navbar';
 import { AppProvider } from './context/context';
 import AuthProvider from './context/AuthProvider';
 import './globals.css';
-import { NAVBAR_HEIGHT } from './utils/constants';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './api/auth/[...nextauth]/route';
 import { UserSession } from './utils/types';
+import QueryProvider from './context/QueryProvider';
 
 export const metadata = {
   title: 'Create Next App',
@@ -23,13 +23,15 @@ export default async function RootLayout({
     <html lang='en'>
       <body>
         <AuthProvider>
-          <AppProvider>
-            <Navbar session={session} />
-            <div className='flex flex-col justify-between min-h-[calc(100vh-66px)]'>
-              {children}
-              <Footer />
-            </div>
-          </AppProvider>
+          <QueryProvider>
+            <AppProvider>
+              <Navbar session={session} />
+              <div className='flex flex-col justify-between min-h-[calc(100vh-66px)]'>
+                {children}
+                <Footer />
+              </div>
+            </AppProvider>
+          </QueryProvider>
         </AuthProvider>
       </body>
     </html>

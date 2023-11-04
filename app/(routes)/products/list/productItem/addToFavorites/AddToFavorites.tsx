@@ -1,7 +1,7 @@
 'use client';
 import Spinner from '@/app/components/spinner/Spinner';
 import { useAppDispatch, useAppState } from '@/app/context/context';
-import { Product, UserSession } from '@/app/utils/types';
+import { Favorite, Product, UserSession } from '@/app/utils/types';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
@@ -30,11 +30,12 @@ const AddToFavorites = ({ product, size }: AddToFavoritesProps) => {
     if (!isFavorite) {
       if (data?.dbUser) {
         setIsLoading(true);
+
         const response = await fetch('api/favorites', {
           method: 'POST',
           body: JSON.stringify({
             userId: data?.dbUser.id,
-            favoriteId: product.id,
+            favorite: product,
           }),
         });
         setIsLoading(false);
@@ -52,7 +53,7 @@ const AddToFavorites = ({ product, size }: AddToFavoritesProps) => {
           method: 'DELETE',
           body: JSON.stringify({
             userId: data?.dbUser.id,
-            favoriteId: product.id,
+            favorite: product,
           }),
         });
         setIsLoading(false);

@@ -51,3 +51,16 @@ export interface UserSession {
     favorites: string[];
   };
 }
+
+export type Favorite = {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  category: string;
+  images: string[];
+  sold: boolean;
+  gift: boolean;
+  stripePriceId: string;
+  stripeProductId: string;
+};
