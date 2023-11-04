@@ -20,19 +20,6 @@ export const getSingleProduct = async (id: string) => {
   return product;
 };
 
-const createProduct = async (product: {
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  images: string[];
-}) => {
-  const newProduct = await prisma.product.create({
-    data: product,
-  });
-  return newProduct;
-};
-
 const updateProduct = async (
   product: {
     name: string;
@@ -59,4 +46,4 @@ const deleteProduct = async (id: string) => {
   return product;
 };
 
-export { createProduct, updateProduct, deleteProduct };
+export { updateProduct, deleteProduct };

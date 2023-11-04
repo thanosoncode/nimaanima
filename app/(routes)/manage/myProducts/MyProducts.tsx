@@ -9,9 +9,7 @@ import { setIsDeleting } from '../store/adminSlice';
 
 const MyProducts: React.FC = () => {
   const dispatch = useDispatch();
-  const { isDeleting, newProduct } = useSelector(
-    (state: AdminState) => state.admin
-  );
+  const { isDeleting } = useSelector((state: AdminState) => state.admin);
   const [products, setProducts] = useState<Product[]>([]);
 
   const getProducts = async () => {
@@ -25,7 +23,7 @@ const MyProducts: React.FC = () => {
   };
   useEffect(() => {
     getProducts();
-  }, [newProduct]);
+  }, []);
 
   const handleProductDelete = async (id: string) => {
     dispatch(setIsDeleting(true));

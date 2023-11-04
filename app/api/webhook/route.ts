@@ -1,9 +1,13 @@
 import { prisma } from '@/lib/prisma';
-import { NewProduct } from '@prisma/client';
+import { Product } from '@prisma/client';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {});
+const secret =
+  process.env.NODE_ENV === 'development'
+    ? process.env.STRIPE_WEB_HOOK_SECRET_TEST
+    : process.env.STRIPE_WEB_HOOK_SECRET;
 
 export async function POST(request: Request, response: Response) {
   const sig = request.headers.get('stripe-signature') ?? '';
@@ -11,11 +15,7 @@ export async function POST(request: Request, response: Response) {
 
   const body = await request.text();
   try {
-    event = stripe.webhooks.constructEvent(
-      body,
-      sig,
-      process.env.STRIPE_WEB_HOOK_SECRET!
-    );
+    event = stripe.webhooks.constructEvent(body, sig, secret!);
   } catch (err) {
     const error = err as Error;
     return NextResponse.json(`Webhook Error: ${error.message}`, {
@@ -38,14 +38,14 @@ export async function POST(request: Request, response: Response) {
 
       const session = await stripe.checkout.sessions.listLineItems(id);
       const lineItems = session.data;
-      const products: NewProduct[] = [];
+      const products: Product[] = [];
 
       for (const item of lineItems) {
-        const product = await prisma.newProduct.findFirst({
+        const product = await prisma.product.findFirst({
           where: { stripePriceId: item.price?.id },
         });
         if (product) {
-          const updatedProduct = await prisma.newProduct.update({
+          const updatedProduct = await prisma.product.update({
             where: { id: product.id },
             data: {
               sold: true,

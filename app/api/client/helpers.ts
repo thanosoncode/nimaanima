@@ -1,3 +1,4 @@
+import { ProductData } from '@/app/(routes)/manage/addNewProduct/AddNewProduct';
 import { Product, UploadedImageData } from '@/app/utils/types';
 
 export const uploadImage = async (formData: FormData) => {
@@ -17,7 +18,7 @@ export const uploadImage = async (formData: FormData) => {
   }
 };
 
-export const uploadProduct = async (product: Product) => {
+export const uploadProduct = async (product: ProductData) => {
   try {
     const uploadProductResponse = await fetch('/api/manage', {
       method: 'POST',

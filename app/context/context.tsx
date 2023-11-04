@@ -1,11 +1,11 @@
 'use client';
 
 import { createContext, useContext, useReducer } from 'react';
-import { NewProduct, OrderDetails, Product } from '../utils/types';
+import { OrderDetails, Product } from '../utils/types';
 
 type AppState = {
-  cartItems: NewProduct[];
-  favorites: NewProduct[];
+  cartItems: Product[];
+  favorites: Product[];
   selectedCategory: string | null;
   orderDetails: OrderDetails;
   isGift: boolean;
@@ -28,11 +28,11 @@ const initialState = {
 type Action =
   | {
       type: 'ADD_CART_ITEM';
-      cartItem: NewProduct;
+      cartItem: Product;
     }
   | {
       type: 'ADD_FAVORITE';
-      favorite: NewProduct;
+      favorite: Product;
     }
   | {
       type: 'REMOVE_FAVORITE';

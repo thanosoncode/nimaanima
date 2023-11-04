@@ -4,14 +4,14 @@ import Link from 'next/link';
 import HandleProduct from './handleProduct/HandleProduct';
 import { getSingleProduct } from '@/lib/products';
 import Recommendations from './recommendations/Recommendations';
-import { NewProduct } from '@prisma/client';
+import { Product } from '@prisma/client';
 
 const SingleProduct = async ({
   params: { id },
 }: {
   params: { id: string };
 }) => {
-  const product = (await getSingleProduct(id)) as NewProduct;
+  const product = (await getSingleProduct(id)) as Product;
 
   return (
     <>

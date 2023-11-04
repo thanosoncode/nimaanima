@@ -9,15 +9,6 @@ export type Product = {
   price: number;
   category: string;
   images: string[];
-};
-
-export type NewProduct = {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  images: string[];
   gift: boolean;
   sold: boolean;
   stripePriceId: string;

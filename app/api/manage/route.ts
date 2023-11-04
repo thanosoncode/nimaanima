@@ -1,5 +1,4 @@
 import { prisma } from '@/lib/prisma';
-import { createProduct } from '@/lib/products';
 import { NextResponse, type NextRequest } from 'next/server';
 import Stripe from 'stripe';
 
@@ -36,7 +35,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       product: stripeProduct.id,
     });
 
-    const product = await prisma.newProduct.create({
+    const product = await prisma.product.create({
       data: {
         name,
         category,

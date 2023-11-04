@@ -13,7 +13,6 @@ import {
   setFileInputValue,
   setChosenImages,
   setProduct,
-  setNewProduct,
 } from '../store/adminSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -140,7 +139,6 @@ const AddNewProduct = () => {
 
     try {
       const uploadedProduct = await uploadProduct(productToUpload);
-      dispatch(setNewProduct(uploadedProduct));
       dispatch(setIsSaving(false));
       dispatch(
         setProduct({
@@ -153,7 +151,6 @@ const AddNewProduct = () => {
       );
     } catch (error) {
       dispatch(setIsSaving(false));
-      dispatch(setNewProduct(null));
       throw new Error('Error uploading product');
     }
   };

@@ -8,6 +8,8 @@ import { Session } from '@/app/utils/types';
 const Footer = async () => {
   const session = (await getServerSession(authOptions)) as Session;
   const isAdmin = session?.user?.email === process.env.ADMIN_EMAIL_1;
+  console.log('session', session);
+  console.log('isAdmin', isAdmin);
 
   return (
     <footer>

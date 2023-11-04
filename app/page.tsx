@@ -8,8 +8,7 @@ const Home = async ({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  // const products = (await getAllProducts()) as Product[];
-  const products = await prisma.newProduct.findMany();
+  const products = await prisma.product.findMany();
   const selectedCategory = searchParams.category as Category;
   const sort = searchParams.sort as SortBy | undefined;
 

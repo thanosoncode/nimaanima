@@ -1,10 +1,10 @@
 'use client';
 import { useAppDispatch, useAppState } from '@/app/context/context';
-import { NewProduct } from '@/app/utils/types';
+import { Product } from '@/app/utils/types';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 interface AddToFavoritesProps {
-  product: NewProduct;
+  product: Product;
   size: number;
 }
 
