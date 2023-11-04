@@ -1,7 +1,8 @@
-import { getAllProducts } from '@/lib/products';
+import { getServerSession } from 'next-auth';
 import Products from './(routes)/products/Products';
-import { Category, Product, SortBy } from './utils/types';
+import { Category, SortBy, UserSession } from './utils/types';
 import { prisma } from '@/lib/prisma';
+import { authOptions } from './api/auth/[...nextauth]/route';
 
 const Home = async ({
   searchParams,

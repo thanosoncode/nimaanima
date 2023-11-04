@@ -1,4 +1,3 @@
-import { Category } from '@/app/utils/types';
 import { prisma } from './prisma';
 
 export const getAllProducts = async () => {

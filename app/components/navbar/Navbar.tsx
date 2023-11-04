@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation';
 import { MdOutlineEmail } from 'react-icons/md';
 import { AiOutlineHeart } from 'react-icons/ai';
 import CartLink from './cartLink/CartLink';
-import { Session } from 'next-auth';
 import UserLink from './userLink/UserLink';
 import MobileMenu from './MobileMenu';
+import { UserSession } from '@/app/utils/types';
 
-const Navbar = ({ session }: { session: Session }) => {
+const Navbar = ({ session }: { session: UserSession }) => {
   const pathname = usePathname();
 
   const links = [

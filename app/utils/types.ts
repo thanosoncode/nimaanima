@@ -42,10 +42,12 @@ export type SearchParams = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export interface Session {
-  user: {
+export interface UserSession {
+  dbUser: {
+    id: string;
     name: string;
     email: string;
     image: string;
+    favorites: string[];
   };
 }

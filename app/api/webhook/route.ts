@@ -24,13 +24,6 @@ export async function POST(request: Request, response: Response) {
   }
 
   switch (event.type) {
-    case 'payment_intent.succeeded':
-      //   const paymentIntentSucceeded = event.data.object;
-      //   console.log("paymentIntentSucceeded", paymentIntentSucceeded);
-      //   console.log("receipt.email", paymentIntentSucceeded.receipt_email);
-      //   console.log("shipping", paymentIntentSucceeded.shipping.address);
-      break;
-
     case 'checkout.session.completed':
       const paymentIntentSucceeded = event.data.object;
       const { shipping_details, customer_details, id } = paymentIntentSucceeded;
