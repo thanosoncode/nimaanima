@@ -2,10 +2,7 @@ import { prisma } from '@/lib/prisma';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest, response: NextResponse) {
-  console.log('request.params', request.url);
   const userId = request.url.split('favorites/')[1];
-
-  console.log('userId', userId);
 
   if (!userId) {
     return NextResponse.json({ message: 'Invalid id' }, { status: 400 });

@@ -1,68 +1,56 @@
 'use client';
 import Spinner from '@/app/components/spinner/Spinner';
-import { useAppDispatch, useAppState } from '@/app/context/context';
-import { Favorite, Product, UserSession } from '@/app/utils/types';
+import { Product, UserSession } from '@/app/utils/types';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 interface AddToFavoritesProps {
   product: Product;
   size: number;
+  isFavorite?: boolean | undefined;
 }
 
-const AddToFavorites = ({ product, size }: AddToFavoritesProps) => {
-  const dispatch = useAppDispatch();
+const AddToFavorites = ({ product, size, isFavorite }: AddToFavoritesProps) => {
+  const router = useRouter();
   const { data } = useSession() as { data: UserSession | null };
-
-  const { favorites } = useAppState();
+  const userId = data?.dbUser.id;
   const [isLoading, setIsLoading] = useState(false);
-
-  const isFavorite = favorites.find((f) => f.id === product.id);
+  const [action, setAction] = useState<'add' | 'remove'>('add');
 
   const handleClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-    const isFavorite = favorites.find((f) => f.id === product.id);
-
+    if (!userId) return;
     if (!isFavorite) {
-      if (data?.dbUser) {
-        setIsLoading(true);
-
-        const response = await fetch('api/favorites', {
-          method: 'POST',
-          body: JSON.stringify({
-            userId: data?.dbUser.id,
-            favorite: product,
-          }),
-        });
+      setIsLoading(true);
+      const response = await fetch('api/favorites', {
+        method: 'POST',
+        body: JSON.stringify({
+          userId: userId,
+          favorite: product,
+        }),
+      });
+      if (response.ok) {
+        router.refresh();
         setIsLoading(false);
-        if (response.ok) {
-          dispatch({ type: 'ADD_FAVORITE', favorite: product });
-        }
-      } else {
-        dispatch({ type: 'ADD_FAVORITE', favorite: product });
       }
+      setIsLoading(false);
     } else {
-      const id = favorites.find((f) => f.id === product.id)?.id as string;
-      if (data?.dbUser) {
-        setIsLoading(true);
-        const response = await fetch('api/favorites', {
-          method: 'DELETE',
-          body: JSON.stringify({
-            userId: data?.dbUser.id,
-            favorite: product,
-          }),
-        });
+      setIsLoading(true);
+      const response = await fetch('api/favorites', {
+        method: 'DELETE',
+        body: JSON.stringify({
+          userId: userId,
+          favorite: product,
+        }),
+      });
+      if (response.ok) {
+        router.refresh();
         setIsLoading(false);
-        if (response.ok) {
-          dispatch({ type: 'REMOVE_FAVORITE', id });
-        }
-      } else {
-        dispatch({ type: 'REMOVE_FAVORITE', id });
       }
+      setIsLoading(false);
     }
   };
 

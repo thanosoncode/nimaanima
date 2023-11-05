@@ -1,34 +1,19 @@
-'use client';
-
-import { useAppState } from '@/app/context/context';
 import Link from 'next/link';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import Empty from './empty/Empty';
 import List from './list/list';
-import { useSession } from 'next-auth/react';
 import { UserSession } from '@/app/utils/types';
-import { useQuery } from '@tanstack/react-query';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { getServerSession } from 'next-auth';
 
-const Favorites = () => {
-  const { favorites: favoritesState } = useAppState();
-  const { data } = useSession() as { data: UserSession | null };
+const Favorites = async () => {
+  const session = (await getServerSession(authOptions)) as UserSession;
 
-  console.log('data', data);
-
-  const { data: favoritesDb } = useQuery({
-    queryKey: ['favorites'],
-    queryFn: () =>
-      fetch(`api/favorites/${data?.dbUser.id}`)
-        .then((response) => response.json())
-        .then((json) => json),
-    staleTime: 600000,
-  });
-
-  const favorites = favoritesDb || favoritesState;
+  const favorites = session.dbUser.favorites;
 
   return (
     <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2 mt-8 pb-32'>
-      {data?.dbUser ? (
+      {session.dbUser ? (
         <div className='mb-16'>
           <h4 className='text-5xl font-thin  text-neutral-950'>
             Favorite items

@@ -7,12 +7,13 @@ import AddToFavorites from './addToFavorites/AddToFavorites';
 
 interface ProductItemProps {
   product: Product;
+  isFavorite: boolean | undefined;
 }
 
-const ProductItem = ({ product }: ProductItemProps) => {
+const ProductItem = ({ product, isFavorite }: ProductItemProps) => {
   return (
     <div className='relative group'>
-      <AddToFavorites product={product} size={19} />
+      <AddToFavorites product={product} size={19} isFavorite={isFavorite} />
       <Link
         href={`/products/${product.id}`}
         className=' w-full h-40 xs:h-52 md:h-48 lg:h-56 sm:h-64 relative block'

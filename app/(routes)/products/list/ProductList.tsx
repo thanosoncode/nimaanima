@@ -1,6 +1,8 @@
-import { Category, Product, SortBy } from '../../../utils/types';
+import { Category, Product, SortBy, UserSession } from '../../../utils/types';
 import SortByButton from './sortByButton/SortByButton';
 import ProductItem from './productItem/ProductItem';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 interface ProductsProps {
   products: Product[];
@@ -9,12 +11,14 @@ interface ProductsProps {
   sort: SortBy | undefined;
 }
 
-const ProductList: React.FC<ProductsProps> = ({
+const ProductList: React.FC<ProductsProps> = async ({
   products,
   title,
   selectedCategory,
   sort,
 }) => {
+  const session = (await getServerSession(authOptions)) as UserSession | null;
+
   const filteredProducts = products.filter((product) =>
     selectedCategory ? product.category === selectedCategory : product
   );
@@ -33,7 +37,13 @@ const ProductList: React.FC<ProductsProps> = ({
       </div>
       <section className='grid gap-y-8 md:gap-y-16 gap-x-2 xs:gap-x-5 justify-center grid-cols-2 sm:grid-cols-2  md:grid-cols-3 '>
         {productsToShow.map((product) => (
-          <ProductItem product={product} key={product.id} />
+          <ProductItem
+            product={product}
+            key={product.id}
+            isFavorite={session?.dbUser.favorites
+              .map((f) => f.id)
+              .includes(product.id)}
+          />
         ))}
       </section>
     </main>

@@ -29,7 +29,6 @@ export async function POST(request: NextRequest, response: NextResponse) {
           favorites: [...user.favorites, favorite],
         },
       });
-
       return NextResponse.json(updated, { status: 200 });
     }
   } catch (error) {

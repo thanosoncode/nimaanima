@@ -37,7 +37,7 @@ const List = ({ favorites }: ListProps) => {
                 </div>
               </div>
             </div>
-            <AddToFavorites product={favorite} size={16} />
+            <AddToFavorites product={favorite} size={16} isFavorite={true} />
           </div>
         ))}
       </section>

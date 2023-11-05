@@ -4,6 +4,8 @@ import { Category, SortBy, UserSession } from './utils/types';
 import { prisma } from '@/lib/prisma';
 import { authOptions } from './api/auth/[...nextauth]/route';
 
+// export const revalidate = 0;
+
 const Home = async ({
   searchParams,
 }: {
