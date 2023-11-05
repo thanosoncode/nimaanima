@@ -3,6 +3,7 @@ import SortByButton from './sortByButton/SortByButton';
 import ProductItem from './productItem/ProductItem';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import LocalFavoritesLoader from './LocalFavoritesLoader';
 
 interface ProductsProps {
   products: Product[];
@@ -18,6 +19,7 @@ const ProductList: React.FC<ProductsProps> = async ({
   sort,
 }) => {
   const session = (await getServerSession(authOptions)) as UserSession | null;
+  console.log('product list session', session);
 
   const filteredProducts = products.filter((product) =>
     selectedCategory ? product.category === selectedCategory : product
@@ -46,6 +48,7 @@ const ProductList: React.FC<ProductsProps> = async ({
           />
         ))}
       </section>
+      <LocalFavoritesLoader session={session} />
     </main>
   );
 };

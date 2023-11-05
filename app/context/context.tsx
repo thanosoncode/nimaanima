@@ -35,6 +35,14 @@ type Action =
       favorite: Product;
     }
   | {
+      type: 'SET_INITIAL_FAVORITES';
+      favorites: Product[];
+    }
+  | {
+      type: 'ADD_LOCAL_STORAGE_FAVORITES_LIST';
+      list: Product[];
+    }
+  | {
       type: 'REMOVE_FAVORITE';
       id: string;
     }
@@ -55,8 +63,24 @@ const reducer = (state: AppState, action: Action) => {
   switch (action.type) {
     case 'ADD_CART_ITEM':
       return { ...state, cartItems: [...state.cartItems, action.cartItem] };
+    case 'SET_INITIAL_FAVORITES':
+      return { ...state, favorites: action.favorites };
     case 'ADD_FAVORITE':
-      return { ...state, favorites: [...state.favorites, action.favorite] };
+      const exists = state.favorites.find(
+        (fav) => fav.id === action.favorite.id
+      );
+      if (!exists) {
+        return { ...state, favorites: [...state.favorites, action.favorite] };
+      } else {
+        return {
+          ...state,
+          favorites: state.favorites.filter(
+            (fav) => fav.id !== action.favorite.id
+          ),
+        };
+      }
+    case 'ADD_LOCAL_STORAGE_FAVORITES_LIST':
+      return { ...state, favorites: [...state.favorites, ...action.list] };
     case 'REMOVE_FAVORITE':
       return {
         ...state,
@@ -81,7 +105,6 @@ const reducer = (state: AppState, action: Action) => {
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
     <AppStateContext.Provider value={state}>
       <AppDispatchContext.Provider value={dispatch}>

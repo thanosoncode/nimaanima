@@ -5,15 +5,16 @@ import List from './list/list';
 import { UserSession } from '@/app/utils/types';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
+import ClientFavorites from './clientFavorites/ClientFavorites';
 
 const Favorites = async () => {
   const session = (await getServerSession(authOptions)) as UserSession;
 
-  const favorites = session.dbUser.favorites;
+  const favorites = session?.dbUser.favorites;
 
-  return (
+  const serverFavorites = (
     <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2 mt-8 pb-32'>
-      {session.dbUser ? (
+      {session?.dbUser ? (
         <div className='mb-16'>
           <h4 className='text-5xl font-thin  text-neutral-950'>
             Favorite items
@@ -47,9 +48,17 @@ const Favorites = async () => {
         </div>
       )}
 
-      {favorites.length > 0 ? <List favorites={favorites} /> : <Empty />}
+      {favorites && favorites.length > 0 ? (
+        <List favorites={favorites} />
+      ) : (
+        <Empty />
+      )}
     </div>
   );
+
+  const result = session?.dbUser ? serverFavorites : <ClientFavorites />;
+
+  return result;
 };
 
 export default Favorites;

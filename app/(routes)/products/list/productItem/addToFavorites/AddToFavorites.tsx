@@ -1,9 +1,10 @@
 'use client';
 import Spinner from '@/app/components/spinner/Spinner';
+import { useAppDispatch, useAppState } from '@/app/context/context';
 import { Product, UserSession } from '@/app/utils/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
 
 interface AddToFavoritesProps {
@@ -14,33 +15,48 @@ interface AddToFavoritesProps {
 
 const AddToFavorites = ({ product, size, isFavorite }: AddToFavoritesProps) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { data } = useSession() as { data: UserSession | null };
   const userId = data?.dbUser.id;
   const [isLoading, setIsLoading] = useState(false);
-  const [action, setAction] = useState<'add' | 'remove'>('add');
+  const { favorites } = useAppState();
+
+  const isLocalFavorite = favorites.find((fav) => fav.id === product.id);
+
+  const favorite = userId ? isFavorite : isLocalFavorite ? true : false;
 
   const handleClick = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    if (!userId) return;
-    if (!isFavorite) {
-      setIsLoading(true);
-      const response = await fetch('api/favorites', {
-        method: 'POST',
-        body: JSON.stringify({
-          userId: userId,
-          favorite: product,
-        }),
-      });
-      if (response.ok) {
-        router.refresh();
-        setIsLoading(false);
+    if (!userId) {
+      const storage = localStorage.getItem('favorites');
+      if (!storage) {
+        localStorage.setItem('favorites', JSON.stringify([product]));
       }
-      setIsLoading(false);
-    } else {
+      if (storage) {
+        const list = JSON.parse(storage) as Product[];
+        if (list.length === 0) {
+          localStorage.setItem('favorites', JSON.stringify([product]));
+        }
+        if (list.length > 0) {
+          const favoriteExists = list.find((f) => f.id === product.id);
+          if (favoriteExists) {
+            const filtered = list.filter((fav) => fav.id !== product.id);
+            localStorage.setItem('favorites', JSON.stringify(filtered));
+          } else {
+            const newList = [...list, product];
+            localStorage.setItem('favorites', JSON.stringify(newList));
+          }
+        }
+      }
+      dispatch({ type: 'ADD_FAVORITE', favorite: product });
+    }
+
+    if (userId) {
+      const method = isFavorite ? 'DELETE' : 'POST';
       setIsLoading(true);
       const response = await fetch('api/favorites', {
-        method: 'DELETE',
+        method,
         body: JSON.stringify({
           userId: userId,
           favorite: product,
@@ -62,7 +78,7 @@ const AddToFavorites = ({ product, size, isFavorite }: AddToFavoritesProps) => {
     >
       {isLoading ? (
         <Spinner />
-      ) : isFavorite ? (
+      ) : favorite ? (
         <AiFillHeart fill='darkred' size={size} />
       ) : (
         <AiOutlineHeart size={size} />
