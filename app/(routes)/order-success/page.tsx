@@ -1,10 +1,15 @@
 import Image from 'next/image';
 import React from 'react';
 import partyFlags from '../../../public/assets/party-flags.jpg';
-import { revalidatePath } from 'next/cache';
+import { SearchParams } from '@/app/utils/types';
+import LocalCartItemsRemover from './localCartItemsRemover/LocalCartItemsRemover';
 
-const OrderSuccess = () => {
-  revalidatePath('/');
+const OrderSuccess = ({ searchParams }: SearchParams) => {
+  const ids =
+    typeof searchParams.productId === 'string'
+      ? [searchParams.productId]
+      : searchParams.productId;
+
   return (
     <div
       className='bg-[#F5F2EA] flex items-center justify-center '
@@ -28,6 +33,7 @@ const OrderSuccess = () => {
         </p>
         <p>We will contact you soon with shipping details</p>
       </div>
+      <LocalCartItemsRemover ids={ids} />
     </div>
   );
 };

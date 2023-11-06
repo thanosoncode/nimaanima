@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useAppDispatch, useAppState } from '../../context/context';
 import Container from '../../components/container/Container';
 import Link from 'next/link';
+import { Product } from '@/app/utils/types';
 
 const Cart = () => {
   const { cartItems } = useAppState();
@@ -11,15 +12,21 @@ const Cart = () => {
 
   const total = cartItems.reduce((total, item) => total + item.price, 0);
 
-  const handleRemoveItem = (id: string) =>
+  const handleRemoveItem = (id: string) => {
     appDispatch({ type: 'REMOVE_ITEM', id });
 
+    const storage = localStorage.getItem('cartItems');
+    if (storage) {
+      const items = JSON.parse(storage) as Product[];
+      const newItems = items.filter((item) => item.id !== id);
+      localStorage.setItem('cartItems', JSON.stringify(newItems));
+    }
+  };
+
   const proceedToCheckout = async () => {
-    const stripePrices = cartItems.map((item) => item.stripePriceId);
     const response = await fetch('api/checkout', {
       method: 'POST',
-
-      body: JSON.stringify({ stripePrices }),
+      body: JSON.stringify({ cartItems }),
       headers: {
         'Content-type': 'application/json',
       },

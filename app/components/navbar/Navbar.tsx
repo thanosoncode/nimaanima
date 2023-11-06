@@ -60,7 +60,6 @@ const Navbar = ({ session }: { session: UserSession }) => {
             <MdOutlineEmail className='mt-1 text-xl text-main-400 sm:hidden' />
           </Link>
           <UserLink session={session} />
-
           <Link
             href='/favorites'
             className='hover:bg-neutral-200 rounded-full p-1 duration-200'

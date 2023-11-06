@@ -19,7 +19,6 @@ const ProductList: React.FC<ProductsProps> = async ({
   sort,
 }) => {
   const session = (await getServerSession(authOptions)) as UserSession | null;
-  console.log('product list session', session);
 
   const filteredProducts = products.filter((product) =>
     selectedCategory ? product.category === selectedCategory : product

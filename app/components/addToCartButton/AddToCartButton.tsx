@@ -15,6 +15,13 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
 
   const handleAddToCart = () => {
     dispatch({ type: 'ADD_CART_ITEM', cartItem: product });
+    const storage = localStorage.getItem('cartItems');
+    if (storage) {
+      const items = JSON.parse(storage);
+      localStorage.setItem('cartItems', JSON.stringify([...items, product]));
+    } else {
+      localStorage.setItem('cartItems', JSON.stringify([product]));
+    }
     router.push('/cart');
   };
 

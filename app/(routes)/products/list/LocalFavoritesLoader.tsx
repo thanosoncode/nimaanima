@@ -10,7 +10,6 @@ const LocalFavoritesLoader = ({ session }: { session: UserSession | null }) => {
   useEffect(() => {
     if (!session) {
       const storage = localStorage.getItem('favorites');
-      console.log('no session load local favorites ');
       if (storage) {
         const favorites = JSON.parse(storage);
         dispatch({ type: 'SET_INITIAL_FAVORITES', favorites });

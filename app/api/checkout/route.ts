@@ -1,3 +1,4 @@
+import { Product } from '@/app/utils/types';
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
@@ -9,19 +10,27 @@ const baseUrl =
     : 'https://nimaanima.vercel.app';
 
 export async function POST(request: Request) {
-  const { stripePrices } = (await request.json()) as { stripePrices: string[] };
+  const { cartItems } = (await request.json()) as { cartItems: Product[] };
 
-  if (!stripePrices || stripePrices.length === 0) {
+  if (!cartItems || cartItems.length === 0) {
     return NextResponse.json({}, { status: 400 });
   }
 
+  const stripePrices = cartItems.map((item) => item.stripePriceId);
+
   const lineItems = stripePrices.map((price) => ({ price, quantity: 1 }));
+
+  const successParams = cartItems
+    .map((item, index) =>
+      index === 0 ? `productId=${item.id}` : `&productId=${item.id}`
+    )
+    .join('');
 
   const session = await stripe.checkout.sessions.create({
     line_items: lineItems,
     shipping_address_collection: { allowed_countries: ['GR'] },
     mode: 'payment',
-    success_url: `${baseUrl}/order-success`,
+    success_url: `${baseUrl}/order-success?${successParams}`,
     cancel_url: `${baseUrl}/cart`,
     automatic_tax: { enabled: true },
     invoice_creation: { enabled: true },

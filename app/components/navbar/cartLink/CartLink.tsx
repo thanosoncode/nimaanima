@@ -2,11 +2,13 @@
 import Link from 'next/link';
 import { BsCart4 } from 'react-icons/bs';
 import { useAppState } from '@/app/context/context';
+import LocalCartItemsLoader from '../localCartItemsLoader/localCartItemsLoader';
 
 interface CartLinkProps {}
 
 const CartLink = ({}: CartLinkProps) => {
-  const { cartItems, favorites } = useAppState();
+  const { cartItems } = useAppState();
+
   return (
     <Link href='/cart' className=''>
       <div className='relative  mr-2 sm:mr-0 hover:bg-neutral-200 rounded-full p-1 duration-200'>
@@ -17,6 +19,7 @@ const CartLink = ({}: CartLinkProps) => {
           </span>
         ) : null}
       </div>
+      <LocalCartItemsLoader />
     </Link>
   );
 };

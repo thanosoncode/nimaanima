@@ -39,6 +39,10 @@ type Action =
       favorites: Product[];
     }
   | {
+      type: 'SET_INITIAL_CART_ITEMS';
+      cartItems: Product[];
+    }
+  | {
       type: 'ADD_LOCAL_STORAGE_FAVORITES_LIST';
       list: Product[];
     }
@@ -65,6 +69,12 @@ const reducer = (state: AppState, action: Action) => {
       return { ...state, cartItems: [...state.cartItems, action.cartItem] };
     case 'SET_INITIAL_FAVORITES':
       return { ...state, favorites: action.favorites };
+    case 'SET_INITIAL_CART_ITEMS':
+      return {
+        ...state,
+        cartItems:
+          state.cartItems.length === 0 ? action.cartItems : state.cartItems,
+      };
     case 'ADD_FAVORITE':
       const exists = state.favorites.find(
         (fav) => fav.id === action.favorite.id
