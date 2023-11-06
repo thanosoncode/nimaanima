@@ -43,6 +43,9 @@ const adminSlice = createSlice({
     setFileInputValue: (state, action: PayloadAction<string>) => {
       state.fileInputValue = action.payload;
     },
+    setCategory: (state, action: PayloadAction<string>) => {
+      state.product.category = action.payload;
+    },
     setImageData: (state, action: PayloadAction<string[]>) => {
       state.chosenImages = action.payload;
     },
@@ -65,6 +68,7 @@ export const {
   setChosenImages,
   setIsDeleting,
   setProduct,
+  setCategory,
   setImageData,
 } = adminSlice.actions;
 

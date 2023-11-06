@@ -11,6 +11,8 @@ const Home = async ({ searchParams }: SearchParams) => {
   const selectedCategory = searchParams.category as Category;
   const sort = searchParams.sort as SortBy | undefined;
 
+  console.log('products', products);
+
   return (
     <Products
       selectedCategory={selectedCategory}

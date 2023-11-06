@@ -13,6 +13,7 @@ import {
   setFileInputValue,
   setChosenImages,
   setProduct,
+  setCategory,
 } from '../store/adminSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -158,10 +159,13 @@ const AddNewProduct = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<ProductData>({
     resolver: zodResolver(ProductDataSchema),
   });
+
+  console.log(getValues('category'));
 
   return (
     <Container>
@@ -225,7 +229,12 @@ const AddNewProduct = () => {
               <label htmlFor='category' className='mr-2'>
                 Category
               </label>
-              <select id='category' {...register('category')}>
+              <select
+                id='category'
+                {...register('category')}
+                value={product.category}
+                onChange={(e) => dispatch(setCategory(e.target.value))}
+              >
                 <option value=''>Choose category</option>
                 <option value='Bracelets'>Bracelets</option>
                 <option value='Tapestry'>Tapestry</option>

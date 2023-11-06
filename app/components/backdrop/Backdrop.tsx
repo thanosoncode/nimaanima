@@ -11,7 +11,7 @@ const Backdrop = () => {
 
   return (
     <div
-      className={`absolute inset-0 flex h-full w-full items-center justify-center backdrop-brightness-75 ${
+      className={`fixed inset-0 flex h-full w-full items-center justify-center backdrop-brightness-75 ${
         open ? 'flex' : 'hidden'
       }`}
     >
