@@ -18,20 +18,16 @@ export const uploadImage = async (formData: FormData) => {
   }
 };
 
-export const uploadProduct = async (product: ProductData) => {
-  try {
-    const uploadProductResponse = await fetch('/api/manage', {
-      method: 'POST',
-      body: JSON.stringify(product),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
-    const productData = (await uploadProductResponse.json()) as Product;
-    return productData;
-  } catch (error) {
-    throw new Error('Error uploading product');
-  }
+export const uploadProduct = async (product: ProductData): Promise<Product> => {
+  const uploadProductResponse = await fetch('/api/manage', {
+    method: 'POST',
+    body: JSON.stringify(product),
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+  const newProduct = (await uploadProductResponse.json()) as Product;
+  return newProduct;
 };
 
 export const deleteProduct = async (id: string) => {

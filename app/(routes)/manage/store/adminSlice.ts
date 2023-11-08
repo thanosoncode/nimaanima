@@ -1,13 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ProductData } from '../addNewProduct/AddNewProduct';
-import { Product } from '@/app/utils/types';
-
-process.env.n;
 
 type InitialState = {
-  isSaving: boolean;
-  isUploading: boolean;
-  isDeleting: boolean;
+  isUploadingImages: boolean;
   fileInputValue: string;
   chosenImages: string[];
   product: ProductData;
@@ -15,9 +10,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  isSaving: false,
-  isUploading: false,
-  isDeleting: false,
+  isUploadingImages: false,
   fileInputValue: '',
   chosenImages: [],
   imageData: [],
@@ -34,11 +27,8 @@ const adminSlice = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-    setIsSaving: (state, action: PayloadAction<boolean>) => {
-      state.isSaving = action.payload;
-    },
-    setIsUploading: (state, action: PayloadAction<boolean>) => {
-      state.isUploading = action.payload;
+    setIsUploadingImages: (state, action: PayloadAction<boolean>) => {
+      state.isUploadingImages = action.payload;
     },
     setFileInputValue: (state, action: PayloadAction<string>) => {
       state.fileInputValue = action.payload;
@@ -52,9 +42,6 @@ const adminSlice = createSlice({
     setChosenImages: (state, action: PayloadAction<string[]>) => {
       state.chosenImages = action.payload;
     },
-    setIsDeleting: (state, action: PayloadAction<boolean>) => {
-      state.isDeleting = action.payload;
-    },
     setProduct: (state, action: PayloadAction<ProductData>) => {
       state.product = action.payload;
     },
@@ -62,11 +49,9 @@ const adminSlice = createSlice({
 });
 
 export const {
-  setIsSaving,
-  setIsUploading,
+  setIsUploadingImages,
   setFileInputValue,
   setChosenImages,
-  setIsDeleting,
   setProduct,
   setCategory,
   setImageData,

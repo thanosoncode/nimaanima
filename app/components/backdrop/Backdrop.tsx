@@ -1,21 +1,16 @@
-import { useSelector } from 'react-redux';
-import { AdminState } from '../../(routes)/manage/store/adminStore';
-import StatusMessage from '../statusMessage/StatusMessage';
+interface BackdropProps {
+  open: boolean;
+  children: React.ReactNode;
+}
 
-const Backdrop = () => {
-  const { isSaving, isUploading, isDeleting } = useSelector(
-    (state: AdminState) => state.admin
-  );
-
-  const open = isSaving || isUploading || isDeleting;
-
+const Backdrop = ({ open, children }: BackdropProps) => {
   return (
     <div
       className={`fixed inset-0 flex h-full w-full items-center justify-center backdrop-brightness-75 ${
         open ? 'flex' : 'hidden'
       }`}
     >
-      <StatusMessage />
+      {children}
     </div>
   );
 };

@@ -8,14 +8,14 @@ import Backdrop from '../../../components/backdrop/Backdrop';
 import PreviewImages from './previeImages/PreviewImages';
 import { AdminState } from '../store/adminStore';
 import {
-  setIsSaving,
-  setIsUploading,
   setFileInputValue,
   setChosenImages,
   setProduct,
   setCategory,
+  setIsUploadingImages,
 } from '../store/adminSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export type ProductData = z.infer<typeof ProductDataSchema>;
 
@@ -53,7 +53,8 @@ const ProductDataSchema = z.object({
 
 const AddNewProduct = () => {
   const dispatch = useDispatch();
-  const { isSaving, isUploading, fileInputValue, chosenImages, product } =
+  const queryClient = useQueryClient();
+  const { fileInputValue, chosenImages, product, isUploadingImages } =
     useSelector((state: AdminState) => state.admin);
 
   const handleProductInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,10 +110,18 @@ const AddNewProduct = () => {
     return Promise.all(promises);
   };
 
+  const { mutate, isPending: isCreatingProduct } = useMutation({
+    mutationKey: ['create-product'],
+    mutationFn: (product: ProductData) => uploadProduct(product),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['my-products'] }),
+  });
+
   const submitProduct = async (data: ProductData) => {
     const files = data.images as FileList;
     const formData = new FormData();
-    dispatch(setIsUploading(true));
+
+    dispatch(setIsUploadingImages(true));
     const imageUrls: string[] = [];
     for (const file of files) {
       formData.append('file', file);
@@ -123,15 +132,13 @@ const AddNewProduct = () => {
       } catch (error) {
         dispatch(setChosenImages([]));
         dispatch(setFileInputValue(''));
-        dispatch(setIsUploading(false));
-        dispatch(setIsSaving(true));
+        dispatch(setIsUploadingImages(false));
         throw new Error('error uploading image');
       }
     }
     dispatch(setChosenImages([]));
     dispatch(setFileInputValue(''));
-    dispatch(setIsUploading(false));
-    dispatch(setIsSaving(true));
+    dispatch(setIsUploadingImages(false));
     const productToUpload = {
       ...product,
       id: new Date().getTime().toString(),
@@ -139,8 +146,7 @@ const AddNewProduct = () => {
     };
 
     try {
-      const uploadedProduct = await uploadProduct(productToUpload);
-      dispatch(setIsSaving(false));
+      mutate(productToUpload);
       dispatch(
         setProduct({
           name: '',
@@ -151,7 +157,6 @@ const AddNewProduct = () => {
         })
       );
     } catch (error) {
-      dispatch(setIsSaving(false));
       throw new Error('Error uploading product');
     }
   };
@@ -159,13 +164,10 @@ const AddNewProduct = () => {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm<ProductData>({
     resolver: zodResolver(ProductDataSchema),
   });
-
-  console.log(getValues('category'));
 
   return (
     <Container>
@@ -267,7 +269,7 @@ const AddNewProduct = () => {
             )}
             <button
               type='submit'
-              disabled={isSaving || isUploading}
+              // disabled={isSaving || isUploading}
               className='w-full rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-neutral-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto'
             >
               Create product
@@ -275,7 +277,12 @@ const AddNewProduct = () => {
           </form>
         </div>
       </div>
-      <Backdrop />
+      <Backdrop open={isUploadingImages || isCreatingProduct}>
+        <div className='bg-white py-8 px-16 rounded'>
+          {isUploadingImages && 'Uploading images...'}
+          {isCreatingProduct && 'Creating product...'}
+        </div>
+      </Backdrop>
     </Container>
   );
 };

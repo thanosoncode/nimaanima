@@ -2,47 +2,27 @@
 
 import { Product } from '@prisma/client';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AdminState } from '../store/adminStore';
-import { setIsDeleting } from '../store/adminSlice';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import Backdrop from '@/app/components/backdrop/Backdrop';
+import RemoveButton from './removeButton/RemoveButton';
 
 const MyProducts: React.FC = () => {
-  const dispatch = useDispatch();
-  const { isDeleting } = useSelector((state: AdminState) => state.admin);
-  const [products, setProducts] = useState<Product[]>([]);
+  const queryClient = useQueryClient();
 
-  const getProducts = async () => {
-    try {
-      const response = await fetch('/api/products');
-      const data = (await response.json()) as Product[];
-      setProducts(data);
-    } catch (error) {
-      throw new Error('error fetching products');
-    }
-  };
-  useEffect(() => {
-    getProducts();
-  }, []);
+  const { data: products } = useQuery({
+    queryKey: ['my-products'],
+    queryFn: () => fetch('/api/products').then((res) => res.json()),
+    staleTime: 600000,
+  });
 
-  const handleProductDelete = async (id: string) => {
-    dispatch(setIsDeleting(true));
-    try {
-      const response = await fetch(`/api/manage/${id}`, {
-        method: 'DELETE',
-      });
-      const data = (await response.json()) as { product: Product };
-      if (data.product.id) {
-        setProducts(
-          products.filter((product) => product.id !== data.product.id)
-        );
-      }
-      dispatch(setIsDeleting(false));
-    } catch (error) {
-      dispatch(setIsDeleting(false));
-      throw new Error('error deleting product');
-    }
-  };
+  const { mutate, isPending: isDeleting } = useMutation({
+    mutationFn: (id: string) =>
+      fetch(`/api/manage/${id}`, { method: 'DELETE' }),
+    mutationKey: ['my-products'],
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['my-products'] }),
+  });
+
   return (
     <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2'>
       <table className='w-full border'>
@@ -57,8 +37,8 @@ const MyProducts: React.FC = () => {
           </tr>
         </thead>
         <tbody className=''>
-          {products.length > 0
-            ? products.map((product) => (
+          {products && products.length > 0
+            ? products.map((product: Product) => (
                 <tr key={product.id} className='border-b border-neutral-300'>
                   <td className=' p-2 '>
                     <div className='flex justify-center items-center p-2 w-12 h-12 relative'>
@@ -75,19 +55,16 @@ const MyProducts: React.FC = () => {
                   <td className='p-2 text-center'>{product.description}</td>
                   <td className='p-2 text-center'>{product.price}</td>
                   <td className='p-2 text-center'>
-                    <button
-                      className='rounded bg-red-400 py-1 px-3 text-white hover:bg-red-200'
-                      onClick={() => handleProductDelete(product.id)}
-                      disabled={isDeleting}
-                    >
-                      remove product
-                    </button>
+                    <RemoveButton id={product.id} />
                   </td>
                 </tr>
               ))
             : null}
         </tbody>
       </table>
+      <Backdrop open={isDeleting}>
+        <div className='bg-white py-8 px-16 rounded'>Deleting...</div>
+      </Backdrop>
     </div>
   );
 };
