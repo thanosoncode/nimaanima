@@ -16,6 +16,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
   selectedCategory,
 }) => {
   const isSelected = selectedCategory === category.name;
+
   return (
     <Link
       href={{ pathname: '', query: { category: category.name } }}

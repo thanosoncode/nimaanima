@@ -57,7 +57,9 @@ const AddNewProduct = () => {
   const { fileInputValue, chosenImages, product, isUploadingImages } =
     useSelector((state: AdminState) => state.admin);
 
-  const handleProductInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleProductInfoChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     dispatch(
       setProduct({
         ...product,
@@ -177,7 +179,7 @@ const AddNewProduct = () => {
           <form
             method='post'
             onSubmit={handleSubmit(submitProduct)}
-            className='mx-auto flex w-96 flex-col rounded-lg border border-gray-200 p-2.5 shadow'
+            className='mx-auto flex w-full sm:w-[500px] flex-col rounded-lg border border-gray-200 p-2.5 shadow'
           >
             <Fieldset
               id='images'
@@ -185,7 +187,7 @@ const AddNewProduct = () => {
               info='Note that the first image will be the main of your product'
               type='file'
               register={register}
-              handleInputChange={handleImageChange}
+              handleImageChange={handleImageChange}
               value={fileInputValue}
               inputProps={{
                 multiple: true,
@@ -269,7 +271,7 @@ const AddNewProduct = () => {
             )}
             <button
               type='submit'
-              // disabled={isSaving || isUploading}
+              disabled={isUploadingImages || isCreatingProduct}
               className='w-full rounded-lg bg-black px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-neutral-600 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto'
             >
               Create product

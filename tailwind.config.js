@@ -39,6 +39,9 @@ module.exports = {
         lightPink: {
           400: '#F8EBE6',
         },
+        lightPeach: {
+          400: '#FDEBD2',
+        },
       },
     },
   },
