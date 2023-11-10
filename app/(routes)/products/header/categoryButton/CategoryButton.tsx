@@ -28,6 +28,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
           alt={category.name}
           className='object-cover w-16 h-16 sm:h-20 sm:w-20'
           sizes='(min-width: 640px) 80px, 64px'
+          placeholder='blur'
         />
       </div>
       <p

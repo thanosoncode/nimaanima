@@ -16,6 +16,7 @@ const Technique = (props: TechniqueData) => {
             fill
             className='object-cover'
             sizes='(min-width: 1280px) 1076px, 95vw'
+            placeholder='blur'
             priority
           />
         </div>
@@ -38,6 +39,7 @@ const Technique = (props: TechniqueData) => {
                 alt={step.image.alt}
                 fill
                 sizes='(min-width: 1280px) 498px, (min-width: 1040px) calc(50vw - 72px), calc(50vw - 48px)'
+                placeholder='blur'
               />
             </div>
           </article>
