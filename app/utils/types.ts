@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 export type Category = 'Dolls' | 'Tapestry' | 'Bracelets' | 'Straps';
 
 export type SortBy = 'asc' | 'desc';
@@ -63,4 +65,43 @@ export type Favorite = {
   gift: boolean;
   stripePriceId: string;
   stripeProductId: string;
+};
+
+type Image = {
+  src: StaticImageData;
+  alt: string;
+};
+
+type Step = {
+  info: {
+    title: string;
+    text: string;
+  };
+  image: Image;
+};
+
+type Header = {
+  title: string;
+  image: Image;
+};
+
+type Footer = {
+  title: string;
+  text: string;
+};
+
+export interface TechniqueData {
+  header: Header;
+  steps: Step[];
+  footer: Footer;
+  rowCarousel: {
+    title: string;
+    products: Product[];
+  };
+}
+
+export type CategoryLink = {
+  id: number;
+  name: Category;
+  image: StaticImageData;
 };

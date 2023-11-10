@@ -1,6 +1,17 @@
-import { Category } from '@/app/utils/types';
+import { Category, CategoryLink } from '@/app/utils/types';
 import CategoryButton from './categoryButton/CategoryButton';
-import { categories } from '@/app/data/categories';
+
+import dolls from '../../../../public/assets/categories/category-dolls.webp';
+import straps from '../../../../public/assets/categories/category-straps.webp';
+import tablet from '../../../../public/assets/categories/category-tablet.webp';
+import tapestry from '../../../../public/assets/categories/category-tapestry.webp';
+
+export const categories: CategoryLink[] = [
+  { id: 1, name: 'Dolls', image: dolls },
+  { id: 2, name: 'Straps', image: straps },
+  { id: 3, name: 'Bracelets', image: tablet },
+  { id: 4, name: 'Tapestry', image: tapestry },
+];
 
 interface ProductsHeaderProps {
   selectedCategory: Category;
