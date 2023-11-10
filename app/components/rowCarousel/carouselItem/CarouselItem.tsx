@@ -20,6 +20,7 @@ const CarouselItem = ({ product }: CarouselItemProps) => {
           alt={product.name}
           fill
           className='object-cover rounded-lg'
+          sizes='(min-width: 1280px) 241px, (min-width: 1040px) calc(25vw - 44px), (min-width: 460px) calc(33.39vw - 33px), calc(50vw - 32px)'
         />
       </Link>
       <div>

@@ -27,6 +27,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
           src={category.image}
           alt={category.name}
           className='object-cover w-16 h-16 sm:h-20 sm:w-20'
+          sizes='(min-width: 640px) 80px, 64px'
         />
       </div>
       <p

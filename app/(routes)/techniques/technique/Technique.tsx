@@ -15,6 +15,8 @@ const Technique = (props: TechniqueData) => {
             alt={props.header.image.alt}
             fill
             className='object-cover'
+            sizes='(min-width: 1280px) 1076px, 95vw'
+            priority
           />
         </div>
       </header>
@@ -31,7 +33,12 @@ const Technique = (props: TechniqueData) => {
               <p>{step.info.text}</p>
             </div>
             <div className='relative w-1/2 h-[280px] rounded-lg overflow-hidden'>
-              <Image src={step.image.src} alt={step.image.alt} fill />
+              <Image
+                src={step.image.src}
+                alt={step.image.alt}
+                fill
+                sizes='(min-width: 1280px) 498px, (min-width: 1040px) calc(50vw - 72px), calc(50vw - 48px)'
+              />
             </div>
           </article>
         ))}

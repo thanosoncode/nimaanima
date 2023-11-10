@@ -22,6 +22,7 @@ const UserLik = ({ session }: UserLikProps) => {
               src={session?.dbUser.image ?? ''}
               fill
               alt={session.dbUser?.name ?? ''}
+              sizes='24px'
             />
           </div>
         ) : (

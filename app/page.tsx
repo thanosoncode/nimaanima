@@ -10,7 +10,7 @@ const Home = async ({ searchParams }: SearchParams) => {
   return (
     <Products
       selectedCategory={selectedCategory}
-      products={products}
+      products={products.slice(0, 5)}
       sort={sort}
     />
   );

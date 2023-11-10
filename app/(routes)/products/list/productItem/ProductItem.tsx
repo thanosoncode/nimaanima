@@ -23,6 +23,7 @@ const ProductItem = ({ product, isFavorite }: ProductItemProps) => {
           alt={product.name}
           fill
           className='object-cover rounded'
+          sizes='(min-width: 1280px) 353px, (min-width: 780px) calc(33.33vw - 27px), calc(50vw - 12px)'
         />
       </Link>
       <div>

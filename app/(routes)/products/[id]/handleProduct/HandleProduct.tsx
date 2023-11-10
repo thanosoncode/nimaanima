@@ -60,6 +60,7 @@ const HandleProduct: React.FC<HandleProductProps> = ({ product }) => {
               alt={`image-${index + 1}`}
               fill
               onClick={() => handleImageSelect(index)}
+              sizes='(min-width: 640px) 60px, 44px'
             />
           </div>
         ))}
@@ -83,6 +84,8 @@ const HandleProduct: React.FC<HandleProductProps> = ({ product }) => {
           width={mainImageSize.width}
           height={mainImageSize.height}
           className='object-contain max-h-[500px] bg-neutral-100 rounded-lg w-full'
+          sizes='(min-width: 1280px) 241px, (min-width: 1040px) calc(25vw - 44px), (min-width: 780px) calc(33.33vw - 48px), (min-width: 460px) calc(33.33vw - 32px), calc(50vw - 32px)'
+          priority
         />
       </div>
     </div>
