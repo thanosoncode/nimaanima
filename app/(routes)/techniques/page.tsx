@@ -22,14 +22,14 @@ const Techniques = () => {
         <ShapeOne fill='#F8EBE6' />
       </div>
       <div className='bg-lightPink-400 '>
-        <div className='xl:max-w-[1140px] px-2 lg:px-8  mx-auto w-full grid grid-cols-2 py-12 gap-8'>
+        <div className='xl:max-w-[1140px] px-2 lg:px-8 xs:px-12 gap-y-8  mx-auto w-full grid grid-cols-1 sm:grid-cols-2 py-12 gap-8'>
           {categories.map((category, index) => (
             <Link
               href={`/techniques/${category.pathname}`}
               key={index}
               className='rounded-lg shadow-soft hover:shadow-cart overflow-hidden duration-200 block bg-white'
             >
-              <div className='relative h-[380px] '>
+              <div className='relative h-[300px] lg:h-[380px] '>
                 <Image
                   alt={category.name}
                   src={category.image}

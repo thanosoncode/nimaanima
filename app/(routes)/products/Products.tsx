@@ -18,7 +18,7 @@ const Products: React.FC<ProductsProps> = ({
     <>
       <ProductsHeader selectedCategory={selectedCategory} />
       <Container classes='h-full lg:px-8 lg:w-full xl:max-w-[1140px] md:w-full md:px-8 w-full px-2'>
-        <div className='mt-10 mb-20'>
+        <div className='mt-8 mb-16'>
           <ProductList
             title={'Find something you love'}
             products={products}

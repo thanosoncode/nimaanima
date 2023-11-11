@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Container from '../../container/Container';
 import ShapeTwo from '../../svg/ShapeTwo';
 import ShapeThree from '../../svg/ShpaeThree';
-import ShapeOne from '../../svg/ShapeOne';
 
 const FooterCTA = () => {
   return (
@@ -23,7 +22,7 @@ const FooterCTA = () => {
           <ShapeThree fill='#4D6BC6' />
         </div>
         <div className='bg-someBlue-500'>
-          <Container classes='pb-2.5 pt-1 flex justify-center'>
+          <Container classes='pb-2.5 flex justify-center'>
             <span className='text-center text-white border-b border-dotted border-white '>
               Every product is 100% handmade.
             </span>
