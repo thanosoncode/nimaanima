@@ -86,7 +86,7 @@ const Tapestry = async () => {
     ],
     footer: {
       title: ' Custom Crafted Treasures',
-      text: 'Each woven wall hanging we create is unique, lovingly handcrafted with care and attention to detail. No two dolls are alike, making each one as special as the person who adopts it.',
+      text: 'Each woven wall hanging we create is unique, lovingly handcrafted with care and attention to detail. No two tapestry are alike, making each one as special as the person who adopts it.',
     },
     rowCarousel: {
       title: 'Check out our woven wall hanging collection',

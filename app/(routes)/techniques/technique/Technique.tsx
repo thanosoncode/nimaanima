@@ -29,7 +29,7 @@ const Technique = (props: TechniqueData) => {
               index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
             }  gap-12 p-2 items-center`}
           >
-            <div className='w-1/2'>
+            <div className='w-1/2 text-center'>
               <h3 className='text-2xl font-semibold mb-4'>{step.info.title}</h3>
               <p>{step.info.text}</p>
             </div>
@@ -38,6 +38,7 @@ const Technique = (props: TechniqueData) => {
                 src={step.image.src}
                 alt={step.image.alt}
                 fill
+                className='object-cover'
                 sizes='(min-width: 1280px) 498px, (min-width: 1040px) calc(50vw - 72px), calc(50vw - 48px)'
                 placeholder='blur'
               />

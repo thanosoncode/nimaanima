@@ -22,18 +22,19 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
       href={{ pathname: '', query: { category: category.name } }}
       className='flex flex-col items-center justify-center gap-2 cursor-pointer group'
     >
-      <div className='w-16 h-16 overflow-hidden duration-200 ease-in-out rounded-full sm:h-20 sm:w-20 group-hover:scale-105'>
+      <div className='relative w-16 h-16 overflow-hidden duration-100 ease-in-out rounded-full sm:h-28 sm:w-28 group-hover:scale-105 hover:shadow-cart'>
         <Image
           src={category.image}
           alt={category.name}
-          className='object-cover w-16 h-16 sm:h-20 sm:w-20'
+          className='object-cover'
+          fill
           sizes='(min-width: 640px) 80px, 64px'
           placeholder='blur'
         />
       </div>
       <p
-        className={`group-hover:border-neutral-400  border-b  px-0 pb-1 text-sm duration-200 ease-in-out sm:px-2 ${
-          isSelected ? 'border-black border-b' : ''
+        className={`group-hover:border-neutral-400  border-b   px-0 pb-1 text-sm duration-200 ease-in-out sm:px-2 ${
+          isSelected ? 'border-black border-b' : 'border-transparent'
         }`}
       >
         {category.name}

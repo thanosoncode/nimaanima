@@ -8,9 +8,6 @@ import { getCategoryProducts } from '@/lib/products';
 import { Product } from '@prisma/client';
 import Technique from '../technique/Technique';
 import { TechniqueData } from '@/app/utils/types';
-import ShapeOne from '@/app/components/svg/ShapeOne';
-import ShapeTwo from '@/app/components/svg/ShapeTwo';
-import ShapeThree from '@/app/components/svg/ShpaeThree';
 
 const Dolls = async () => {
   const products = (await getCategoryProducts('Dolls')) as Product[];

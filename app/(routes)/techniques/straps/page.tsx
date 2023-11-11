@@ -86,7 +86,7 @@ const Straps = async () => {
     ],
     footer: {
       title: ' Custom Crafted Treasures',
-      text: 'Each guitar strap we create is unique, lovingly handcrafted with care and attention to detail. No two dolls are alike, making each one as special as the person who adopts it.',
+      text: 'Each guitar strap we create is unique, lovingly handcrafted with care and attention to detail. No two guitar straps are alike, making each one as special as the person who adopts it.',
     },
     rowCarousel: {
       title: 'Check out our card woven guitar straps collection',
