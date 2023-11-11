@@ -100,8 +100,11 @@ export interface TechniqueData {
   };
 }
 
-export type CategoryLink = {
+export type CategoryItem = {
   id: number;
   name: Category;
   image: StaticImageData;
+  pathname: string;
+  title: string;
+  subtitle: string;
 };

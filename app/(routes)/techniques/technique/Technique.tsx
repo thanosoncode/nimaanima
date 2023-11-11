@@ -21,13 +21,13 @@ const Technique = (props: TechniqueData) => {
           />
         </div>
       </header>
-      <main className='grid grid-cols-1 gap-16 xl:max-w-[1140px] mx-auto px-2 lg:px-8'>
+      <main className='grid grid-cols-1 gap-12 xl:max-w-[1140px] mx-auto px-2 lg:px-8'>
         {props.steps.map((step, index) => (
           <article
             key={index}
             className={`flex ${
               index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-            }  gap-16 p-2 items-center`}
+            }  gap-12 p-2 items-center`}
           >
             <div className='w-1/2'>
               <h3 className='text-2xl font-semibold mb-4'>{step.info.title}</h3>
@@ -45,7 +45,7 @@ const Technique = (props: TechniqueData) => {
           </article>
         ))}
         <article>
-          <div className=' rounded-lg  text-lg text-center bg-lightPink-400  py-4 px-12 mx-auto'>
+          <div className='rounded-lg  text-lg text-center bg-lightPink-400  py-4 px-12 mx-auto my-12'>
             <h3 className='text-2xl font-semibold pb-6 text-center'>
               {props.footer.title}
             </h3>
