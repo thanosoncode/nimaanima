@@ -63,9 +63,9 @@ const ContactUs = () => {
             </h1>
             <p className='text-center font-light'>
               Have a specific request or looking for a customized item? Send us
-              a message, and we'll get back to you promptly.
-              <br /> Make a special offer or ask us anything &ndash; we're here
-              for you!
+              a message, and we&apos;ll get back to you promptly.
+              <br /> Make a special offer or ask us anything &ndash; we&apos;re
+              here for you!
             </p>
           </Container>
         </header>

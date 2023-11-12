@@ -9,7 +9,8 @@ const FooterLevelOne = () => {
       <div className='bg-someBlue-400'>
         <div className='-mt-1 flex flex-col items-center justify-center gap-4 pt-2 pb-4 bg-LightBlueWave'>
           <h4 className='font-medium px-8 text-center'>
-            Ask us anything or make a special order &ndash; we're here to help!
+            Ask us anything or make a special order &ndash; we&apos;re here to
+            help!
           </h4>
           <button className='rounded-full border border-neutral-400 bg-white py-2 px-5 font-semibold duration-200 ease-in-out hover:scale-105'>
             <Link href='/contact'>Get in touch!</Link>
