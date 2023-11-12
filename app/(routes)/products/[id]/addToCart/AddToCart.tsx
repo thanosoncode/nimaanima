@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useAppDispatch, useAppState } from '@/app/context/context';
+import { useAppDispatch, useAppState } from "@/app/context/context";
 
-import { Product } from '@/app/utils/types';
-import { useRouter } from 'next/navigation';
+import { Product } from "@/app/utils/types";
+import { useRouter } from "next/navigation";
 
 interface AddToCartProps {
   product: Product;
@@ -14,16 +14,16 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
   const router = useRouter();
 
   const handleAddToCart = () => {
-    dispatch({ type: 'ADD_CART_ITEM', cartItem: product });
-    const storage = localStorage.getItem('cartItems');
+    dispatch({ type: "ADD_CART_ITEM", cartItem: product });
+    const storage = localStorage.getItem("cartItems");
     if (storage) {
       const items = JSON.parse(storage);
-      localStorage.setItem('cartItems', JSON.stringify([...items, product]));
+      localStorage.setItem("cartItems", JSON.stringify([...items, product]));
     } else {
-      localStorage.setItem('cartItems', JSON.stringify(product));
+      localStorage.setItem("cartItems", JSON.stringify(product));
     }
 
-    router.push('/cart');
+    router.push("/cart");
   };
 
   const { cartItems } = useAppState();
@@ -32,12 +32,12 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
   return (
     <button
       onClick={handleAddToCart}
-      className={`mx-auto mt-2  rounded-full bg-neutral-900 py-2 text-center text-white duration-100 ease-in-out sm:mt-6 w-full sm:py-3 ${
-        isNotInCart ? 'hover:scale-[1.04] hover:opacity-80' : ''
+      className={`mx-auto mt-2  w-full rounded-full bg-neutral-900 py-2 text-center text-white duration-100 ease-in-out sm:mt-6 sm:py-3 ${
+        isNotInCart ? "hover:scale-[1.04] hover:opacity-80" : ""
       } `}
       disabled={!isNotInCart}
     >
-      {isNotInCart ? 'Add to cart' : 'Added!'}
+      {isNotInCart ? "Add to cart" : "Added!"}
     </button>
   );
 };

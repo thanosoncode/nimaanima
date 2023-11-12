@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { ProductData } from '../addNewProduct/AddNewProduct';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { ProductData } from "../addNewProduct/AddNewProduct";
 
 type InitialState = {
   isUploadingImages: boolean;
@@ -11,20 +11,20 @@ type InitialState = {
 
 const initialState: InitialState = {
   isUploadingImages: false,
-  fileInputValue: '',
+  fileInputValue: "",
   chosenImages: [],
   imageData: [],
   product: {
-    name: '',
+    name: "",
     price: 0,
-    description: '',
-    category: '',
+    description: "",
+    category: "",
     images: [],
   },
 };
 
 const adminSlice = createSlice({
-  name: 'admin',
+  name: "admin",
   initialState,
   reducers: {
     setIsUploadingImages: (state, action: PayloadAction<boolean>) => {

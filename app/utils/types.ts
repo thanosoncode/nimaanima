@@ -1,8 +1,8 @@
-import { StaticImageData } from 'next/image';
+import { StaticImageData } from "next/image";
 
-export type Category = 'Dolls' | 'Tapestry' | 'Bracelets' | 'Straps';
+export type Category = "Dolls" | "Tapestry" | "Bracelets" | "Straps";
 
-export type SortBy = 'asc' | 'desc';
+export type SortBy = "asc" | "desc";
 
 export type Product = {
   id: string;

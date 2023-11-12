@@ -1,13 +1,13 @@
 const Spinner = ({ message, size }: { message?: string; size?: string }) => {
   return (
-    <div className='flex flex-col gap-3 justify-center items-center'>
+    <div className="flex flex-col items-center justify-center gap-3">
       <div
         className={`${
-          size ? size : 'w-5 h-5'
-        }  rounded-full border-4 border-neutral-400 animate-spin ease-linear infinite`}
-        style={{ borderTop: '3px solid #000' }}
+          size ? size : "h-5 w-5"
+        }  infinite animate-spin rounded-full border-4 border-neutral-400 ease-linear`}
+        style={{ borderTop: "3px solid #000" }}
       ></div>
-      {message && <div className='text-center text-white'>{message}</div>}
+      {message && <div className="text-center text-white">{message}</div>}
     </div>
   );
 };

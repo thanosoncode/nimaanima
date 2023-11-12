@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Fieldset from './filedSet/Fieldset';
-import Container from '../../../components/container/Container';
-import { useAppDispatch, useAppState } from '../../../context/context';
-import { redirect } from 'next/navigation';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import Fieldset from "./filedSet/Fieldset";
+import Container from "../../../components/container/Container";
+import { useAppDispatch, useAppState } from "../../../context/context";
+import { redirect } from "next/navigation";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 const DetailsSchema = z.object({
   email: z.string().email(),
-  fullName: z.string().min(1, { message: 'Full name is required' }),
-  street: z.string().min(1, { message: 'Street address is required' }),
-  city: z.string().min(1, { message: 'City is required' }),
-  postalCode: z.string().min(1, { message: 'Postal code is required' }),
+  fullName: z.string().min(1, { message: "Full name is required" }),
+  street: z.string().min(1, { message: "Street address is required" }),
+  city: z.string().min(1, { message: "City is required" }),
+  postalCode: z.string().min(1, { message: "Postal code is required" }),
 });
 
 export type OrderDetails = z.infer<typeof DetailsSchema>;
@@ -27,12 +27,12 @@ const Details = () => {
 
   const { cartItems } = useAppState();
   if (cartItems.length === 0) {
-    redirect('/products');
+    redirect("/products");
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch({
-      type: 'SET_ORDER_DETAILS',
+      type: "SET_ORDER_DETAILS",
       orderDetails: { ...orderDetails, [e.target.name]: e.target.value },
     });
   };
@@ -47,88 +47,88 @@ const Details = () => {
   });
 
   const submit = (data: OrderDetails) => {
-    dispatch({ type: 'SET_ORDER_DETAILS', orderDetails: data });
+    dispatch({ type: "SET_ORDER_DETAILS", orderDetails: data });
     reset();
-    router.push('/cart/payment');
+    router.push("/cart/payment");
   };
 
   return (
-    <Container classes='py-12'>
-      <div className='mx-auto max-w-[700px] px-4'>
-        <h4 className='pb-8 text-3xl font-light'>
+    <Container classes="py-12">
+      <div className="mx-auto max-w-[700px] px-4">
+        <h4 className="pb-8 text-3xl font-light">
           Choose your shipping address
         </h4>
         <form>
           <Fieldset
-            id='email'
-            label='Email*'
+            id="email"
+            label="Email*"
             value={orderDetails.email}
             handleInputChange={handleInputChange}
             register={register}
           />
           {errors.email ? (
-            <span className='text-xs text-red-400'>{errors.email.message}</span>
+            <span className="text-xs text-red-400">{errors.email.message}</span>
           ) : (
-            <span className='p-3'></span>
+            <span className="p-3"></span>
           )}
           <Fieldset
-            id='fullName'
-            label='Full name*'
+            id="fullName"
+            label="Full name*"
             value={orderDetails.fullName}
             handleInputChange={handleInputChange}
             register={register}
           />
           {errors.fullName ? (
-            <span className='text-xs text-red-400'>
+            <span className="text-xs text-red-400">
               {errors.fullName.message}
             </span>
           ) : (
-            <span className='p-3'></span>
+            <span className="p-3"></span>
           )}
           <Fieldset
-            id='street'
-            label='Street address*'
+            id="street"
+            label="Street address*"
             value={orderDetails.street}
             handleInputChange={handleInputChange}
             register={register}
           />
           {errors.street ? (
-            <span className='text-xs text-red-400'>
+            <span className="text-xs text-red-400">
               {errors.street.message}
             </span>
           ) : (
-            <span className='p-3'></span>
+            <span className="p-3"></span>
           )}
           <Fieldset
-            id='postalCode'
-            label='Postal code*'
+            id="postalCode"
+            label="Postal code*"
             value={orderDetails.postalCode}
             handleInputChange={handleInputChange}
             register={register}
           />
           {errors.postalCode ? (
-            <span className='text-xs text-red-400'>
+            <span className="text-xs text-red-400">
               {errors.postalCode.message}
             </span>
           ) : (
-            <span className='p-3'></span>
+            <span className="p-3"></span>
           )}
           <Fieldset
-            id='city'
-            label='City*'
+            id="city"
+            label="City*"
             value={orderDetails.city}
             handleInputChange={handleInputChange}
             register={register}
           />
           {errors.city ? (
-            <span className='text-sm text-red-400'>{errors.city.message}</span>
+            <span className="text-sm text-red-400">{errors.city.message}</span>
           ) : (
-            <span className='p-3'></span>
+            <span className="p-3"></span>
           )}
           <button
-            type='button'
+            type="button"
             onClick={handleSubmit(submit)}
-            className='my-4 block w-full rounded-full bg-black py-3 text-white duration-100 ease-in-out hover:opacity-80'
+            className="my-4 block w-full rounded-full bg-black py-3 text-white duration-100 ease-in-out hover:opacity-80"
           >
             submit
           </button>

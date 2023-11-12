@@ -7,7 +7,7 @@ const Backdrop = ({ open, children }: BackdropProps) => {
   return (
     <div
       className={`fixed inset-0 flex h-full w-full items-center justify-center backdrop-brightness-75 ${
-        open ? 'flex' : 'hidden'
+        open ? "flex" : "hidden"
       }`}
     >
       {children}

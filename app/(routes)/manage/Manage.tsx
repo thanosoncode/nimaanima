@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { Provider } from 'react-redux';
-import { store } from './store/adminStore';
-import AddNewProduct from './addNewProduct/AddNewProduct';
-import { useState } from 'react';
-import Container from '../../components/container/Container';
-import MyProducts from './myProducts/MyProducts';
+import { Provider } from "react-redux";
+import { store } from "./store/adminStore";
+import AddNewProduct from "./addNewProduct/AddNewProduct";
+import { useState } from "react";
+import Container from "../../components/container/Container";
+import MyProducts from "./myProducts/MyProducts";
 
 enum Tab {
-  myProducts = 'My products',
-  newProduct = 'New Product',
+  myProducts = "My products",
+  newProduct = "New Product",
 }
 
 const Manage = () => {
@@ -33,12 +33,12 @@ const Manage = () => {
 
   return (
     <Provider store={store}>
-      <Container classes='mt-8 mb-12 px-4'>
-        <div className='flex mb-8 justify-center gap-10'>
+      <Container classes="mt-8 mb-12 px-4">
+        <div className="mb-8 flex justify-center gap-10">
           <button
             onClick={() => handleTabChange(Tab.myProducts)}
             className={`px-2 text-xl ${
-              myProductsView ? 'border-b-2 border-red-400' : ''
+              myProductsView ? "border-b-2 border-red-400" : ""
             }`}
           >
             My Products
@@ -46,7 +46,7 @@ const Manage = () => {
           <button
             onClick={() => handleTabChange(Tab.newProduct)}
             className={`px-2 text-xl ${
-              newProductView ? 'border-b-2 border-red-400' : ''
+              newProductView ? "border-b-2 border-red-400" : ""
             }`}
           >
             New Product

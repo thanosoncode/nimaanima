@@ -1,9 +1,9 @@
-import Link from 'next/link';
-import Container from '../container/Container';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { UserSession } from '@/app/utils/types';
-import LevelTwo from './levels/LevelTwo';
+import Link from "next/link";
+import Container from "../container/Container";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { UserSession } from "@/app/utils/types";
+import LevelTwo from "./levels/LevelTwo";
 
 const Footer = async () => {
   const session = (await getServerSession(authOptions)) as UserSession;
@@ -12,33 +12,33 @@ const Footer = async () => {
   return (
     <footer>
       <LevelTwo />
-      <div className='bg-someBlue-600'>
-        <Container classes='flex gap-2 py-4 justify-between  sm:flex-row flex-col'>
-          <div className='text-white text-sm flex gap-2'>
+      <div className="bg-someBlue-600">
+        <Container classes="flex gap-2 py-4 justify-between  sm:flex-row flex-col">
+          <div className="flex gap-2 text-sm text-white">
             <p>2023</p>
             <p>
-              Design inspired by{' '}
+              Design inspired by{" "}
               <Link
-                href='https://www.etsy.com/'
-                target='_blank'
-                rel='noopener noreferrer'
+                href="https://www.etsy.com/"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 etsy.com
               </Link>
             </p>
           </div>
-          <div className='flex gap-2 items-center'>
-            <Link href='/products' className='underline text-white text-sm'>
+          <div className="flex items-center gap-2">
+            <Link href="/products" className="text-sm text-white underline">
               Products
             </Link>
-            <Link href='/techniques' className='underline text-white text-sm'>
+            <Link href="/techniques" className="text-sm text-white underline">
               Techniques
             </Link>
-            <Link href='/contact' className='underline text-white text-sm'>
+            <Link href="/contact" className="text-sm text-white underline">
               Contact
             </Link>
             {isAdmin ? (
-              <Link href='/manage' className='underline text-white text-sm'>
+              <Link href="/manage" className="text-sm text-white underline">
                 Manage
               </Link>
             ) : null}

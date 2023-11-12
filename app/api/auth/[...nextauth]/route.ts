@@ -1,9 +1,9 @@
-import NextAuth from 'next-auth/next';
-import GoogleProvider from 'next-auth/providers/google';
-import { Session, SessionStrategy } from 'next-auth';
-import { prisma } from '@/lib/prisma';
-import { JWT } from 'next-auth/jwt';
-import { AdapterUser } from 'next-auth/adapters';
+import NextAuth from "next-auth/next";
+import GoogleProvider from "next-auth/providers/google";
+import { Session, SessionStrategy } from "next-auth";
+import { prisma } from "@/lib/prisma";
+import { JWT } from "next-auth/jwt";
+import { AdapterUser } from "next-auth/adapters";
 
 export const authOptions = {
   // adapter: PrismaAdapter(prisma),
@@ -19,8 +19,8 @@ export const authOptions = {
           const newUser = await prisma.user.create({
             data: {
               email: params.session.user.email,
-              name: params.session.user.name ?? '',
-              image: params.session.user.image ?? '',
+              name: params.session.user.name ?? "",
+              image: params.session.user.image ?? "",
               favorites: [],
             },
           });
@@ -44,7 +44,7 @@ export const authOptions = {
 
   secret: process.env.AUTH_SECRET,
   session: {
-    strategy: 'jwt' as SessionStrategy,
+    strategy: "jwt" as SessionStrategy,
     maxAge: 24 * 60 * 60,
   },
 

@@ -1,6 +1,6 @@
-import Products from './(routes)/products/Products';
-import { Category, SearchParams, SortBy } from './utils/types';
-import { prisma } from '@/lib/prisma';
+import Products from "./(routes)/products/Products";
+import { Category, SearchParams, SortBy } from "./utils/types";
+import { prisma } from "@/lib/prisma";
 
 const Home = async ({ searchParams }: SearchParams) => {
   const products = await prisma.product.findMany();

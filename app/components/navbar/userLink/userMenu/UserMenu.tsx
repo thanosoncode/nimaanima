@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { signOut } from 'next-auth/react';
-import { useEffect, useRef } from 'react';
+import { signOut } from "next-auth/react";
+import { useEffect, useRef } from "react";
 
 interface UserMenuProps {
   userMenuOpen: boolean;
@@ -25,22 +25,22 @@ const UserMenu: React.FC<UserMenuProps> = ({ userMenuOpen, onClose }) => {
       }
     };
     if (userMenuOpen) {
-      document.addEventListener('click', handleOutsideClick);
+      document.addEventListener("click", handleOutsideClick);
     }
 
-    return () => document.removeEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener("click", handleOutsideClick);
   }, [userMenuOpen]);
 
   return (
     <div
       className={`${
-        userMenuOpen ? 'block' : 'hidden'
-      } absolute py-2 top-8 right-0 rounded border shadow-lg bg-white w-32 z-20`}
+        userMenuOpen ? "block" : "hidden"
+      } absolute top-8 right-0 z-20 w-32 rounded border bg-white py-2 shadow-lg`}
       ref={userMenuRef}
     >
-      <div className='flex flex-col gap-2 '>
+      <div className="flex flex-col gap-2 ">
         <button
-          className='whitespace-nowrap text-gray-500 hover:bg-gray-300 bg-white pl-6 text-left duration-300 py-1.5'
+          className="whitespace-nowrap bg-white py-1.5 pl-6 text-left text-gray-500 duration-300 hover:bg-gray-300"
           onClick={handleLogout}
         >
           Log out

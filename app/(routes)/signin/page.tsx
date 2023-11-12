@@ -1,34 +1,34 @@
-'use client';
-import google from '../../../public/assets/social/google.svg';
-import facebook from '../../../public/assets/social/facebook.svg';
-import instagram from '../../../public/assets/social/instagram.png';
-import Image from 'next/image';
-import { signIn } from 'next-auth/react';
+"use client";
+import google from "../../../public/assets/social/google.svg";
+import facebook from "../../../public/assets/social/facebook.svg";
+import instagram from "../../../public/assets/social/instagram.png";
+import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 const SignIn = () => {
   return (
-    <div className='flex justify-center items-center rounded-3xl border  shadow-soft border-neutral-300 p-8 pb-14 mt-20 w-min mx-auto'>
+    <div className="mx-auto mt-20 flex w-min items-center  justify-center rounded-3xl border border-neutral-300 p-8 pb-14 shadow-soft">
       <div>
-        <h1 className='text-xl font-medium mb-8'>Sign in</h1>
-        <div className='flex flex-col gap-6'>
+        <h1 className="mb-8 text-xl font-medium">Sign in</h1>
+        <div className="flex flex-col gap-6">
           <button
-            onClick={() => signIn('google')}
-            className='rounded-full justify-center py-3 whitespace-nowrap w-[320px] border-black border-2 font-semibold flex gap-4 items-center hover:scale-[1.04] hover:shadow-md duration-300'
+            onClick={() => signIn("google")}
+            className="flex w-[320px] items-center justify-center gap-4 whitespace-nowrap rounded-full border-2 border-black py-3 font-semibold duration-300 hover:scale-[1.04] hover:shadow-md"
           >
-            <div className='w-4 h-4 relative'>
-              <Image src={google} fill alt='google' />
+            <div className="relative h-4 w-4">
+              <Image src={google} fill alt="google" />
             </div>
             Continue with Google
           </button>
-          <button className='rounded-full justify-center py-3 whitespace-nowrap w-[320px] border-black border-2 font-semibold flex gap-4 items-center hover:scale-[1.04] hover:shadow-md duration-300'>
-            <div className='w-4 h-4 relative'>
-              <Image src={facebook} fill alt='facebook' />
+          <button className="flex w-[320px] items-center justify-center gap-4 whitespace-nowrap rounded-full border-2 border-black py-3 font-semibold duration-300 hover:scale-[1.04] hover:shadow-md">
+            <div className="relative h-4 w-4">
+              <Image src={facebook} fill alt="facebook" />
             </div>
             Continue with Facebook
           </button>
-          <button className='rounded-full justify-center py-3 whitespace-nowrap w-[320px] border-black border-2 font-semibold flex gap-4 items-center hover:scale-[1.04] hover:shadow-md duration-300'>
-            <div className='w-5 h-5 relative'>
-              <Image src={instagram} fill alt='instagram' />
+          <button className="flex w-[320px] items-center justify-center gap-4 whitespace-nowrap rounded-full border-2 border-black py-3 font-semibold duration-300 hover:scale-[1.04] hover:shadow-md">
+            <div className="relative h-5 w-5">
+              <Image src={instagram} fill alt="instagram" />
             </div>
             Continue with Instagram
           </button>

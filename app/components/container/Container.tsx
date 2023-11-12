@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const Container = ({
   classes,
@@ -8,7 +8,7 @@ const Container = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className={`mx-auto xl:w-[1140px] w-full px-2 xl:px-0 ${classes}`}>
+    <div className={`mx-auto w-full px-2 xl:w-[1140px] xl:px-0 ${classes}`}>
       {children}
     </div>
   );

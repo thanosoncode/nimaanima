@@ -1,4 +1,4 @@
-import { prisma } from './prisma';
+import { prisma } from "./prisma";
 
 export const getAllProducts = async () => {
   const products = await prisma.product.findMany({});
@@ -27,7 +27,7 @@ const updateProduct = async (
     category: string;
     images: string[];
   },
-  id: string
+  id: string,
 ) => {
   const newProduct = await prisma.product.update({
     where: {

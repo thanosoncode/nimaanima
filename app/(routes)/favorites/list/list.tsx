@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import AddToFavorites from '../../products/list/productItem/addToFavorites/AddToFavorites';
-import { Product } from '@/app/utils/types';
+import Image from "next/image";
+import Link from "next/link";
+import AddToFavorites from "../../products/list/productItem/addToFavorites/AddToFavorites";
+import { Product } from "@/app/utils/types";
 
 interface ListProps {
   favorites: Product[];
@@ -9,31 +9,31 @@ interface ListProps {
 
 const List = ({ favorites }: ListProps) => {
   return (
-    <div className='py-4'>
-      <section className='grid lg:grid-cols-4  sm:grid-cols-3  grid-cols-2 gap-4'>
+    <div className="py-4">
+      <section className="grid grid-cols-2  gap-4  sm:grid-cols-3 lg:grid-cols-4">
         {favorites.map((favorite) => (
           <div
             key={favorite.id}
-            className='rounded-lg shadow-soft p-2 hover:shadow-hover relative'
+            className="relative rounded-lg p-2 shadow-soft hover:shadow-hover"
           >
             <Link
               href={`/products/${favorite.id}`}
-              className='w-full h-32 md:h-44 sm:h-40 relative block'
+              className="relative block h-32 w-full sm:h-40 md:h-44"
             >
               <Image
                 src={favorite.images[0]}
                 alt={favorite.name}
                 fill
-                className='object-cover rounded-lg'
+                className="rounded-lg object-cover"
               />
             </Link>
             <div>
-              <div className='px-1 pt-1'>
-                <div className='flex items-center justify-between gap-2 text-sm'>
-                  <p className='overflow-hidden whitespace-nowrap text-ellipsis'>
+              <div className="px-1 pt-1">
+                <div className="flex items-center justify-between gap-2 text-sm">
+                  <p className="overflow-hidden text-ellipsis whitespace-nowrap">
                     {favorite.name}
                   </p>
-                  <p className='whitespace-nowrap'>€ {favorite.price}</p>
+                  <p className="whitespace-nowrap">€ {favorite.price}</p>
                 </div>
               </div>
             </div>

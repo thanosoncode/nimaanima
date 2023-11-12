@@ -1,16 +1,16 @@
-import Footer from './components/footer/Footer';
-import Navbar from './components/navbar/Navbar';
-import { AppProvider } from './context/context';
-import AuthProvider from './context/AuthProvider';
-import './globals.css';
-import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/route';
-import { UserSession } from './utils/types';
-import QueryProvider from './context/QueryProvider';
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
+import { AppProvider } from "./context/context";
+import AuthProvider from "./context/AuthProvider";
+import "./globals.css";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import { UserSession } from "./utils/types";
+import QueryProvider from "./context/QueryProvider";
 
 export const metadata = {
-  title: 'nimaAnima',
-  description: 'Handmade creations',
+  title: "nimaAnima",
+  description: "Handmade creations",
 };
 
 export default async function RootLayout({
@@ -20,13 +20,13 @@ export default async function RootLayout({
 }) {
   const session = (await getServerSession(authOptions)) as UserSession;
   return (
-    <html lang='en'>
+    <html lang="en">
       <body>
         <AuthProvider>
           <QueryProvider>
             <AppProvider>
               <Navbar session={session} />
-              <div className='flex flex-col justify-between min-h-[calc(100vh-66px)]'>
+              <div className="flex min-h-[calc(100vh-66px)] flex-col justify-between">
                 {children}
                 <Footer />
               </div>

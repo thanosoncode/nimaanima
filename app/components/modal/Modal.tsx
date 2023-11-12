@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef } from "react";
 
 const Modal = ({
   children,
@@ -32,34 +32,34 @@ const Modal = ({
 
   useLayoutEffect(() => {
     if (open) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     }
     return () => {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = "auto";
     };
   }, [open]);
 
   useEffect(() => {
     const handleEscapePress = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         onClose && onClose();
       }
     };
 
-    document.addEventListener('keydown', handleEscapePress);
+    document.addEventListener("keydown", handleEscapePress);
 
-    return () => document.removeEventListener('keydown', handleEscapePress);
+    return () => document.removeEventListener("keydown", handleEscapePress);
   }, [open]);
 
   return (
     <div
-      className={`${open ? 'fixed' : 'hidden'} z-40 inset-0`}
+      className={`${open ? "fixed" : "hidden"} inset-0 z-40`}
       onClick={handleOutsideClick}
     >
-      <div className='bg-black  opacity-70 w-full h-full duration-300'></div>
-      <div className='flex justify-center items-center absolute inset-0'>
+      <div className="h-full  w-full bg-black opacity-70 duration-300"></div>
+      <div className="absolute inset-0 flex items-center justify-center">
         <div ref={childrenContainerRef}>{children}</div>
       </div>
     </div>
