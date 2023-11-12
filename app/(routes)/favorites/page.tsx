@@ -6,6 +6,7 @@ import { UserSession } from '@/app/utils/types';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from 'next-auth';
 import ClientFavorites from './clientFavorites/ClientFavorites';
+import Container from '@/app/components/container/Container';
 
 const Favorites = async () => {
   const session = (await getServerSession(authOptions)) as UserSession;
@@ -13,10 +14,10 @@ const Favorites = async () => {
   const favorites = session?.dbUser.favorites;
 
   const serverFavorites = (
-    <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2 mt-8 pb-32'>
+    <Container classes='sm:mt-6 mt-12 mb-32'>
       {session?.dbUser ? (
         <div className='mb-16'>
-          <h4 className='text-5xl font-thin  text-neutral-950'>
+          <h4 className='text-4xl sm:text-5xl font-thin  text-neutral-950'>
             Favorite items
           </h4>
         </div>
@@ -53,7 +54,7 @@ const Favorites = async () => {
       ) : (
         <Empty />
       )}
-    </div>
+    </Container>
   );
 
   const result = session?.dbUser ? serverFavorites : <ClientFavorites />;

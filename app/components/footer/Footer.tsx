@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Container from '../container/Container';
-import LevelOne from './levels/LevelOne';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { UserSession } from '@/app/utils/types';
@@ -14,7 +13,7 @@ const Footer = async () => {
     <footer>
       <LevelTwo />
       <div className='bg-someBlue-600'>
-        <Container classes='flex gap-2 py-4 px-2 justify-between max-w-[1140px] sm:flex-row flex-col'>
+        <Container classes='flex gap-2 py-4 justify-between  sm:flex-row flex-col'>
           <div className='text-white text-sm flex gap-2'>
             <p>2023</p>
             <p>

@@ -5,12 +5,13 @@ import Empty from '../empty/Empty';
 import List from '../list/list';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { useAppState } from '@/app/context/context';
+import Container from '@/app/components/container/Container';
 
 const ClientFavorites = () => {
   const { favorites: favoritesFromState } = useAppState();
 
   return (
-    <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2 mt-8 pb-32'>
+    <Container classes='mt-6 sm:mt-12 pb-32'>
       <div className='mb-16'>
         <div className='flex gap-8 justify-between sm:justify-start  items-center mb-8'>
           <h4 className='text-4xl whitespace-nowrap sm:text-5xl font-thin  text-neutral-950'>
@@ -42,7 +43,7 @@ const ClientFavorites = () => {
       ) : (
         <Empty />
       )}
-    </div>
+    </Container>
   );
 };
 

@@ -53,7 +53,7 @@ const Details = () => {
   };
 
   return (
-    <Container classes='py-12 mx-auto lg:px-8 lg:w-full xl:max-w-[1140px] md:w-full md:px-8 w-full px-2'>
+    <Container classes='py-12'>
       <div className='mx-auto max-w-[700px] px-4'>
         <h4 className='pb-8 text-3xl font-light'>
           Choose your shipping address

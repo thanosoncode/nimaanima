@@ -7,7 +7,7 @@ const FooterLevelOne = () => {
     <div>
       <ShapeTwo fill='#D7E6F5' />
       <div className='bg-someBlue-400'>
-        <div className='-mt-1 flex flex-col items-center justify-center gap-4 pt-2 pb-4 bg-LightBlueWave'>
+        <div className='flex flex-col items-center justify-center gap-4  pt-2 pb-0 sm:pb-2 lg:pb-8 bg-LightBlueWave'>
           <h4 className='font-medium px-8 text-center'>
             Ask us anything or make a special order &ndash; we&apos;re here to
             help!

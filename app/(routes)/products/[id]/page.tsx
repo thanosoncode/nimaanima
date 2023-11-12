@@ -15,7 +15,7 @@ const SingleProduct = async ({
 
   return (
     <>
-      <Container classes='w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1140px] mt-8  md:mt-12 mb-12 md:mb-20'>
+      <Container classes='items-center justify-between pb-4 mt-6 sm:mt-12 mb-12 md:mb-20'>
         <div className='flex gap-2 sm:gap-4'>
           <div className='flex flex-col gap-4 md:flex-row'>
             <HandleProduct product={product} />

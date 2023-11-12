@@ -31,7 +31,7 @@ const MobileMenu = () => {
     <div className='relative flex gap-2 items-center'>
       <div
         onClick={handleMenuOpen}
-        className='w-min cursor-pointer whitespace-nowrap  px-2 py-1.5 text-center'
+        className='w-min cursor-pointer whitespace-nowrap  px-2 pt-1.5 text-center'
       >
         <FiMenu size={20} />
       </div>

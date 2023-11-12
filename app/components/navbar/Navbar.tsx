@@ -8,6 +8,7 @@ import CartLink from './cartLink/CartLink';
 import UserLink from './userLink/UserLink';
 import MobileMenu from './MobileMenu';
 import { UserSession } from '@/app/utils/types';
+import Container from '../container/Container';
 
 const Navbar = ({ session }: { session: UserSession }) => {
   const pathname = usePathname();
@@ -19,19 +20,16 @@ const Navbar = ({ session }: { session: UserSession }) => {
 
   return (
     <nav className='border-b-2 border-neutral-300'>
-      <div className='mx-auto flex w-full items-center justify-between py-4 px-2 md:w-full md:px-8 lg:w-full lg:px-8 xl:max-w-[1140px]'>
+      <Container classes='flex w-full items-center justify-between py-2 sm:py-4'>
         <div className='flex items-center gap-2'>
-          <Link
-            href='/'
-            className='font-bold text-xl text-main-400 sm:text-3xl'
-          >
-            nimaAnima
+          <Link href='/' className='font-bold  text-main-400 text-3xl'>
+            NimaAnima
           </Link>
-          <div className='sm:hidden flex'>
+          <div className='md:hidden flex'>
             <MobileMenu />
           </div>
         </div>
-        <div className='items-center gap-1 sm:gap-4 hidden sm:flex'>
+        <div className='items-center gap-1 sm:gap-4 hidden md:flex'>
           {links.map((link) => {
             return (
               <Link
@@ -68,7 +66,7 @@ const Navbar = ({ session }: { session: UserSession }) => {
           </Link>
           <CartLink />
         </div>
-      </div>
+      </Container>
     </nav>
   );
 };

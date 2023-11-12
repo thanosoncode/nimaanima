@@ -3,11 +3,12 @@ import Link from 'next/link';
 import RowCarousel from '@/app/components/rowCarousel/RowCarousel';
 
 import { TechniqueData } from '@/app/utils/types';
+import Container from '@/app/components/container/Container';
 
 const Technique = (props: TechniqueData) => {
   return (
     <div className='mt-8 mb-20'>
-      <header className='xl:max-w-[1140px] mx-auto px-2 lg:px-8 mb-16'>
+      <Container classes=' mb-16'>
         <h1 className='text-4xl sm:text-5xl font-thin mb-8'>
           {props.header.title}
         </h1>
@@ -22,8 +23,8 @@ const Technique = (props: TechniqueData) => {
             priority
           />
         </div>
-      </header>
-      <main className='grid grid-cols-1 gap-6 sm:gap-12 xl:max-w-[1140px] mx-auto px-2 lg:px-8'>
+      </Container>
+      <Container classes='grid grid-cols-1 gap-6 sm:gap-12'>
         {props.steps.map((step, index) => (
           <article
             key={index}
@@ -70,7 +71,7 @@ const Technique = (props: TechniqueData) => {
           title={props.rowCarousel.title}
           items={props.rowCarousel.products}
         />
-      </main>
+      </Container>
     </div>
   );
 };

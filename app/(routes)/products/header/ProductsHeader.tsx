@@ -11,13 +11,13 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = ({
   selectedCategory,
 }) => {
   return (
-    <div className='mt-12'>
+    <div className='mt-6 sm:mt-12'>
       {/* <div className='rotate-180'>
         <ShapeOne fill='#F8EBE6' />
       </div> */}
       <header className='relative pb-4 '>
         <div className='flex flex-col items-center justify-center'>
-          <h1 className='whitespace-normal  text-center font-extralight sm:whitespace-nowrap text-4xl md:text-5xl mb-6  sm:mb-8 '>
+          <h1 className='whitespace-normal text-center font-thin sm:whitespace-nowrap text-4xl md:text-5xl mb-6  sm:mb-8 '>
             Handmade one&nbsp;of&nbsp;a&nbsp;kind&nbsp;creations
           </h1>
           <section className='flex items-center justify-center gap-6  sm:gap-12'>

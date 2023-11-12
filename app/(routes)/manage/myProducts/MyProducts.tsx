@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 import RemoveButton from './removeButton/RemoveButton';
 import Spinner from '@/app/components/spinner/Spinner';
+import Container from '@/app/components/container/Container';
 
 const MyProducts: React.FC = () => {
   const { data: products, isLoading } = useQuery({
@@ -55,10 +56,6 @@ const MyProducts: React.FC = () => {
     </table>
   );
 
-  return (
-    <div className='xl:max-w-[1140px] mx-auto w-full lg:px-4 px-2'>
-      {result}
-    </div>
-  );
+  return <Container>{result}</Container>;
 };
 export default MyProducts;

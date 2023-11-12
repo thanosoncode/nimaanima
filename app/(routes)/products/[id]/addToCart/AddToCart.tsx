@@ -32,7 +32,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
   return (
     <button
       onClick={handleAddToCart}
-      className={`mx-auto mt-2 w-1/3  rounded-full bg-neutral-900 py-2 text-center text-white duration-100 ease-in-out sm:mt-6 sm:w-full sm:py-3 ${
+      className={`mx-auto mt-2  rounded-full bg-neutral-900 py-2 text-center text-white duration-100 ease-in-out sm:mt-6 w-full sm:py-3 ${
         isNotInCart ? 'hover:scale-[1.04] hover:opacity-80' : ''
       } `}
       disabled={!isNotInCart}

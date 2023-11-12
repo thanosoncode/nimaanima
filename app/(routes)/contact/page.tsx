@@ -52,11 +52,11 @@ const ContactUs = () => {
   } = useForm<TypeFormData>({ resolver: zodResolver(TypeFormData) });
 
   return (
-    <div className='mx-auto w-full max-w-[1140px] overflow-hidden md:px-8 lg:px-8'>
-      <div className='relative h-full w-full'>
-        <header className='px-2 pt-12 pb-4 sm:px-0'>
+    <Container classes='overflow-hidden '>
+      <div className=''>
+        <header className='mt-6 sm:mt-12 mb-8'>
           <Container>
-            <h1 className='pb-4 text-center text-4xl sm:text-5xl font-thin'>
+            <h1 className='mb-8 text-center text-4xl sm:text-5xl font-thin'>
               We take orders!
               <br />
               Reach out for special offers or custom inquiries
@@ -74,7 +74,7 @@ const ContactUs = () => {
             <form
               ref={form}
               onSubmit={handleSubmit(sendEmail)}
-              className='mx-auto flex w-full flex-col gap-4 px-6 sm:w-[500px]'
+              className='mx-auto flex w-full flex-col gap-4 sm:w-[500px]'
             >
               <fieldset className='flex flex-col'>
                 <label>Message</label>
@@ -114,7 +114,7 @@ const ContactUs = () => {
       <Modal open={loading}>
         <div className='bg-white px-12 py-6'>Sending...</div>
       </Modal>
-    </div>
+    </Container>
   );
 };
 

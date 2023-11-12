@@ -6,8 +6,8 @@ import ShapeOne from '@/app/components/svg/ShapeOne';
 
 const Techniques = () => {
   return (
-    <div className='mt-8 mb-20'>
-      <header className='xl:max-w-[1140px] px-2 lg:px-8  mx-auto w-full mb-12'>
+    <div className='mt-6 sm:mt-12 mb-20'>
+      <Container classes='mb-12'>
         <h1 className='text-4xl sm:text-5xl font-thin  text-neutral-950 mb-4'>
           Explore the Techniques Behind Our Handmade Collection
         </h1>
@@ -17,12 +17,12 @@ const Techniques = () => {
           to Card Woven Guitar Straps &ndash; Reflects the Passion and Precision
           We Infuse into Every Creation
         </h3>
-      </header>
+      </Container>
       <div className='rotate-180'>
         <ShapeOne fill='#F8EBE6' />
       </div>
       <div className='bg-lightPink-400 '>
-        <div className='xl:max-w-[1140px] px-2 lg:px-8 xs:px-12 gap-y-8  mx-auto w-full grid grid-cols-1 sm:grid-cols-2 py-12 gap-8'>
+        <Container classes=' gap-y-8  mx-auto w-full grid grid-cols-1 sm:grid-cols-2 py-12 gap-8'>
           {categories.map((category, index) => (
             <Link
               href={`/techniques/${category.pathname}`}
@@ -43,7 +43,7 @@ const Techniques = () => {
               </div>
             </Link>
           ))}
-        </div>
+        </Container>
       </div>
       <div className=''>
         <ShapeOne fill='#F8EBE6' />
