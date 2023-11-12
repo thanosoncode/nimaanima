@@ -36,7 +36,7 @@ const ProductList: React.FC<ProductsProps> = async ({
         <h4 className='mb-4 text-2xl font-light'>{title}</h4>
         <SortByButton />
       </div>
-      <section className='grid gap-y-4 md:gap-y-8 gap-x-4 justify-center grid-cols-2 sm:grid-cols-3  md:grid-cols-4 '>
+      <section className='grid gap-y-8 md:gap-y-8 gap-x-4 justify-center grid-cols-2 sm:grid-cols-3  md:grid-cols-4 '>
         {productsToShow.map((product) => (
           <ProductItem
             product={product}

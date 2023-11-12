@@ -23,12 +23,12 @@ const Favorites = async () => {
       ) : (
         <div className='mb-16'>
           <div className='flex gap-8 items-center mb-8'>
-            <h4 className='text-5xl font-thin  text-neutral-950'>
+            <h4 className='text-4xl whitespace-nowrap sm:text-5xl font-thin  text-neutral-950'>
               Favorite items
             </h4>
             <Link
               href='/signin'
-              className='py-2 px-4 border-2 rounded-full border-neutral-900 block hover:scale-[1.04] duration-200 hover:shadow'
+              className='py-2 px-4 border-2 rounded-full border-neutral-900 whitespace-nowrap block hover:scale-[1.04] duration-200 hover:shadow'
             >
               Sign in
             </Link>

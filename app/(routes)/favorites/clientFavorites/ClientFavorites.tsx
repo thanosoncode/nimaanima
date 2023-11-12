@@ -13,17 +13,17 @@ const ClientFavorites = () => {
     <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2 mt-8 pb-32'>
       <div className='mb-16'>
         <div className='flex gap-8 items-center mb-8'>
-          <h4 className='text-5xl font-thin  text-neutral-950'>
+          <h4 className='text-4xl whitespace-nowrap sm:text-5xl font-thin  text-neutral-950'>
             Favorite items
           </h4>
           <Link
             href='/signin'
-            className='py-2 px-4 border-2 rounded-full border-neutral-900 block hover:scale-[1.04] duration-200 hover:shadow'
+            className='py-2 px-4 border-2 rounded-full border-neutral-900 block whitespace-nowrap hover:scale-[1.04] duration-200 hover:shadow'
           >
             Sign in
           </Link>
         </div>
-        <div className='flex gap-1 items-center mb-3'>
+        <div className='flex gap-2 items-start mb-3'>
           <AiOutlineClockCircle size={22} />
           <p className='font-medium'>
             Don&apos;t lose your faves! Sign in or create an account.

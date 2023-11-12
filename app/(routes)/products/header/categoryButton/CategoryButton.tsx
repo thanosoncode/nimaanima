@@ -22,7 +22,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
       href={{ pathname: '', query: { category: category.name } }}
       className='flex flex-col items-center justify-center gap-2 cursor-pointer group'
     >
-      <div className='relative w-16 h-16 overflow-hidden duration-100 ease-in-out rounded-full sm:h-28 sm:w-28 group-hover:scale-105 hover:shadow-cart'>
+      <div className='relative w-16 h-16 overflow-hidden duration-100 ease-in-out rounded-full sm:h-20 sm:w-20 md:h-28 md:w-28 group-hover:scale-105 hover:shadow-cart'>
         <Image
           src={category.image}
           alt={category.name}

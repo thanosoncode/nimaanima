@@ -17,10 +17,10 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = ({
       </div>
       <header className='relative pb-4 bg-lightPeach-400'>
         <div className='flex flex-col items-center justify-center'>
-          <h1 className='whitespace-normal  text-center text-2xl font-thin tracking-wide sm:whitespace-nowrap sm:text-5xl mb-8 '>
-            Handmade and one of a kind creations.
+          <h1 className='whitespace-normal  text-center text-2xl font-extralight sm:whitespace-nowrap sm:text-4xl md:text-5xl mb-2  sm:mb-8 '>
+            Handmade and one of a kind creations
           </h1>
-          <section className='mt-6 flex items-center justify-center gap-6 sm:mt-0 sm:gap-12'>
+          <section className=' flex items-center justify-center gap-6  sm:gap-12'>
             {categories.map((category) => (
               <CategoryButton
                 category={category}
