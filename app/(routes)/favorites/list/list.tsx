@@ -10,7 +10,7 @@ interface ListProps {
 const List = ({ favorites }: ListProps) => {
   return (
     <div className='py-4'>
-      <section className='grid lg:grid-cols-4    md:grid-cols-3 sm:grid-cols-3 xs:grid-cols-3 grid-cols-2 gap-4'>
+      <section className='grid lg:grid-cols-4  sm:grid-cols-3  grid-cols-2 gap-4'>
         {favorites.map((favorite) => (
           <div
             key={favorite.id}
@@ -18,7 +18,7 @@ const List = ({ favorites }: ListProps) => {
           >
             <Link
               href={`/products/${favorite.id}`}
-              className='w-full  h-32 md:h-44 sm:h-40 relative block'
+              className='w-full h-32 md:h-44 sm:h-40 relative block'
             >
               <Image
                 src={favorite.images[0]}
@@ -28,7 +28,7 @@ const List = ({ favorites }: ListProps) => {
               />
             </Link>
             <div>
-              <div className='px-1  pt-1'>
+              <div className='px-1 pt-1'>
                 <div className='flex items-center justify-between gap-2 text-sm'>
                   <p className='overflow-hidden whitespace-nowrap text-ellipsis'>
                     {favorite.name}

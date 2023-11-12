@@ -13,9 +13,9 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = ({
   return (
     <div className='mt-4'>
       <div className='rotate-180'>
-        <ShapeOne fill='#FDEBD2' />
+        <ShapeOne fill='#F8EBE6' />
       </div>
-      <header className='relative pb-4 bg-lightPeach-400'>
+      <header className='relative pb-4 bg-lightPink-400'>
         <div className='flex flex-col items-center justify-center'>
           <h1 className='whitespace-normal  text-center text-2xl font-extralight sm:whitespace-nowrap sm:text-4xl md:text-5xl mb-2  sm:mb-8 '>
             Handmade and one of a kind creations
@@ -32,7 +32,7 @@ const ProductsHeader: React.FC<ProductsHeaderProps> = ({
         </div>
       </header>
       <div className=''>
-        <ShapeOne fill='#FDEBD2' />
+        <ShapeOne fill='#F8EBE6' />
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ const Favorites = async () => {
         </div>
       ) : (
         <div className='mb-16'>
-          <div className='flex gap-8 items-center mb-8'>
+          <div className='flex gap-8 justify-between sm:justify-start items-center mb-8'>
             <h4 className='text-4xl whitespace-nowrap sm:text-5xl font-thin  text-neutral-950'>
               Favorite items
             </h4>

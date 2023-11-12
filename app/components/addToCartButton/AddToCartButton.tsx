@@ -32,7 +32,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     <button
       disabled={!isNotInCart}
       onClick={handleAddToCart}
-      className='px-1 sm:px-3 border-2 rounded-full border-neutral-500 whitespace-nowrap p-y-1 w-min '
+      className='px-2 sm:px-3 border-2 rounded-full border-neutral-500 whitespace-nowrap p-y-1 w-min '
     >
       {isNotInCart ? 'Add to cart' : 'Added!'}
     </button>

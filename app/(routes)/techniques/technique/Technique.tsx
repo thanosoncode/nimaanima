@@ -6,9 +6,11 @@ import { TechniqueData } from '@/app/utils/types';
 
 const Technique = (props: TechniqueData) => {
   return (
-    <div className='mt-12 mb-20'>
+    <div className='mt-8 mb-20'>
       <header className='xl:max-w-[1140px] mx-auto px-2 lg:px-8 mb-16'>
-        <h1 className='text-6xl font-thin mb-8'>{props.header.title}</h1>
+        <h1 className='text-4xl sm:text-5xl font-thin mb-8'>
+          {props.header.title}
+        </h1>
         <div className='relative w-full h-[460px] '>
           <Image
             src={props.header.image.src}
@@ -30,7 +32,9 @@ const Technique = (props: TechniqueData) => {
             }  gap-6 sm:gap-12 p-2 items-center`}
           >
             <div className='w-full sm:w-1/2 text-center'>
-              <h3 className='text-2xl font-semibold mb-4'>{step.info.title}</h3>
+              <h3 className='text-2xl font-semibold mb-2 sm:mb-4'>
+                {step.info.title}
+              </h3>
               <p>{step.info.text}</p>
             </div>
             <div className='relative w-full sm:w-1/2 h-[280px] rounded-lg overflow-hidden'>

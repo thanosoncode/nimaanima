@@ -52,15 +52,20 @@ const ContactUs = () => {
   } = useForm<TypeFormData>({ resolver: zodResolver(TypeFormData) });
 
   return (
-    <div className='mx-auto w-full max-w-[1400px] overflow-hidden md:px-8 lg:px-8'>
+    <div className='mx-auto w-full max-w-[1140px] overflow-hidden md:px-8 lg:px-8'>
       <div className='relative h-full w-full'>
         <header className='px-2 pt-12 pb-4 sm:px-0'>
           <Container>
-            <h1 className='pb-4 text-center text-4xl font-thin tracking-wide'>
-              Make a special offer or ask us anything like.
+            <h1 className='pb-4 text-center text-4xl sm:text-5xl font-thin'>
+              We take orders!
+              <br />
+              Reach out for special offers or custom inquiries
             </h1>
-            <p className='text-center font-light tracking-wide'>
-              Send us your message we will contact you as soon as possible.
+            <p className='text-center font-light'>
+              Have a specific request or looking for a customized item? Send us
+              a message, and we'll get back to you promptly.
+              <br /> Make a special offer or ask us anything &ndash; we're here
+              for you!
             </p>
           </Container>
         </header>

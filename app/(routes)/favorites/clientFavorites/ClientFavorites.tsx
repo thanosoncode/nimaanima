@@ -12,7 +12,7 @@ const ClientFavorites = () => {
   return (
     <div className='xl:max-w-[1140px] mx-auto w-full md:px-8 px-2 mt-8 pb-32'>
       <div className='mb-16'>
-        <div className='flex gap-8 items-center mb-8'>
+        <div className='flex gap-8 justify-between sm:justify-start  items-center mb-8'>
           <h4 className='text-4xl whitespace-nowrap sm:text-5xl font-thin  text-neutral-950'>
             Favorite items
           </h4>

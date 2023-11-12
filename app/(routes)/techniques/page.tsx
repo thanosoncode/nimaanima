@@ -8,7 +8,7 @@ const Techniques = () => {
   return (
     <div className='mt-8 mb-20'>
       <header className='xl:max-w-[1140px] px-2 lg:px-8  mx-auto w-full mb-12'>
-        <h1 className='text-5xl font-thin  text-neutral-950 mb-4'>
+        <h1 className='text-4xl sm:text-5xl font-thin  text-neutral-950 mb-4'>
           Explore the Techniques Behind Our Handmade Collection
         </h1>
         <h3>
