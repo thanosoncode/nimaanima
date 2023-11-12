@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import Container from '../container/Container';
-import CTA from './cta/CTA';
+import LevelOne from './levels/LevelOne';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { UserSession } from '@/app/utils/types';
+import LevelTwo from './levels/LevelTwo';
 
 const Footer = async () => {
   const session = (await getServerSession(authOptions)) as UserSession;
@@ -11,7 +12,7 @@ const Footer = async () => {
 
   return (
     <footer>
-      <CTA />
+      <LevelTwo />
       <div className='bg-someBlue-600'>
         <Container classes='flex gap-2 py-4 px-2 justify-between max-w-[1140px] sm:flex-row flex-col'>
           <div className='text-white text-sm flex gap-2'>

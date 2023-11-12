@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import ShapeTwo from '../../svg/ShapeTwo';
-import ShapeThree from '../../svg/ShpaeThree';
+import ShapeThree from '../../svg/ShapeThree';
 
-const FooterCTA = () => {
+const FooterLevelOne = () => {
   return (
     <div>
       <ShapeTwo fill='#D7E6F5' />
@@ -29,4 +29,4 @@ const FooterCTA = () => {
     </div>
   );
 };
-export default FooterCTA;
+export default FooterLevelOne;

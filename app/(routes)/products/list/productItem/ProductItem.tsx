@@ -29,7 +29,7 @@ const ProductItem = ({ product, isFavorite }: ProductItemProps) => {
       <div>
         <div className='px-1 mb-1'>
           <div className='flex  sm:flex-row flex-col sm:gap-2  sm:items-center sm:justify-between items-start justify-start'>
-            <p className='overflow-hidden whitespace-nowrap text-ellipsis'>
+            <p className='overflow-hidden whitespace-nowrap text-ellipsis w-full'>
               {product.name}
             </p>
             <p className='whitespace-nowrap'>€ {product.price}</p>
