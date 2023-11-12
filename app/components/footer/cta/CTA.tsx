@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Container from '../../container/Container';
 import ShapeTwo from '../../svg/ShapeTwo';
 import ShapeThree from '../../svg/ShpaeThree';
 
@@ -17,17 +16,15 @@ const FooterCTA = () => {
           </button>
         </div>
       </div>
-      <div className='bg-someBlue-400'>
-        <div className='rotate-180 '>
+      <div className='bg-someBlue-400 h-10 w-full relative '>
+        <div className='absolute inset-0 rotate-180'>
           <ShapeThree fill='#4D6BC6' />
         </div>
-        <div className='bg-someBlue-500'>
-          <Container classes='pb-2.5 flex justify-center'>
-            <span className='text-center text-white border-b border-dotted border-white '>
-              Every product is 100% handmade.
-            </span>
-          </Container>
-        </div>
+      </div>
+      <div className='pb-2   flex justify-center bg-someBlue-500'>
+        <span className='text-center text-white  '>
+          Every product is 100% handmade.
+        </span>
       </div>
     </div>
   );

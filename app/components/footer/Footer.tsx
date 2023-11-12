@@ -13,8 +13,20 @@ const Footer = async () => {
     <footer>
       <CTA />
       <div className='bg-someBlue-600'>
-        <Container classes='flex gap-2 py-4 px-2 justify-between max-w-[1140px]'>
-          <p className='text-white text-sm'>2023</p>
+        <Container classes='flex gap-2 py-4 px-2 justify-between max-w-[1140px] sm:flex-row flex-col'>
+          <div className='text-white text-sm flex gap-2'>
+            <p>2023</p>
+            <p>
+              Design inspired by{' '}
+              <Link
+                href='https://www.etsy.com/'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                etsy.com
+              </Link>
+            </p>
+          </div>
           <div className='flex gap-2 items-center'>
             <Link href='/products' className='underline text-white text-sm'>
               Products
