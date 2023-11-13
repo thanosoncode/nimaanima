@@ -1,10 +1,10 @@
-import Container from "../../../components/container/Container";
-import AddToCart from "./addToCart/AddToCart";
-import Link from "next/link";
-import HandleProduct from "./handleProduct/HandleProduct";
-import { getSingleProduct } from "@/lib/products";
-import Recommendations from "./recommendations/Recommendations";
-import { Product } from "@prisma/client";
+import Container from '../../../components/container/Container';
+import AddToCart from './addToCart/AddToCart';
+import Link from 'next/link';
+import HandleProduct from './handleProduct/HandleProduct';
+import { getSingleProduct } from '@/lib/products';
+import Recommendations from './recommendations/Recommendations';
+import { Product } from '@prisma/client';
 
 const SingleProduct = async ({
   params: { id },
@@ -21,7 +21,7 @@ const SingleProduct = async ({
             <HandleProduct product={product} />
             <article className="flex w-full flex-col gap-2 md:w-[25%] md:gap-6">
               <p className="text-xl font-semibold md:text-2xl">
-                € {product.price}{" "}
+                € {product.price}{' '}
               </p>
               <p className="text-xl text-neutral-700 sm:text-xl ">
                 {product.name}
@@ -38,7 +38,7 @@ const SingleProduct = async ({
             </article>
           </div>
         </div>
-        <div className="mt-12">
+        <div className="mt-8 sm:mt-12">
           <Recommendations category={product.category} currentId={id} />
         </div>
       </Container>

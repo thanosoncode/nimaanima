@@ -1,9 +1,9 @@
-import Link from "next/link";
-import Image from "next/image";
-import React from "react";
-import { Product } from "@/app/utils/types";
-import AddToCartButton from "../../../../components/addToCartButton/AddToCartButton";
-import AddToFavorites from "./addToFavorites/AddToFavorites";
+import Link from 'next/link';
+import Image from 'next/image';
+import React from 'react';
+import { Product } from '@/app/utils/types';
+import AddToCartButton from '../../../../components/addToCartButton/AddToCartButton';
+import AddToFavorites from './addToFavorites/AddToFavorites';
 
 interface ProductItemProps {
   product: Product;
@@ -35,8 +35,7 @@ const ProductItem = ({ product, isFavorite }: ProductItemProps) => {
             <p className="whitespace-nowrap">€ {product.price}</p>
           </div>
         </div>
-        {product.sold && "sold"}
-        <AddToCartButton product={product} />
+        {!product.sold && <AddToCartButton product={product} />}
       </div>
     </div>
   );
