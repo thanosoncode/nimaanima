@@ -11,6 +11,7 @@ interface AddToCartButtonProps {
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
   const dispatch = useAppDispatch();
+  const { cartItems } = useAppState();
   const router = useRouter();
 
   const handleAddToCart = () => {
@@ -25,16 +26,20 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     router.push('/cart');
   };
 
-  const { cartItems } = useAppState();
-  const isNotInCart = !cartItems.find((item) => item.id === product.id);
+  const isInCart =
+    cartItems &&
+    cartItems.length > 0 &&
+    cartItems.find((item) => item.id === product.id)
+      ? true
+      : false;
 
   return (
     <button
-      disabled={!isNotInCart}
+      disabled={isInCart}
       onClick={handleAddToCart}
       className="p-y-1 w-min whitespace-nowrap rounded-full border-2 border-neutral-500 px-2 text-sm sm:px-3 sm:text-base"
     >
-      {isNotInCart ? 'Add to cart' : 'Added!'}
+      {isInCart ? 'In cart' : 'Add to cart'}
     </button>
   );
 };

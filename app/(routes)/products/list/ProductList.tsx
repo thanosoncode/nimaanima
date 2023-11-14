@@ -1,9 +1,8 @@
-import { Category, Product, SortBy, UserSession } from "../../../utils/types";
-import SortByButton from "./sortByButton/SortByButton";
-import ProductItem from "./productItem/ProductItem";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import LocalFavoritesLoader from "./LocalFavoritesLoader";
+import { Category, Product, SortBy, UserSession } from '../../../utils/types';
+import SortByButton from './sortByButton/SortByButton';
+import ProductItem from './productItem/ProductItem';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 interface ProductsProps {
   products: Product[];
@@ -26,7 +25,7 @@ const ProductList: React.FC<ProductsProps> = async ({
 
   const productsToShow = !sort
     ? filteredProducts
-    : sort === "asc"
+    : sort === 'asc'
     ? filteredProducts.sort((a, b) => a.price - b.price)
     : filteredProducts.sort((a, b) => b.price - a.price);
 
@@ -47,7 +46,6 @@ const ProductList: React.FC<ProductsProps> = async ({
           />
         ))}
       </section>
-      <LocalFavoritesLoader session={session} />
     </main>
   );
 };

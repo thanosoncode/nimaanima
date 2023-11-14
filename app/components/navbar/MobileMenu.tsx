@@ -1,8 +1,9 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { FiMenu } from "react-icons/fi";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { FiMenu } from 'react-icons/fi';
+import LocalItemsLoader from './localItemsLoader/localCartItemsLoader';
 
 const MobileMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -16,15 +17,15 @@ const MobileMenu = () => {
 
   useEffect(() => {
     if (menuOpen && !isMouseOver) {
-      document.addEventListener("click", closeModal);
+      document.addEventListener('click', closeModal);
     }
-    return () => document.removeEventListener("click", closeModal);
+    return () => document.removeEventListener('click', closeModal);
   }, [menuOpen, isMouseOver]);
 
   const links = [
-    { name: "Products", path: "/" },
-    { name: "How they are made", path: "/techniques" },
-    { name: "Contact", path: "/contact" },
+    { name: 'Products', path: '/' },
+    { name: 'How they are made', path: '/techniques' },
+    { name: 'Contact', path: '/contact' },
   ];
 
   return (
@@ -39,7 +40,7 @@ const MobileMenu = () => {
         onMouseOver={() => setIsMouseOver(true)}
         onMouseLeave={() => setIsMouseOver(false)}
         className={`absolute top-8 left-0 z-50  flex flex-col whitespace-nowrap rounded-lg border bg-white py-2 shadow-cart duration-300 ease-in-out ${
-          menuOpen ? "visible opacity-100" : "invisible opacity-0"
+          menuOpen ? 'visible opacity-100' : 'invisible opacity-0'
         } `}
       >
         {links.map((link, index) => (
@@ -53,6 +54,7 @@ const MobileMenu = () => {
           </Link>
         ))}
       </div>
+      <LocalItemsLoader />
     </div>
   );
 };

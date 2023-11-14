@@ -11,11 +11,11 @@ interface AddToCartProps {
 
 const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
   const dispatch = useAppDispatch();
+  const { cartItems } = useAppState();
   const router = useRouter();
 
   const handleAddToCart = () => {
     dispatch({ type: 'ADD_CART_ITEM', cartItem: product });
-
     const storage = localStorage.getItem('cartItems');
     if (storage) {
       const items = JSON.parse(storage);
@@ -26,18 +26,22 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
     router.push('/cart');
   };
 
-  const { cartItems } = useAppState();
-  const isNotInCart = !cartItems.find((item) => item.id === product.id);
+  const isInCart =
+    cartItems &&
+    cartItems.length > 0 &&
+    cartItems.find((item) => item.id === product.id)
+      ? true
+      : false;
 
   const addToCart = (
     <button
       onClick={handleAddToCart}
       className={`mx-auto mt-12  w-full rounded-full bg-neutral-900 py-3 text-center text-white duration-100 ease-in-out sm:mt-6 ${
-        isNotInCart ? 'hover:scale-[1.04] hover:opacity-80' : ''
+        !isInCart ? 'hover:scale-[1.04] hover:opacity-80' : ''
       } `}
-      disabled={!isNotInCart}
+      disabled={isInCart}
     >
-      {isNotInCart ? 'Add to cart' : 'Added!'}
+      {isInCart ? 'In cart' : 'Add to cart'}
     </button>
   );
 

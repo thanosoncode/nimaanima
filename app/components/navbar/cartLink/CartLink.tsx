@@ -1,8 +1,7 @@
-"use client";
-import Link from "next/link";
-import { BsCart4 } from "react-icons/bs";
-import { useAppState } from "@/app/context/context";
-import LocalCartItemsLoader from "../localCartItemsLoader/localCartItemsLoader";
+'use client';
+import Link from 'next/link';
+import { BsCart4 } from 'react-icons/bs';
+import { useAppState } from '@/app/context/context';
 
 interface CartLinkProps {}
 
@@ -19,7 +18,6 @@ const CartLink = ({}: CartLinkProps) => {
           </span>
         ) : null}
       </div>
-      <LocalCartItemsLoader />
     </Link>
   );
 };

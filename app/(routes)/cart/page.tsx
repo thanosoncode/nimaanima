@@ -1,49 +1,69 @@
 'use client';
 
-import Image from 'next/image';
 import { useAppDispatch, useAppState } from '../../context/context';
 import Container from '../../components/container/Container';
-import Link from 'next/link';
-import { Product } from '@/app/utils/types';
 import ViewFavorites from './viewFavorites/ViewFavorites';
+import Summary from './summary/Summary';
+import CartItem from './cartItem/CartiItem';
+import Image from 'next/image';
+import { Product } from '@/app/utils/types';
 
 const Cart = () => {
-  const { cartItems, favorites } = useAppState();
+  const { cartItems, favorites, saved } = useAppState();
   const appDispatch = useAppDispatch();
-
-  const total = cartItems.reduce((total, item) => total + item.price, 0);
 
   const showViewFavorites = favorites.length > 0;
 
-  const handleRemoveItem = (id: string) => {
-    appDispatch({ type: 'REMOVE_ITEM', id });
+  const moveToCart = (item: Product) => {
+    appDispatch({ type: 'ADD_CART_ITEM', cartItem: item });
+    appDispatch({ type: 'REMOVE_SAVED_ITEM', savedItem: item });
+    const localSavedItems = localStorage.getItem('savedItems');
+    if (localSavedItems) {
+      const items = JSON.parse(localSavedItems) as Product[];
+      const newItems = items.filter((x) => x.id !== item.id);
+      localStorage.setItem('savedItems', JSON.stringify(newItems));
+    }
 
-    const storage = localStorage.getItem('cartItems');
-    if (storage) {
-      const items = JSON.parse(storage) as Product[];
-      const newItems = items.filter((item) => item.id !== id);
+    const localCartItems = localStorage.getItem('cartItems');
+    if (localCartItems) {
+      const items = JSON.parse(localCartItems) as Product[];
+      const newItems = [...items, item];
       localStorage.setItem('cartItems', JSON.stringify(newItems));
     }
   };
 
-  const proceedToCheckout = async () => {
-    const response = await fetch('api/checkout', {
-      method: 'POST',
-      body: JSON.stringify({ cartItems }),
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error('Something went wrong. Try again later');
+  const moveToFavorites = (item: Product) => {
+    appDispatch({ type: 'ADD_FAVORITE', favorite: item });
+    appDispatch({ type: 'REMOVE_SAVED_ITEM', savedItem: item });
+    const localSavedItems = localStorage.getItem('savedItems');
+    if (localSavedItems) {
+      const items = JSON.parse(localSavedItems) as Product[];
+      const newItems = items.filter((x) => x.id !== item.id);
+      localStorage.setItem('savedItems', JSON.stringify(newItems));
     }
-    const checkoutUrl = await response.json();
-    window.location.assign(checkoutUrl);
+    const localFavoriteItems = localStorage.getItem('favoriteItems');
+    if (localFavoriteItems) {
+      const items = JSON.parse(localFavoriteItems) as Product[];
+      const newItems = [...items, item];
+      localStorage.setItem('favoriteItems', JSON.stringify(newItems));
+    } else {
+      localStorage.setItem('favoriteItems', JSON.stringify([item]));
+    }
+  };
+
+  const removeItem = (item: Product) => {
+    appDispatch({ type: 'REMOVE_SAVED_ITEM', savedItem: item });
+    const localFavoriteItems = localStorage.getItem('favoriteItems');
+    if (localFavoriteItems) {
+      const items = JSON.parse(localFavoriteItems) as Product[];
+      const newItems = items.filter((x) => x.id !== item.id);
+      localStorage.setItem('favoriteItems', JSON.stringify(newItems));
+    }
   };
 
   return (
     <Container classes={`${showViewFavorites ? '' : 'mb-20'}`}>
-      <div className="flex flex-col items-center px-0 lg:block lg:px-8 xl:px-0">
+      <div className="flex flex-col items-center px-0 lg:block">
         <div>
           {cartItems.length > 0 ? (
             <h4 className="py-4 text-3xl font-thin sm:py-8">
@@ -52,115 +72,74 @@ const Cart = () => {
             </h4>
           ) : (
             <div>
-              <h4 className="py-4 text-3xl font-thin sm:py-8">
+              <h4 className="py-8 text-center text-3xl font-thin sm:py-8">
                 Your cart is empty.
               </h4>
             </div>
           )}
         </div>
         {cartItems.length > 0 ? (
-          <div className="flex flex-col  justify-between gap-10 lg:flex-row ">
+          <div className="flex flex-col items-center justify-between gap-10 lg:flex-row lg:items-start">
             <div className="flex flex-col gap-8">
               {cartItems.map((item) => (
-                <div
-                  key={item.id}
-                  className=" max-w-[600px] rounded-xl border border-neutral-300 p-2 shadow-cart sm:p-3"
-                >
-                  <div className="flex w-full gap-2  sm:gap-6">
-                    <div className="relative h-32 w-36 shrink-0 overflow-hidden rounded-xl sm:h-52  sm:w-60 sm:shrink ">
-                      <Image
-                        src={item.images[0]}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between">
-                      <div>
-                        <div className="text-neutral-700">
-                          <Link
-                            href={`/products/${item.id}`}
-                            className="text-neutral-600"
-                          >
-                            {item.name}
-                          </Link>
-                        </div>
-                        <div className="">€ {item.price}.00</div>
-                      </div>
-                      <div className="mb-4 flex gap-4">
-                        <button
-                          onClick={() => handleRemoveItem(item.id)}
-                          className="block w-min rounded-full bg-white  text-sm font-medium duration-200 ease-in-out hover:bg-neutral-100"
-                        >
-                          Remove
-                        </button>
-                        <button className="block w-min whitespace-nowrap rounded-full bg-white text-sm  font-medium duration-200 ease-in-out hover:bg-neutral-100">
-                          Save for later
-                        </button>
-                      </div>
-                      <div className="hidden items-start gap-2 sm:flex">
-                        <input
-                          type="checkbox"
-                          id="gift"
-                          className="mt-1.5 block bg-red-500"
-                          onChange={(e) =>
-                            appDispatch({
-                              type: 'SET_IS_GIFT',
-                              isGift: e.target.checked,
-                            })
-                          }
-                        />
-                        <label htmlFor="gift" className="flex flex-col">
-                          <span>This package is a gift</span>
-                          <span className="text-sm">
-                            Prices will not be show in the package slip
-                          </span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-2 flex items-start gap-2 sm:hidden">
-                    <input type="checkbox" id="gift" className="mt-1.5 block" />
-                    <label htmlFor="gift" className="flex flex-col">
-                      <span>This package is a gift</span>
-                      <span className="text-sm">
-                        Prices will not be show in the package slip
-                      </span>
-                    </label>
-                  </div>
-                </div>
+                <CartItem key={item.id} item={item} />
               ))}
             </div>
-            <div className="flex w-full max-w-[400px] flex-col  items-center px-4 sm:mt-0 md:px-0 ">
-              <div className="flex w-full flex-col gap-6 px-2">
-                <div className="flex justify-between">
-                  <div className="font-medium tracking-wide">
-                    Item&#40;s&#41; total
-                  </div>
-                  <div className="">€ {total}</div>
-                </div>
-                <div className="flex justify-between border-b border-neutral-200 pb-2">
-                  <div className="tracking-wide">Shipping</div>
-                  <div className="">€ 3.00</div>
-                </div>
-                <div className="flex justify-between">
-                  <div className="font-medium tracking-wide">
-                    Total &#40;{cartItems.length}item&#41;
-                  </div>
-                  <div className="">€ {total + 3}</div>
-                </div>
-              </div>
-              <button
-                onClick={proceedToCheckout}
-                className="mt-14 block w-full whitespace-nowrap rounded-full bg-neutral-800 px-5 py-3 text-center text-sm tracking-wider text-white duration-200 ease-out hover:scale-105"
-              >
-                Proceed to checkout
-              </button>
-            </div>
+            <Summary cartItems={cartItems} />
           </div>
         ) : null}
       </div>
-      <div className="mt-24 mb-8">
+      {saved.length > 0 ? (
+        <div className="mt-16">
+          <h4 className="mb-6 text-2xl font-medium">
+            {saved.length} item&#40;s&#41; saved for later
+          </h4>
+          <div>
+            {saved.map((item) => (
+              <div key={item.id} className="flex justify-between">
+                <div className="flex gap-4">
+                  <div className="relative h-40 w-52 flex-shrink-0 overflow-hidden rounded">
+                    <Image
+                      src={item.images[0]}
+                      alt={item.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="font-light">
+                    <p>{item.name}</p>
+                    <p className="max-w-[640px] overflow-hidden text-ellipsis lg:whitespace-nowrap">
+                      {item.description}
+                    </p>
+                    <div className="mt-8 flex gap-4">
+                      <button
+                        onClick={() => moveToCart(item)}
+                        className="rounded-full border-2 border-black px-3 py-1.5 text-sm font-medium duration-200 hover:scale-105 hover:shadow-cart"
+                      >
+                        Move to cart
+                      </button>
+                      <button
+                        onClick={() => moveToFavorites(item)}
+                        className="rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200"
+                      >
+                        Move to favorites
+                      </button>
+                      <button
+                        onClick={() => removeItem(item)}
+                        className="rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div className="font-medium">€{item.price}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+      <div className="mt-16 mb-8">
         <ViewFavorites favorites={favorites} />
       </div>
     </Container>
