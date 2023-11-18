@@ -2,6 +2,8 @@ import Products from './(routes)/products/Products';
 import { Category, SearchParams, SortBy } from './utils/types';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 const Home = async ({ searchParams }: SearchParams) => {
   const products = await prisma.product.findMany();
   const selectedCategory = searchParams.category as Category;

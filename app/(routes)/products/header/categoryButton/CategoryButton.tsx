@@ -33,7 +33,7 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
         />
       </div>
       <p
-        className={`border-b  px-0 pb-1  font-semibold duration-200 ease-in-out group-hover:border-neutral-400 sm:px-2 ${
+        className={`border-b  px-0 pb-1  font-medium duration-200 ease-in-out group-hover:border-neutral-400 sm:px-2 ${
           isSelected ? 'border-b border-black' : 'border-transparent'
         }`}
       >
