@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import React, { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
-import Container from "../../components/container/Container";
-import z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Modal from "@/app/components/modal/Modal";
+import React, { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+import Container from '../../components/container/Container';
+import z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Modal from '@/app/components/modal/Modal';
 
 const TypeFormData = z.object({
-  email: z.string().email({ message: "Email is required" }),
-  message: z.string().min(1, { message: "Please add your message." }).max(1000),
+  email: z.string().email({ message: 'Email is required' }),
+  message: z.string().min(1, { message: 'Please add your message.' }).max(1000),
 });
 
 type TypeFormData = z.infer<typeof TypeFormData>;
@@ -24,13 +24,13 @@ const ContactUs = () => {
 
     try {
       const response = await emailjs.sendForm(
-        "service_wh4c1jj",
-        "template_4x5wobq",
-        form.current ?? "",
-        "user_bm37QJFLQoyKqlOoNcG0e",
+        'service_wh4c1jj',
+        'template_4x5wobq',
+        form.current ?? '',
+        'user_bm37QJFLQoyKqlOoNcG0e',
       );
 
-      if (response.text !== "OK") {
+      if (response.text !== 'OK') {
         setLoading(false);
         form.current && form.current.reset();
         throw new Error(response.text);
@@ -41,7 +41,7 @@ const ContactUs = () => {
     } catch (error) {
       setLoading(false);
       form.current && form.current.reset();
-      throw new Error("Something went wrong.");
+      throw new Error('Something went wrong.');
     }
   };
 
@@ -80,7 +80,7 @@ const ContactUs = () => {
                 <label>Message</label>
                 <textarea
                   className="h-60 resize-y border border-gray-300 pl-2"
-                  {...register("message")}
+                  {...register('message')}
                 />
                 {errors.message && (
                   <p className="text-sm text-red-400">
@@ -94,7 +94,7 @@ const ContactUs = () => {
                 <input
                   type="email"
                   className="rounded border border-gray-300 py-2  pl-2 sm:py-4"
-                  {...register("email")}
+                  {...register('email')}
                 />
                 {errors.email && (
                   <p className="text-sm text-red-400">{errors.email.message}</p>

@@ -1,8 +1,8 @@
 import { Category, Product, SortBy, UserSession } from '../../../utils/types';
-import SortByButton from './sortByButton/SortByButton';
 import ProductItem from './productItem/ProductItem';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import Controls from './controls/Controls';
 
 interface ProductsProps {
   products: Product[];
@@ -33,7 +33,7 @@ const ProductList: React.FC<ProductsProps> = async ({
     <main>
       <div className="flex items-start justify-between">
         <h4 className="mb-4 text-2xl font-light">{title}</h4>
-        <SortByButton />
+        <Controls />
       </div>
       <section className="grid grid-cols-2 justify-center gap-y-8 gap-x-4 sm:grid-cols-3 md:grid-cols-4  md:gap-y-8 ">
         {productsToShow.map((product) => (
