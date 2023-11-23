@@ -3,10 +3,11 @@
 import { useAppState } from '@/app/context/context';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BsFilter } from 'react-icons/bs';
 import { SortBy } from '../../../../../utils/types';
 import { BsCheckLg } from 'react-icons/bs';
+import { useOutsideClick } from '@/app/utils/helpers';
 
 type Selection = {
   name: string;
@@ -16,25 +17,13 @@ type Selection = {
 const SortByButton = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isMouseOver, setIsMouseOver] = useState(false);
   const params = useSearchParams();
   const category = params.get('category');
   const currentSortBy = params.get('sort');
+  const menuRef = useRef<HTMLDivElement | null>(null);
 
   const handleMenuOpen = () => {
     setMenuOpen(!menuOpen);
-  };
-
-  const handleClearCategory = () => {
-    if (currentSortBy) {
-      router.push(`/?sort=${currentSortBy}`);
-      setMenuOpen(false);
-      return;
-    } else {
-      router.push('');
-      setMenuOpen(false);
-      return;
-    }
   };
 
   const handleSelectionClick = (sortBy: SortBy) => {
@@ -60,13 +49,7 @@ const SortByButton = () => {
     }
   };
 
-  useEffect(() => {
-    const closeModal = () => setMenuOpen(false);
-    if (menuOpen && !isMouseOver) {
-      document.addEventListener('click', closeModal);
-    }
-    return () => document.removeEventListener('click', closeModal);
-  }, [menuOpen, isMouseOver]);
+  useOutsideClick({ ref: menuRef, onOutsideClick: () => setMenuOpen(false) });
 
   const selection: Selection[] = [
     { name: 'Price: Low to High', sortBy: 'asc' },
@@ -74,10 +57,10 @@ const SortByButton = () => {
   ];
 
   return (
-    <>
+    <div className="relative">
       <div
         onClick={handleMenuOpen}
-        className="relative w-min cursor-pointer whitespace-nowrap rounded-full border border-black px-4 py-1.5 text-center"
+        className="w-min cursor-pointer whitespace-nowrap rounded-full border border-black px-4 py-1.5 text-center"
       >
         {currentSortBy ? (
           <p className="text-sm">
@@ -88,8 +71,7 @@ const SortByButton = () => {
         )}
       </div>
       <div
-        onMouseOver={() => setIsMouseOver(true)}
-        onMouseLeave={() => setIsMouseOver(false)}
+        ref={menuRef}
         className={`absolute top-10 right-0 z-50  flex flex-col whitespace-nowrap rounded-lg border bg-white shadow-md duration-300 ease-in-out ${
           menuOpen ? 'visible opacity-100' : 'invisible opacity-0'
         } `}
@@ -107,7 +89,7 @@ const SortByButton = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 export default SortByButton;

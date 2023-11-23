@@ -12,7 +12,7 @@ const ClearCategoryButton = () => {
       router.push(`/?sort=${currentSortBy}`);
       return;
     } else {
-      router.push('');
+      router.push('/');
       return;
     }
   };
