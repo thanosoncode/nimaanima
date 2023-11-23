@@ -34,10 +34,9 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
   return (
     <button
       onClick={handleCategoryClick}
-      // href={{ pathname: '', query: { category: category.name } }}
       className="group flex cursor-pointer flex-col items-center justify-center gap-2"
     >
-      <div className="relative h-16 w-16 overflow-hidden rounded-full border duration-100 ease-in-out hover:shadow-cart group-hover:scale-105 sm:h-20 sm:w-20 md:h-28 md:w-28">
+      <div className="relative h-16 w-16 overflow-hidden rounded-full border border-neutral-400 duration-100 ease-in-out hover:shadow-cart group-hover:scale-105 sm:h-20 sm:w-20 md:h-28 md:w-28">
         <Image
           src={category.image}
           alt={category.name}
