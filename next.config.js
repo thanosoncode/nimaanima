@@ -13,6 +13,7 @@ const nextConfig = {
     STRIPE_WEB_HOOK_SECRET_TEST: process.env.STRIPE_WEB_HOOK_SECRET,
     STRIPE_WEB_HOOK_SECRET: process.env.STRIPE_WEB_HOOK_SECRET,
   },
+  experimental: { serverActions: true },
   images: {
     domains: ['res.cloudinary.com', 'lh3.googleusercontent.com'],
   },

@@ -32,7 +32,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           </div>
         </div>
       </div>
-      <AddToFavorites product={product} size={16} variant="icon" />
+      <AddToFavorites product={product} size={16} />
     </div>
   );
 };

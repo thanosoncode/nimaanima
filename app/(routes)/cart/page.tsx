@@ -61,9 +61,6 @@ const Cart = () => {
     }
   };
 
-  console.log('favorites', favorites);
-  console.log('saved', saved);
-
   const savedIsFavorite = (id: string) => {
     return favorites.find((fav) => fav.id === id) ? true : false;
   };

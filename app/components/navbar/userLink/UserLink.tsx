@@ -1,8 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
-import UserMenu from "./userMenu/UserMenu";
-import { UserSession } from "@/app/utils/types";
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
+import UserMenu from './userMenu/UserMenu';
+import { UserSession } from '@/app/utils/types';
 
 interface UserLikProps {
   session: UserSession;
@@ -12,16 +12,16 @@ const UserLik = ({ session }: UserLikProps) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const handleUserMenuOpen = () => setUserMenuOpen(!userMenuOpen);
 
-  return session && session.dbUser && session.dbUser.email ? (
+  const userLink = (
     <div className="relative mr-1 ml-3">
       <div onClick={handleUserMenuOpen} className="cursor-pointer duration-300">
         {session.dbUser.image ? (
           <div className="relative h-6 w-6">
             <Image
               className="rounded-full"
-              src={session?.dbUser.image ?? ""}
+              src={session?.dbUser.image ?? ''}
               fill
-              alt={session.dbUser?.name ?? ""}
+              alt={session.dbUser?.name ?? ''}
               sizes="24px"
             />
           </div>
@@ -36,14 +36,9 @@ const UserLik = ({ session }: UserLikProps) => {
         onClose={() => setUserMenuOpen(false)}
       />
     </div>
-  ) : (
-    <Link
-      href="/signin"
-      className="rounded-full p-2 px-2.5 text-center text-sm font-medium duration-200 hover:bg-neutral-200"
-    >
-      Sign in
-    </Link>
   );
+
+  return userLink;
 };
 
 export default UserLik;

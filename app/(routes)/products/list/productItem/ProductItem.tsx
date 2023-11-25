@@ -13,12 +13,7 @@ interface ProductItemProps {
 const ProductItem = ({ product, isFavorite }: ProductItemProps) => {
   return (
     <div className="group relative">
-      <AddToFavorites
-        product={product}
-        size={19}
-        isFavorite={isFavorite}
-        variant="icon"
-      />
+      <AddToFavorites product={product} size={19} isFavorite={isFavorite} />
       <Link
         href={`/products/${product.id}`}
         className=" relative block h-40 w-full sm:h-48 md:h-48 lg:h-56 xs:h-52"

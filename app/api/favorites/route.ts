@@ -1,5 +1,6 @@
 import { Favorite, Product } from '@/app/utils/types';
 import { prisma } from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest, response: NextResponse) {
@@ -11,7 +12,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   if (!userId || !favorite) {
     return NextResponse.json(
       { message: 'Invalid user id and/or favorite' },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
   return NextResponse.json(
     { message: 'Something went wrong' },
-    { status: 400 }
+    { status: 400 },
   );
 }
 
@@ -50,7 +51,7 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
   if (!userId || !favorite) {
     return NextResponse.json(
       { message: 'Invalid user id and/or favorite' },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -77,6 +78,6 @@ export async function DELETE(request: NextRequest, response: NextResponse) {
 
   return NextResponse.json(
     { message: 'Something went wrong' },
-    { status: 400 }
+    { status: 400 },
   );
 }

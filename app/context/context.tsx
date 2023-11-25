@@ -78,7 +78,6 @@ const AppStateContext = createContext<AppState | undefined>(undefined);
 const AppDispatchContext = createContext<Dispatch | undefined>(undefined);
 
 const reducer = (state: AppState, action: Action) => {
-  console.log('action', action);
   switch (action.type) {
     case 'ADD_CART_ITEM':
       return { ...state, cartItems: [...state.cartItems, action.cartItem] };

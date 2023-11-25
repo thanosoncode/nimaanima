@@ -12,7 +12,6 @@ interface AddToFavoritesProps {
   product: Product;
   size?: number;
   isFavorite?: boolean | undefined;
-  variant: 'text' | 'icon';
   buttonClasses?: string;
 }
 
@@ -20,7 +19,6 @@ const AddToFavorites = ({
   product,
   size,
   isFavorite,
-  variant,
   buttonClasses,
 }: AddToFavoritesProps) => {
   const router = useRouter();
@@ -37,20 +35,16 @@ const AddToFavorites = ({
       dispatch({ type: 'ADD_FAVORITE', favorite: product });
       const localFavoriteItems = localStorage.getItem('favoriteItems');
       if (!localFavoriteItems) {
-        console.log('no favorites');
         localStorage.setItem('favoriteItems', JSON.stringify([product]));
         return;
       }
       if (localFavoriteItems) {
-        console.log('favorites exist');
         const items = JSON.parse(localFavoriteItems) as Product[];
         const itemExists = items.find((item) => item.id === product.id);
         if (itemExists) {
-          console.log('specific favorite exist -remove it');
           const newItems = items.filter((x) => x.id !== product.id);
           localStorage.setItem('favoriteItems', JSON.stringify(newItems));
         } else {
-          console.log('add favorite');
           localStorage.setItem(
             'favoriteItems',
             JSON.stringify([...items, product]),
@@ -96,20 +90,7 @@ const AddToFavorites = ({
     </button>
   );
 
-  const buttonText = (
-    <button
-      onClick={handleClick}
-      disabled={isLoading}
-      className={twMerge(
-        'w-min whitespace-nowrap hover:underline',
-        buttonClasses,
-      )}
-    >
-      {isLoading ? <Spinner /> : favorite ? 'Favorite!' : 'Add to favorites'}
-    </button>
-  );
-
-  return variant === 'text' ? buttonText : buttonIcon;
+  return buttonIcon;
 };
 
 export default AddToFavorites;

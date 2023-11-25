@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FiMenu } from 'react-icons/fi';
-import LocalItemsLoader from './localItemsLoader/localCartItemsLoader';
+import LocalItemsLoader from './localItemsLoader/LocalItemsLoader';
 
 const MobileMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -54,7 +54,6 @@ const MobileMenu = () => {
           </Link>
         ))}
       </div>
-      <LocalItemsLoader />
     </div>
   );
 };

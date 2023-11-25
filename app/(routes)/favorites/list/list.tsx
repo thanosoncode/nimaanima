@@ -37,12 +37,7 @@ const List = ({ favorites }: ListProps) => {
                 </div>
               </div>
             </div>
-            <AddToFavorites
-              product={favorite}
-              size={16}
-              isFavorite={true}
-              variant="icon"
-            />
+            <AddToFavorites product={favorite} size={16} isFavorite={true} />
           </div>
         ))}
       </section>

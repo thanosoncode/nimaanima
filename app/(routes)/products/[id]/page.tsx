@@ -5,7 +5,9 @@ import Recommendations from './recommendations/Recommendations';
 import { Product } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import Carousel from './carousel/Carousel';
-import AddToFavorites from '../../../components/addToFavorites/AddToFavorites';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { UserSession } from '@/app/utils/types';
 
 const SingleProduct = async ({
   params: { id },
@@ -14,6 +16,17 @@ const SingleProduct = async ({
 }) => {
   const product = (await getSingleProduct(id)) as Product;
   const allProducts = await prisma.product.findMany();
+  const session = (await getServerSession(authOptions)) as UserSession | null;
+
+  const user = await prisma.user.findFirst({
+    where: {
+      id: session?.dbUser.id,
+    },
+  });
+
+  const isFavorite = user?.favorites.find((fav) => fav.id === id)
+    ? true
+    : false;
 
   const sameCategoryProducts = allProducts.filter(
     (p) => p.category === product.category && p.id !== product.id,
@@ -37,12 +50,6 @@ const SingleProduct = async ({
                 {product.name}
               </p>
               <p>{product.description}</p>
-
-              <AddToFavorites
-                product={product}
-                variant="icon"
-                buttonClasses="static w-min"
-              />
               <AddToCart product={product} />
             </article>
           </div>
