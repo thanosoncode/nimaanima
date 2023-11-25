@@ -4,16 +4,25 @@ import { useAppDispatch, useAppState } from '@/app/context/context';
 import { Product, UserSession } from '@/app/utils/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { twMerge } from 'tailwind-merge';
 
 interface AddToFavoritesProps {
   product: Product;
-  size: number;
+  size?: number;
   isFavorite?: boolean | undefined;
+  variant: 'text' | 'icon';
+  buttonClasses?: string;
 }
 
-const AddToFavorites = ({ product, size, isFavorite }: AddToFavoritesProps) => {
+const AddToFavorites = ({
+  product,
+  size,
+  isFavorite,
+  variant,
+  buttonClasses,
+}: AddToFavoritesProps) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { data } = useSession() as { data: UserSession | null };
@@ -25,28 +34,29 @@ const AddToFavorites = ({ product, size, isFavorite }: AddToFavoritesProps) => {
 
   const handleClick = async () => {
     if (!userId) {
+      dispatch({ type: 'ADD_FAVORITE', favorite: product });
       const localFavoriteItems = localStorage.getItem('favoriteItems');
-
       if (!localFavoriteItems) {
-        console.log('no favorite key');
+        console.log('no favorites');
         localStorage.setItem('favoriteItems', JSON.stringify([product]));
         return;
       }
       if (localFavoriteItems) {
-        console.log('hello');
+        console.log('favorites exist');
         const items = JSON.parse(localFavoriteItems) as Product[];
         const itemExists = items.find((item) => item.id === product.id);
         if (itemExists) {
+          console.log('specific favorite exist -remove it');
           const newItems = items.filter((x) => x.id !== product.id);
           localStorage.setItem('favoriteItems', JSON.stringify(newItems));
         } else {
+          console.log('add favorite');
           localStorage.setItem(
             'favoriteItems',
             JSON.stringify([...items, product]),
           );
         }
       }
-      dispatch({ type: 'ADD_FAVORITE', favorite: product });
     }
 
     if (userId) {
@@ -67,11 +77,14 @@ const AddToFavorites = ({ product, size, isFavorite }: AddToFavoritesProps) => {
     }
   };
 
-  return (
+  const buttonIcon = (
     <button
       onClick={handleClick}
       disabled={isLoading}
-      className={` visible  absolute top-2 right-2 z-20 rounded-full  border bg-white p-1`}
+      className={twMerge(
+        'visible absolute top-2 right-2 z-20 rounded-full  border bg-white p-1',
+        buttonClasses,
+      )}
     >
       {isLoading ? (
         <Spinner />
@@ -82,6 +95,21 @@ const AddToFavorites = ({ product, size, isFavorite }: AddToFavoritesProps) => {
       )}
     </button>
   );
+
+  const buttonText = (
+    <button
+      onClick={handleClick}
+      disabled={isLoading}
+      className={twMerge(
+        'w-min whitespace-nowrap hover:underline',
+        buttonClasses,
+      )}
+    >
+      {isLoading ? <Spinner /> : favorite ? 'Favorite!' : 'Add to favorites'}
+    </button>
+  );
+
+  return variant === 'text' ? buttonText : buttonIcon;
 };
 
 export default AddToFavorites;

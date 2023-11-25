@@ -65,7 +65,7 @@ type Action =
       id: string;
     }
   | {
-      type: 'REMOVE_ITEM';
+      type: 'REMOVE_CART_ITEM';
       id: string;
     }
   | { type: 'EMPTY_CART' }
@@ -119,7 +119,7 @@ const reducer = (state: AppState, action: Action) => {
         ...state,
         favorites: state.favorites.filter((f) => f.id !== action.id),
       };
-    case 'REMOVE_ITEM':
+    case 'REMOVE_CART_ITEM':
       return {
         ...state,
         cartItems: state.cartItems.filter((item) => item.id !== action.id),

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import { Product } from '@/app/utils/types';
 import AddToCartButton from '../../../../components/addToCartButton/AddToCartButton';
-import AddToFavorites from './addToFavorites/AddToFavorites';
+import AddToFavorites from '../../../../components/addToFavorites/AddToFavorites';
 
 interface ProductItemProps {
   product: Product;
@@ -13,7 +13,12 @@ interface ProductItemProps {
 const ProductItem = ({ product, isFavorite }: ProductItemProps) => {
   return (
     <div className="group relative">
-      <AddToFavorites product={product} size={19} isFavorite={isFavorite} />
+      <AddToFavorites
+        product={product}
+        size={19}
+        isFavorite={isFavorite}
+        variant="icon"
+      />
       <Link
         href={`/products/${product.id}`}
         className=" relative block h-40 w-full sm:h-48 md:h-48 lg:h-56 xs:h-52"

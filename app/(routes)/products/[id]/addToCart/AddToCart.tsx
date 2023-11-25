@@ -21,7 +21,7 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
       const items = JSON.parse(storage);
       localStorage.setItem('cartItems', JSON.stringify([...items, product]));
     } else {
-      localStorage.setItem('cartItems', JSON.stringify(product));
+      localStorage.setItem('cartItems', JSON.stringify([product]));
     }
     router.push('/cart');
   };

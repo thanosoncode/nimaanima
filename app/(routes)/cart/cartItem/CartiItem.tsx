@@ -1,4 +1,5 @@
 'use client';
+import SaveForLater from '@/app/components/saveForLater/SaveForLater';
 import { useAppDispatch } from '@/app/context/context';
 import { Product } from '@/app/utils/types';
 import Image from 'next/image';
@@ -12,31 +13,12 @@ const CartItem = ({ item }: CartItemProps) => {
   const appDispatch = useAppDispatch();
 
   const handleRemoveItem = (id: string) => {
-    appDispatch({ type: 'REMOVE_ITEM', id });
+    appDispatch({ type: 'REMOVE_CART_ITEM', id });
     const storage = localStorage.getItem('cartItems');
     if (storage) {
       const items = JSON.parse(storage) as Product[];
       const newItems = items.filter((item) => item.id !== id);
       localStorage.setItem('cartItems', JSON.stringify(newItems));
-    }
-  };
-
-  const handleSaveItem = (item: Product) => {
-    appDispatch({ type: 'ADD_SAVED_ITEM', savedItem: item });
-    appDispatch({ type: 'REMOVE_ITEM', id: item.id });
-    const localCartItems = localStorage.getItem('cartItems');
-    if (localCartItems) {
-      const items = JSON.parse(localCartItems) as Product[];
-      const newItems = items.filter((x) => x.id !== item.id);
-      localStorage.setItem('cartItems', JSON.stringify(newItems));
-    }
-    const localSavedItems = localStorage.getItem('savedItems');
-    if (localSavedItems) {
-      const items = JSON.parse(localSavedItems) as Product[];
-      const newItems = [...items, item];
-      localStorage.setItem('savedItems', JSON.stringify(newItems));
-    } else {
-      localStorage.setItem('savedItems', JSON.stringify([item]));
     }
   };
 
@@ -70,12 +52,7 @@ const CartItem = ({ item }: CartItemProps) => {
             >
               Remove
             </button>
-            <button
-              onClick={() => handleSaveItem(item)}
-              className="block w-min whitespace-nowrap rounded-full bg-white text-sm  font-medium duration-200 ease-in-out hover:bg-neutral-100"
-            >
-              Save for later
-            </button>
+            <SaveForLater product={item} />
           </div>
           <div className="hidden items-start gap-2 sm:flex">
             <input

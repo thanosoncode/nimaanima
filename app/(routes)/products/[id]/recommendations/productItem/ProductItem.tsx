@@ -1,8 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
-import React from "react";
-import { Product } from "@/app/utils/types";
-import AddToFavorites from "../../../list/productItem/addToFavorites/AddToFavorites";
+import Link from 'next/link';
+import Image from 'next/image';
+import React from 'react';
+import { Product } from '@/app/utils/types';
+import AddToFavorites from '../../../../../components/addToFavorites/AddToFavorites';
 
 interface ProductItemProps {
   product: Product;
@@ -32,7 +32,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           </div>
         </div>
       </div>
-      <AddToFavorites product={product} size={16} />
+      <AddToFavorites product={product} size={16} variant="icon" />
     </div>
   );
 };

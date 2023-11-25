@@ -61,6 +61,13 @@ const Cart = () => {
     }
   };
 
+  console.log('favorites', favorites);
+  console.log('saved', saved);
+
+  const savedIsFavorite = (id: string) => {
+    return favorites.find((fav) => fav.id === id) ? true : false;
+  };
+
   return (
     <Container classes={`${showViewFavorites ? '' : 'mb-20'}`}>
       <div className="flex flex-col items-center px-0 lg:block">
@@ -119,8 +126,13 @@ const Cart = () => {
                         Move to cart
                       </button>
                       <button
+                        disabled={savedIsFavorite(item.id)}
                         onClick={() => moveToFavorites(item)}
-                        className="rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200"
+                        className={`rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200 ${
+                          savedIsFavorite(item.id)
+                            ? 'text-neutral-400 hover:bg-white'
+                            : ''
+                        }`}
                       >
                         Move to favorites
                       </button>

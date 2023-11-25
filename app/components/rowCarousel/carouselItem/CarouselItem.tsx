@@ -1,8 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
-import React from "react";
-import { Product } from "@/app/utils/types";
-import AddToFavorites from "@/app/(routes)/products/list/productItem/addToFavorites/AddToFavorites";
+import Link from 'next/link';
+import Image from 'next/image';
+import React from 'react';
+import { Product } from '@/app/utils/types';
+import AddToFavorites from '@/app/components/addToFavorites/AddToFavorites';
 
 interface CarouselItemProps {
   product: Product;
@@ -33,7 +33,7 @@ const CarouselItem = ({ product }: CarouselItemProps) => {
           </div>
         </div>
       </div>
-      <AddToFavorites product={product} size={16} />
+      <AddToFavorites product={product} size={16} variant="icon" />
     </div>
   );
 };

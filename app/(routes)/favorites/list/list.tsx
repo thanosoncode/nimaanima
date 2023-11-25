@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
-import AddToFavorites from "../../products/list/productItem/addToFavorites/AddToFavorites";
-import { Product } from "@/app/utils/types";
+import Image from 'next/image';
+import Link from 'next/link';
+import AddToFavorites from '../../../components/addToFavorites/AddToFavorites';
+import { Product } from '@/app/utils/types';
 
 interface ListProps {
   favorites: Product[];
@@ -37,7 +37,12 @@ const List = ({ favorites }: ListProps) => {
                 </div>
               </div>
             </div>
-            <AddToFavorites product={favorite} size={16} isFavorite={true} />
+            <AddToFavorites
+              product={favorite}
+              size={16}
+              isFavorite={true}
+              variant="icon"
+            />
           </div>
         ))}
       </section>

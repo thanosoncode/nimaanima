@@ -1,11 +1,11 @@
 import Container from '../../../components/container/Container';
 import AddToCart from './addToCart/AddToCart';
-import Link from 'next/link';
 import { getSingleProduct } from '@/lib/products';
 import Recommendations from './recommendations/Recommendations';
 import { Product } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import Carousel from './carousel/Carousel';
+import AddToFavorites from '../../../components/addToFavorites/AddToFavorites';
 
 const SingleProduct = async ({
   params: { id },
@@ -38,12 +38,11 @@ const SingleProduct = async ({
               </p>
               <p>{product.description}</p>
 
-              <Link
-                href={`/techniques/${product.category.toLowerCase()}`}
-                className="block w-min whitespace-nowrap border-b border-b-neutral-600 px-1 text-neutral-600"
-              >
-                Craftwork technique
-              </Link>
+              <AddToFavorites
+                product={product}
+                variant="icon"
+                buttonClasses="static w-min"
+              />
               <AddToCart product={product} />
             </article>
           </div>
