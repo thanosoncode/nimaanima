@@ -1,12 +1,12 @@
-import Link from "next/link";
-import { AiOutlineClockCircle } from "react-icons/ai";
-import Empty from "./empty/Empty";
-import List from "./list/list";
-import { UserSession } from "@/app/utils/types";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth";
-import ClientFavorites from "./clientFavorites/ClientFavorites";
-import Container from "@/app/components/container/Container";
+import Link from 'next/link';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import Empty from './empty/Empty';
+import List from './list/list';
+import { UserSession } from '@/app/utils/types';
+import { getServerSession } from 'next-auth';
+import ClientFavorites from './clientFavorites/ClientFavorites';
+import Container from '@/app/components/container/Container';
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 
 const Favorites = async () => {
   const session = (await getServerSession(authOptions)) as UserSession;

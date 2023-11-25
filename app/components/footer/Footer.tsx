@@ -1,9 +1,9 @@
-import Link from "next/link";
-import Container from "../container/Container";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { UserSession } from "@/app/utils/types";
-import LevelTwo from "./levels/LevelTwo";
+import Link from 'next/link';
+import Container from '../container/Container';
+import { getServerSession } from 'next-auth';
+import { UserSession } from '@/app/utils/types';
+import LevelTwo from './levels/LevelTwo';
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 
 const Footer = async () => {
   const session = (await getServerSession(authOptions)) as UserSession;
@@ -17,7 +17,7 @@ const Footer = async () => {
           <div className="flex gap-2 text-sm text-white">
             <p>2023</p>
             <p>
-              Design inspired by{" "}
+              Design inspired by{' '}
               <Link
                 href="https://www.etsy.com/"
                 target="_blank"

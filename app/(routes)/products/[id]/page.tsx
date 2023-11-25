@@ -6,8 +6,8 @@ import { Product } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import Carousel from './carousel/Carousel';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { UserSession } from '@/app/utils/types';
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 
 const SingleProduct = async ({
   params: { id },

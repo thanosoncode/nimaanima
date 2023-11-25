@@ -1,19 +1,34 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
-import { Product } from '@/app/utils/types';
+import { Product, UserSession } from '@/app/utils/types';
 import AddToCartButton from '../../../../components/addToCartButton/AddToCartButton';
 import AddToFavorites from '../../../../components/addToFavorites/AddToFavorites';
+import AddToFavoritesServer from '@/app/components/addToFavoritesServer/AddToFavoritesServer';
 
 interface ProductItemProps {
   product: Product;
-  isFavorite: boolean | undefined;
+  session: UserSession | null;
 }
 
-const ProductItem = ({ product, isFavorite }: ProductItemProps) => {
+const ProductItem = ({ product, session }: ProductItemProps) => {
+  const isFavorite = session?.dbUser.favorites.find(
+    (fav) => fav.id === product.id,
+  )
+    ? true
+    : false;
   return (
     <div className="group relative">
-      <AddToFavorites product={product} size={19} isFavorite={isFavorite} />
+      {session ? (
+        <AddToFavoritesServer
+          isFavorite={isFavorite}
+          product={product}
+          userId={session.dbUser.id}
+        />
+      ) : (
+        <AddToFavorites product={product} size={19} />
+      )}
+
       <Link
         href={`/products/${product.id}`}
         className=" relative block h-40 w-full sm:h-48 md:h-48 lg:h-56 xs:h-52"

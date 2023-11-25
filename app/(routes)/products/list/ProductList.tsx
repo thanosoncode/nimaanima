@@ -1,8 +1,8 @@
 import { Category, Product, SortBy, UserSession } from '../../../utils/types';
 import ProductItem from './productItem/ProductItem';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import Controls from './controls/Controls';
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 
 interface ProductsProps {
   products: Product[];
@@ -37,13 +37,7 @@ const ProductList: React.FC<ProductsProps> = async ({
       </div>
       <section className="grid grid-cols-2 justify-center gap-y-8 gap-x-4 sm:grid-cols-3 md:grid-cols-4  md:gap-y-8 ">
         {productsToShow.map((product) => (
-          <ProductItem
-            product={product}
-            key={product.id}
-            isFavorite={session?.dbUser.favorites
-              .map((f) => f.id)
-              .includes(product.id)}
-          />
+          <ProductItem product={product} key={product.id} session={session} />
         ))}
       </section>
     </main>

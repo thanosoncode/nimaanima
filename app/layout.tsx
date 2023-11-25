@@ -4,9 +4,9 @@ import { AppProvider } from './context/context';
 import AuthProvider from './context/AuthProvider';
 import './globals.css';
 import { getServerSession } from 'next-auth';
-import { authOptions } from './api/auth/[...nextauth]/route';
 import { UserSession } from './utils/types';
 import QueryProvider from './context/QueryProvider';
+import { authOptions } from './api/auth/[...nextauth]/authOptions';
 
 export const metadata = {
   title: 'NimaAnima',

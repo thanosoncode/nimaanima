@@ -52,23 +52,6 @@ const AddToFavorites = ({
         }
       }
     }
-
-    if (userId) {
-      const method = isFavorite ? 'DELETE' : 'POST';
-      setIsLoading(true);
-      const response = await fetch('api/favorites', {
-        method,
-        body: JSON.stringify({
-          userId: userId,
-          favorite: product,
-        }),
-      });
-      if (response.ok) {
-        router.refresh();
-        setIsLoading(false);
-      }
-      setIsLoading(false);
-    }
   };
 
   const buttonIcon = (
@@ -76,7 +59,7 @@ const AddToFavorites = ({
       onClick={handleClick}
       disabled={isLoading}
       className={twMerge(
-        'visible absolute top-2 right-2 z-20 rounded-full  border bg-white p-1',
+        'absolute top-2 right-2 z-20 rounded-full  border bg-white p-1',
         buttonClasses,
       )}
     >
