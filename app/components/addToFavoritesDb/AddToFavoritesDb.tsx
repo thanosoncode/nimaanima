@@ -4,6 +4,8 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { Product } from '@/app/utils/types';
 import { addToFavoritesAction } from '@/app/actions/actions';
 import Spinner from '../spinner/Spinner';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
 const Button = ({ isFavorite }: { isFavorite: boolean }) => {
   const { pending } = useFormStatus();

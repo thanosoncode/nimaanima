@@ -15,7 +15,6 @@ interface ListProps {
 }
 
 const List = ({ favorites, session }: ListProps) => {
-  console.log('session.data.dbUser', session?.data?.dbUser);
   const isFavorite = (item: Product) =>
     session.data?.dbUser.favorites.find((fav) => fav.id === item.id)
       ? true

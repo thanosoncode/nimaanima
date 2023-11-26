@@ -9,10 +9,16 @@ import { useSession } from 'next-auth/react';
 import { useAppState } from '@/app/context/context';
 import Spinner from '@/app/components/spinner/Spinner';
 
+export const dynamic = 'force-dynamic';
+
 const Favorites = () => {
   const { favorites } = useAppState();
   const session = useSession() as { data: UserSession | null; status: string };
   const isLoading = session.status === 'loading';
+
+  console.log('session', session.data?.dbUser.favorites);
+
+  console.log('favorites STATE', favorites);
 
   const header = session?.data?.dbUser ? (
     <div className="mb-16">
