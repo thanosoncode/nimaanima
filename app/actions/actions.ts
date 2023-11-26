@@ -25,6 +25,7 @@ export const addToFavoritesAction = async (
         },
       });
       revalidatePath('/');
+      revalidatePath('/favorites');
       return { userId, product, isFavorite: false };
     } else {
       await prisma.user.update({
@@ -36,8 +37,83 @@ export const addToFavoritesAction = async (
         },
       });
       revalidatePath('/');
+      revalidatePath('/favorites');
       return { userId, product, isFavorite: true };
     }
   }
   return { userId, product, isFavorite: previousState.isFavorite };
+};
+
+export const saveForLaterAction = async (
+  previousState: { product: Product; userId: string; isSaved: boolean },
+  formData: FormData,
+): Promise<{ product: Product; userId: string; isSaved: boolean }> => {
+  const { userId, product } = previousState;
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+  });
+
+  if (user && !previousState.isSaved) {
+    const newCartItems = user.cartItems.filter(
+      (item) => item.id !== product.id,
+    );
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        saved: [...user.saved, product],
+        cartItems: newCartItems,
+      },
+    });
+    return { userId, product, isSaved: true };
+  }
+  return { userId, product, isSaved: false };
+};
+
+export const addCartItemAction = async (
+  previousState: { product: Product; userId: string },
+  formData: FormData,
+): Promise<{ product: Product; userId: string }> => {
+  const { userId, product } = previousState;
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+  });
+
+  if (user) {
+    const newSavedItems = user.cartItems.filter(
+      (item) => item.id !== product.id,
+    );
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        saved: newSavedItems,
+        cartItems: [...user.cartItems, product],
+      },
+    });
+    return { userId, product };
+  }
+  return { userId, product };
+};
+
+export const removeCartItemAction = async (
+  previousState: { product: Product; userId: string },
+  formData: FormData,
+): Promise<{ product: Product; userId: string }> => {
+  const { userId, product } = previousState;
+  const user = await prisma.user.findFirst({
+    where: { id: userId },
+  });
+
+  if (user) {
+    const newCartItems = user.cartItems.filter(
+      (item) => item.id !== product.id,
+    );
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        cartItems: newCartItems,
+      },
+    });
+    return { userId, product };
+  }
+  return { userId, product };
 };

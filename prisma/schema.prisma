@@ -20,7 +20,7 @@ model Product {
   stripeProductId String
 }
 
-type Favorite {
+type Item {
   id              String
   name            String
   price           Int
@@ -34,11 +34,13 @@ type Favorite {
 }
 
 model User {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  email     String     @unique
+  email     String   @unique
   image     String
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  favorites Favorite[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  favorites Item[]
+  saved     Item[]
+  cartItems Item[]
 }

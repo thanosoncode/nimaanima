@@ -1,13 +1,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import AddToFavorites from '../../../components/addToFavorites/AddToFavorites';
-import { Product } from '@/app/utils/types';
+import { Product, UserSession } from '@/app/utils/types';
+import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import { getServerSession } from 'next-auth';
+import AddToFavoritesDb from '@/app/components/addToFavoritesDb/AddToFavoritesDb';
 
 interface ListProps {
   favorites: Product[];
+  session: {
+    data: UserSession | null;
+    status: string;
+  };
 }
 
-const List = ({ favorites }: ListProps) => {
+const List = ({ favorites, session }: ListProps) => {
+  console.log('session.data.dbUser', session?.data?.dbUser);
+  const isFavorite = (item: Product) =>
+    session.data?.dbUser.favorites.find((fav) => fav.id === item.id)
+      ? true
+      : false;
+
   return (
     <div className="py-4">
       <section className="grid grid-cols-2  gap-4  sm:grid-cols-3 lg:grid-cols-4">
@@ -37,7 +50,15 @@ const List = ({ favorites }: ListProps) => {
                 </div>
               </div>
             </div>
-            <AddToFavorites product={favorite} size={16} isFavorite={true} />
+            {session.data?.dbUser ? (
+              <AddToFavoritesDb
+                userId={session.data?.dbUser.id}
+                product={favorite}
+                isFavorite={isFavorite(favorite)}
+              />
+            ) : (
+              <AddToFavorites product={favorite} size={16} isFavorite={true} />
+            )}
           </div>
         ))}
       </section>

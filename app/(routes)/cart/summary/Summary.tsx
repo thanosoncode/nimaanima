@@ -36,7 +36,7 @@ const Summary = ({ cartItems }: SummaryProps) => {
         </div>
         <div className="flex justify-between">
           <div className="font-medium tracking-wide">
-            Total &#40;{cartItems.length}item&#41;
+            Total {cartItems.length} item&#40;s&#41;
           </div>
           <div className="">€ {total + 3}</div>
         </div>

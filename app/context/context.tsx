@@ -82,7 +82,14 @@ const reducer = (state: AppState, action: Action) => {
     case 'ADD_CART_ITEM':
       return { ...state, cartItems: [...state.cartItems, action.cartItem] };
     case 'ADD_SAVED_ITEM':
-      return { ...state, saved: [...state.saved, action.savedItem] };
+      const isAlreadySaved = state.saved.find(
+        (saved) => saved.id === action.savedItem.id,
+      );
+      if (isAlreadySaved) {
+        return { ...state };
+      } else {
+        return { ...state, saved: [...state.saved, action.savedItem] };
+      }
     case 'REMOVE_SAVED_ITEM':
       return {
         ...state,

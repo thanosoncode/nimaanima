@@ -4,7 +4,7 @@ import React from 'react';
 import { Product, UserSession } from '@/app/utils/types';
 import AddToCartButton from '../../../../components/addToCartButton/AddToCartButton';
 import AddToFavorites from '../../../../components/addToFavorites/AddToFavorites';
-import AddToFavoritesServer from '@/app/components/addToFavoritesServer/AddToFavoritesServer';
+import AddToFavoritesDb from '@/app/components/addToFavoritesDb/AddToFavoritesDb';
 
 interface ProductItemProps {
   product: Product;
@@ -20,7 +20,7 @@ const ProductItem = ({ product, session }: ProductItemProps) => {
   return (
     <div className="group relative">
       {session ? (
-        <AddToFavoritesServer
+        <AddToFavoritesDb
           isFavorite={isFavorite}
           product={product}
           userId={session.dbUser.id}

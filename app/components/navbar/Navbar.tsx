@@ -10,6 +10,7 @@ import MobileMenu from './MobileMenu';
 import { UserSession } from '@/app/utils/types';
 import Container from '../container/Container';
 import LocalItemsLoader from './localItemsLoader/LocalItemsLoader';
+import UserItemsLoader from './UserItemsLoader/UserItemsLoader';
 
 const Navbar = ({ session }: { session: UserSession | null }) => {
   const pathname = usePathname();
@@ -80,7 +81,7 @@ const Navbar = ({ session }: { session: UserSession | null }) => {
           <CartLink />
         </div>
       </Container>
-      {!session && <LocalItemsLoader />}
+      {session ? <UserItemsLoader session={session} /> : <LocalItemsLoader />}
     </nav>
   );
 };

@@ -9,7 +9,7 @@ const Button = ({ isFavorite }: { isFavorite: boolean }) => {
   const { pending } = useFormStatus();
 
   return (
-    <button type="submit">
+    <button type="submit" disabled={pending}>
       {pending ? (
         <Spinner size="h-4 w-4" />
       ) : isFavorite ? (
@@ -21,17 +21,17 @@ const Button = ({ isFavorite }: { isFavorite: boolean }) => {
   );
 };
 
-interface AddToFavoritesServerFormProps {
+interface AddToFavoritesDbFormProps {
   userId: string;
   product: Product;
   isFavorite: boolean;
 }
 
-const AddToFavoritesServer = ({
+const AddToFavoritesDb = ({
   userId,
   product,
   isFavorite,
-}: AddToFavoritesServerFormProps) => {
+}: AddToFavoritesDbFormProps) => {
   const [state, formAction] = useFormState(addToFavoritesAction, {
     product,
     userId,
@@ -48,4 +48,4 @@ const AddToFavoritesServer = ({
   );
 };
 
-export default AddToFavoritesServer;
+export default AddToFavoritesDb;

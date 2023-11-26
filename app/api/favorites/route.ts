@@ -1,4 +1,4 @@
-import { Favorite, Product } from '@/app/utils/types';
+import { Item, Product } from '@/app/utils/types';
 import { prisma } from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
 import { NextResponse, type NextRequest } from 'next/server';
@@ -6,7 +6,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 export async function POST(request: NextRequest, response: NextResponse) {
   const { userId, favorite } = (await request.json()) as {
     userId: string;
-    favorite: Favorite;
+    favorite: Item;
   };
 
   if (!userId || !favorite) {
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 export async function DELETE(request: NextRequest, response: NextResponse) {
   const { userId, favorite } = (await request.json()) as {
     userId: string;
-    favorite: Favorite;
+    favorite: Item;
   };
 
   if (!userId || !favorite) {
