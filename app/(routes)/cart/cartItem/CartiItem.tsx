@@ -1,7 +1,10 @@
 'use client';
+import RemoveCartItem from '@/app/components/removeCartItemDb/RemoveCartItemDb';
 import SaveForLater from '@/app/components/saveForLater/SaveForLater';
+import SaveForLaterDb from '@/app/components/saveForLaterDb/SaveForLaterDb';
 import { useAppDispatch } from '@/app/context/context';
-import { Product } from '@/app/utils/types';
+import { Product, UserSession } from '@/app/utils/types';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -11,6 +14,10 @@ interface CartItemProps {
 
 const CartItem = ({ item }: CartItemProps) => {
   const appDispatch = useAppDispatch();
+  const session = useSession() as {
+    data: UserSession | null;
+    status: string;
+  };
 
   const handleRemoveItem = (id: string) => {
     appDispatch({ type: 'REMOVE_CART_ITEM', id });
@@ -46,13 +53,21 @@ const CartItem = ({ item }: CartItemProps) => {
             <div className="">€ {item.price}.00</div>
           </div>
           <div className="mb-4 flex gap-4">
-            <button
-              onClick={() => handleRemoveItem(item.id)}
-              className="block w-min rounded-full bg-white  text-sm font-medium duration-200 ease-in-out hover:bg-neutral-100"
-            >
-              Remove
-            </button>
-            <SaveForLater product={item} />
+            {session.data?.dbUser ? (
+              <RemoveCartItem userId={session.data.dbUser.id} product={item} />
+            ) : (
+              <button
+                onClick={() => handleRemoveItem(item.id)}
+                className="block w-min rounded-full bg-white  text-sm font-medium duration-200 ease-in-out hover:bg-neutral-100"
+              >
+                Remove
+              </button>
+            )}
+            {session.data?.dbUser ? (
+              <SaveForLaterDb userId={session.data.dbUser.id} product={item} />
+            ) : (
+              <SaveForLater product={item} />
+            )}
           </div>
           <div className="hidden items-start gap-2 sm:flex">
             <input

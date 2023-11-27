@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import React from 'react';
 import { Product, UserSession } from '@/app/utils/types';
-import AddToCartButton from '../../../../components/addToCartButton/AddToCartButton';
+import AddToCartButton from './addToCartButton/AddToCartButton';
 import AddToFavorites from '../../../../components/addToFavorites/AddToFavorites';
 import AddToFavoritesDb from '@/app/components/addToFavoritesDb/AddToFavoritesDb';
 

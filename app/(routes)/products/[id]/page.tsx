@@ -5,9 +5,8 @@ import Recommendations from './recommendations/Recommendations';
 import { Product } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import Carousel from './carousel/Carousel';
-import { getServerSession } from 'next-auth';
-import { UserSession } from '@/app/utils/types';
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+
+export const dynamic = 'force-dynamic';
 
 const SingleProduct = async ({
   params: { id },
@@ -16,17 +15,6 @@ const SingleProduct = async ({
 }) => {
   const product = (await getSingleProduct(id)) as Product;
   const allProducts = await prisma.product.findMany();
-  const session = (await getServerSession(authOptions)) as UserSession | null;
-
-  const user = await prisma.user.findFirst({
-    where: {
-      id: session?.dbUser.id,
-    },
-  });
-
-  const isFavorite = user?.favorites.find((fav) => fav.id === id)
-    ? true
-    : false;
 
   const sameCategoryProducts = allProducts.filter(
     (p) => p.category === product.category && p.id !== product.id,

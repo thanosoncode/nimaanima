@@ -18,8 +18,6 @@ const Favorites = () => {
 
   console.log('session', session.data?.dbUser.favorites);
 
-  console.log('favorites STATE', favorites);
-
   const header = session?.data?.dbUser ? (
     <div className="mb-16">
       <h4 className="text-neutral-950 text-4xl font-thin  sm:text-5xl">

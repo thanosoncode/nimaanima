@@ -1,9 +1,13 @@
 'use client';
 
+import AddToCartDb from '@/app/components/addToCartDb/AddToCartDb';
 import { useAppDispatch, useAppState } from '@/app/context/context';
 
-import { Product } from '@/app/utils/types';
+import { Product, UserSession } from '@/app/utils/types';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+
+export const dynamic = 'force-dynamic';
 
 interface AddToCartProps {
   product: Product;
@@ -13,6 +17,13 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
   const dispatch = useAppDispatch();
   const { cartItems } = useAppState();
   const router = useRouter();
+  const session = useSession() as {
+    data: UserSession | null;
+    status: string;
+  };
+
+  const isInCartDb = (item: Product) =>
+    cartItems.find((cartItem) => cartItem.id === item.id) ? true : false;
 
   const handleAddToCart = () => {
     dispatch({ type: 'ADD_CART_ITEM', cartItem: product });
@@ -33,7 +44,13 @@ const AddToCart: React.FC<AddToCartProps> = ({ product }) => {
       ? true
       : false;
 
-  const addToCart = (
+  const addToCart = session.data?.dbUser ? (
+    <AddToCartDb
+      userId={session.data.dbUser.id}
+      isInCart={isInCartDb(product)}
+      product={product}
+    />
+  ) : (
     <button
       onClick={handleAddToCart}
       className={`mx-auto mt-12  w-full rounded-full bg-neutral-900 py-3 text-center text-white duration-100 ease-in-out sm:mt-6 ${

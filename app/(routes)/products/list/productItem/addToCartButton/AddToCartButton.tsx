@@ -1,8 +1,10 @@
 'use client';
 
+import AddToCartDb from '@/app/components/addToCartDb/AddToCartDb';
 import { useAppDispatch, useAppState } from '@/app/context/context';
 
-import { Product } from '@/app/utils/types';
+import { Product, UserSession } from '@/app/utils/types';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 interface AddToCartButtonProps {
@@ -13,6 +15,10 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
   const dispatch = useAppDispatch();
   const { cartItems } = useAppState();
   const router = useRouter();
+  const session = useSession() as {
+    data: UserSession | null;
+    status: string;
+  };
 
   const handleAddToCart = () => {
     dispatch({ type: 'ADD_CART_ITEM', cartItem: product });
@@ -33,7 +39,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
       ? true
       : false;
 
-  return (
+  const addToCartButton = (
     <button
       disabled={isInCart}
       onClick={handleAddToCart}
@@ -41,6 +47,17 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     >
       {isInCart ? 'In cart' : 'Add to cart'}
     </button>
+  );
+
+  return session.data?.dbUser ? (
+    <AddToCartDb
+      userId={session.data.dbUser.id}
+      product={product}
+      isInCart={isInCart}
+      variant="outlined"
+    />
+  ) : (
+    addToCartButton
   );
 };
 export default AddToCartButton;

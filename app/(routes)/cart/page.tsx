@@ -6,11 +6,19 @@ import ViewFavorites from './viewFavorites/ViewFavorites';
 import Summary from './summary/Summary';
 import CartItem from './cartItem/CartiItem';
 import Image from 'next/image';
-import { Product } from '@/app/utils/types';
+import { Product, UserSession } from '@/app/utils/types';
+import { useSession } from 'next-auth/react';
+import MoveToCartFromSavedDb from '@/app/components/moveToCartFromSavedDb/MoveToCartFromSavedDb';
+import MoveToFavoritesFromSavedDb from '@/app/components/moveToFavoritesFromSavedDb/MoveToFavoritesFromSavedDb';
+import RemoveFromSavedDb from '@/app/components/removeFromSavedDb/RemoveFromSavedDb';
 
 const Cart = () => {
   const { cartItems, favorites, saved } = useAppState();
   const appDispatch = useAppDispatch();
+  const session = useSession() as {
+    data: UserSession | null;
+    status: string;
+  };
 
   const showViewFavorites = favorites.length > 0;
 
@@ -116,29 +124,51 @@ const Cart = () => {
                       {item.description}
                     </p>
                     <div className="mt-8 flex gap-4">
-                      <button
-                        onClick={() => moveToCart(item)}
-                        className="rounded-full border-2 border-black px-3 py-1.5 text-sm font-medium duration-200 hover:scale-105 hover:shadow-cart"
-                      >
-                        Move to cart
-                      </button>
-                      <button
-                        disabled={savedIsFavorite(item.id)}
-                        onClick={() => moveToFavorites(item)}
-                        className={`rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200 ${
-                          savedIsFavorite(item.id)
-                            ? 'text-neutral-400 hover:bg-white'
-                            : ''
-                        }`}
-                      >
-                        Move to favorites
-                      </button>
-                      <button
-                        onClick={() => removeItem(item)}
-                        className="rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200"
-                      >
-                        Remove
-                      </button>
+                      {session.data?.dbUser ? (
+                        <MoveToCartFromSavedDb
+                          userId={session.data.dbUser.id}
+                          product={item}
+                        />
+                      ) : (
+                        <button
+                          onClick={() => moveToCart(item)}
+                          className="rounded-full border-2 border-black px-3 py-1.5 text-sm font-medium duration-200 hover:scale-105 hover:shadow-cart"
+                        >
+                          Move to cart
+                        </button>
+                      )}
+                      {session.data?.dbUser ? (
+                        <MoveToFavoritesFromSavedDb
+                          userId={session.data.dbUser.id}
+                          product={item}
+                          disabled={savedIsFavorite(item.id)}
+                        />
+                      ) : (
+                        <button
+                          disabled={savedIsFavorite(item.id)}
+                          onClick={() => moveToFavorites(item)}
+                          className={`rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200 ${
+                            savedIsFavorite(item.id)
+                              ? 'text-neutral-400 hover:bg-white'
+                              : ''
+                          }`}
+                        >
+                          Move to favorites
+                        </button>
+                      )}
+                      {session.data?.dbUser ? (
+                        <RemoveFromSavedDb
+                          userId={session.data.dbUser.id}
+                          product={item}
+                        />
+                      ) : (
+                        <button
+                          onClick={() => removeItem(item)}
+                          className="rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200"
+                        >
+                          Remove
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
