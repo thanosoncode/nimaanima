@@ -92,6 +92,11 @@ type Footer = {
   text: string;
 };
 
+export enum Level {
+  one = 'one',
+  two = 'two',
+}
+
 export interface TechniqueData {
   header: Header;
   steps: Step[];

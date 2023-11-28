@@ -29,7 +29,6 @@ export default async function RootLayout({
               <Navbar session={session} />
               <div className="flex min-h-[calc(100vh-66px)] flex-col justify-between">
                 {children}
-                <Footer />
               </div>
             </AppProvider>
           </QueryProvider>

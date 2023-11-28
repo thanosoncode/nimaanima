@@ -2,7 +2,7 @@ import Link from 'next/link';
 import ShapeTwo from '../../svg/ShapeTwo';
 import ShapeThree from '../../svg/ShapeThree';
 
-const FooterLevelOne = () => {
+const LevelTwo = () => {
   return (
     <div>
       <ShapeTwo fill="#D7E6F5" />
@@ -30,4 +30,4 @@ const FooterLevelOne = () => {
     </div>
   );
 };
-export default FooterLevelOne;
+export default LevelTwo;

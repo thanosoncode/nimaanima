@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import AddToFavorites from '../../../components/addToFavorites/AddToFavorites';
+import AddToFavorites from '../../../../components/addToFavorites/AddToFavorites';
 import { Product, UserSession } from '@/app/utils/types';
 import AddToFavoritesDb from '@/app/components/addToFavoritesDb/AddToFavoritesDb';
 import { useAppState } from '@/app/context/context';

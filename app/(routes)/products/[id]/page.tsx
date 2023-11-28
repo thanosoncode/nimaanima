@@ -5,6 +5,8 @@ import Recommendations from './recommendations/Recommendations';
 import { Product } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import Carousel from './carousel/Carousel';
+import Footer from '@/app/components/footer/Footer';
+import { Level } from '@/app/utils/types';
 
 export const dynamic = 'force-dynamic';
 
@@ -55,6 +57,7 @@ const SingleProduct = async ({
           />
         </div>
       </Container>
+      <Footer level={Level.two} />
     </>
   );
 };

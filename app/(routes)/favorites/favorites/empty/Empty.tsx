@@ -1,5 +1,5 @@
-import Image from "next/image";
-import neckless from "../../../../public/assets/necklace.svg";
+import Image from 'next/image';
+import neckless from '../../../../../public/assets/necklace.svg';
 
 const Empty = () => {
   return (

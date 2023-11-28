@@ -1,17 +1,22 @@
 import Link from 'next/link';
 import Container from '../container/Container';
 import { getServerSession } from 'next-auth';
-import { UserSession } from '@/app/utils/types';
+import { Level, UserSession } from '@/app/utils/types';
 import LevelTwo from './levels/LevelTwo';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
+import LevelOne from './levels/LevelOne';
 
-const Footer = async () => {
+interface FooterProps {
+  level: Level;
+}
+
+const Footer = async (props: FooterProps) => {
   const session = (await getServerSession(authOptions)) as UserSession;
   const isAdmin = session?.dbUser?.email === process.env.ADMIN_EMAIL_1;
 
   return (
     <footer>
-      <LevelTwo />
+      {props.level === Level.one ? <LevelOne /> : <LevelTwo />}
       <div className="bg-someBlue-600">
         <Container classes="flex gap-2 py-4 justify-between  sm:flex-row flex-col">
           <div className="flex gap-2 text-sm text-white">

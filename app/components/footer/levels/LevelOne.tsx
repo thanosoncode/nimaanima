@@ -1,6 +1,6 @@
-import ShapeThree from "../../svg/ShapeThree";
+import ShapeThree from '../../svg/ShapeThree';
 
-const FooterLevelOne = () => {
+const LevelOne = () => {
   return (
     <div>
       <div className="relative h-10 w-full bg-white ">
@@ -16,4 +16,4 @@ const FooterLevelOne = () => {
     </div>
   );
 };
-export default FooterLevelOne;
+export default LevelOne;
