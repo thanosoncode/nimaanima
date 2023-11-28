@@ -14,7 +14,7 @@ const Button = () => {
 
   return (
     <button
-      className="rounded-full border-2 border-black px-3 py-1.5 text-sm font-medium duration-200 hover:scale-105 hover:shadow-cart"
+      className="whitespace-nowrap rounded-full border-2 border-black px-3 py-1.5 text-sm font-medium duration-200 hover:scale-105 hover:shadow-cart"
       disabled={pending}
     >
       {pending ? 'Moving...' : 'Move to cart'}

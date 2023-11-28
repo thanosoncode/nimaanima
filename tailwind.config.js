@@ -6,6 +6,9 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    // screens: {
+    //   xs: '480px',
+    // },
     extend: {
       boxShadow: {
         soft: '0 0px 10px rgba(0, 0, 0, 0.1)',

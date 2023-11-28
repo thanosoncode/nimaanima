@@ -8,7 +8,7 @@ const Button = ({ disabled }: { disabled: boolean }) => {
 
   return (
     <button
-      className={`rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200 ${
+      className={`whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium duration-200 hover:bg-neutral-200 ${
         disabled ? 'text-neutral-400 hover:bg-white' : ''
       }`}
       disabled={pending}

@@ -1,24 +1,20 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import AddToFavorites from '../../../components/addToFavorites/AddToFavorites';
 import { Product, UserSession } from '@/app/utils/types';
-import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
-import { getServerSession } from 'next-auth';
 import AddToFavoritesDb from '@/app/components/addToFavoritesDb/AddToFavoritesDb';
+import { useAppState } from '@/app/context/context';
+import { useSession } from 'next-auth/react';
 
-interface ListProps {
-  favorites: Product[];
-  session: {
-    data: UserSession | null;
-    status: string;
-  };
-}
+interface ListProps {}
 
-const List = ({ favorites, session }: ListProps) => {
+const List = () => {
+  const { favorites } = useAppState();
+  const session = useSession() as { data: UserSession | null; status: string };
+
   const isFavorite = (item: Product) =>
-    session.data?.dbUser.favorites.find((fav) => fav.id === item.id)
-      ? true
-      : false;
+    favorites.find((fav) => fav.id === item.id) ? true : false;
 
   return (
     <div className="py-4">

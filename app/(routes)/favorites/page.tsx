@@ -53,11 +53,7 @@ const Favorites = () => {
   const result = (
     <Container classes="sm:mt-6 mt-12 mb-32">
       {header}
-      {favorites.length > 0 ? (
-        <List favorites={favorites} session={session} />
-      ) : (
-        <Empty />
-      )}
+      {favorites.length > 0 ? <List /> : <Empty />}
     </Container>
   );
 
