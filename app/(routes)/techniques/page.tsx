@@ -38,6 +38,9 @@ const Techniques = () => {
                     src={category.image}
                     fill
                     className="object-cover"
+                    priority
+                    placeholder="blur"
+                    sizes="(min-width: 1280px) 554px, (min-width: 640px) calc(50vw - 24px), calc(100vw - 16px)"
                   />
                 </div>
                 <div className="bg-white p-4">

@@ -1,6 +1,6 @@
 'use client';
 import { Product } from '@/app/utils/types';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import arrowLeft from '../../../../../public/assets/left-black-arrow.png';
 import arrowRight from '../../../../../public/assets/right-black-arrow.png';
@@ -12,7 +12,6 @@ interface CarouselProps {
 const Carousel: React.FC<CarouselProps> = ({ product }) => {
   const [currentImage, setCurrentImage] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const [mainImageSize, setMainImageSize] = useState({ width: 0, height: 0 });
 
   const handlePreviousImageClick = () => {
     if (currentImage > 0) {
@@ -32,15 +31,6 @@ const Carousel: React.FC<CarouselProps> = ({ product }) => {
   const handleImageSelect = (index: number) => {
     setCurrentImage(index);
   };
-
-  useLayoutEffect(() => {
-    if (ref.current) {
-      setMainImageSize({
-        width: ref.current.getBoundingClientRect().width,
-        height: ref.current.getBoundingClientRect().height,
-      });
-    }
-  }, []);
 
   return (
     <div className="relative flex w-full flex-col-reverse gap-4 md:w-[75%] md:flex-row">
@@ -70,21 +60,21 @@ const Carousel: React.FC<CarouselProps> = ({ product }) => {
           onClick={handlePreviousImageClick}
           className="absolute top-1/2 left-2 z-10 flex h-8 w-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white shadow-lg duration-200  ease-in-out hover:bg-neutral-100 sm:left-8 sm:h-12 sm:w-12"
         >
-          <Image src={arrowLeft} alt="left-arrow" className="h-2/5 w-2/5 " />
+          <Image src={arrowLeft} alt="left-arrow" className="h-2/5 w-2/5" />
         </div>
         <div
           onClick={handleNextImageClick}
           className="absolute top-1/2 right-2 z-10 flex h-8 w-8 -translate-y-1/2 cursor-pointer  items-center justify-center rounded-full bg-white shadow-lg duration-200 ease-in-out hover:bg-neutral-100 sm:right-8 sm:h-12 sm:w-12"
         >
-          <Image src={arrowRight} alt="right-arrow" className="h-2/5 w-2/5 " />
+          <Image src={arrowRight} alt="right-arrow" className="h-2/5 w-2/5" />
         </div>
         <Image
           src={product.images[currentImage]}
           alt=""
-          width={mainImageSize.width}
-          height={mainImageSize.height}
+          width={700}
+          height={500}
           className="h-[500px] w-full rounded-lg bg-neutral-100 object-contain"
-          sizes="(min-width: 1280px) 241px, (min-width: 1040px) calc(25vw - 44px), (min-width: 780px) calc(33.33vw - 48px), (min-width: 460px) calc(33.33vw - 32px), calc(50vw - 32px)"
+          sizes="(min-width: 1280px) 763px, (min-width: 780px) calc(75vw - 104px), calc(100vw - 16px)"
           priority
         />
       </div>

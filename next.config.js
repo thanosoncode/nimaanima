@@ -16,7 +16,11 @@ const nextConfig = {
     STRIPE_WEB_HOOK_SECRET: process.env.STRIPE_WEB_HOOK_SECRET,
   },
   images: {
-    domains: ['res.cloudinary.com', 'lh3.googleusercontent.com'],
+    domains: [
+      'res.cloudinary.com',
+      'lh3.googleusercontent.com',
+      'scontent-lga3-1.xx.fbcdn.net',
+    ],
   },
 };
 

@@ -1,9 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
-import RowCarousel from "@/app/components/rowCarousel/RowCarousel";
+import Image from 'next/image';
+import Link from 'next/link';
+import RowCarousel from '@/app/components/rowCarousel/RowCarousel';
 
-import { TechniqueData } from "@/app/utils/types";
-import Container from "@/app/components/container/Container";
+import { TechniqueData } from '@/app/utils/types';
+import Container from '@/app/components/container/Container';
 
 const Technique = (props: TechniqueData) => {
   return (
@@ -29,7 +29,7 @@ const Technique = (props: TechniqueData) => {
           <article
             key={index}
             className={`flex flex-col ${
-              index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"
+              index % 2 === 0 ? 'sm:flex-row' : 'sm:flex-row-reverse'
             }  items-center gap-6 p-2 sm:gap-12`}
           >
             <div className="w-full text-center sm:w-1/2">
@@ -44,7 +44,7 @@ const Technique = (props: TechniqueData) => {
                 alt={step.image.alt}
                 fill
                 className="object-cover"
-                sizes="(min-width: 1280px) 498px, (min-width: 1040px) calc(50vw - 72px), calc(50vw - 48px)"
+                sizes="(min-width: 1280px) 538px, (min-width: 640px) calc(50vw - 40px), calc(100vw - 32px)"
                 placeholder="blur"
               />
             </div>
@@ -58,10 +58,10 @@ const Technique = (props: TechniqueData) => {
             <div className="flex flex-col gap-4">
               <p>{props.footer.text}</p>
               <p>
-                If you&apos;re looking for a personalized touch{" "}
+                If you&apos;re looking for a personalized touch{' '}
                 <Link href="/contact" className="font-bold underline">
                   let us know
-                </Link>{" "}
+                </Link>{' '}
                 and we&apos;ll craft a custom creation just for you
               </p>
             </div>

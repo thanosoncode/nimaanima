@@ -20,6 +20,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
           alt={product.name}
           fill
           className="rounded-lg object-cover"
+          sizes="(min-width: 1280px) 257px, (min-width: 1040px) calc(25vw - 32px), (min-width: 460px) calc(33.39vw - 33px), calc(50vw - 32px)"
         />
       </Link>
       <div>
