@@ -4,6 +4,8 @@ const nextConfig = {
     CLOUD_NAME: process.env.CLOUD_NAME,
     GOOGLE_SECRET: process.env.GOOGLE_SECRET,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
+    FACEBOOK_SECRET: process.env.FACEBOOK_SECRET,
     NEXTAUTH_URL:
       process.env.NODE_ENV === 'development'
         ? 'http://localhost:3000'

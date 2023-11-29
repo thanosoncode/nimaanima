@@ -1,4 +1,5 @@
 import GoogleProvider from 'next-auth/providers/google';
+import FacebookProvider from 'next-auth/providers/facebook';
 import { Session, SessionStrategy } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import { JWT } from 'next-auth/jwt';
@@ -38,6 +39,10 @@ export const authOptions = {
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
+    }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_SECRET!,
     }),
   ],
 
