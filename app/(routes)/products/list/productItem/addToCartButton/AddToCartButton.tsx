@@ -29,7 +29,6 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product }) => {
     } else {
       localStorage.setItem('cartItems', JSON.stringify([product]));
     }
-    router.push('/cart');
   };
 
   const isInCart =
